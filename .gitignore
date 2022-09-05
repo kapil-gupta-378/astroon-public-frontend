@@ -34,3 +34,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+#vs code 
+.vscode
+/.vscode/
+
+#husky pre commit 
+.husky
+/.husky/
