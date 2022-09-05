@@ -26,7 +26,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: storage,
-  whitelist: ['walletReducer'],
+  whitelist: ['homeReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
