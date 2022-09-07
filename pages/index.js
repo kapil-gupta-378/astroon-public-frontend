@@ -1,25 +1,44 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Web3 from 'web3';
 import { setHome } from '../src/redux/home/homeSlice';
+import {
+  setBalance,
+  setNetworkId,
+  setWalletAddress,
+} from '../src/redux/persist/wallet/walletSlice';
+import { connectWallet } from '../src/utils/connectWallet';
 import styles from '../styles/Home.module.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
 export default function Home() {
-  const dispatch = useDispatch();
   const address = useSelector((state) => state.homeReducer.data);
 
+  const dispatch = useDispatch();
+  const route = useRouter;
   useEffect(() => {
-    const check = async () => {
-      const web3 = new Web3(window.ethereum);
-      const account = await web3.eth.getAccounts();
-      if (address !== account[0]) {
-        dispatch(setHome(account[0]));
-      }
-    };
-    check();
-  }, [address]);
+    connetWallet();
+    addEventListenerForWallet();
+  }, [connetWallet, addEventListenerForWallet]);
+
+  const connetWallet = useCallback(async () => {
+    const { accounts, networkId, balance } = await connectWallet();
+    dispatch(setWalletAddress(accounts[0]));
+    dispatch(setNetworkId(networkId));
+    dispatch(setBalance(balance));
+  }, [dispatch]);
+
+  const addEventListenerForWallet = useCallback(() => {
+    ethereum.on('accountsChanged', (accounts) => {
+      dispatch(setWalletAddress(accounts[0]));
+    });
+    ethereum.on('chainChanged', (networkId) => {
+      dispatch(setNetworkId(networkId));
+    });
+    ethereum.on('connect', () => route.push('/'));
+  }, [route, dispatch]);
 
   return (
     <div className={styles.container}>
