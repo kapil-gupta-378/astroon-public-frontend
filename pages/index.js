@@ -1,10 +1,6 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Web3 from 'web3';
-import { setHome } from '../src/redux/home/homeSlice';
+import { useDispatch } from 'react-redux';
 import {
   setBalance,
   setNetworkId,
@@ -14,8 +10,6 @@ import { connectWallet } from '../src/utils/connectWallet';
 import styles from '../styles/Home.module.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
 export default function Home() {
-  const address = useSelector((state) => state.homeReducer.data);
-
   const dispatch = useDispatch();
   const route = useRouter;
   useEffect(() => {

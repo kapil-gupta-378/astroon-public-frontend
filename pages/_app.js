@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import '../styles/globals.css';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
