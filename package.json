@@ -4,16 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build:development": "next build",
     "start": "next start",
     "lint": "next lint",
     "formate": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|scss|sass|md|html)\"",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "build:production": "env-cmd -f .env.production yarn next build && yarn next start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "dotenv": "^16.0.2",
+    "env-cmd": "^10.1.0",
     "next": "12.2.5",
     "prop-types": "^15.8.1",
     "react": "18.2.0",

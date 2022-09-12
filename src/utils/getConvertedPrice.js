@@ -10,3 +10,5 @@ const getConvertPrice = async (convertTo = 'eth', value) => {
     return;
   }
 };
+
+export { getConvertPrice };

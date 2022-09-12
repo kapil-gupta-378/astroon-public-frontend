@@ -9,6 +9,7 @@ import {
 import { connectWallet } from '../src/utils/connectWallet';
 import styles from '../styles/Home.module.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
+const vari = process.env.NEXT_PUBLIC_BASE_URL;
 export default function Home() {
   const dispatch = useDispatch();
   const route = useRouter;
@@ -16,7 +17,6 @@ export default function Home() {
     connetWallet();
     addEventListenerForWallet();
   }, [connetWallet, addEventListenerForWallet]);
-
   const connetWallet = useCallback(async () => {
     const { accounts, networkId, balance } = await connectWallet();
     dispatch(setWalletAddress(accounts[0]));
@@ -37,6 +37,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div className="dropdown">Astroon</div>
+      <div className="dropdown">{vari}</div>
     </div>
   );
 }
