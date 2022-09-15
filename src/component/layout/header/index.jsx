@@ -82,18 +82,19 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Blog
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
+                  <a
+                    className={`${styles.header_search} nav-link text-white`}
+                    href="#"
+                  >
                     <Image src={searchIcon} alt="search" />
                   </a>
                 </li>
                 <li className="nav-item">
-                  <Button className={`${styles.header_wallet_btn}`}>
-                    <Image src={walletIcon} alt="wallet" /> WalletConnect
+                  <Button
+                    data-content="WalletConnect"
+                    className={`${styles.header_wallet_btn}`}
+                  >
+                    <Image src={walletIcon} alt="wallet" />
                   </Button>
                 </li>
               </ul>
