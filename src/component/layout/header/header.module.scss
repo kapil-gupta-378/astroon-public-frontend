@@ -1,0 +1,33 @@
+.header_wrapper {
+  font-family: 'Rubik', sans-serif;
+  width: 85%;
+  margin: 0 auto;
+  nav {
+    div {
+      .logo {
+        font-size: 26px;
+        font-weight: 500;
+      }
+    }
+
+    .nav_items {
+      li {
+        a {
+          font-size: 14px;
+          font-weight: 300;
+        }
+
+        &:last-child {
+          .header_wallet_btn {
+            background-color: transparent;
+            color:#fff;
+            border-radius: 50px;
+            padding: 5px;
+            border: 10px solid transparent;
+            background: transparent;
+          }
+        }
+      }
+    }
+  }
+}
