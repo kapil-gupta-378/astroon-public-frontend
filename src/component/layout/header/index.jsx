@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import searchIcon from '../../../../images/search.png';
@@ -6,27 +6,67 @@ import walletIcon from '../../../../images/wallet.png';
 import Button from '../../common/Button';
 
 const Header = () => {
+  const header = useRef();
+
+  const handleNav = () => {
+    header.current.classList.toggle(styles.open_nav);
+  };
+
   return (
     <>
-      <div className={styles.header_wrapper}>
+      <div ref={header} className={styles.header_wrapper}>
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">
             <a className={`${styles.logo} navbar-brand text-white`} href="#">
               Logo
             </a>
             <button
-              className="navbar-toggler"
+              className={`${styles.nav_toggeler} navbar-toggler`}
               type="button"
+              onClick={handleNav}
               data-bs-toggle="collapse"
               data-bs-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span className="navbar-toggler-icon"></span>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g id="menu 1">
+                  <path
+                    id="off"
+                    d="M3 12H21"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    id="openfirst"
+                    d="M3 6H21"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    id="openlast"
+                    d="M3 18H21"
+                    stroke="white"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </g>
+              </svg>
             </button>
             <div
-              className="collapse navbar-collapse"
+              className={`collapse navbar-collapse ${styles.nav_items_wrapper}`}
               id="navbarSupportedContent"
             >
               <ul
