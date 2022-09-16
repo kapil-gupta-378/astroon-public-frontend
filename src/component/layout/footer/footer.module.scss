@@ -1,0 +1,20 @@
+@import '/styles/typography.module';
+.footer_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 100%;
+  background: rgba(162, 70, 211, 0.3);
+  .container {
+    display: flex;
+    justify-content: space-between;
+    span {
+      @include heading_6;
+    }
+    .footer_social_media {
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+}
