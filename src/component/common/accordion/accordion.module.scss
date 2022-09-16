@@ -1,0 +1,55 @@
+@import '../../../../styles/typography.module';
+.accordion_wrap {
+  margin-bottom: 10px;
+  .accordion_item {
+    position: relative;
+    padding: 15px;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 15px;
+      padding: 1px;
+      background: linear-gradient(#faff00, #fe19c1);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    h2 {
+      border-radius: 20px;
+      .accordion_btn {
+        @include heading_5;
+        text-align: start;
+        width: 100%;
+        border: none;
+        background: transparent;
+        position: relative;
+
+        &::after {
+          content: '';
+          background-image: url('../../../../public/images/accordion_minus.svg');
+          background-position: center right;
+          background-repeat: no-repeat;
+          background-size: 25px 25px;
+          width: 25px;
+          height: 25px;
+          position: absolute;
+          right: 13px;
+          top: 0;
+        }
+        &[aria-expanded='false']::after {
+          contain: '';
+          background-image: url('../../../../public/images/accordion_plus.svg');
+        }
+      }
+    }
+    .accordion_body_wrap {
+      .accordion_body {
+        @include heading_7;
+        padding-left: 7px;
+      }
+    }
+  }
+}
