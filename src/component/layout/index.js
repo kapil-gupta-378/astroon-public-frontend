@@ -4,11 +4,13 @@ import Header from './header';
 import Footer from './footer';
 import styles from './Layout.module.scss';
 import Home from './home';
+import Whitepaper from './whitepaper';
 const Layout = ({ children }) => {
   return (
     <div className={`${styles.layout_wrapper}`}>
       <Header />
       <Home/>
+      <Whitepaper/>
       {children}
       <Footer />
     </div>

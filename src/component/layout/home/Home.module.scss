@@ -66,3 +66,29 @@
     // width: 50%;
   }
 }
+
+@media screen and (max-width:980px) {
+.home_page {
+  height: auto;
+   flex-direction: column; 
+   .home_details {
+    width: 100%;
+    text-align: center;
+   }
+}
+}
+@media screen and (max-width:480px) {
+    .home_page {
+       flex-direction: column; 
+       .home_details {
+        width: 100%;
+        text-align: center;
+        h1 {
+            font-size: 30px;
+        }
+        h4 {
+            font-size: 21px;
+        }
+       }
+    }
+    }
