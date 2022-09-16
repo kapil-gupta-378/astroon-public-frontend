@@ -36,8 +36,6 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className="dropdown">Astroon</div>
-      <div className="dropdown">{vari}</div>
     </div>
   );
 }
