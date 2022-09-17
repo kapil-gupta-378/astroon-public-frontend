@@ -26,3 +26,52 @@
     }
   }
 }
+
+// 1024 -
+@media only screen and (max-width: 1199px) {
+}
+// 980 -
+@media only screen and (max-width: 1023px) {
+  .faq_wrap {
+    max-width: 868px !important;
+    .faq_heading {
+    }
+    .accordion_wrap {
+      flex-direction: column;
+
+      .accordion_coloum {
+        width: 100%;
+      }
+    }
+  }
+}
+// 768 -
+@media only screen and (max-width: 979px) {
+  .faq_wrap {
+    max-width: 660px !important;
+    .faq_heading {
+    }
+    .accordion_wrap {
+      .accordion_coloum {
+      }
+    }
+  }
+}
+// 650 -
+@media only screen and (max-width: 767px) {
+  .faq_wrap {
+    max-width: 530px !important;
+    .faq_heading {
+    }
+    .accordion_wrap {
+      .accordion_coloum {
+      }
+    }
+  }
+}
+// 480 -
+@media only screen and (max-width: 649px) {
+}
+// 375 -
+@media only screen and (max-width: 479px) {
+}

@@ -53,3 +53,37 @@
     }
   }
 }
+
+// 1024 -
+@media only screen and (max-width: 1199px) {
+}
+// 980 -
+@media only screen and (max-width: 1023px) {
+}
+// 768 -
+@media only screen and (max-width: 979px) {
+  .accordion_wrap {
+    .accordion_item {
+    }
+    h2 {
+      .accordion_btn {
+      }
+    }
+  }
+}
+.accordion_body_wrap {
+  .accordion_body {
+  }
+}
+// 650 -
+@media only screen and (max-width: 767px) {
+}
+// 480 -
+@media only screen and (max-width: 649px) {
+}
+// 375 -
+@media only screen and (max-width: 479px) {
+}
+// 320 -
+@media only screen and (max-width: 374px) {
+}

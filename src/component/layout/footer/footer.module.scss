@@ -18,3 +18,39 @@
     }
   }
 }
+
+// 1024 -
+@media only screen and (max-width: 1199px) {
+}
+// 980 -
+@media only screen and (max-width: 1023px) {
+  .footer_wrap {
+    .container {
+      max-width: 868px !important;
+    }
+  }
+}
+// 768 -
+@media only screen and (max-width: 979px) {
+  .footer_wrap {
+    .container {
+      max-width: 660px !important;
+      padding: 0px;
+    }
+  }
+}
+// 650 -
+@media only screen and (max-width: 767px) {
+  .footer_wrap {
+    .container {
+      max-width: 530px !important;
+      padding: 0px;
+    }
+  }
+}
+// 480 -
+@media only screen and (max-width: 649px) {
+}
+// 375 -
+@media only screen and (max-width: 479px) {
+}

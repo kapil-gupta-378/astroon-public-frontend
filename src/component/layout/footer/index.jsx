@@ -10,8 +10,10 @@ const Footer = () => {
   return (
     <div className={styles.footer_wrap}>
       <div className={`row container ${styles.container}`}>
-        <span className="col-9">&#169; 2022 Astroon NFT</span>
-        <div className={`col-3 ${styles.footer_social_media}`}>
+        <span className="col-6 col-md-7 col-sm-7">&#169; 2022 Astroon NFT</span>
+        <div
+          className={`col-6 col-md-5 col-sm-5 ${styles.footer_social_media}`}
+        >
           <Image src={opensea} width={15} height={15} alt="twitter" />
           <Image src={discord} width={15} height={15} alt="twitter" />
           <Image src={twitter} width={15} height={15} alt="twitter" />

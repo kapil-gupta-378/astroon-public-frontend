@@ -6,8 +6,12 @@
     #a246d3 99.12%
   );
   width: 251px;
-  height: 232px;
+  height: 315px;
   border-radius: 25px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  flex-direction: column;
   .card_img_wrap {
     width: 100%;
     position: relative;
@@ -38,5 +42,6 @@
     @include heading_6;
     text-align: center;
     font-family: 'Rubik', sans-serif;
+    margin-bottom: 35px;
   }
 }
