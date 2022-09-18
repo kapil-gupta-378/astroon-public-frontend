@@ -27,6 +27,12 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .faq_wrap {
+    max-width: 1084px !important;
+  }
+}
+
 // 1024 -
 @media only screen and (max-width: 1199px) {
 }
