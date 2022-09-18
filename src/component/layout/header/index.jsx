@@ -132,7 +132,7 @@ const Header = () => {
                 <li className="nav-item">
                   <Button
                     data-content="WalletConnect"
-                    className={`${styles.header_wallet_btn}`}
+                    kind='wallet-connect'
                   >
                     <Image src={walletIcon} alt="wallet" />
                   </Button>

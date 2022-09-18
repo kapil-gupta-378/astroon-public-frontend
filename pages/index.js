@@ -7,10 +7,11 @@ import {
   setWalletAddress,
 } from '../src/redux/persist/wallet/walletSlice';
 import { connectWallet } from '../src/utils/connectWallet';
+import Home from "../src/containers/home"
 import styles from '../styles/Home.module.css';
 // import "bootstrap/dist/css/bootstrap.min.css";
 const vari = process.env.NEXT_PUBLIC_BASE_URL;
-export default function Home() {
+export default function HomePage() {
   const dispatch = useDispatch();
   const route = useRouter;
   useEffect(() => {
@@ -36,6 +37,7 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+    <Home/>
     </div>
   );
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import Image from 'next/image';
-import style from './Home.module.scss';
+import style from './Banner.module.scss';
 import Button from '../../common/Button';
 import HomePageImage from '../../../../public/images/homepage.svg';
-function Home() {
+function Banner() {
   return (
     <div className={style['home_wrp']}>
       <div className={`${style.home_page} container-fluid`}>
@@ -14,8 +14,7 @@ function Home() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             tristique consectetur placerat tortor adipiscing. Nascetur quam
           </p>
-          <Button data-content="explore" className={`${style.home_wallet_btn}`}>
-            {/* <Image src={walletIcon} alt="wallet" /> */}
+          <Button data-content="explore" kind='text' >
             Explore
           </Button>
         </div>
@@ -27,4 +26,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Banner;
