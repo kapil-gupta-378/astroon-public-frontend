@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 80px;
   width: 100%;
   background: rgba(162, 70, 211, 0.3);
   .container {
@@ -13,8 +13,9 @@
       @include heading_6;
     }
     .footer_social_media {
+      padding: 0px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-around;
     }
   }
 }

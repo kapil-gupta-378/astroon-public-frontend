@@ -12,7 +12,7 @@ function Whitepaper() {
           tristique consectetur placerat tortor.
         </p>
         <Button data-content="whitepaper" kind="download">
-          Whitepaper
+          Download
         </Button>
       </div>
     </div>

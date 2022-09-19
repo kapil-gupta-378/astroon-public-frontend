@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import searchIcon from '../../../../images/search.png';
-import walletIcon from '../../../../images/wallet.png';
+import searchIcon from '../../../../public/images/search.png';
+import walletIcon from '../../../../public/images/wallet.png';
 import Button from '../../common/Button';
 
 const Header = () => {

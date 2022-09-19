@@ -31,22 +31,22 @@
 }
 
 @mixin heading_5 {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
   color: $text-02-color;
   line-height: 23px;
 }
 @mixin heading_6 {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   color: $text-02-color;
   line-height: 17px;
 }
 @mixin heading_7 {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   color: $text-02-color;
-  line-height: 17px;
+  line-height: 23px;
 }
 @mixin heading_8 {
   font-size: 16px;
