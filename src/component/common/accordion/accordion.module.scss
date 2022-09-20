@@ -1,6 +1,6 @@
 @import '../../../../styles/typography.module';
 .accordion_wrap {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   .accordion_item {
     position: relative;
     padding: 15px;
@@ -49,6 +49,7 @@
       .accordion_body {
         @include heading_7;
         padding-left: 7px;
+        padding-bottom: 25px;
       }
     }
   }

@@ -19,12 +19,12 @@
       font-family: 'Rubik';
       font-style: normal;
       font-weight: 500;
-      font-size: 10px;
+      font-size: 14px;
       line-height: 19px;
       /* identical to box height */
       color: white;
-        width: 100px;
-        padding: 5px;
+      width: 100px;
+      padding: 5px;
     }
     h1 {
       // color: linear-gradient(266.54deg, #FF00D6 4.51%, #FAFF00 98.67%);
@@ -52,14 +52,14 @@
       font-family: 'Rubik';
       font-style: normal;
       font-weight: 400;
-      font-size: 12px;
+      font-size: 14px;
       margin-top: 25px;
       /* or 180% */
 
       color: #efefef;
     }
   }
-  .home_images{
+  .home_images {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,28 +67,28 @@
   }
 }
 
-@media screen and (max-width:980px) {
-.home_page {
-  height: auto;
-   flex-direction: column; 
-   .home_details {
-    width: 100%;
-    text-align: center;
-   }
-}
-}
-@media screen and (max-width:480px) {
-    .home_page {
-       flex-direction: column; 
-       .home_details {
-        width: 100%;
-        text-align: center;
-        h1 {
-            font-size: 30px;
-        }
-        h4 {
-            font-size: 21px;
-        }
-       }
+@media screen and (max-width: 980px) {
+  .home_page {
+    height: auto;
+    flex-direction: column;
+    .home_details {
+      width: 100%;
+      text-align: center;
     }
+  }
+}
+@media screen and (max-width: 480px) {
+  .home_page {
+    flex-direction: column;
+    .home_details {
+      width: 100%;
+      text-align: center;
+      h1 {
+        font-size: 30px;
+      }
+      h4 {
+        font-size: 21px;
+      }
     }
+  }
+}

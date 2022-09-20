@@ -9,8 +9,8 @@ const Card = () => {
         <div className={styles.backgroud_card}>
           <Image
             src={cardback}
-            width={326}
-            height={299}
+            width={420}
+            height={283}
             alt="img"
             layout="fixed"
           />
@@ -18,8 +18,8 @@ const Card = () => {
         <div className={styles.img_card}>
           <Image
             src={'/images/card_avatar.svg'}
-            width={250}
-            height={250}
+            width={322}
+            height={287}
             layout="fixed"
             alt="card_avatar"
           />
