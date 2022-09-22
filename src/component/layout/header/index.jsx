@@ -1,16 +1,67 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import searchIcon from '../../../../images/search.png';
 import walletIcon from '../../../../images/wallet.png';
 import Button from '../../common/Button';
+// import { providers } from 'ethers'
+import Web3 from 'web3';
+import Web3Modal from 'web3modal';
+import { useEffect } from 'react';
 
 const Header = () => {
-  const header = useRef();
 
+  const [chainId, setChainId] = useState()
+  const header = useRef();
   const handleNav = () => {
     header.current.classList.toggle(styles.open_nav);
   };
+ 
+ 
+
+  async function connectwallet() {
+    const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad';
+
+    const providerOptions = {
+      walletconnect: {
+        // package: WalletConnectProvider, // required
+        options: {
+          infuraId: INFURA_ID, // required
+        },
+      },
+    };
+  let web3Modal;
+
+    if (typeof window !== "undefined") {
+      web3Modal = new Web3Modal({
+        network: "mainnet", // optional
+        cacheProvider: true,
+        providerOptions, // required
+      });
+    }
+    try {
+      const provider = await web3Modal.connect();
+      const web3 = new Web3(provider);
+      const acc = await web3.eth.getAccounts();
+      const chainId = await web3.eth.getChainId();
+      const accountBalance = await web3.eth.getBalance(acc[0]);
+      setChainId(chainId)
+      console.log({ acc: acc[0], chainId, accountBalance });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(()=>{
+    if(window.ethereum){
+    window.ethereum.on('accountsChanged', function (accounts) {
+      console.log("accounts", accounts)
+    })
+    window.ethereum.on('networkChanged', async (network) => {
+      window.location.reload();
+      console.log(network)
+  });
+}
+  },[])
 
   return (
     <>
@@ -132,7 +183,8 @@ const Header = () => {
                 <li className="nav-item">
                   <Button
                     data-content="WalletConnect"
-                    kind='wallet-connect'
+                    kind="wallet-connect"
+                    onClick={connectwallet}
                   >
                     <Image src={walletIcon} alt="wallet" />
                   </Button>

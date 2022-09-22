@@ -41,44 +41,44 @@ $fontsize: 12px;
         }
 
         &:last-child {
-          .header_wallet_btn {
-            color: #fff;
-            font-size: $fontsize;
-            padding: 18px 35px;
-            display: flex;
-            background: linear-gradient(
-              182.32deg,
-              #faff00 18.76%,
-              #fe19c1 98.05%
-            );
-            border: 0;
-            border-radius: 50px;
-            position: relative;
-            overflow: hidden;
-            width: 170px;
+          // .header_wallet_btn {
+          //   color: #fff;
+          //   font-size: $fontsize;
+          //   padding: 18px 35px;
+          //   display: flex;
+          //   background: linear-gradient(
+          //     182.32deg,
+          //     #faff00 18.76%,
+          //     #fe19c1 98.05%
+          //   );
+          //   border: 0;
+          //   border-radius: 50px;
+          //   position: relative;
+          //   overflow: hidden;
+          //   width: 170px;
 
-            &::before {
-              content: attr(data-content);
-              font-weight: 500;
-              position: absolute;
-              border-radius: inherit;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-              width: 99%;
-              height: 96%;
-              background-color: #050523;
-              display: flex;
-              align-items: center;
-              justify-content: flex-end;
-              padding: 0 30px 0 0;
-            }
-            span {
-              width: 12px !important;
-              height: auto !important;
-              margin: 0 5px 0 0 !important;
-            }
-          }
+          //   &::before {
+          //     content: attr(data-content);
+          //     font-weight: 500;
+          //     position: absolute;
+          //     border-radius: inherit;
+          //     top: 50%;
+          //     left: 50%;
+          //     transform: translate(-50%, -50%);
+          //     width: 99%;
+          //     height: 96%;
+          //     background-color: #050523;
+          //     display: flex;
+          //     align-items: center;
+          //     justify-content: flex-end;
+          //     padding: 0 30px 0 0;
+          //   }
+          //   span {
+          //     width: 12px !important;
+          //     height: auto !important;
+          //     margin: 0 5px 0 0 !important;
+          //   }
+          // }
         }
       }
     }

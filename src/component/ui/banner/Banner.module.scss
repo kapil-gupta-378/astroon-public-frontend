@@ -5,8 +5,8 @@
   width: 100%;
 }
 .home_page {
-  width: 85%;
-  height: 80vh;
+  width: 88%;
+  height: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -27,24 +27,22 @@
         padding: 5px;
     }
     h1 {
-      // color: linear-gradient(266.54deg, #FF00D6 4.51%, #FAFF00 98.67%);
       background: linear-gradient(266.54deg, #ff00d6 4.51%, #faff00 98.67%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      //   text-fill-color: transparent;
       font-family: 'Roboto Slab';
       font-style: normal;
       font-weight: 800;
-      font-size: 45px;
+      font-size: 50px;
       line-height: 90px;
     }
     h4 {
       font-family: 'Roboto Slab';
       font-style: normal;
       font-weight: 400;
-      font-size: 26px;
-      line-height: 26px;
+      font-size: 30px;
+      line-height: 30px;
       color: #ffffff;
     }
     p {
@@ -52,8 +50,9 @@
       font-family: 'Rubik';
       font-style: normal;
       font-weight: 400;
-      font-size: 12px;
-      margin-top: 25px;
+      font-size: 14px;
+      margin-top: 40px;
+      // line-height: 30px;
       /* or 180% */
 
       color: #efefef;
