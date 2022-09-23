@@ -1,0 +1,83 @@
+@import '../../../../styles/typography.module';
+.team_wrap {
+  .team_heading {
+    @include heading_2;
+    text-align: center;
+    margin: 60px;
+    font-family: 'Roboto Slab';
+  }
+  .cards_wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .card_navigation_btn {
+    margin: 55px 0px 80px 0px;
+    text-align: center;
+    .back_btn {
+      background: rgba(162, 70, 211, 0.3);
+      border-radius: 8px;
+      padding: 6px 24px;
+      outline: none;
+      border: none;
+      margin-right: 18px;
+    }
+    .forword_btn {
+      background: #7d13b6;
+      border-radius: 8px;
+      padding: 6px 24px;
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+// 1024 -
+@media only screen and (max-width: 1199px) {
+}
+// 980 -
+@media only screen and (max-width: 1023px) {
+  .team_wrap {
+    max-width: 868px !important;
+  }
+}
+// 768 -
+@media only screen and (max-width: 979px) {
+  .team_wrap {
+    max-width: 660px !important;
+    .team_heading {
+    }
+    .cards_wrap {
+      flex-wrap: wrap;
+      gap: 29px;
+    }
+    .card_navigation_btn {
+      .back_btn {
+      }
+      .forword_btn {
+      }
+    }
+  }
+}
+// 650 -
+@media only screen and (max-width: 767px) {
+  .team_wrap {
+    max-width: 530px !important;
+    .team_heading {
+    }
+    .cards_wrap {
+    }
+    .card_navigation_btn {
+      .back_btn {
+      }
+      .forword_btn {
+      }
+    }
+  }
+}
+// 480 -
+@media only screen and (max-width: 649px) {
+}
+// 375 -
+@media only screen and (max-width: 479px) {
+}

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:development": "next build",
+    "build:development": "env-cmd -f .env.development yarn next build && yarn next start",
     "start": "next start",
     "lint": "next lint",
     "formate": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|scss|sass|md|html)\"",
@@ -14,7 +14,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "axios": "^0.27.2",
-    "bootstrap": "^5.2.0",
     "dotenv": "^16.0.2",
     "env-cmd": "^10.1.0",
     "next": "12.2.5",

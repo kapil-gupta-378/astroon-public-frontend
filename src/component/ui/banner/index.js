@@ -14,7 +14,7 @@ function Banner() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             tristique consectetur placerat tortor adipiscing. Nascetur quam
           </p>
-          <Button data-content="explore" kind='text' >
+          <Button data-content="explore" kind="text">
             Explore
           </Button>
         </div>

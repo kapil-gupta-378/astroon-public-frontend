@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import searchIcon from '../../../../images/search.png';
-import walletIcon from '../../../../images/wallet.png';
+import searchIcon from '../../../../public/images/search.png';
+import walletIcon from '../../../../public/images/wallet.png';
 import Button from '../../common/Button';
 // import { providers } from 'ethers'
 import Web3 from 'web3';
@@ -46,7 +46,6 @@ const Header = () => {
       const chainId = await web3.eth.getChainId();
       const accountBalance = await web3.eth.getBalance(acc[0]);
       setChainId(chainId)
-      console.log({ acc: acc[0], chainId, accountBalance });
     } catch (error) {
       console.log(error);
     }
@@ -54,11 +53,9 @@ const Header = () => {
   useEffect(()=>{
     if(window.ethereum){
     window.ethereum.on('accountsChanged', function (accounts) {
-      console.log("accounts", accounts)
     })
     window.ethereum.on('networkChanged', async (network) => {
       window.location.reload();
-      console.log(network)
   });
 }
   },[])
