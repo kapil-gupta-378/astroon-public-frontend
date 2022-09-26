@@ -4,12 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build:development": "env-cmd -f .env.development yarn next build && yarn next start",
+    "build:development": "env-cmd -f .env.development yarn next build",
+    "start:development": "env-cmd -f .env.development yarn next start",
     "start": "next start",
+    "export": "next export",
     "lint": "next lint",
     "formate": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|scss|sass|md|html)\"",
     "prepare": "husky install",
-    "build:production": "env-cmd -f .env.production yarn next build && yarn next start"
+    "build:production": "env-cmd -f .env.production yarn next build && yarn next start",
+    "start:production": "env-cmd -f .env.production yarn next start"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
