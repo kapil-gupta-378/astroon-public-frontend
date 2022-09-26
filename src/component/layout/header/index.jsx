@@ -10,14 +10,11 @@ import Web3Modal from 'web3modal';
 import { useEffect } from 'react';
 
 const Header = () => {
-
-  const [chainId, setChainId] = useState()
+  const [chainId, setChainId] = useState();
   const header = useRef();
   const handleNav = () => {
     header.current.classList.toggle(styles.open_nav);
   };
- 
- 
 
   async function connectwallet() {
     const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad';
@@ -30,11 +27,11 @@ const Header = () => {
         },
       },
     };
-  let web3Modal;
+    let web3Modal;
 
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       web3Modal = new Web3Modal({
-        network: "mainnet", // optional
+        network: 'mainnet', // optional
         cacheProvider: true,
         providerOptions, // required
       });
@@ -45,20 +42,19 @@ const Header = () => {
       const acc = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
       const accountBalance = await web3.eth.getBalance(acc[0]);
-      setChainId(chainId)
+      setChainId(chainId);
     } catch (error) {
       console.log(error);
     }
   }
-  useEffect(()=>{
-    if(window.ethereum){
-    window.ethereum.on('accountsChanged', function (accounts) {
-    })
-    window.ethereum.on('networkChanged', async (network) => {
-      window.location.reload();
-  });
-}
-  },[])
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', function (accounts) {});
+      window.ethereum.on('networkChanged', async (network) => {
+        window.location.reload();
+      });
+    }
+  }, []);
 
   return (
     <>

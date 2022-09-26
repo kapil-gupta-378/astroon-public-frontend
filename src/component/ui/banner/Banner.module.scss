@@ -2,12 +2,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 88%;
+  margin: 0 auto;
+  margin-bottom: 550px;
 }
 .home_page {
-  width: 88%;
   height: auto;
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   .home_details {
@@ -67,15 +69,26 @@
 }
 
 @media screen and (max-width: 980px) {
-  .home_page {
-    height: auto;
-    flex-direction: column;
-    .home_details {
-      width: 100%;
-      text-align: center;
+
+  .home_wrp{
+
+    margin-bottom: 470px;
+    .home_page {
+      height: auto;
+      flex-direction: column;
+      .home_details {
+        width: 100%;
+        text-align: center;
+      }
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+
+}
+
+
 @media screen and (max-width: 480px) {
   .home_page {
     flex-direction: column;

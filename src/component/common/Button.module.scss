@@ -22,10 +22,11 @@ $fontsize: 12px;
   font-family: 'Rubik';
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
+  font-size: $fontsize;
   line-height: 19px;
   color: white;
-  padding: 11px 27px;
+  padding: 11px 35px;
+  margin-top: 34px;
   text-decoration: none;
   cursor: pointer;
   &:hover {
