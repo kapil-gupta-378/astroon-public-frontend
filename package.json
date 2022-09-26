@@ -26,6 +26,7 @@
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "reduxjs-toolkit-persist": "^7.2.1",
+    "sharp": "^0.31.0",
     "web3": "^1.7.5"
   },
   "devDependencies": {
