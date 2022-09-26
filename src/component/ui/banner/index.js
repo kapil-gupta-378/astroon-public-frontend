@@ -19,7 +19,7 @@ function Banner() {
           </Button>
         </div>
         <div className="home_images">
-          <Image src={HomePageImage} alt="" width="400px" height="550px" />
+          <Image src={HomePageImage} alt="" width="420px" height="570px" />
         </div>
       </div>
     </div>
