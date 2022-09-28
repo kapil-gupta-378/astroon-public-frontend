@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
+    "@rollbar/react": "^0.11.1",
     "axios": "^0.27.2",
     "dotenv": "^16.0.2",
     "env-cmd": "^10.1.0",
@@ -26,6 +27,7 @@
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
     "reduxjs-toolkit-persist": "^7.2.1",
+    "rollbar": "^2.25.2",
     "sharp": "^0.31.0",
     "web3": "^1.7.5"
   },
