@@ -17,7 +17,7 @@ const Card = () => {
         </div>
         <div className={styles.img_card}>
           <Image
-            src={'/images/card_avatar.svg'}
+            src={'/assets/images/card_avatar.svg'}
             width={322}
             height={287}
             layout="fixed"
