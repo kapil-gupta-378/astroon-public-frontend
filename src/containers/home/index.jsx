@@ -5,6 +5,7 @@ import styles from './home.module.scss';
 import Banner from '../../component/ui/banner';
 import Roadmap from '../../component/ui/roadmap';
 import Whitepaper from '../../component/ui/whitepaper';
+import Blog from '../../component/ui/blog';
 const Home = () => {
   return (
     <div className={styles.home_wrp}>
@@ -12,6 +13,7 @@ const Home = () => {
       <Roadmap />
       <Whitepaper />
       <FAQ />
+      <Blog />
       <Team />
     </div>
   );

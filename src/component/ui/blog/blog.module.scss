@@ -1,0 +1,48 @@
+@import '../../../../styles/typography.module';
+.blog_wrap {
+  .blog_heading {
+    @include heading_2;
+    text-align: center;
+    margin: 60px;
+    font-family: 'Roboto Slab';
+  }
+  .blog_cards_wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+// 1024 -
+@media only screen and (max-width: 1199px) {
+}
+// 980 -
+@media only screen and (max-width: 1023px) {
+  .blog_wrap {
+    max-width: 868px !important;
+  }
+}
+// 768 -
+@media only screen and (max-width: 979px) {
+  .blog_wrap {
+    max-width: 660px !important;
+    .blog_heading {
+    }
+    .cards_wrap {
+      flex-wrap: wrap;
+      gap: 29px;
+    }
+  }
+}
+// 650 -
+@media only screen and (max-width: 767px) {
+  .blog_wrap {
+    max-width: 530px !important;
+  }
+}
+// 480 -
+@media only screen and (max-width: 649px) {
+}
+// 375 -
+@media only screen and (max-width: 479px) {
+}

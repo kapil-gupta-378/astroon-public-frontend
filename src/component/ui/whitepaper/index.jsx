@@ -11,7 +11,7 @@ function Whitepaper() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           tristique consectetur placerat tortor.
         </p>
-        <Button data-content="whitepaper" kind="download">
+        <Button data-content="viewall" kind="text">
           Download
         </Button>
       </div>
