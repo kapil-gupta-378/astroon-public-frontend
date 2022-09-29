@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import searchIcon from '../../../../public/images/search.png';
-import walletIcon from '../../../../public/images/wallet.png';
-import Button from '../../common/Button';
+import searchIcon from '../../../../public/assets/images/search.png';
+import walletIcon from '../../../../public/assets/images/wallet.png';
+import Button from '../../common/button';
 
 const Header = () => {
   const header = useRef();

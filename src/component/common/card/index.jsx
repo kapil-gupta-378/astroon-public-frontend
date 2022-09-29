@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './card.module.scss';
-import cardback from '../../../../public/images/card_back.svg';
+import cardback from '../../../../public/assets/images/card_back.svg';
 const Card = () => {
   return (
     <div className={styles.card_wrap}>

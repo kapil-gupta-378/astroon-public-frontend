@@ -2,8 +2,8 @@ import Image from 'next/image';
 import React from 'react';
 import Card from '../../common/card';
 import styles from './team.module.scss';
-import cardBackIcon from '../../../../public/images/forword_icon.svg';
-import cardForwordIcon from '../../../../public/images/backword_icon.svg';
+import cardBackIcon from '../../../../public/assets/images/forword_icon.svg';
+import cardForwordIcon from '../../../../public/assets/images/backword_icon.svg';
 const Team = () => {
   return (
     <div className={`container ${styles.team_wrap}`}>

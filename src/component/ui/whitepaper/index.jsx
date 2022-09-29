@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../../common/Button';
-import style from './Whitepaper.module.scss';
+import Button from '../../common/button';
+import style from './whitepaper.module.scss';
 
 function Whitepaper() {
   return (

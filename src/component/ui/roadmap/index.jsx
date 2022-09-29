@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './Roadmap.module.scss';
-import RoadmapImage from '../../../../public/images/roadmap.svg';
+import styles from './roadmap.module.scss';
+import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 
 const Roadmap = () => {
   return (
