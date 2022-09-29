@@ -1,12 +1,9 @@
+@import '../../../../styles/typography.module';
 .roadmap_wrapper {
   margin: 50px 0 110px;
   .roadmap_heading {
-    font-family: 'Roboto Slab', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    margin-bottom: 20px;
-    p {
-      color: #fff;
+    h3 {
+      @include heading_2;
     }
   }
 

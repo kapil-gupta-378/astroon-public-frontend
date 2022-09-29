@@ -1,3 +1,4 @@
+@import '../../../../styles/typography.module';
 .whitepaper_wrp {
   width: 100%;
   display: flex;
@@ -24,17 +25,8 @@
       width: 100px;
       padding: 5px;
     }
-    h1 {
-      font-family: 'Roboto Slab';
-      font-style: normal;
-      font-weight: 700;
-      font-size: 48px;
-      line-height: 90px;
-      /* identical to box height, or 188% */
-
-      text-align: center;
-
-      color: #ffffff;
+    h3 {
+      @include heading_2;
     }
     p {
       font-family: 'Rubik';
@@ -44,6 +36,7 @@
       line-height: 28px;
       text-align: center;
       color: #efefef;
+      padding: 29px 0px;
     }
   }
 }
