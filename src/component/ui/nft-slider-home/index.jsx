@@ -6,28 +6,57 @@ import cardImage2 from '../../../../public/assets/images/nft2.svg';
 import cardImage3 from '../../../../public/assets/images/nft3.svg';
 import cardImage4 from '../../../../public/assets/images/nft4.svg';
 import cardImage5 from '../../../../public/assets/images/nft5.svg';
-// import cardImage6 from '../../../../public/assets/images/nft6.svg';
+import Slider from 'react-slick';
 const nftCollectionData = [
   { imglink: cardImage1, id: 1 },
   { imglink: cardImage2, id: 2 },
   { imglink: cardImage3, id: 3 },
   { imglink: cardImage4, id: 4 },
   { imglink: cardImage5, id: 5 },
-  //   { imglink: cardImage6, id: 6 },
+  { imglink: cardImage1, id: 1 },
+  { imglink: cardImage2, id: 2 },
+  { imglink: cardImage3, id: 3 },
+  { imglink: cardImage4, id: 4 },
+  { imglink: cardImage5, id: 5 },
+  { imglink: cardImage1, id: 1 },
+  { imglink: cardImage2, id: 2 },
+  { imglink: cardImage3, id: 3 },
+  { imglink: cardImage4, id: 4 },
+  { imglink: cardImage5, id: 5 },
+  { imglink: cardImage1, id: 1 },
+  { imglink: cardImage2, id: 2 },
+  { imglink: cardImage3, id: 3 },
+  { imglink: cardImage4, id: 4 },
+  { imglink: cardImage5, id: 5 },
+  { imglink: cardImage1, id: 1 },
+  { imglink: cardImage2, id: 2 },
+  { imglink: cardImage3, id: 3 },
+  { imglink: cardImage4, id: 4 },
+  { imglink: cardImage5, id: 5 },
 ];
 const NftSlider = () => {
+  const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: 'linear',
+  };
   return (
     <div className={styles.nft_slider_home}>
-      <div className={styles.nft_slider_top}>
+      <Slider {...settings}>
         {nftCollectionData.map((nft) => {
           return <NftCard key={nft.id} nftdata={nft} />;
         })}
-      </div>
-      <div className={styles.nft_slider_buttom}>
+      </Slider>
+      <Slider {...settings}>
         {nftCollectionData.map((nft) => {
           return <NftCard key={nft.id} nftdata={nft} />;
         })}
-      </div>
+      </Slider>
     </div>
   );
 };
