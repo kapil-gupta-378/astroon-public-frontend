@@ -1,0 +1,18 @@
+@import '../../../../styles/typography.module';
+
+.nft_collection {
+  .nft_collection_heading {
+    @include heading_2;
+    margin: 0px 0px 40px 0px;
+  }
+  .nfts_wrap {
+    display: grid;
+
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 33.6% 33.6% 33.6%;
+  }
+  .btn_wrap {
+    display: flex;
+    justify-content: center;
+  }
+}
