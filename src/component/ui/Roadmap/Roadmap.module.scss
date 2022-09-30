@@ -1,52 +1,57 @@
+@import '../../../../styles/typography.module.scss';
+
 .roadmap_wrapper {
-  margin: 50px 0 110px;
+  margin:0 0;
+  width: 88%;
+  margin: 0 auto;
+  transform: translateY(-450px);
   .roadmap_heading {
+    @include heading_2;
     font-family: 'Roboto Slab', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     p {
       color: #fff;
     }
   }
-
+  
   .roadmap_image {
-    width: 75%;
+    width: 85%;
     margin: 0 auto;
 
     .roadmap_text {
       position: absolute;
       color: white;
-      width: 25%;
+      width: 27%;
       p {
         font-family: 'Rubik', sans-serif;
         &:nth-child(1) {
           font-weight: 700;
           font-size: 22px;
+          line-height: 22px;
         }
 
         &:nth-child(2) {
-          font-weight: 400;
-          font-size: 14px;
+          font-weight: 300;
+          font-size: 13px;
         }
       }
       &:nth-child(2) {
-        top: 80px;
-        left: 135px;
+        top: 75px;
+        left: 80px;
       }
 
       &:nth-child(3) {
-        top: 280px;
-        left: -60px;
+        top: 270px;
+        left: -95px;
       }
 
       &:nth-child(4) {
-        bottom: 190px;
-        right: -20px;
+        bottom: 197px;
+        right: -80px;
       }
 
       &:nth-child(5) {
-        bottom: -176px;
+        bottom: -130px;
         left: 14px;
       }
     }
@@ -59,18 +64,47 @@
       .roadmap_text {
         width: 35%;
         &:nth-child(2) {
-          top: 50px;
+          top: 30px;
           left: 20px;
         }
 
         &:nth-child(3) {
-          top: 280px;
-          left: -60px;
+          top: 175px;
+          left: -90px;
         }
 
         &:nth-child(4) {
-          bottom: 145px;
+          bottom: 135px;
           right: -100px;
+        }
+
+        &:nth-child(5) {
+          bottom: -130px;
+          left: 0px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .roadmap_wrapper {
+    .roadmap_image {
+      .roadmap_text {
+        width: 42%;
+        &:nth-child(2) {
+          top: 0;
+          left: -30px;
+        }
+
+        &:nth-child(3) {
+          top: 105px;
+          left: -105px;
+        }
+
+        &:nth-child(4) {
+          bottom: 85px;
+          right: -105px;
         }
 
         &:nth-child(5) {
