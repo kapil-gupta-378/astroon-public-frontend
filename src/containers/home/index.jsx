@@ -12,9 +12,9 @@ const Home = () => {
       <Banner />
       <Roadmap />
       <Whitepaper />
+      <Team />
       <FAQ />
       <Blog />
-      <Team />
     </div>
   );
 };

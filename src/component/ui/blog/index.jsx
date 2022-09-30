@@ -12,7 +12,9 @@ const Blog = () => {
           <BlogCard key={idx} />
         ))}
       </div>
-      <Button kind="text">View All</Button>
+      <div className={styles.view_all_btn}>
+        <Button kind="text">View All</Button>
+      </div>
     </div>
   );
 };

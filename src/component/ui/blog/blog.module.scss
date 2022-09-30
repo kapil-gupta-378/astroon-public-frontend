@@ -11,6 +11,11 @@
     flex-direction: row;
     justify-content: space-around;
   }
+  .view_all_btn {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 80px;
+  }
 }
 
 // 1024 -
@@ -26,9 +31,8 @@
 @media only screen and (max-width: 979px) {
   .blog_wrap {
     max-width: 660px !important;
-    .blog_heading {
-    }
-    .cards_wrap {
+    .blog_cards_wrap {
+      display: flex;
       flex-wrap: wrap;
       gap: 29px;
     }
