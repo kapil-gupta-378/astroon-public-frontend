@@ -1,19 +1,14 @@
-@import '../../../../styles/typography.module.scss';
-
+@import '../../../../styles/typography.module';
 .roadmap_wrapper {
-  margin:0 0;
+  margin: 0 0;
   width: 88%;
   margin: 0 auto;
-  transform: translateY(-450px);
   .roadmap_heading {
-    @include heading_2;
-    font-family: 'Roboto Slab', sans-serif;
-    margin-bottom: 40px;
-    p {
-      color: #fff;
+    h3 {
+      @include heading_2;
     }
   }
-  
+
   .roadmap_image {
     width: 85%;
     margin: 0 auto;

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './Button.module.scss';
+import styles from './button.module.scss';
 import axios from 'axios';
-// import demo from '../../../public/demo.pdf';
 
 const Button = ({ children, kind, ...rest }) => {
   const downloadFile = () => {

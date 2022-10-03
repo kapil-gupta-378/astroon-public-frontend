@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import styles from './Roadmap.module.scss';
-import RoadmapImage from '../../../../public/images/roadmap.svg';
+import styles from './roadmap.module.scss';
+import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 
 const Roadmap = () => {
   return (
@@ -9,7 +9,7 @@ const Roadmap = () => {
       <div className={`${styles.roadmap_wrapper}`}>
         <div className="container-fluid">
           <div className={`${styles.roadmap_heading} text-center tex-white`}>
-            <p>Roadmap</p>
+            <h3>Roadmap</h3>
           </div>
           <div className={`${styles.roadmap_image} position-relative `}>
             <Image src={RoadmapImage} alt="roadmap" />

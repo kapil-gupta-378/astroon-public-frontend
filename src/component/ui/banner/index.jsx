@@ -1,12 +1,12 @@
 import React from 'react';
 import Image from 'next/image';
-import style from './Banner.module.scss';
-import Button from '../../common/Button';
-import HomePageImage from '../../../../public/images/homepage.svg';
+import style from './banner.module.scss';
+import Button from '../../common/button';
+import HomePageImage from '../../../../public/assets/images/homepage.svg';
 function Banner() {
   return (
     <div className={style['home_wrp']}>
-      <div className={`${style.home_page} container-fluid`}>
+      <div className={`${style.home_page} container`}>
         <div className={style.home_details}>
           <h1>Collect, Buy and sell</h1>
           <h4>extraordinary NFT&apos;S</h4>
