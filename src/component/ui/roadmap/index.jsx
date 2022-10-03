@@ -9,7 +9,7 @@ const Roadmap = () => {
       <div className={`${styles.roadmap_wrapper}`}>
         <div className="container-fluid">
           <div className={`${styles.roadmap_heading} text-center tex-white`}>
-            <p>Roadmap</p>
+            <h3>Roadmap</h3>
           </div>
           <div className={`${styles.roadmap_image} position-relative `}>
             <Image src={RoadmapImage} alt="roadmap" />

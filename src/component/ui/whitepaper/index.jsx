@@ -6,12 +6,12 @@ function Whitepaper() {
   return (
     <div className={style.whitepaper_wrp}>
       <div className={`${style.whitepaper_content} container-fluid`}>
-        <h1>Whitepaper</h1>
+        <h3>Whitepaper</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           tristique consectetur placerat tortor.
         </p>
-        <Button data-content="whitepaper" kind="download">
+        <Button data-content="Download" kind="download">
           Download
         </Button>
       </div>

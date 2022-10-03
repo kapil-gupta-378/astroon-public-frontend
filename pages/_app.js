@@ -3,6 +3,8 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'reduxjs-toolkit-persist/integration/react';
 import { persistor, store } from '../src/redux/store';
 import Layout from '../src/component/layout';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // <-- Provider imports 'rollbar' for us
 import ErrorFallback from '../src/component/common/error-fallback';
 import getConfig from 'next/config';
