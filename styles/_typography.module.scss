@@ -6,7 +6,7 @@
   line-height: 90px;
 }
 
-// below css for section heading
+// below css for home page section heading
 @mixin heading_2 {
   font-size: 33px;
   font-weight: 800;
@@ -51,7 +51,7 @@
   font-size: 14px;
   font-weight: 400;
   color: $text-02-color;
-  line-height: 23px;
+  line-height: 25px;
 }
 @mixin heading_8 {
   font-size: 16px;
@@ -70,4 +70,33 @@
   font-weight: 600;
   color: $text-02-color;
   line-height: 18px;
+}
+
+// below css for ast page
+
+@mixin heading_9 {
+  font-size: 25px;
+  font-weight: 700;
+  color: $text-01-color;
+  line-height: 30px;
+  text-align: center;
+  font-family: 'Roboto Slab';
+  margin-bottom: 45px;
+}
+
+@mixin heading_10 {
+  font-size: 85px;
+  font-weight: 900;
+  color: $text-01-color;
+  line-height: 30px;
+  text-align: center;
+  font-family: 'Roboto Slab';
+  margin-bottom: 40px;
+}
+@mixin heading_11 {
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+  font-weight: 400;
 }
