@@ -1,0 +1,14 @@
+.video_border {
+  background: url('../../../../public/assets/images/video_frame.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin: 50px;
+  .animation_video {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 9% 4% 9% 4%;
+    height: 755px;
+  }
+}

@@ -1,0 +1,51 @@
+@import '../../../../styles/typography.module';
+.join_wrap {
+  width: 100%;
+  padding: 0% 8% 6% 8%;
+  .join_you_tube_wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    .join_you_tube {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background: url('../../../../public/assets/images/join_youtube_channel.png')
+        no-repeat center;
+    }
+
+    .join_you_tube_container {
+      color: white;
+      padding: 60px 20px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Roboto Slab';
+    }
+    .join_now_btn {
+      background-color: #faff00;
+      border-radius: 268px;
+      border: none;
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+      padding: 11px 27px;
+      cursor: pointer;
+      &:hover {
+        color: black;
+      }
+      width: 12%;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
