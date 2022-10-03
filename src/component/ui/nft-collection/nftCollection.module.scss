@@ -1,6 +1,7 @@
 @import '../../../../styles/typography.module';
 
 .nft_collection {
+  margin-bottom: 100px;
   .nft_collection_heading {
     @include heading_2;
     margin: 0px 0px 40px 0px;
