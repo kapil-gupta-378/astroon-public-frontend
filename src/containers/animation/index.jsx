@@ -6,9 +6,11 @@ import JoinYoutubeChannel from '../../component/ui/join-youtube-channel';
 const Animation = () => {
   return (
     <>
-      <Video />
-      <OurArtworks />
-      <JoinYoutubeChannel />
+      <div className="container">
+        <Video />
+        <OurArtworks />
+        <JoinYoutubeChannel />
+      </div>
     </>
   );
 };

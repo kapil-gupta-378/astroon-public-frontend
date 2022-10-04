@@ -28,12 +28,21 @@ const NFTCard = () => {
       </div>
       <div className={styles.nft_card_sec}>
         <div className={styles.nft_card_art}>
-          <p>Art</p>
-          <h6>Art #1234</h6>
+          <div className={styles.nft_card_heading_wrap}>
+            <p>Art</p>
+            <Image
+              src={'/assets/images/art.svg'}
+              width={15}
+              height={15}
+              layout="fixed"
+              alt="art"
+            />
+            <h6>Art #1234</h6>
+          </div>
           <button className={styles.opensea_btn}>View on Opensea</button>
         </div>
         <div className={styles.nft_card_price}>
-          <h1>0.207 ETH</h1>
+          <h5>0.207 ETH</h5>
           <p>$281.21</p>
         </div>
       </div>
