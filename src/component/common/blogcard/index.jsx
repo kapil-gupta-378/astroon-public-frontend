@@ -13,15 +13,15 @@ const BlogCard = ({ data }) => {
         <Image
           loader={myLoader}
           src={data.featureImage}
+          layout="responsive"
           width={322}
-          height={287}
-          layout="fixed"
+          height={217}
           alt="blog_card"
         />
       </div>
       <div className={styles.blog_card_text}>
         <p>{data.title}</p>
-        <h4>{data.metaDescription}</h4>
+        <h4>{`${data.metaDescription.substring(0, 46)}....`}</h4>
       </div>
     </div>
   );

@@ -5,7 +5,7 @@ import BlogCard from '../../common/blogcard';
 import Button from '../../common/button';
 import styles from './blog.module.scss';
 
-const Blog = () => {
+const BlogRow = () => {
   const dispatch = useDispatch();
   const blogData = useSelector((state) => state.blogReducer.data);
   useEffect(() => {
@@ -26,4 +26,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default BlogRow;
