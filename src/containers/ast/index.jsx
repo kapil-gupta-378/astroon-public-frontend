@@ -7,6 +7,7 @@ import Button from '../../component/common/button';
 import styles from './ast.module.scss';
 import tokenomicsImage from '.././../../public/assets/images/tokenomics.svg';
 import HowStep from '../../component/common/how-step';
+import HeadingBackground from '../../component/common/heading-background';
 const data = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -16,10 +17,13 @@ const data = [
 const AST = () => {
   return (
     <section className={`container ${styles.ast_page_wrap}`}>
-      <div className={styles.ast_heading_back}>
-        <p>Astroon Token</p>
-        <h1>$ AST</h1>
+      <div className={styles.banner}>
+        <HeadingBackground>
+          <p>Astroon Token</p>
+          <h1>$ AST</h1>
+        </HeadingBackground>
       </div>
+
       <div className={styles.description_wrap}>
         <h3>Meet $AST – Astroon Token</h3>
         <p>

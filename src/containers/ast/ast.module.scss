@@ -7,18 +7,7 @@
 }
 .ast_page_wrap {
   margin: 25px auto;
-
-  .ast_heading_back {
-    background-image: url('../../../public/assets/images/AST-page-heading-background.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 53px;
-
+  .banner {
     p {
       @include heading_9;
     }
@@ -28,6 +17,7 @@
       text-shadow: 0px 16px 10px rgba(0, 0, 0, 0.18);
     }
   }
+
   .description_wrap {
     margin-top: 60px;
     padding: 0px 185px;
