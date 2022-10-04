@@ -3,25 +3,6 @@ import React from 'react';
 import styles from './nftcard.module.scss';
 import cardback from '../../../../public/assets/images/card_back.svg';
 
-// import React from 'react';
-// import Image from 'next/image';
-// import styles from './nftcard.module.scss';
-
-// const NftCard = ({ nftdata }) => {
-//   return (
-//     <div className={styles.nftCard_wrap}>
-//       <Image
-//         src={nftdata.imglink}
-//         layout="responsive"
-//         alt="nftImage"
-//         priority
-//       />
-//     </div>
-//   );
-// };
-
-// export default NftCard;
-
 const NFTCard = () => {
   return (
     <div className={`container ${styles.nft_card_wrap}`}>
