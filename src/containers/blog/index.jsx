@@ -7,6 +7,7 @@ import styles from './blog.module.scss';
 import cardBackIcon from '../../../public/assets/images/forword_icon.svg';
 import cardForwordIcon from '../../../public/assets/images/backword_icon.svg';
 import { setBlogdataCount } from '../../redux/blog/blogSlice';
+import HeadingBackground from '../../component/common/heading-background';
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useDispatch();
@@ -36,6 +37,9 @@ const Blog = () => {
   };
   return (
     <div className={`container ${styles.blog_wrap}`}>
+      <HeadingBackground>
+        <h3 className={styles.main_heading}>Blog</h3>
+      </HeadingBackground>
       <div className={styles.blog_main_wrap}>
         {!blogLoading ? (
           blogData.length !== 0 ? (

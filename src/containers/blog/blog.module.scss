@@ -1,5 +1,13 @@
+@import '../../../styles/typography.module';
+
 .blog_wrap {
+  margin-top: 20px;
+  .main_heading {
+    padding: 50px;
+    @include heading_2;
+  }
   .blog_main_wrap {
+    margin-top: 30px;
     height: 120vh;
     display: flex;
     align-items: center;
