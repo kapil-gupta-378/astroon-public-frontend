@@ -57,44 +57,6 @@
       margin: 30px auto;
     }
   }
-  .work_wrap {
-    position: relative;
-    height: 600px;
-    margin-top: 71px;
-    h3 {
-      @include heading_2;
-    }
-
-    .work_image {
-      width: 90%;
-      position: absolute;
-      top: -60px;
-      left: 45px;
-    }
-    .earn_text {
-      @include heading_7;
-      @include common_Scss;
-      top: 200px;
-    }
-    .learn_text {
-      @include heading_7;
-      @include common_Scss;
-      top: 421px;
-      left: 202px;
-    }
-    .shop_text {
-      @include heading_7;
-      @include common_Scss;
-      right: 202px;
-      top: 421px;
-    }
-    .trade_text {
-      @include heading_7;
-      @include common_Scss;
-      top: 200px;
-      right: -33px;
-    }
-  }
 
   .tokenomics_wrap {
     margin-top: 40px;

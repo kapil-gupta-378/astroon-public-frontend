@@ -5,8 +5,8 @@ import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import Button from '../../component/common/button';
 // import mainHeadingBackground from '../../../public/assets/images/AST-page-heading-background.svg';
 import styles from './ast.module.scss';
-import workFlowImage from '.././../../public/assets/images/workflow.svg';
 import tokenomicsImage from '.././../../public/assets/images/tokenomics.svg';
+import HowStep from '../../component/common/how-step';
 const data = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -58,32 +58,8 @@ const AST = () => {
           <Button>Buy $AST</Button>
         </div>
       </div>
-      <div className={styles.work_wrap}>
-        <h3>How it Works?</h3>
-        <div className={styles.work_image}>
-          <Image src={workFlowImage} layout="responsive" alt="image work" />
-        </div>
-        <p className={styles.earn_text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
-          nunc ornare adipiscing aenean ipsum pretium eu arcu. Aenean aliquam
-          integer
-        </p>
-        <p className={styles.learn_text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
-          nunc ornare adipiscing aenean ipsum pretium eu arcu. Aenean aliquam
-          integer
-        </p>
-        <p className={styles.shop_text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
-          nunc ornare adipiscing aenean ipsum pretium eu arcu. Aenean aliquam
-          integer
-        </p>
-        <p className={styles.trade_text}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
-          nunc ornare adipiscing aenean ipsum pretium eu arcu. Aenean aliquam
-          integer
-        </p>
-      </div>
+
+      <HowStep title="How it Works?" />
       <div className={styles.tokenomics_wrap}>
         <h3>Tokenomics</h3>
         <div className={styles.tokenomics_image}>
