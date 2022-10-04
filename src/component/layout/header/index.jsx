@@ -1,16 +1,57 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import searchIcon from '../../../../public/assets/images/search.png';
 import walletIcon from '../../../../public/assets/images/wallet.png';
 import Button from '../../common/button';
+import Web3 from 'web3';
+import Web3Modal from 'web3modal';
+import { useEffect } from 'react';
 
 const Header = () => {
+  const [chainId, setChainId] = useState();
   const header = useRef();
-
   const handleNav = () => {
     header.current.classList.toggle(styles.open_nav);
   };
+
+  async function connectwallet() {
+    const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad';
+
+    const providerOptions = {
+      walletconnect: {
+        // package: WalletConnectProvider, // required
+        options: {
+          infuraId: INFURA_ID, // required
+        },
+      },
+    };
+    let web3Modal;
+
+    if (typeof window !== 'undefined') {
+      web3Modal = new Web3Modal({
+        network: 'mainnet', // optional
+        cacheProvider: true,
+        providerOptions, // required
+      });
+    }
+    try {
+      const provider = await web3Modal.connect();
+      const web3 = new Web3(provider);
+      const chainId = await web3.eth.getChainId();
+      setChainId(chainId);
+    } catch (error) {
+      return chainId;
+    }
+  }
+  useEffect(() => {
+    if (window.ethereum) {
+      window.ethereum.on('accountsChanged', function () {});
+      window.ethereum.on('networkChanged', async () => {
+        window.location.reload();
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -130,7 +171,11 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <Button data-content="WalletConnect" kind="wallet-connect">
+                  <Button
+                    data-content="WalletConnect"
+                    kind="wallet-connect"
+                    onClick={connectwallet}
+                  >
                     <Image src={walletIcon} alt="wallet" />
                   </Button>
                 </li>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import Image from 'next/image';
 import React from 'react';
 import styles from './nftcard.module.scss';
@@ -46,8 +47,26 @@ const NFTCard = () => {
           <p>$281.21</p>
         </div>
       </div>
+=======
+import React from 'react';
+import Image from 'next/image';
+import styles from './nftcard.module.scss';
+const NftCard = ({ nftdata }) => {
+  return (
+    <div className={styles.nftCard_wrap}>
+      <Image
+        src={nftdata.imglink}
+        layout="responsive"
+        alt="nftImage"
+        priority
+      />
+>>>>>>> d88f7eb5220404fab95ee6d04d782e8ca3b03273
     </div>
   );
 };
 
+<<<<<<< HEAD
 export default NFTCard;
+=======
+export default NftCard;
+>>>>>>> d88f7eb5220404fab95ee6d04d782e8ca3b03273
