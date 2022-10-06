@@ -49,3 +49,72 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 11px 5px;
+      }
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 5px 5px;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 5px 5px;
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 0px 0px;
+        width: 35%;
+      }
+    }
+  }
+} /* 320 */
