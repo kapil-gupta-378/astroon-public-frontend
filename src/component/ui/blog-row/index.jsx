@@ -5,12 +5,13 @@ import BlogCard from '../../common/blogcard';
 import Button from '../../common/button';
 import styles from './blog.module.scss';
 
-const Blog = () => {
+const BlogRow = () => {
   const dispatch = useDispatch();
-  const blogData = useSelector((state) => state.blogReducer.data);
+  const { blogData } = useSelector((state) => state.blogReducer);
   useEffect(() => {
     dispatch(fetchBlogData());
   }, []);
+
   return (
     <div className={`container ${styles.blog_wrap}`}>
       <h3 className={styles.blog_heading}>Blog</h3>
@@ -26,4 +27,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default BlogRow;
