@@ -1,0 +1,42 @@
+@import '../../../../styles/typography.module';
+.whitepaper_wrp {
+  margin: 110px auto;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .whitepaper_content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .whitepaper_btn {
+      background: linear-gradient(141.07deg, #faff00 -6.88%, #fe19c1 50.39%);
+      border-radius: 268px;
+      border: none;
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+      /* identical to box height */
+      color: white;
+      width: 100px;
+      padding: 5px;
+    }
+    h3 {
+      @include heading_2;
+    }
+    p {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 28px;
+      text-align: center;
+      color: #efefef;
+      padding: 29px 0px;
+    }
+  }
+}

@@ -1,10 +1,10 @@
 import React from 'react';
 import styles from './footer.module.scss';
-import twitter from '../../../../public/images/twitter.svg';
-import insta from '../../../../public/images/instagram.svg';
-import message from '../../../../public/images/message.svg';
-import opensea from '../../../../public/images/opensea_icon.svg';
-import discord from '../../../../public/images/discord_icon.svg';
+import twitter from '../../../../public/assets/images/twitter.svg';
+import insta from '../../../../public/assets/images/instagram.svg';
+import message from '../../../../public/assets/images/message.svg';
+import opensea from '../../../../public/assets/images/opensea_icon.svg';
+import discord from '../../../../public/assets/images/discord_icon.svg';
 import Image from 'next/image';
 const Footer = () => {
   return (

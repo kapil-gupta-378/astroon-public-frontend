@@ -29,7 +29,7 @@
 
         &::after {
           content: '';
-          background-image: url('../../../../public/images/accordion_minus.svg');
+          background-image: url('../../../../public/assets/images/accordion_minus.svg');
           background-position: center right;
           background-repeat: no-repeat;
           background-size: 25px 25px;
@@ -41,7 +41,7 @@
         }
         &[aria-expanded='false']::after {
           contain: '';
-          background-image: url('../../../../public/images/accordion_plus.svg');
+          background-image: url('../../../../public/assets/images/accordion_plus.svg');
         }
       }
     }

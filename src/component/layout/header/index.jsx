@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
-import searchIcon from '../../../../public/images/search.png';
-import walletIcon from '../../../../public/images/wallet.png';
-import Button from '../../common/Button';
-// import { providers } from 'ethers'
+import searchIcon from '../../../../public/assets/images/search.png';
+import walletIcon from '../../../../public/assets/images/wallet.png';
+import Button from '../../common/button';
 import Web3 from 'web3';
 import Web3Modal from 'web3modal';
 import { useEffect } from 'react';
@@ -39,18 +38,16 @@ const Header = () => {
     try {
       const provider = await web3Modal.connect();
       const web3 = new Web3(provider);
-      const acc = await web3.eth.getAccounts();
       const chainId = await web3.eth.getChainId();
-      const accountBalance = await web3.eth.getBalance(acc[0]);
       setChainId(chainId);
     } catch (error) {
-      console.log(error);
+      return chainId;
     }
   }
   useEffect(() => {
     if (window.ethereum) {
-      window.ethereum.on('accountsChanged', function (accounts) {});
-      window.ethereum.on('networkChanged', async (network) => {
+      window.ethereum.on('accountsChanged', function () {});
+      window.ethereum.on('networkChanged', async () => {
         window.location.reload();
       });
     }
