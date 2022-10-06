@@ -1,0 +1,48 @@
+@import '../../../../styles/typography.module';
+.benefits_wrap {
+  .benefits_heading {
+    @include heading_3;
+    text-align: center;
+    margin: 60px;
+    font-family: 'Roboto Slab';
+  }
+  p {
+    color: white;
+    text-align: center;
+    padding: 0px 140px 60px 140px;
+  }
+}
+
+// Responsive breakpoints
+// @media only screen and (max-width: 1199px) {
+// } /* 1024 */
+// @media only screen and (max-width: 1023px) {
+// } /* 980 */
+// @media only screen and (max-width: 979px) {
+// } /* 768 */
+@media only screen and (max-width: 767px) {
+  .benefits_wrap {
+    .benefits_heading {
+    }
+    p {
+      color: white;
+      text-align: center;
+      padding: 0px 80px 60px 80px;
+    }
+  }
+} /* 650 */
+// @media only screen and (max-width: 649px) {
+// } /* 480 */
+@media only screen and (max-width: 479px) {
+  .benefits_wrap {
+    .benefits_heading {
+    }
+    p {
+      color: white;
+      text-align: center;
+      padding: 0px 30px 60px 30px;
+    }
+  }
+} /* 375 */
+// @media only screen and (max-width: 374px) {
+// } /* 320 */

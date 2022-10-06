@@ -1,5 +1,4 @@
 import React from 'react';
-import NftCard from '../../common/nft-card';
 import styles from './nftSlider.module.scss';
 import cardImage1 from '../../../../public/assets/images/nftimag.svg';
 import cardImage2 from '../../../../public/assets/images/nft2.svg';
@@ -7,6 +6,7 @@ import cardImage3 from '../../../../public/assets/images/nft3.svg';
 import cardImage4 from '../../../../public/assets/images/nft4.svg';
 import cardImage5 from '../../../../public/assets/images/nft5.svg';
 import Slider from 'react-slick';
+import CollectionCard from '../../common/collection-card';
 const nftCollectionData = [
   { imglink: cardImage1, id: 1 },
   { imglink: cardImage2, id: 2 },
@@ -49,12 +49,12 @@ const NftSlider = () => {
     <div className={styles.nft_slider_home}>
       <Slider {...settings}>
         {nftCollectionData.map((nft) => {
-          return <NftCard key={nft.id} nftdata={nft} />;
+          return <CollectionCard key={nft.id} nftdata={nft} />;
         })}
       </Slider>
       <Slider {...settings}>
         {nftCollectionData.map((nft) => {
-          return <NftCard key={nft.id} nftdata={nft} />;
+          return <CollectionCard key={nft.id} nftdata={nft} />;
         })}
       </Slider>
     </div>
