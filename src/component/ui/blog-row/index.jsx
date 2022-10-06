@@ -7,10 +7,11 @@ import styles from './blog.module.scss';
 
 const BlogRow = () => {
   const dispatch = useDispatch();
-  const blogData = useSelector((state) => state.blogReducer.data);
+  const { blogData } = useSelector((state) => state.blogReducer);
   useEffect(() => {
     dispatch(fetchBlogData());
   }, []);
+
   return (
     <div className={`container ${styles.blog_wrap}`}>
       <h3 className={styles.blog_heading}>Blog</h3>
