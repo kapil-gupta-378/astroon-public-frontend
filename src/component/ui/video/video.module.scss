@@ -1,0 +1,132 @@
+.video_border {
+  background: url('../../../../public/assets/images/video_frame.svg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  margin-top: 50px;
+  height: 559px;
+  position: relative;
+
+  &::before {
+    content: '';
+    background-image: url('../../../../public/assets/images/video_bottom.svg');
+    position: absolute;
+    bottom: 25px;
+    left: 0px;
+    background-size: 450px 85px;
+    width: 450px;
+    height: 85px;
+    z-index: 1;
+    right: 0;
+    margin: 0 auto;
+    background-repeat: no-repeat;
+  }
+  .animation_video {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0% 4%;
+    height: 85%;
+    margin-top: 40px;
+  }
+}
+//  Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 10.5%;
+      width: 40%;
+      background-size: 100% 85px;
+    }
+    .animation_video {
+      height: 72%;
+      margin-top: unset;
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 18.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 53%;
+      margin-top: unset;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 18.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 53%;
+      margin-top: unset;
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 24.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 40%;
+      margin-top: unset;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 27%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 34%;
+      margin-top: unset;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 30.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 26.5%;
+      margin-top: unset;
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 31.8%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 23.5%;
+      margin-top: unset;
+    }
+  }
+} /* 320 */
