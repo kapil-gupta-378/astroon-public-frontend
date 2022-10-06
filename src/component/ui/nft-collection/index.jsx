@@ -6,8 +6,8 @@ import cardImage3 from '../../../../public/assets/images/nft3.svg';
 import cardImage4 from '../../../../public/assets/images/nft4.svg';
 import cardImage5 from '../../../../public/assets/images/nft5.svg';
 import cardImage6 from '../../../../public/assets/images/nft6.svg';
-import NftCard from '../../common/nft-card';
 import Button from '../../common/button';
+import CollectionCard from '../../common/collection-card';
 const nftCollectionData = [
   { imglink: cardImage1, id: 1 },
   { imglink: cardImage2, id: 2 },
@@ -23,7 +23,7 @@ const NftCollection = () => {
       <h3 className={styles.nft_collection_heading}>NFT Collection</h3>
       <div className={styles.nfts_wrap}>
         {nftCollectionData.map((nft) => {
-          return <NftCard key={nft.id} nftdata={nft} />;
+          return <CollectionCard key={nft.id} nftdata={nft} />;
         })}
       </div>
       <div className={styles.btn_wrap}>

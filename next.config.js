@@ -12,6 +12,9 @@ const nextConfig = {
     // Will be available on both server and client
     rollbarClientToken: process.env.ROLLBAR_CLIENT_TOKEN,
   },
+  images: {
+    domains: ['13.112.214.174'],
+  },
 };
 
 module.exports = nextConfig;
