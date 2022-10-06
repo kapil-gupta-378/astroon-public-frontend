@@ -1,0 +1,13 @@
+@import '../../../styles/typography.module';
+.blog_detail_wrap {
+  .blog_heading {
+    @include heading_2;
+  }
+  .blog_date {
+    @include heading_11;
+    color: #d9d9d9;
+  }
+  .blog_content {
+    padding: 0px 15%;
+  }
+}
