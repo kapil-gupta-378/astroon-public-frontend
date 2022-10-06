@@ -1,5 +1,6 @@
 @import '../../../styles/typography.module';
 .blog_detail_wrap {
+  margin-top: 50px;
   .blog_heading {
     @include heading_2;
   }
@@ -8,6 +9,6 @@
     color: #d9d9d9;
   }
   .blog_content {
-    padding: 0px 15%;
+    padding: 0px 16%;
   }
 }

@@ -14,8 +14,9 @@ const BlogDetailPage = ({ data }) => {
   );
 };
 
-export async function getServerSideProps() {
-  const res = await fetch(`${APP_URL}blog/18`);
+export async function getServerSideProps({ params }) {
+  const { id } = params;
+  const res = await fetch(`${APP_URL}blog/${id}`);
   const dataJSON = await res.json();
   const data = await dataJSON.data;
 
