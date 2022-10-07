@@ -1,0 +1,126 @@
+@import '../../../../styles/typography.module';
+.findus_wrap {
+  width: 100%;
+  margin-bottom: 70px;
+  .findus_on_your_wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    .findus_on_your {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background: url('../../../../public/assets/images/games_find_us.svg')
+        no-repeat center;
+    }
+
+    .findus_on_your_container {
+      color: white;
+      padding: 60px 20px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Roboto Slab';
+    }
+    .findus_content {
+      display: flex;
+      justify-content: space-evenly;
+      width: 40%;
+      margin: auto;
+      .app_store_btn {
+        background-color: #faff00;
+        border-radius: 268px;
+        border: none;
+        font-family: 'Rubik';
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19px;
+        cursor: pointer;
+        &:hover {
+          color: black;
+        }
+        align-items: center;
+        text-align: center;
+        display: table-row;
+        // display: flex;
+        .app_store_btn_dis {
+          display: flex;
+          .app_store_btn_img {
+            width: 30%;
+            padding: 6px 15px;
+          }
+          .app_store_btn_text {
+            width: 70%;
+            p {
+              font-size: 10px;
+            }
+            h6 {
+              font-size: 14px;
+              margin-top: -35px;
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .findus_wrap {
+    .findus_on_your_wrap {
+      .findus_content {
+        display: flex;
+        justify-content: space-evenly;
+        width: 55%;
+        margin: auto;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 767px) {
+  .findus_wrap {
+    .findus_on_your_wrap {
+      .findus_content {
+        display: flex;
+        justify-content: space-evenly;
+        width: 75%;
+        margin: auto;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .findus_wrap {
+    .findus_on_your_wrap {
+      .findus_content {
+        display: flex;
+        justify-content: space-evenly;
+        width: 85%;
+        margin: auto;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .findus_wrap {
+    .findus_on_your_wrap {
+      .findus_content {
+        display: flex;
+        justify-content: space-evenly;
+        width: 105%;
+        margin: auto;
+      }
+    }
+  }
+} /* 375 */

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 import searchIcon from '../../../../public/assets/images/search.png';
 import walletIcon from '../../../../public/assets/images/wallet.png';
 import Button from '../../common/button';
@@ -123,9 +124,9 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Animation
-                  </a>
+                  <Link href="/animation">
+                    <a className="nav-link text-white">Animation</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-white" href="#">
@@ -138,14 +139,14 @@ const Header = () => {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    App
-                  </a>
+                  <Link href="/app">
+                    <a className="nav-link text-white">App</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Games
-                  </a>
+                  <Link href="/games">
+                    <a className="nav-link text-white">Games</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-white" href="#">
