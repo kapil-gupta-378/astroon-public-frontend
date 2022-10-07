@@ -29,6 +29,21 @@
     height: 85%;
     margin-top: 40px;
   }
+  .video_btn_wrp {
+    position: absolute;
+    top: 46%;
+    transform: translateY(-46%);
+    left: 0;
+    right: 0;
+    text-align: center;
+    button {
+      background: transparent;
+      border: transparent;
+      border-radius: 50%;
+      height: 36px;
+      width: 36px;
+    }
+  }
 }
 //  Responsive breakpoints
 @media only screen and (max-width: 1199px) {
