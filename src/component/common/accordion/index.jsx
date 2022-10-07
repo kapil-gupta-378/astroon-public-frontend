@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './accordion.module.scss';
 
-const Accordion = ({ id }) => {
+const Accordion = ({ data, id }) => {
   return (
     <div className={styles.accordion_wrap} id="accordionExample">
       <div className={styles.accordion_item}>
@@ -14,7 +14,7 @@ const Accordion = ({ id }) => {
             aria-expanded="false"
             aria-controls={`collapse${id}`}
           >
-            Phasellus pellentesque pulvinar.
+            {data.question}
           </button>
         </h2>
         <div
@@ -23,10 +23,7 @@ const Accordion = ({ id }) => {
           aria-labelledby={`heading${id}`}
           data-bs-parent="#accordionExample"
         >
-          <div className={styles.accordion_body}>
-            Ut enim ad minim veniam quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat aute irure dolor
-          </div>
+          <div className={styles.accordion_body}>{data.answer}</div>
         </div>
       </div>
     </div>

@@ -59,9 +59,9 @@ const Header = () => {
       <div ref={header} className={styles.header_wrapper}>
         <nav className="navbar navbar-expand-lg">
           <div className="container-fluid">
-            <a className={`${styles.logo} navbar-brand text-white`} href="#">
-              Logo
-            </a>
+            <Link href="/">
+              <a className={`${styles.logo} navbar-brand text-white`}>Logo</a>
+            </Link>
             <button
               className={`${styles.nav_toggeler} navbar-toggler`}
               type="button"
@@ -115,13 +115,14 @@ const Header = () => {
                 className={`${styles.nav_items} navbar-nav mx-auto mb-2 mb-lg-0`}
               >
                 <li className="nav-item">
-                  <a
-                    className="nav-link text-white active"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Home
-                  </a>
+                  <Link href="/">
+                    <a
+                      className="nav-link text-white active"
+                      aria-current="page"
+                    >
+                      Home
+                    </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link href="/animation">
@@ -129,14 +130,12 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Token
-                  </a>
+                  <Link href="/ast">
+                    <a className="nav-link text-white">Token</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    NFT
-                  </a>
+                  <a className="nav-link text-white">NFT</a>
                 </li>
                 <li className="nav-item">
                   <Link href="/app">
@@ -149,25 +148,18 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Merch
-                  </a>
+                  <a className="nav-link text-white">Merch</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Gallery
-                  </a>
+                  <a className="nav-link text-white">Gallery</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white" href="#">
-                    Blog
-                  </a>
+                  <Link href="/blog">
+                    <a className="nav-link text-white">Blog</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`${styles.header_search} nav-link text-white`}
-                    href="#"
-                  >
+                  <a className={`${styles.header_search} nav-link text-white`}>
                     <Image src={searchIcon} alt="search" />
                   </a>
                 </li>

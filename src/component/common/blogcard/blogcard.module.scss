@@ -5,31 +5,28 @@
     rgba(162, 70, 211, 0) 90.89%,
     #a246d3 99.12%
   );
-  width: 322px;
+  cursor: pointer;
   border-radius: 25px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  height: auto;
   .blog_card_img_wrap {
     width: 100%;
-    position: relative;
     border-radius: 25px;
-    position: relative;
-
-    .img_blog_card {
-      position: absolute !important;
-      top: -147px;
-      left: -9px;
+    span {
+      border-radius: inherit;
     }
   }
   .blog_card_text {
     width: 100%;
-    padding-left: 25px;
     display: flex;
     flex-direction: column;
-    margin-top: -22px;
-    margin-bottom: 36px;
+    padding: 0px 25px 0px 25px;
+    margin: 20px 0px 45px 0px;
+    height: 75px;
     h4 {
       @include heading_4;
       font-family: 'Rubik', sans-serif;
