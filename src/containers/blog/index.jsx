@@ -60,7 +60,9 @@ const Blog = () => {
       <div className={styles.card_navigation_btn}>
         <button
           onClick={fetchPreviousBlog}
-          className={` ${blogCount > 6 ? styles.back_btn : styles.forword_btn}`}
+          className={` ${
+            currentPage === 1 ? styles.disabled_btn : styles.enable_btn
+          }`}
         >
           <Image
             src={cardForwordIcon}
@@ -72,7 +74,9 @@ const Blog = () => {
         </button>
         <button
           onClick={fetchMoreblog}
-          className={` ${blogCount < 6 ? styles.back_btn : styles.forword_btn}`}
+          className={` ${
+            blogCount <= 6 ? styles.disabled_btn : styles.enable_btn
+          }`}
         >
           <Image
             src={cardBackIcon}

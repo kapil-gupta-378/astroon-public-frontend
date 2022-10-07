@@ -5,9 +5,10 @@
     rgba(162, 70, 211, 0) 90.89%,
     #a246d3 99.12%
   );
+  cursor: pointer;
   border-radius: 25px;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   flex-direction: column;
   width: 100%;

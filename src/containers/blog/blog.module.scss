@@ -28,7 +28,7 @@
   .card_navigation_btn {
     margin: 130px 0px 130px 0px;
     text-align: center;
-    .back_btn {
+    .disabled_btn {
       background: rgba(162, 70, 211, 0.3);
       border-radius: 8px;
       padding: 6px 24px;
@@ -36,7 +36,7 @@
       border: none;
       margin-right: 18px;
     }
-    .forword_btn {
+    .enable_btn {
       background: #7d13b6;
       border-radius: 8px;
       padding: 6px 24px;
