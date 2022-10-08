@@ -21,11 +21,28 @@
 
 // 1024 -
 @media only screen and (max-width: 1199px) {
+  .blog_wrap {
+    max-width: 973px !important;
+    // .blog_heading {
+    // }
+    .blog_cards_wrap {
+      gap: 30px;
+    }
+    // .view_all_btn {
+    // }
+  }
 }
 // 980 -
 @media only screen and (max-width: 1023px) {
   .blog_wrap {
     max-width: 868px !important;
+    // .blog_heading {
+    // }
+    .blog_cards_wrap {
+      gap: 30px;
+    }
+    .view_all_btn {
+    }
   }
 }
 // 768 -
@@ -36,6 +53,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 29px;
+      padding: 0px 20%;
     }
   }
 }
@@ -47,7 +65,25 @@
 }
 // 480 -
 @media only screen and (max-width: 649px) {
+  .blog_wrap {
+    max-width: 660px !important;
+    .blog_cards_wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 29px;
+      padding: 0px 10%;
+    }
+  }
 }
 // 375 -
 @media only screen and (max-width: 479px) {
+  .blog_wrap {
+    max-width: 660px !important;
+    .blog_cards_wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 29px;
+      padding: 0px 5%;
+    }
+  }
 }
