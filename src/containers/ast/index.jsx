@@ -1,12 +1,20 @@
 // import Image from 'next/image';
 import Image from 'next/image';
 import React from 'react';
-import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts';
 import Button from '../../component/common/button';
 // import mainHeadingBackground from '../../../public/assets/images/AST-page-heading-background.svg';
 import styles from './ast.module.scss';
 import tokenomicsImage from '.././../../public/assets/images/tokenomics.svg';
 import HowStep from '../../component/common/how-step';
+import HeadingBackground from '../../component/common/heading-background';
 const data = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -16,10 +24,10 @@ const data = [
 const AST = () => {
   return (
     <section className={`container ${styles.ast_page_wrap}`}>
-      <div className={styles.ast_heading_back}>
-        <p>Astroon Token</p>
-        <h1>$ AST</h1>
-      </div>
+      <HeadingBackground>
+        <p className={styles.heading1}>Astroon Token</p>
+        <h1 className={styles.heading2}>$ AST</h1>
+      </HeadingBackground>
       <div className={styles.description_wrap}>
         <h3>Meet $AST – Astroon Token</h3>
         <p>
@@ -41,18 +49,20 @@ const AST = () => {
       </div>
       <div className={styles.chart_wrap}>
         <div className={styles.chart}>
-          <LineChart width={500} height={350} data={data}>
-            <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-            <XAxis dataKey="name" stroke="#fff" />
-            <YAxis stroke="#fff" />
-            <Tooltip />
-            <Line
-              type="monotone"
-              dataKey="uv"
-              stroke="#FCEE21"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
+          <ResponsiveContainer width="100%" height={350}>
+            <LineChart data={data}>
+              <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+              <XAxis dataKey="name" stroke="#fff" />
+              <YAxis stroke="#fff" />
+              <Tooltip />
+              <Line
+                type="monotone"
+                dataKey="uv"
+                stroke="#FCEE21"
+                activeDot={{ r: 8 }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
         </div>
         <div className={styles.btn_wrap}>
           <Button>Buy $AST</Button>

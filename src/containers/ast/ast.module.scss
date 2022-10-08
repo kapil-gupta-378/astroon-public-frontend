@@ -8,29 +8,17 @@
 .ast_page_wrap {
   margin: 25px auto;
 
-  .ast_heading_back {
-    background-image: url('../../../public/assets/images/AST-page-heading-background.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 53px;
+  .heading1 {
+    @include heading_9;
+  }
 
-    p {
-      @include heading_9;
-    }
-
-    h1 {
-      @include heading_10;
-      text-shadow: 0px 16px 10px rgba(0, 0, 0, 0.18);
-    }
+  .heading2 {
+    @include heading_10;
+    text-shadow: 0px 16px 10px rgba(0, 0, 0, 0.18);
   }
   .description_wrap {
     margin-top: 60px;
-    padding: 0px 185px;
+    padding: 0px 14%;
     h3 {
       @include heading_2;
       margin-bottom: 46px;
@@ -47,11 +35,11 @@
     margin-top: 90px;
     flex-direction: column;
     .chart {
-      width: 48%;
+      width: 60%;
       background: #0f0338;
       box-shadow: 0px 25px 45px 15px rgba(23, 1, 38, 0.6);
       border-radius: 15px;
-      padding: 30px 0px;
+      padding: 30px 30px 30px 0px;
     }
     .btn_wrap {
       margin: 30px auto;
@@ -106,3 +94,79 @@
     left: 157px;
   }
 }
+
+@media only screen and (max-width: 1199px) {
+  .ast_page_wrap {
+    max-width: 900px;
+
+    .ast_heading_back {
+    }
+    .description_wrap {
+    }
+    .chart_wrap {
+      .chart {
+      }
+      .btn_wrap {
+      }
+    }
+
+    .tokenomics_wrap {
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .ast_page_wrap {
+    max-width: 900px;
+
+    .ast_heading_back {
+      background-size: unset;
+    }
+    .description_wrap {
+    }
+    .chart_wrap {
+      .chart {
+      }
+      .btn_wrap {
+      }
+    }
+
+    .tokenomics_wrap {
+      .tokenomics_image {
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .ast_page_wrap {
+    margin: 25px auto;
+
+    .ast_heading_back {
+      p {
+        font-size: 18px;
+        margin-bottom: 21px;
+      }
+
+      h1 {
+        font-size: 50px;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .ast_page_wrap {
+    .ast_heading_back {
+      p {
+        margin-bottom: 7px;
+      }
+
+      h1 {
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
