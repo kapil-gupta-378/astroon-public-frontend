@@ -1,0 +1,53 @@
+@import '../../../../styles/typography.module';
+.input_wrap {
+  position: relative;
+  .corner_border_label {
+    @include heading_7;
+    position: absolute;
+    top: -12px;
+    left: 17px;
+    z-index: 2;
+    &::after {
+      content: ' ';
+      background-color: #05052d;
+      width: 136%;
+      height: 13px;
+      position: absolute;
+      left: -9px;
+      top: 5px;
+      z-index: -1;
+    }
+  }
+  .corner_border {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    border-top: none;
+    border-bottom: none;
+    color: #fff;
+    opacity: 0.3;
+    border-radius: 4px;
+    padding: 12px;
+
+    &::placeholder {
+      color: #ffffff;
+      opacity: 0.5;
+    }
+  }
+  .full_border {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: 1px solid #fff;
+    color: #fff;
+    opacity: 0.3;
+    border-radius: 4px;
+    padding: 12px;
+    &::placeholder {
+      color: #ffffff;
+      opacity: 0.5;
+    }
+  }
+}
