@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 import searchIcon from '../../../../public/assets/images/search.png';
 import walletIcon from '../../../../public/assets/images/wallet.png';
 import Button from '../../common/button';
 import Web3 from 'web3';
 import Web3Modal from 'web3modal';
 import { useEffect } from 'react';
-import Link from 'next/link';
 
 const Header = () => {
   const [chainId, setChainId] = useState();
@@ -125,7 +125,9 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">Animation</a>
+                  <Link href="/animation">
+                    <a className="nav-link text-white">Animation</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link href="/ast">
@@ -136,10 +138,14 @@ const Header = () => {
                   <a className="nav-link text-white">NFT</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">App</a>
+                  <Link href="/app">
+                    <a className="nav-link text-white">App</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">Games</a>
+                  <Link href="/games">
+                    <a className="nav-link text-white">Games</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-white">Merch</a>
