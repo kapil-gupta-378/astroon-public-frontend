@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // <-- Provider imports 'rollbar' for us
 import ErrorFallback from '../src/component/common/error-fallback';
 import getConfig from 'next/config';
+import 'react-toastify/dist/ReactToastify.css';
 const { publicRuntimeConfig } = getConfig();
 const rollbarConfig = {
   accessToken: publicRuntimeConfig.rollbarClientToken,

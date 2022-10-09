@@ -1,0 +1,270 @@
+@import '../../../styles/typography.module';
+.login_wrap {
+  width: 100%;
+  background-image: url('../../../public/assets/images/login-page-background.svg');
+  background-color: #030220;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  .left_wrap {
+    padding: 7.5% 9%;
+    width: 50%;
+    h1 {
+      @include heading_2;
+      text-align: left;
+      font-weight: 600;
+    }
+    .form_wrap {
+      margin-top: 70px;
+      display: flex;
+      gap: 40px;
+      flex-direction: column;
+      .name_wrap {
+        display: flex;
+        gap: 25px;
+        .fist_name {
+          width: 50%;
+        }
+        .last_name {
+          width: 50%;
+        }
+      }
+    }
+    .btn_wrap {
+      justify-content: center;
+      align-items: center;
+      button:not(:disabled) {
+        cursor: pointer;
+        width: 100%;
+      }
+    }
+    .not_member_yet {
+      @include heading_8;
+      text-align: center;
+      font-family: 'SF Pro Display', sans-serif;
+      cursor: pointer;
+      a {
+        color: #faff00;
+        margin-left: 10px;
+      }
+    }
+    .remember_me_btn {
+      display: flex;
+      font-size: 14px;
+      line-height: 60px;
+      text-align: center;
+      font-weight: 400;
+      input[type='checkbox'] {
+        accent-color: #9d9ca3;
+      }
+      .span {
+        background-color: #9d9ca3;
+      }
+      .forget_pass_text {
+        margin-left: 207px;
+        color: #9d9ca3;
+        cursor: pointer;
+      }
+      .remember_me {
+        margin-left: 10px;
+        color: #9d9ca3;
+      }
+    }
+  }
+  .right_wrap {
+    width: 50%;
+    padding: 4% 8%;
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 20px;
+      }
+      padding: 10% 9%;
+      .remember_me_btn {
+        line-height: 25px;
+        .forget_pass_text {
+          margin-left: 98px;
+        }
+      }
+    }
+    .right_wrap {
+      padding: 9% 8%;
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 20px;
+      }
+      padding: 10% 9%;
+      .remember_me_btn {
+        line-height: 35px;
+        .forget_pass_text {
+          margin-left: 84px;
+        }
+      }
+    }
+    .right_wrap {
+      padding: 6% 6%;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 15px;
+        margin: 10% 0% 0% 0%;
+      }
+      padding: 6% 9%;
+      p {
+        padding: 0% 7.5% 0% 7.5%;
+      }
+      .remember_me_btn {
+        line-height: 25px;
+        .forget_pass_text {
+          margin-left: 16px;
+        }
+      }
+    }
+    .right_wrap {
+      padding: 7% 6%;
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 15px;
+        margin: 8% 0% 0% 0%;
+      }
+      padding: 6% 6%;
+      p {
+        padding: 0% 7.5% 0% 7.5%;
+      }
+      .remember_me_btn {
+        line-height: 25px;
+        .forget_pass_text {
+          margin-left: 16px;
+        }
+      }
+      .not_member_yet {
+        font-size: 9px;
+      }
+    }
+    .right_wrap {
+      padding: 7% 6%;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 15px;
+        margin: 8% 0% 0% 0%;
+      }
+      padding: 15% 6%;
+      p {
+        padding: 0% 7.5% 0% 7.5%;
+      }
+      .remember_me_btn {
+        line-height: 27px;
+        font-size: 10px;
+        .forget_pass_text {
+          margin-left: 12px;
+        }
+      }
+      h1 {
+        font-size: 15px;
+      }
+      .btn_wrap {
+        cursor: pointer;
+        width: 100%;
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+    }
+    .right_wrap {
+      padding: 25% 6%;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 15px;
+        margin: 8% 0% 0% 0%;
+      }
+      padding: 15% 6%;
+      p {
+        padding: 0% 7.5% 0% 7.5%;
+      }
+      .remember_me_btn {
+        line-height: 27px;
+        font-size: 7px;
+        .forget_pass_text {
+          margin-left: 12px;
+        }
+      }
+      h1 {
+        font-size: 15px;
+      }
+      .btn_wrap {
+        margin-bottom: -20px;
+        button:not(:disabled) {
+          width: 100%;
+          font-size: 10px;
+        }
+      }
+    }
+    .right_wrap {
+      padding: 25% 6%;
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .login_wrap {
+    .left_wrap {
+      .form_wrap {
+        gap: 15px;
+        margin: 8% 0% 0% 0%;
+      }
+      padding: 15% 6%;
+      p {
+        padding: 0% 7.5% 0% 7.5%;
+      }
+      .remember_me_btn {
+        line-height: 27px;
+        font-size: 6px;
+        .forget_pass_text {
+          margin-left: 10px;
+        }
+      }
+      h1 {
+        font-size: 12px;
+      }
+      .btn_wrap {
+        margin-bottom: -20px;
+        button:not(:disabled) {
+          width: 100%;
+          font-size: 9px;
+        }
+      }
+    }
+    .right_wrap {
+      padding: 25% 6%;
+    }
+  }
+} /* 320 */

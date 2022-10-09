@@ -1,0 +1,142 @@
+import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import styles from './resetpassword.module.scss';
+import loginUpRightImage from '../../../public/assets/images/reset-password-page-icon.svg';
+import TextInput from '../../component/common/text-input';
+import Button from '../../component/common/button';
+import { toast, ToastContainer } from 'react-toastify';
+import {
+  verifyResetPasswordTokenUserApi,
+  resetPasswordUserApi,
+} from '../../../services/api/user';
+
+const ResetPassword = () => {
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const { token } = router.query;
+
+  useEffect(() => {
+    const data = async () => {
+      await verifyResetPasswordToken(token);
+    };
+    if (token) {
+      data();
+    }
+  }, [token]);
+
+  const verifyResetPasswordToken = async (verifyToken) => {
+    try {
+      const res = await verifyResetPasswordTokenUserApi(verifyToken);
+      if (res.success) {
+        toast.success(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        router.push('/forgot-password');
+        toast.error(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      router.push('/forgot-password');
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // throw error;
+    }
+  };
+
+  const handleResetPassword = async () => {
+    const data = {
+      password: password,
+    };
+    try {
+      const res = await resetPasswordUserApi(data, token);
+      if (res.success) {
+        toast.error(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        toast.error(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // throw error;
+    }
+  };
+  return (
+    <div className={styles.reset_password_wrap}>
+      <div className={styles.left_wrap}>
+        <div>
+          <h1>Reset Your Password</h1>
+        </div>
+        <div className={styles.form_wrap}>
+          <TextInput
+            handleValue={password}
+            handleOnChange={(e) => setPassword(e.target.value)}
+            title="Password"
+            placeHolder="Enter your new password"
+            kind="fullborder"
+          />
+        </div>
+        <div className={styles.btn_wrap}>
+          <Button onClick={handleResetPassword}>Submit</Button>
+        </div>
+        <p className={styles.do_you_know_password}>
+          Do you know password?{' '}
+          <Link href="/login">
+            <a>Login Now</a>
+          </Link>
+        </p>
+      </div>
+      <div className={styles.right_wrap}>
+        <Image src={loginUpRightImage} layout="responsive" alt="login" />
+      </div>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default ResetPassword;
