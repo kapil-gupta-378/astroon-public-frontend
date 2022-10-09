@@ -1,0 +1,120 @@
+@import '../../../../styles/typography.module';
+.join_wrap {
+  width: 100%;
+  margin-bottom: 70px;
+  .join_you_tube_wrap {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    .join_you_tube {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background: url('../../../../public/assets/images/join_youtube_channel.png')
+        no-repeat center;
+    }
+
+    .join_you_tube_container {
+      color: white;
+      padding: 60px 20px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Roboto Slab';
+    }
+    .join_now_btn {
+      background-color: #faff00;
+      border-radius: 268px;
+      border: none;
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 19px;
+      padding: 11px 27px;
+      cursor: pointer;
+      &:hover {
+        color: black;
+      }
+      width: 12%;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 11px 5px;
+      }
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 5px 5px;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 5px 5px;
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 3px 0px;
+        width: 20%;
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .join_wrap {
+    .join_you_tube_wrap {
+      .join_now_btn {
+        padding: 0px 0px;
+        width: 35%;
+      }
+    }
+  }
+} /* 320 */

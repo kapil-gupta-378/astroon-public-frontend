@@ -1,0 +1,50 @@
+@import '../../../../styles/typography.module';
+.astroon_wrp {
+  margin: 110px auto;
+  width: 90%;
+  .astroon_content {
+    width: 100%;
+    h3 {
+      @include heading_2;
+    }
+    p {
+      font-family: 'Rubik';
+      font-style: normal;
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 28px;
+      text-align: center;
+      color: #efefef;
+      padding: 29px 0px;
+    }
+
+    .astroon_content_position {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+}
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .astroon_wrp {
+    .astroon_content {
+      text-align: center;
+      .astroon_content_position {
+        display: unset;
+        text-align: center;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

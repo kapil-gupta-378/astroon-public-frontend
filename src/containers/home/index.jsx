@@ -5,7 +5,7 @@ import styles from './home.module.scss';
 import Banner from '../../component/ui/banner';
 import Roadmap from '../../component/ui/roadmap';
 import Whitepaper from '../../component/ui/whitepaper';
-import Blog from '../../component/ui/blog';
+import BlogRow from '../../component/ui/blog-row';
 import NftCollection from '../../component/ui/nft-collection';
 import NftSlider from '../../component/ui/nft-slider-home';
 const Home = () => {
@@ -18,7 +18,7 @@ const Home = () => {
       <Whitepaper />
       <Team />
       <FAQ />
-      <Blog />
+      <BlogRow />
     </div>
   );
 };
