@@ -36,7 +36,7 @@ const SignUp = () => {
         const res = await createUserApi(data);
         if (res.success) {
           setRegisterBtn('Registered');
-          toast.error(res.message, {
+          toast.success(res.message, {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
