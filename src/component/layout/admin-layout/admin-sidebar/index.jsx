@@ -1,0 +1,108 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+import styles from './adminSidebae.module.scss';
+import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
+const AdminSidebar = () => {
+  return (
+    <div className={styles.admin_sidebar_wrap}>
+      <h3 className={styles.logo_wrap}>Logo</h3>
+      <div className={styles.navigation_wrap}>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">Admin Management</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">Content Management</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/blog">Blog</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">Category Management</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">CMS Page Management</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">News & Announcements</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">Settings</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">
+            Client Inquiries & Support Request
+          </Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/management">Menu System</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminSidebar;
