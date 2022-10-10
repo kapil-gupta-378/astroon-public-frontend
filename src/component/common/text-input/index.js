@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './textInput.module.scss';
+import PropTypes from 'prop-types';
 const TextInput = ({
   title,
   placeHolder,
@@ -22,6 +23,18 @@ const TextInput = ({
       />
     </div>
   );
+};
+
+TextInput.propTypes = {
+  title: PropTypes.string,
+  placeHolder: PropTypes.string,
+  kind: PropTypes.string,
+  handleOnChange: PropTypes.func,
+  handleType: PropTypes.string,
+};
+TextInput.defaultProps = {
+  title: 'text',
+  kind: 'fullborder',
 };
 
 export default TextInput;

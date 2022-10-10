@@ -6,15 +6,22 @@ import styles from './layout.module.scss';
 import { useRouter } from 'next/router';
 const Layout = ({ children }) => {
   const router = useRouter();
+  const currectRoute = [
+    '/login',
+    '/sign-up',
+    '/forgot-password',
+    `${`/reset/[token]`}`,
+  ];
+
   return (
     <div
       className={`${
-        router.pathname.includes('/sign-up') !== true && styles.layout_wrap
+        currectRoute.includes(router.pathname) !== true && styles.layout_wrap
       }`}
     >
-      {router.pathname.includes('/sign-up') !== true && <Header />}
+      {currectRoute.includes(router.pathname) !== true && <Header />}
       {children}
-      {router.pathname.includes('/sign-up') !== true && <Footer />}
+      {currectRoute.includes(router.pathname) !== true && <Footer />}
     </div>
   );
 };
