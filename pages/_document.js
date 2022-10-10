@@ -11,6 +11,10 @@ export default function Document() {
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossOrigin="anonymous"
           />
+          <link
+            href="http://fonts.cdnfonts.com/css/sf-pro-display"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body className="main_body">
           <script

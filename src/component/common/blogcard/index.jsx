@@ -29,7 +29,7 @@ const BlogCard = ({ data }) => {
         />
       </div>
       <div className={styles.blog_card_text}>
-        <p>{data.title}</p>
+        <p>{`${data.title.substring(0, 30)}....`}</p>
         <h4>{`${data.metaDescription.substring(0, 46)}....`}</h4>
       </div>
     </div>
