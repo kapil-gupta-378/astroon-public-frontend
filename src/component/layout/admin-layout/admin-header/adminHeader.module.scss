@@ -17,9 +17,12 @@
       }
     }
     .header_right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       width: 10%;
       .avatar_wrap {
-        width: 100%;
+        width: 45%;
         height: 35px;
         position: relative;
       }
