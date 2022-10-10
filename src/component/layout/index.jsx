@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Header from './header';
-import Footer from './footer';
-import styles from './layout.module.scss';
 import { useRouter } from 'next/router';
+import UserLayout from './user-layout';
+import AdminLayout from './admin-layout';
 const Layout = ({ children }) => {
   const router = useRouter();
   const currectRoute = [
@@ -14,18 +13,17 @@ const Layout = ({ children }) => {
   ];
 
   return (
-    <div
-      className={`${
-        currectRoute.includes(router.pathname) !== true && styles.layout_wrap
-      }`}
-    >
-      {currectRoute.includes(router.pathname) !== true && <Header />}
-      {children}
-      {currectRoute.includes(router.pathname) !== true && <Footer />}
-    </div>
+    <>
+      {router.pathname.includes('/admin') ? (
+        <AdminLayout>{children}</AdminLayout>
+      ) : currectRoute.includes(router.pathname) ? (
+        <div>{children}</div>
+      ) : (
+        <UserLayout>{children}</UserLayout>
+      )}
+    </>
   );
 };
-
 Layout.propTypes = {
   chindren: PropTypes.node,
 };
