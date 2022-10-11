@@ -1,0 +1,26 @@
+@import '../../../../../styles/typography.module';
+.admin_sidebar_wrap {
+  padding: 10% 10% 40% 10%;
+  background: rgba(255, 255, 255, 0.03);
+  .logo_wrap {
+    @include heading_9;
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    text-align: start;
+    margin-bottom: 70px;
+  }
+  .navigation_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    a {
+      margin-left: 10px;
+      @include heading_11;
+      font-size: 13px;
+      text-decoration: none;
+      text-align: start;
+      color: rgba(184, 184, 184, 0.9);
+      vertical-align: bottom;
+    }
+  }
+}

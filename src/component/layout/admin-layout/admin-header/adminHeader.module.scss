@@ -1,0 +1,31 @@
+@import '../../../../../styles/typography.module';
+.admin_header_wrap {
+  border-bottom: 1px solid #29293a;
+  padding: 25px 30px;
+  .header_nav_wrap {
+    display: flex;
+    flex-direction: row;
+    .header_left {
+      width: 90%;
+      h3 {
+        @include heading_5;
+      }
+      p {
+        @include heading_6;
+        color: #b8b8b8e5;
+        margin-bottom: 0px;
+      }
+    }
+    .header_right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 10%;
+      .avatar_wrap {
+        width: 45%;
+        height: 35px;
+        position: relative;
+      }
+    }
+  }
+}
