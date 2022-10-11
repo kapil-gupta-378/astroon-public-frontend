@@ -6,15 +6,46 @@ body {
   margin: 0;
   box-sizing: border-box;
 
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     width: 3px;
     background-color: #050430;
     position: absolute;
     left: 0;
   }
 
-  &::-webkit-scrollbar-thumb{
+  &::-webkit-scrollbar-thumb {
     border-radius: 2px;
     background-color: #001764;
+  }
+}
+
+// css for filter component
+
+.filter_wrap {
+  .css-b62m3t-container {
+    .css-1s2u09g-control {
+      background: transparent;
+      border-radius: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .css-319lph-ValueContainer {
+        color: #fff;
+        font-size: 14px;
+        .css-14el2xx-placeholder {
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+          }
+        }
+      }
+    }
+    .css-26l3qy-menu {
+      display: block;
+      width: 120% !important;
+    }
   }
 }

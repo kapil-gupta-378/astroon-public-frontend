@@ -6,6 +6,7 @@
     "no-console": "error",
     "no-debugger": "error",
     "no-unused-vars": "off",
+    "no-undef": "error",
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "error",

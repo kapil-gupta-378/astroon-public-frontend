@@ -20,6 +20,7 @@ const Login = () => {
     };
     try {
       const res = await loginUserApi(data);
+
       if (res.success) {
         toast.success(res.message, {
           position: 'top-right',
@@ -30,6 +31,7 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
+        localStorage.setItem('token', res.data.token);
       } else {
         toast.error(res.message, {
           position: 'top-right',
