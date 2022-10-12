@@ -1,7 +1,8 @@
 import React from 'react';
+import BlogTable from '../../src/containers/admin-blog-table';
 
 const AdminBlogPage = () => {
-  return <h1>blog</h1>;
+  return <BlogTable />;
 };
 
 export default AdminBlogPage;

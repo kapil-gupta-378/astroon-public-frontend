@@ -13,3 +13,15 @@ export const getAdminListDataApi = async () => {
   });
   return xhr.data.data;
 };
+
+export const createAdminAuditApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}admin-audit`,
+    data,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  });
+  return xhr.data;
+};

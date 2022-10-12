@@ -1,0 +1,62 @@
+@import '../../../../styles/typography.module';
+.dialogbox_wrap {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  background: rgba(3, 2, 35, 0.89);
+  .modal_content {
+    width: 37%;
+    background: url('../../../../public/assets/images/dialogBackgorund.png');
+
+    border-radius: 25px;
+    padding: 40px 38px;
+    .modal_header {
+      .dailog_title {
+        @include heading_12;
+        margin-bottom: 20px;
+      }
+    }
+    .input_wrap {
+      padding: 0px 40px 20px 40px;
+    }
+    .dialog_body {
+      width: 80%;
+      margin-bottom: 20px;
+      @include heading_7;
+      font-size: 13px;
+      text-align: center;
+      line-height: 18px;
+      margin: 0px auto 25px auto;
+    }
+
+    .dialog_footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      .dialog_left_btn {
+        background: transparent;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
+      }
+      .dialog_right_btn {
+        background: #ffffff;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
+        color: #020039;
+      }
+    }
+  }
+}
