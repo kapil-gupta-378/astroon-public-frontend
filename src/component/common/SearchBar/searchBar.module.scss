@@ -1,0 +1,19 @@
+@import '../../../../styles/typography.module';
+.search_bar_wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  .search_input {
+    background: transparent;
+    outline: none;
+    border: none;
+    margin-left: 15px;
+    ::placeholder {
+      font-size: 21px;
+      font-family: 'Rubik';
+      font-weight: 500;
+      color: #b8b8b8;
+    }
+  }
+}

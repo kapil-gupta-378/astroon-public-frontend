@@ -1,8 +1,7 @@
 import React from 'react';
-import AdminBlog from '../../src/containers/admin';
 
 const AdminBlogPage = () => {
-  return <AdminBlog />;
+  return <h1>blog</h1>;
 };
 
 export default AdminBlogPage;
