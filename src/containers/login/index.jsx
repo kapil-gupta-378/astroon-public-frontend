@@ -24,6 +24,7 @@ const Login = () => {
         const res = await loginUserApi(data);
         if (res.success) {
           router.push('admin/management');
+          localStorage.setItem('token', res.data.token);
           toast.success(res.message, {
             position: 'top-right',
             autoClose: 5000,

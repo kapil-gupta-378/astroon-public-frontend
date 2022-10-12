@@ -5,7 +5,7 @@ import styles from './adminSidebae.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
 const AdminSidebar = () => {
   return (
-    <div className={styles.admin_sidebar_wrap}>
+    <aside className={styles.admin_sidebar_wrap}>
       <h3 className={styles.logo_wrap}>Logo</h3>
       <div className={styles.navigation_wrap}>
         <div>
@@ -16,7 +16,7 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/management">Admin Management</Link>
+          <Link href="/admin/admin-management">Admin Management</Link>
         </div>
         <div>
           <Image
@@ -101,7 +101,7 @@ const AdminSidebar = () => {
           <Link href="/admin/management">Menu System</Link>
         </div>
       </div>
-    </div>
+    </aside>
   );
 };
 
