@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Link from 'next/link';
 import styles from './signUp.module.scss';
 import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.svg';
 import TextInput from '../../component/common/text-input';
@@ -128,7 +129,7 @@ const SignUp = () => {
           <div className={styles.name_wrap}>
             <div className={styles.fist_name}>
               <TextInput
-                handleType="text"
+                handleType="password"
                 handleValue={password}
                 handleOnChange={(e) => setPassword(e.target.value)}
                 title="Password"
@@ -138,7 +139,7 @@ const SignUp = () => {
             </div>
             <div className={styles.last_name}>
               <TextInput
-                handleType="text"
+                handleType="password"
                 handleValue={confirmPassword}
                 handleOnChange={(e) => handleConfirmPassword(e)}
                 title="Confirm Password"
@@ -153,7 +154,10 @@ const SignUp = () => {
           <Button onClick={hadnleCreateUser}>{registerBtn}</Button>
         </div>
         <p className={styles.already_have_account}>
-          Already have an account? <span>Login Now</span>
+          Already have an account?{' '}
+          <Link href="/login">
+            <a>Login Now</a>
+          </Link>
         </p>
       </div>
       <div className={styles.right_wrap}>

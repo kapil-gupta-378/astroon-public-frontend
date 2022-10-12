@@ -12,13 +12,35 @@ const ForgotPassword = () => {
   const [email, setEmail] = useState('');
 
   const handleForgotPassword = async () => {
-    const data = {
-      email: email,
-    };
-    try {
-      const res = await forgotPasswordUserApi(data);
-      if (res.success) {
-        toast.success(res.message, {
+    if (email) {
+      const data = {
+        email: email,
+      };
+      try {
+        const res = await forgotPasswordUserApi(data);
+        if (res.success) {
+          toast.success(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -27,19 +49,10 @@ const ForgotPassword = () => {
           draggable: true,
           progress: undefined,
         });
-      } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        // throw error;
       }
-    } catch (error) {
-      toast.error(error.response.data.message, {
+    } else {
+      toast.error('Please Fill Email Feild', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -48,7 +61,6 @@ const ForgotPassword = () => {
         draggable: true,
         progress: undefined,
       });
-      // throw error;
     }
   };
   return (
@@ -63,6 +75,7 @@ const ForgotPassword = () => {
         </div>
         <div className={styles.form_wrap}>
           <TextInput
+            handleType="text"
             handleValue={email}
             handleOnChange={(e) => setEmail(e.target.value)}
             title="Email"
