@@ -67,13 +67,35 @@ const ResetPassword = () => {
   };
 
   const handleResetPassword = async () => {
-    const data = {
-      password: password,
-    };
-    try {
-      const res = await resetPasswordUserApi(data, token);
-      if (res.success) {
-        toast.error(res.message, {
+    if (password) {
+      const data = {
+        password: password,
+      };
+      try {
+        const res = await resetPasswordUserApi(data, token);
+        if (res.success) {
+          toast.error(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -82,19 +104,10 @@ const ResetPassword = () => {
           draggable: true,
           progress: undefined,
         });
-      } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        // throw error;
       }
-    } catch (error) {
-      toast.error(error.response.data.message, {
+    } else {
+      toast.error('Please Fill Password Feild', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -103,7 +116,6 @@ const ResetPassword = () => {
         draggable: true,
         progress: undefined,
       });
-      // throw error;
     }
   };
   return (
@@ -114,6 +126,7 @@ const ResetPassword = () => {
         </div>
         <div className={styles.form_wrap}>
           <TextInput
+            handleType="password"
             handleValue={password}
             handleOnChange={(e) => setPassword(e.target.value)}
             title="Password"
