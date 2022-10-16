@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   adminListData: [],
   adminLoading: false,
+  adminListCount: 0,
 };
 
 export const adminSlice = createSlice({
@@ -15,9 +16,21 @@ export const adminSlice = createSlice({
     setAdmindataLoading: (state, action) => {
       state.adminLoading = action.payload;
     },
+    setAdminListCount: (state, action) => {
+      state.adminListCount = action.payload;
+    },
+    setAdmindataUpdate: (state, action) => {
+      state.adminListData = [...state.adminListData, ...action.payload];
+      state.adminListCount = state.adminListCount - 6;
+    },
   },
 });
 
-export const { setAdmindata, setAdmindataLoading } = adminSlice.actions;
+export const {
+  setAdmindata,
+  setAdmindataLoading,
+  setAdminListCount,
+  setAdmindataUpdate,
+} = adminSlice.actions;
 
 export default adminSlice.reducer;

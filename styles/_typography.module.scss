@@ -94,8 +94,16 @@
 }
 @mixin heading_11 {
   font-size: 14px;
-  color: #fff;
+  color: $text-01-color;
   line-height: 25px;
   text-align: center;
   font-weight: 400;
+}
+@mixin heading_12 {
+  font-size: 20px;
+  color: $text-01-color;
+  line-height: 25px;
+  text-align: center;
+  font-weight: 600;
+  font-family: 'Rubik';
 }

@@ -1,5 +1,6 @@
 @import '../../../../styles/typography.module';
 .input_wrap {
+  width: 100%;
   position: relative;
   .corner_border_label {
     @include heading_7;
@@ -7,16 +8,22 @@
     top: -12px;
     left: 17px;
     z-index: 2;
-    &::after {
-      content: ' ';
-      background-color: #05052d;
-      width: 136%;
-      height: 13px;
-      position: absolute;
-      left: -9px;
-      top: 5px;
-      z-index: -1;
-    }
+    top: -9px;
+    left: 17px;
+    z-index: 2;
+    padding: 0px 24px 0px 12px;
+    line-height: 16px;
+
+    // &::after {
+    //   content: ' ';
+    //   // background-color: inherit;
+    //   width: 136%;
+    //   height: 13px;
+    //   position: absolute;
+    //   left: -9px;
+    //   top: 5px;
+    //   z-index: -1;
+    // }
   }
   .corner_border {
     width: 100%;
@@ -27,7 +34,7 @@
     border-top: none;
     border-bottom: none;
     color: #fff;
-    // opacity: 0.3;
+    font-size: 13px;
     border-radius: 4px;
     padding: 12px;
 
@@ -40,11 +47,12 @@
     width: 100%;
     background: transparent;
     outline: none;
+    font-size: 13px;
     border: 1px solid rgb(255, 255, 255, 0.3);
     color: #fff;
-    // opacity: 0.3;
     border-radius: 4px;
     padding: 12px;
+
     &::placeholder {
       color: #ffffff;
       opacity: 0.5;

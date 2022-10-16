@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;300;400;500;600;700;800;900&family=Rubik:wght@300;400;500;600;700;900&display=swap');
-
+@import './typography.module';
 html,
 body {
   padding: 0;
@@ -32,6 +32,10 @@ body {
       .css-319lph-ValueContainer {
         color: #fff;
         font-size: 14px;
+        .css-qc6sy-singleValue {
+          color: white;
+          text-align: center;
+        }
         .css-14el2xx-placeholder {
           div {
             display: flex;
@@ -45,7 +49,121 @@ body {
     }
     .css-26l3qy-menu {
       display: block;
-      width: 120% !important;
+      width: 150% !important;
+    }
+  }
+}
+
+// css for form input selector
+.form_select_wrap {
+  width: 100%;
+  position: relative;
+  label {
+    @include heading_7;
+    position: absolute;
+    top: -12px;
+    left: 34px;
+    z-index: 2;
+    &::after {
+      content: ' ';
+      background-color: #05052d;
+      width: 179%;
+      height: 13px;
+      position: absolute;
+      left: -9px;
+      top: 5px;
+      z-index: -1;
+    }
+  }
+  .css-b62m3t-container {
+    .css-1s2u09g-control {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      outline: none;
+      border: 1px solid rgb(255, 255, 255, 0.3);
+      color: #fff;
+      border-radius: 4px;
+      padding: 12px;
+
+      &::placeholder {
+        color: #ffffff;
+        opacity: 0.5;
+      }
+      .css-319lph-ValueContainer {
+        color: #fff;
+        font-size: 14px;
+        .css-1pndypt-Input {
+          color: white;
+        }
+        .css-14el2xx-placeholder {
+          color: white !important;
+        }
+        .css-qc6sy-singleValue {
+          color: white;
+          text-align: center;
+        }
+        .css-14el2xx-placeholder {
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+          }
+        }
+      }
+      .css-1hb7zxy-IndicatorsContainer {
+        .css-1okebmr-indicatorSeparator {
+          background-color: unset;
+        }
+      }
+    }
+    .css-1pahdxg-control {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      outline: none;
+      border: 1px solid rgb(255, 255, 255, 0.3);
+      color: #fff;
+      border-radius: 4px;
+      padding: 12px;
+
+      &::placeholder {
+        color: #ffffff;
+        opacity: 0.5;
+      }
+      .css-319lph-ValueContainer {
+        color: #fff;
+        font-size: 14px;
+        .css-1pndypt-Input {
+          color: white;
+        }
+      }
+      .css-14el2xx-placeholder {
+        color: white !important;
+      }
+      .css-qc6sy-singleValue {
+        color: white;
+        text-align: center;
+      }
+      .css-14el2xx-placeholder {
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+          color: #fff;
+        }
+      }
+    }
+    .css-26l3qy-menu {
+      display: block;
+      width: 100% !important;
     }
   }
 }
