@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './login.module.scss';
 import loginUpRightImage from '../../../public/assets/images/login-page-icon.svg';
@@ -12,17 +12,41 @@ import { toast, ToastContainer } from 'react-toastify';
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const router = useRouter();
 
   const handleLogin = async () => {
-    const data = {
-      userName: username,
-      password: password,
-    };
-    try {
-      const res = await loginUserApi(data);
-
-      if (res.success) {
-        toast.success(res.message, {
+    if (username && password) {
+      const data = {
+        userName: username,
+        password: password,
+      };
+      try {
+        const res = await loginUserApi(data);
+        if (res.success) {
+          router.push('admin/admin-management');
+          localStorage.setItem('token', res.data.token);
+          toast.success(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        } else {
+          toast.error(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -31,20 +55,10 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
-        localStorage.setItem('token', res.data.token);
-      } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        // throw error;
       }
-    } catch (error) {
-      toast.error(error.response.data.message, {
+    } else {
+      toast.error('Please Fill All Feilds', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -53,7 +67,6 @@ const Login = () => {
         draggable: true,
         progress: undefined,
       });
-      // throw error;
     }
   };
   const redirectToForgot = () => {
@@ -67,6 +80,7 @@ const Login = () => {
         </div>
         <div className={styles.form_wrap}>
           <TextInput
+            handleType="text"
             handleValue={username}
             handleOnChange={(e) => setUsername(e.target.value)}
             title="Username/Email"
@@ -74,6 +88,7 @@ const Login = () => {
             kind="fullborder"
           />
           <TextInput
+            handleType="password"
             handleValue={password}
             handleOnChange={(e) => setPassword(e.target.value)}
             title="Password"
