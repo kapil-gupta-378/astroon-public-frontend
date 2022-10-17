@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import searchIcon from './../../../../public/assets/images/search.png';
 import styles from './searchBar.module.scss';
-const SearchBar = ({ inputTextValue, handleSearch }) => {
+const SearchBar = ({ inputValue, onChangeInputHandler }) => {
   return (
     <div className={styles.search_bar_wrap}>
       <Image
@@ -13,11 +13,11 @@ const SearchBar = ({ inputTextValue, handleSearch }) => {
         alt="search icon"
       />
       <input
+        value={inputValue}
+        onChange={onChangeInputHandler}
         className={styles.search_input}
         type="text"
         placeholder="Search"
-        value={inputTextValue}
-        onChange={handleSearch}
       />
     </div>
   );

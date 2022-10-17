@@ -1,43 +1,169 @@
-import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast, ToastContainer } from 'react-toastify';
+import { adminAuditApi, deleteAdminApi } from '../../../services/api/admin';
 import Button from '../../component/common/button';
+import DialogBox from '../../component/common/dialoag-box';
 import FilterBy from '../../component/common/FilterBy';
 import ListTable from '../../component/common/list-table';
 import SearchBar from '../../component/common/SearchBar';
 import { fetchAdminListData } from '../../redux/admin/adminAction';
 import styles from './adminListTable.module.scss';
+
 const AdminListTable = () => {
+  const [deleteDialog, setDeleteDialog] = useState(false);
+  const [deleteItemId, setDeleteItemId] = useState('');
+  const [deleteItemComment, setDeleteItemComment] = useState('');
+  const [searchKeyWord, setSearchKeyWord] = useState();
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
+  const [role, setRole] = useState('admin');
   const dispatch = useDispatch();
+  const route = useRouter();
   const filterByOptions = [
     { value: 'admin', label: 'Admin' },
-    { value: 'super admin', label: 'Super Admin' },
-    { value: 'sub admin', label: 'Sub Admin' },
+    { value: 'user', label: 'User' },
+    { value: 'subadmin', label: 'Sub Admin' },
   ];
-  const { adminListData, adminLoading } = useSelector(
+  const { adminListData, adminLoading, adminListCount } = useSelector(
     (state) => state.adminReducer,
   );
   useEffect(() => {
-    dispatch(fetchAdminListData());
+    setPageLimit(6);
+    setPageNumber(1);
+    const paramsObj = {
+      page: pageNumber,
+      limit: pageLimit,
+      role: role,
+    };
+    dispatch(fetchAdminListData(paramsObj));
+    setPageNumber((value) => value + 1);
   }, []);
+
+  useEffect(() => {
+    const paramsObj = {
+      page: 1,
+      limit: pageLimit,
+      role: role,
+      search: searchKeyWord,
+    };
+    dispatch(fetchAdminListData(paramsObj));
+  }, [searchKeyWord]);
+
+  useEffect(() => {
+    const paramsObj = {
+      page: 1,
+      limit: pageLimit,
+      role: role,
+    };
+    dispatch(fetchAdminListData(paramsObj));
+  }, [role]);
+
+  const handleDeleteDialog = (id) => {
+    setDeleteItemId(id);
+    setDeleteDialog(true);
+  };
+
+  const handleDeleteDialogCancel = () => {
+    setDeleteItemId('');
+    setDeleteItemComment('');
+    setDeleteDialog(false);
+  };
+  const fetchMoreData = () => {
+    const paramsObj = {
+      page: pageNumber,
+      limit: pageLimit,
+      role: role,
+    };
+    dispatch(fetchAdminListData(paramsObj, true));
+    setPageNumber((value) => value + 1);
+  };
+  const handleDeleteAdmin = async (id, comment) => {
+    const data = {
+      comment: comment.toString(),
+      description: id.toString(),
+      action: 'delete',
+    };
+    try {
+      if (comment) {
+        await adminAuditApi(data);
+        setDeleteItemComment('');
+      }
+      const res = await deleteAdminApi(id);
+      if (res.success) {
+        toast.success(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setDeleteDialog(false);
+        dispatch(fetchAdminListData());
+      }
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setDeleteDialog(false);
+    }
+  };
 
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
-          <SearchBar />
+          <SearchBar
+            inputValue={searchKeyWord}
+            onChangeInputHandler={(e) => setSearchKeyWord(e.target.value)}
+          />
         </div>
         <div className={styles.top_bar_right}>
           <div className={styles.filter_wrap}>
-            <FilterBy options={filterByOptions} />
+            <FilterBy
+              options={filterByOptions}
+              handleChange={(value) => setRole(value.value)}
+            />
           </div>
           <div className={styles.add_btn_wrap}>
-            <Button>Add Admin Account</Button>
+            <Button onClick={() => route.push('addAdmin')}>
+              Add Admin Account
+            </Button>
           </div>
         </div>
       </section>
       <section className={styles.list_table_wrap}>
-        <ListTable data={adminListData} loading={adminLoading} />
+        <ListTable
+          data={adminListData}
+          loading={adminLoading}
+          handleDeleteItem={handleDeleteDialog}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminListCount}
+        />
       </section>
+      <ToastContainer />
+      <DialogBox
+        mainHading="You’re about to delete this account"
+        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"
+        leftButtonHandler={handleDeleteDialogCancel}
+        rightButtonHandler={() =>
+          handleDeleteAdmin(deleteItemId, deleteItemComment)
+        }
+        leftButtonName="Cancel"
+        rightButtonName="Delete"
+        handleShow={deleteDialog}
+        inputValue={deleteItemComment}
+        onChangeInput={(value) => setDeleteItemComment(value)}
+      />
     </main>
   );
 };

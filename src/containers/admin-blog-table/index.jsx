@@ -260,8 +260,8 @@ const AdminBlogTable = () => {
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
           <SearchBar
-            inputTextValue={searchBlog}
-            handleSearch={handleSearchBlogTitle}
+            inputValue={searchBlog}
+            onChangeInputHandler={handleSearchBlogTitle}
           />
         </div>
         <div className={styles.top_bar_right}>
@@ -286,8 +286,8 @@ const AdminBlogTable = () => {
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"
         leftButtonName="Cancel"
         rightButtonName="Delete"
-        value={comments}
-        setState={setAdminComments}
+        inputValue={comments}
+        onChangeInput={setAdminComments}
         rightButtonHandler={handleBlogDelete}
         leftButtonHandler={handleCommentsPopupClose}
       />

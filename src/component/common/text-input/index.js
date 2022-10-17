@@ -8,11 +8,21 @@ const TextInput = ({
   handleOnChange,
   handleValue,
   handleType,
+  inputDiabled,
+  titleBackground,
 }) => {
   return (
     <div className={styles.input_wrap}>
-      <label className={styles.corner_border_label}>{title}</label>
+      {title && (
+        <label
+          style={{ background: titleBackground }}
+          className={styles.corner_border_label}
+        >
+          {title}
+        </label>
+      )}
       <input
+        disabled={inputDiabled}
         type={handleType}
         value={handleValue}
         onChange={handleOnChange}
@@ -31,10 +41,12 @@ TextInput.propTypes = {
   kind: PropTypes.string,
   handleOnChange: PropTypes.func,
   handleType: PropTypes.string,
+  inputDiabled: PropTypes.bool,
 };
 TextInput.defaultProps = {
-  title: 'text',
   kind: 'fullborder',
+  inputDiabled: false,
+  titleBackground: '#05052d',
 };
 
 export default TextInput;
