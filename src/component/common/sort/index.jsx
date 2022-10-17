@@ -10,11 +10,11 @@ const Sort = ({ handleSorting, isSort }) => {
         <button className={styles.srt_btn} onClick={() => handleSorting('ASC')}>
           <Image
             src={desIcon}
-            width={11}
+            width={15}
             height={15}
             layout="fixed"
-            alt="filter-icon"
-          />
+            alt="sort-icon"
+          />{' '}
           Sort
         </button>
       ) : (
@@ -24,11 +24,11 @@ const Sort = ({ handleSorting, isSort }) => {
         >
           <Image
             src={asenIcon}
-            width={11}
+            width={15}
             height={15}
             layout="fixed"
-            alt="filter-icon"
-          />
+            alt="sort-icon"
+          />{' '}
           Sort
         </button>
       )}
