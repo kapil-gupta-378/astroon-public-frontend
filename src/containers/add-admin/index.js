@@ -185,7 +185,7 @@ const AddAdmin = () => {
               />
             </div>
             <div className={styles.profile_upload_image_wrap}>
-              <Button onClick={uploadImageToProfiel}>Update Image</Button>
+              <Button onClick={uploadImageToProfiel}>Upload Image</Button>
               <input
                 accept="image/*"
                 ref={ImageInputRef}
