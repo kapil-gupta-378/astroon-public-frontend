@@ -136,8 +136,8 @@ const AdminBlogTable = () => {
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"
         leftButtonName="Cancel"
         rightButtonName="Delete"
-        value={comments}
-        setState={setAdminComments}
+        inputValue={comments}
+        onChangeInput={setAdminComments}
         rightButtonHandler={handleBlogDelete}
         leftButtonHandler={handleCommentsPopupClose}
       />

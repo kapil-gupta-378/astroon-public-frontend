@@ -9,8 +9,8 @@ const DialogBox = ({
   leftButtonName,
   rightButtonName,
   handleShow,
-  value,
-  setState,
+  inputValue,
+  onChangeInput,
 }) => {
   return (
     <div className="dialog_box">
@@ -25,11 +25,13 @@ const DialogBox = ({
             {content && <p className={styles.dialog_body}>{content}</p>}
             <div className={styles.input_wrap}>
               <TextInput
-                handleType="text"
+                titleBackground={'#AF3277'}
+                title={'Comment'}
+                handleType={'text'}
                 kind="fullborder"
-                placeHolder="Enter Comments"
-                handleValue={value}
-                handleOnChange={(e) => setState(e.target.value)}
+                placeHolder="Add Comment"
+                handleValue={inputValue}
+                handleOnChange={(e) => onChangeInput(e.target.value)}
               />
             </div>
 
