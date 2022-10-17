@@ -27,7 +27,7 @@ const AddAdmin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState();
-  const [, setStatus] = useState('');
+  const [status, setStatus] = useState('');
   const [profileImage, setProfileImage] = useState();
   const [newUpadateImageURL, setNewUpadateImageURL] = useState();
   const router = useRouter();
@@ -57,6 +57,7 @@ const AddAdmin = () => {
       userName: userName,
       email: email,
       password: password,
+      isActive: status,
       roleId: role,
     };
     try {
@@ -154,7 +155,6 @@ const AddAdmin = () => {
 
             <div className={styles.name_input_wrap}>
               <FormSelect
-                selectedOption={role}
                 label={'Role'}
                 options={rollSelectOptions}
                 handleChange={(value) => setRole(value.value)}
@@ -162,7 +162,9 @@ const AddAdmin = () => {
               <FormSelect
                 label={'Status'}
                 options={statusSelctOptions}
-                handleChange={(value) => setStatus(value.value)}
+                handleChange={(value) =>
+                  setStatus(value.value === 'active' ? true : false)
+                }
               />
             </div>
           </div>
