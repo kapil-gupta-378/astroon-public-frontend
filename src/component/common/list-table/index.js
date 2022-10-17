@@ -82,6 +82,7 @@ const ListTable = ({
                         )}
                       </td>
                       <td
+                        style={{ cursor: 'pointer' }}
                         onClick={() =>
                           router.push(`/admin/profile-detail/${item.id}`)
                         }
@@ -94,7 +95,10 @@ const ListTable = ({
                           alt="delte-icon"
                         />
                       </td>
-                      <td onClick={() => handleDeleteItem(item.id)}>
+                      <td
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => handleDeleteItem(item.id)}
+                      >
                         <Image
                           src={deleteIcon}
                           width={15}
