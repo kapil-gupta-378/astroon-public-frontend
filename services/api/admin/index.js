@@ -74,7 +74,7 @@ export const createAdminAccountApi = async (data) => {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   });
-  return xhr.data.data;
+  return xhr.data;
 };
 
 export const createAdminAuditApi = async (data) => {
