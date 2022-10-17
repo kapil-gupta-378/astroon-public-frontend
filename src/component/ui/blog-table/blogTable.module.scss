@@ -70,6 +70,9 @@
           color: #24ff00e5;
         }
       }
+      h3 {
+        @include heading_3;
+      }
     }
   }
 }
