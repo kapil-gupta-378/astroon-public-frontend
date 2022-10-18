@@ -40,7 +40,7 @@ export const sortBlogDataApi = async (sortBy) => {
 
 export const createBlogApi = async (data) => {
   const xhr = await axios.request({
-    method: 'port',
+    method: 'post',
     url: `${APP_URL}blog`,
     data: data,
     headers: {
@@ -48,7 +48,7 @@ export const createBlogApi = async (data) => {
     },
   });
 
-  return xhr.data.data;
+  return xhr.data;
 };
 
 export const uploadBlogBannerImageToServer = async (data) => {

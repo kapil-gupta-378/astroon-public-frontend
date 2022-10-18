@@ -9,6 +9,7 @@ import {
   createBlogApi,
   uploadBlogBannerImageToServer,
 } from '../../../services/api/blog/blog';
+import { toast, ToastContainer } from 'react-toastify';
 const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const CreateBlog = () => {
@@ -18,6 +19,7 @@ const CreateBlog = () => {
   const [isPopular, setIsPopular] = useState();
   const [isTop, setIsTop] = useState();
   const [blogContent, setBlogContent] = useState('');
+  const [metaDescription, setMetaDescription] = useState('');
   const [editorLoaded, setEditorLoaded] = useState(false);
 
   const router = useRouter();
@@ -79,10 +81,36 @@ const CreateBlog = () => {
       title: blogTitle,
       featureImage: imageResponse.fileName,
       description: blogContent,
+      metaDescription: metaDescription,
       isPopular: isPopular,
       isTop: isTop,
     };
-    createBlogApi(data);
+
+    try {
+      const response = await createBlogApi(data);
+
+      if (response.success) {
+        toast.success(response.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   return (
     <main className={styles.create_blog_page_wrap}>
@@ -98,12 +126,20 @@ const CreateBlog = () => {
       </section>
       <section className={styles.create_blog_form_wrap}>
         <TextInput
-          titleBackground={'#05052d'}
+          titleBackground={'#010125'}
           placeHolder={'Enter title'}
           title={'Title'}
           kind={'fullborder'}
           handleValue={blogTitle}
           handleOnChange={(e) => setBlogTitle(e.target.value)}
+        />
+        <TextInput
+          titleBackground={'#010125'}
+          placeHolder={'Enter Meta Description'}
+          title={'Meta Description'}
+          kind={'fullborder'}
+          handleValue={metaDescription}
+          handleOnChange={(e) => setMetaDescription(e.target.value)}
         />
 
         <div className={styles.blog_upload_image_wrap}>
@@ -169,6 +205,7 @@ const CreateBlog = () => {
           <Button onClick={createBlog}>Submit</Button>
         </div>
       </section>
+      <ToastContainer />
     </main>
   );
 };
