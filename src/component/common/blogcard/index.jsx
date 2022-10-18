@@ -26,6 +26,7 @@ const BlogCard = ({ data }) => {
           width={322}
           height={217}
           alt="blog_card"
+          unoptimized
         />
       </div>
       <div className={styles.blog_card_text}>

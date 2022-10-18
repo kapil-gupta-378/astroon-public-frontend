@@ -21,7 +21,7 @@ const statusSelctOptions = [
   { value: 'active', label: 'Active' },
   { value: 'inactive', label: 'Inactive' },
 ];
-const ProfileDetail = () => {
+const ProfileEdit = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [userName, setUseraName] = useState('');
@@ -205,4 +205,4 @@ const ProfileDetail = () => {
   );
 };
 
-export default ProfileDetail;
+export default ProfileEdit;
