@@ -17,6 +17,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "@rollbar/react": "^0.11.1",
+    "@ckeditor/ckeditor5-react": "^5.0.2",
+    "ckeditor5-custom-build": "file:./ckeditor5",
     "axios": "^0.27.2",
     "dotenv": "^16.0.2",
     "env-cmd": "^10.1.0",
