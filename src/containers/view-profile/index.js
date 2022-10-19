@@ -42,7 +42,7 @@ const ViewProfile = () => {
   };
 
   const gotoEditProfile = () => {
-    route.push(`/edit-profile/${id}`);
+    route.push(`/admin/edit-profile/${id}`);
   };
   return (
     <main className={styles.profile_details_wrap}>
@@ -55,8 +55,8 @@ const ViewProfile = () => {
       ) : (
         <>
           <div className={styles.profile_details_right}>
-            <div onClick={() => route.back()} className={styles.header}>
-              <div className={styles.header_left}>
+            <div className={styles.header}>
+              <div onClick={() => route.back()} className={styles.header_left}>
                 <Image
                   src={backArrowIcon}
                   width={20}
@@ -67,7 +67,7 @@ const ViewProfile = () => {
                 <h3>View Account</h3>
               </div>
               <div className={styles.header_right}>
-                <Button onClick={() => gotoEditProfile()}>Edit Profile</Button>
+                <Button onClick={gotoEditProfile}>Edit Profile</Button>
               </div>
             </div>
             <div className={styles.form_body}>
