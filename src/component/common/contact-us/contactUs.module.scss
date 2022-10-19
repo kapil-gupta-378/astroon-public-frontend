@@ -1,0 +1,103 @@
+@import '../../../../styles/typography.module';
+.dialogbox_wrap {
+  background: url('../../../../public/assets/images/contact_us_bg.svg');
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  background: rgba(3, 2, 35, 0.89);
+
+  &::-webkit-scrollbar {
+    width: 0.4rem;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #020039;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(
+      268.56deg,
+      #a246d3 41.31%,
+      #fe19c1 78.72%,
+      #faff00 102.46%
+    );
+  }
+
+  .modal_content {
+    width: 100%;
+
+    padding: 40px 38px;
+    .bg_image {
+      background-image: linear-gradient(
+        268.56deg,
+        #a246d3 41.31%,
+        #fe19c1 78.72%,
+        #faff00 102.46%
+      );
+      box-shadow: 0px 20px 50px 10px rgba(0, 0, 0, 0.2);
+      border-radius: 0px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      position: absolute;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: 'Roboto Slab';
+      p {
+        margin-top: 1%;
+        font-size: 14px;
+      }
+    }
+
+    .input_wrap {
+      width: 50%;
+      margin: auto;
+      .description {
+        height: 30%;
+      }
+      .contact_text_area {
+        width: 100%;
+        background: transparent;
+        outline: none;
+        font-size: 13px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+        border-radius: 4px;
+        padding: 12px;
+      }
+    }
+    .dialog_footer {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 50px;
+      .dialog_left_btn {
+        background: transparent;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
+      }
+      .dialog_right_btn {
+        background: #ffffff;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
+        color: #020039;
+      }
+    }
+  }
+}
