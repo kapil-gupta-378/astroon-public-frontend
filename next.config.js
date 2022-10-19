@@ -2,7 +2,7 @@
 require('dotenv').config();
 // const webpack = require('webpack');
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   swcMinify: true,
   serverRuntimeConfig: {
     // Will only be available on the server side
