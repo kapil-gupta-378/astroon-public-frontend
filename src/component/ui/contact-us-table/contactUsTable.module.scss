@@ -1,0 +1,92 @@
+@import '../../../../styles/typography.module';
+.table_wrap {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  color: #fff;
+  overflow-y: scroll;
+  height: 70vh;
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: #050430;
+    position: absolute;
+    left: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #001764;
+  }
+  table {
+    thead {
+      tr {
+        border-color: unset;
+        border-style: none;
+        border-width: 0;
+        border-bottom: 1px solid #29293a;
+        th {
+          @include heading_7;
+          color: rgba(255, 255, 255, 0.9);
+          font-family: 'Rubik';
+          padding: 26px 20px;
+          border-bottom: none;
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #29293a;
+        th {
+          @include heading_7;
+          color: rgba(255, 255, 255, 0.9);
+          font-family: 'Rubik';
+          padding: 26px 20px;
+          font-weight: 400;
+          font-size: 13px;
+        }
+        td {
+          @include heading_7;
+          color: rgba(255, 255, 255, 0.9);
+          font-family: 'Rubik';
+          padding: 26px 20px;
+          font-weight: 400;
+          font-size: 13px;
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            .dot {
+              background: rgba(36, 255, 0, 0.8980392157);
+              border-radius: 50%;
+              width: 4px;
+              height: 4px;
+            }
+            span {
+              margin-left: 5px;
+            }
+          }
+          .view_btn {
+            width: 100%;
+            color: #ffffff;
+            padding: 7px;
+            font-size: 14px;
+            border: none;
+            border-color: hsl(0deg, 0%, 80%);
+            background: transparent;
+            border-radius: 30px;
+            border-style: solid;
+            border-width: 1px;
+            display: flex;
+            justify-content: center;
+          }
+        }
+        :nth-child(6) {
+          color: #24ff00e5;
+        }
+      }
+      h3 {
+        @include heading_3;
+      }
+    }
+  }
+}
