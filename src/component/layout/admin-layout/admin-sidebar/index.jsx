@@ -46,6 +46,16 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
+          <Link href="/admin/contact-us">Contact-Us</Link>
+        </div>
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
           <Link href="/admin/management">Category Management</Link>
         </div>
         <div>
