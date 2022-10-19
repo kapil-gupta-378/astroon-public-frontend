@@ -22,25 +22,26 @@
   .earn_text {
     @include heading_7;
     @include common_Scss;
-    top: 200px;
+    top: 233px;
+    left: -35px;
   }
   .learn_text {
     @include heading_7;
     @include common_Scss;
-    top: 421px;
-    left: 202px;
+    top: 437px;
+    left: 174px;
   }
   .shop_text {
     @include heading_7;
     @include common_Scss;
-    right: 202px;
-    top: 421px;
+    right: 162px;
+    top: 439px;
   }
   .trade_text {
     @include heading_7;
     @include common_Scss;
-    top: 200px;
-    right: -33px;
+    top: 210px;
+    right: -58px;
   }
 }
 
