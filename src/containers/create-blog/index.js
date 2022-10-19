@@ -29,6 +29,7 @@ const CreateBlog = () => {
   };
   const editorRef = useRef();
   const { CKEditor, ClassicEditor } = editorRef.current || {};
+
   useEffect(() => {
     editorRef.current = {
       CKEditor: require('@ckeditor/ckeditor5-react').CKEditor,
@@ -186,7 +187,7 @@ const CreateBlog = () => {
         </div>
         <div className={styles.ckEditor_wrap}>
           <h6 className={styles.content_heading}>Blog Content </h6>
-          {editorLoaded && (
+          {ClassicEditor && CKEditor && editorLoaded && (
             <CKEditor
               config={{
                 extraPlugins: [uploadPlugin],
