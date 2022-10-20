@@ -185,7 +185,7 @@ const CreateBlog = () => {
             </div>
           </div>
         </div>
-        <div className={styles.ckEditor_wrap}>
+        <div className={` ck-content ${styles.ckEditor_wrap}`}>
           <h6 className={styles.content_heading}>Blog Content </h6>
           {ClassicEditor && CKEditor && editorLoaded && (
             <CKEditor
@@ -197,6 +197,14 @@ const CreateBlog = () => {
               onChange={(event, editor) => {
                 const data = editor.getData();
                 setBlogContent(data);
+              }}
+              onError={(error, { willEditorRestart }) => {
+                // If the editor is restarted, the toolbar element will be created once again.
+                // The `onReady` callback will be called again and the new toolbar will be added.
+                // This is why you need to remove the older toolbar.
+                if (willEditorRestart) {
+                  this.editor.ui.view.toolbar.element.remove();
+                }
               }}
             />
           )}

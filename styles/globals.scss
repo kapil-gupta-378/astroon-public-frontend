@@ -171,25 +171,15 @@ body {
 // custom css for CKEditor
 
 .ck-editor {
-  .ck-editor__top {
-    .ck-sticky-panel {
-      .ck-sticky-panel__content {
-        .ck-toolbar_grouping {
-          background: #030732;
-          .ck-toolbar {
-            background: #030732;
-          }
-        }
-      }
-    }
-  }
-
   .ck-editor__main {
-    background: #030732;
     .ck-content {
-      background: #030732 !important;
       height: 240px;
-      color: white !important;
     }
   }
+}
+
+:root {
+  --ck-color-base-background: #030732 !important;
+  --ck-color-base-text: #fff !important;
+  --ck-color-button-default-hover-background: #6a6969 !important;
 }
