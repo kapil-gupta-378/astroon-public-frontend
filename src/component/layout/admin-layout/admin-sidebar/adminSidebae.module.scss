@@ -21,6 +21,46 @@
       text-align: start;
       color: rgba(184, 184, 184, 0.9);
       vertical-align: bottom;
+      &:focus {
+        color: white;
+      }
+    }
+    .dropdown_btn {
+      margin-left: 10px;
+      @include heading_11;
+      font-size: 13px;
+      text-decoration: none;
+      text-align: start;
+      color: rgba(184, 184, 184, 0.9);
+      vertical-align: bottom;
+      cursor: pointer;
+      &:focus {
+        color: white;
+      }
+      &::after {
+        content: '';
+        background: url('../../../../../public/assets/images/dropdown_down-icon.svg');
+        margin-left: 10px;
+        background-position: center center;
+        background-size: contain;
+        color: white;
+        padding: 6px;
+        background-repeat: no-repeat;
+      }
+    }
+    .dropdown_wrap {
+      margin-left: 10px;
+      @include heading_11;
+      font-size: 13px;
+      text-decoration: none;
+      text-align: start;
+      color: rgba(184, 184, 184, 0.9);
+      vertical-align: bottom;
+      display: flex;
+      flex-direction: column;
+      margin-left: 15px;
+      margin-top: 20px;
+      gap: 17px;
     }
   }
 }

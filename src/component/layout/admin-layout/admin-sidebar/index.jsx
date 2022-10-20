@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './adminSidebae.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
+
 const AdminSidebar = () => {
+  const [openDropDown, setOpenDropDown] = useState(false);
   return (
     <aside className={styles.admin_sidebar_wrap}>
       <Link href={'/'}>
@@ -88,7 +90,21 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/management">Settings</Link>
+          <a
+            className={styles.dropdown_btn}
+            onClick={() => setOpenDropDown((value) => !value)}
+          >
+            Dropdown button
+          </a>
+
+          {openDropDown && (
+            <div className={styles.dropdown_wrap}>
+              <Link href={'/admin/general-settings'}>General Settings</Link>
+              <Link href={'/admin/general-information'}>
+                General Information
+              </Link>
+            </div>
+          )}
         </div>
         <div>
           <Image
