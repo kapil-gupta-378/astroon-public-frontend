@@ -1,5 +1,5 @@
 $fontsize: 12px;
-
+@import '../../../../../styles/typography.module';
 .header_wrapper {
   font-family: 'Rubik', sans-serif;
   width: 88%;
@@ -31,9 +31,8 @@ $fontsize: 12px;
           font-weight: 400;
           padding: 0 !important;
         }
-        a : active {
+        a: active {
           font-weight: 600;
-
         }
 
         &:nth-child(10) {
@@ -44,6 +43,33 @@ $fontsize: 12px;
           }
         }
       }
+    }
+  }
+
+  .wallet_connect_modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .wallet_connect_modal_icon_wrap {
+      display: flex;
+      flex-direction: column;
+      border: 0.5px solid #ffffff;
+      border-radius: 15px;
+      width: 30%;
+      padding: 20px 7px;
+      margin-bottom: 20px;
+      span {
+        margin-top: 10px;
+      }
+    }
+    .wallet_connect_modal_btn {
+      @include heading_7;
+      background: #ffffff;
+      border-radius: 268px;
+      border: none;
+      padding: 8px 25px;
+      color: #020039;
     }
   }
 }
