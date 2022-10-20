@@ -1,7 +1,7 @@
 import moment from 'moment/moment';
 import React from 'react';
 import styles from './blogDetails.module.scss';
-const BlogDetail = ({ data }) => {
+const BlogDetail = ({ isAdmin, data }) => {
   return (
     <div className={`container ${styles.blog_detail_wrap}`}>
       <h3 className={styles.blog_heading}>{data.title}</h3>
@@ -9,7 +9,7 @@ const BlogDetail = ({ data }) => {
         {moment(data.createdAt).format(' Do MMMM YYYY')}
       </p>
       <div
-        className={styles.blog_content}
+        className={isAdmin !== 'isAdmin' ? styles.blog_content : ''}
         dangerouslySetInnerHTML={{ __html: data.description }}
       ></div>
     </div>

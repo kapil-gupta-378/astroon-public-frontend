@@ -13,7 +13,7 @@ const nextConfig = {
     rollbarClientToken: process.env.ROLLBAR_CLIENT_TOKEN,
   },
   images: {
-    domains: ['13.112.214.174'],
+    domains: ['astroon-bucket.s3.ap-northeast-1.amazonaws.com'],
   },
 };
 

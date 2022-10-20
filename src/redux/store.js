@@ -6,12 +6,15 @@ import createWebStorage from 'reduxjs-toolkit-persist/lib/storage/createWebStora
 const createNoopStorage = () => {
   return {
     getItem(_key) {
+      // eslint-disable-next-line no-undef
       return Promise.resolve(null);
     },
     setItem(_key, value) {
+      // eslint-disable-next-line no-undef
       return Promise.resolve(value);
     },
     removeItem(_key) {
+      // eslint-disable-next-line no-undef
       return Promise.resolve();
     },
   };

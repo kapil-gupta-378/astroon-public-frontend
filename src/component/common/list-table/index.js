@@ -13,6 +13,7 @@ const ListTable = ({
   handleDeleteItem,
   fetchMoreData,
   dataCount,
+  onClickUserName,
 }) => {
   const router = useRouter();
   return (
@@ -70,7 +71,12 @@ const ListTable = ({
                           alt="delte-icon"
                         />
                       </td>
-                      <td>{item.userName}</td>
+                      <td
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => onClickUserName(item.id)}
+                      >
+                        {item.userName}
+                      </td>
                       <td>{item.email}</td>
                       <td>{item.role.name}</td>
                       <td>
@@ -84,7 +90,7 @@ const ListTable = ({
                       <td
                         style={{ cursor: 'pointer' }}
                         onClick={() =>
-                          router.push(`/admin/profile-detail/${item.id}`)
+                          router.push(`/admin/edit-profile/${item.id}`)
                         }
                       >
                         <Image

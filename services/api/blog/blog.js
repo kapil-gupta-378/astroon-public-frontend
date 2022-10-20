@@ -26,16 +26,16 @@ export const deleteBlogDataApi = async (id) => {
   return xhr.data;
 };
 
-export const sortBlogDataApi = async (sortBy) => {
+export const blogDataOperationApi = async (data) => {
   const xhr = await axios.request({
     method: 'get',
-    url: `${APP_URL}blog?sortBy=${sortBy}`,
+    url: `${APP_URL}blog/list?${data}`,
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token'),
     },
   });
 
-  return xhr.data.data;
+  return xhr.data;
 };
 
 export const createBlogApi = async (data) => {

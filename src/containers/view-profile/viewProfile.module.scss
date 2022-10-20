@@ -1,0 +1,108 @@
+@import '../../../styles/typography.module';
+
+.profile_details_wrap {
+  padding: 3%;
+  display: flex;
+  flex-direction: row;
+
+  .laoding_wrap {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .profile_details_right {
+    width: 100%;
+    .header {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 45px;
+      h3 {
+        display: inline;
+        color: #ffff;
+        margin-left: 10px;
+        @include heading-12;
+        margin-bottom: 0px;
+      }
+      .header_left {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .form_body {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 119px;
+      .name_input_wrap {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 30px;
+        .details_text_wrap {
+          .detail_text {
+            color: #fff;
+            display: inline;
+          }
+          span {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    .submit_button {
+      margin-top: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .profile_details_left {
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    .profile_details {
+      .profile_image_wrap {
+        width: 100%;
+        margin-bottom: 40px;
+        span {
+          border-radius: 50%;
+        }
+      }
+      .profile_upload_image_wrap {
+        input {
+          visibility: hidden;
+          width: 10px;
+        }
+        .profile_upload_image {
+          background: linear-gradient(
+            141.07deg,
+            #faff00 -6.88%,
+            #fe19c1 50.39%
+          );
+          border-radius: 268px;
+          border: none;
+          font-family: 'Rubik';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 19px;
+          color: white;
+          padding: 11px 37px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
