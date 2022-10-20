@@ -167,3 +167,19 @@ body {
     }
   }
 }
+
+// custom css for CKEditor
+
+.ck-editor {
+  .ck-editor__main {
+    .ck-content {
+      height: 240px;
+    }
+  }
+}
+
+:root {
+  --ck-color-base-background: #030732 !important;
+  --ck-color-base-text: #fff !important;
+  --ck-color-button-default-hover-background: #6a6969 !important;
+}

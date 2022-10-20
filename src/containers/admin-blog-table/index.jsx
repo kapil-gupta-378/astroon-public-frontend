@@ -11,6 +11,8 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import DialogBox from '../../component/common/dialoag-box';
 import { createAdminAuditApi } from '../../../services/api/admin';
+import Button from '../../component/common/button';
+import { useRouter } from 'next/router';
 import BlogFilter from '../../component/common/blog-filter';
 import BlogDialogBox from '../../component/common/blog-dialoag-box';
 
@@ -26,6 +28,8 @@ const AdminBlogTable = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [startDate, setStartDate] = useState(todayDate);
   const [endDate, setEndDate] = useState(todayDate);
+
+  const route = useRouter();
 
   useEffect(() => {
     const Data = async () => {
@@ -255,6 +259,10 @@ const AdminBlogTable = () => {
     }
   };
 
+  const gotoAddBlogPage = () => {
+    route.push('/admin/create-blog');
+  };
+
   return (
     <main className={styles.blog_table_wrap}>
       <section className={styles.top_bar}>
@@ -271,6 +279,7 @@ const AdminBlogTable = () => {
           <div className={styles.filter_wrap}>
             <BlogFilter handleFilter={showBlogFilter} />
           </div>
+          <Button onClick={gotoAddBlogPage}>Add Blog</Button>
         </div>
       </section>
       <section className={styles.list_table_wrap}>

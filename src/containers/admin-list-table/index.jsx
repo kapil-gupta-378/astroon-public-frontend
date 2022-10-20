@@ -118,6 +118,10 @@ const AdminListTable = () => {
     }
   };
 
+  const gotoProfile = (id) => {
+    route.push(`/admin/view-profile/${id}`);
+  };
+
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
@@ -148,6 +152,7 @@ const AdminListTable = () => {
           handleDeleteItem={handleDeleteDialog}
           fetchMoreData={fetchMoreData}
           dataCount={adminListCount}
+          onClickUserName={gotoProfile}
         />
       </section>
       <ToastContainer />

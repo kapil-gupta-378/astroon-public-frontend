@@ -14,11 +14,11 @@
     height: 100vh;
   }
   .profile_details_right {
-    width: 75%;
+    width: 100%;
     .header {
       cursor: pointer;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       margin-bottom: 45px;
       h3 {
@@ -28,16 +28,35 @@
         @include heading-12;
         margin-bottom: 0px;
       }
-    }
-    .form_body {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-      .name_input_wrap {
+      .header_left {
         display: flex;
         justify-content: center;
         align-items: center;
+      }
+    }
+    .form_body {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 119px;
+      .name_input_wrap {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
         gap: 30px;
+        .details_text_wrap {
+          .detail_text {
+            color: #fff;
+            display: inline;
+          }
+          span {
+            color: #fff;
+            margin-left: 10px;
+            font-size: 13px;
+          }
+        }
       }
     }
     .submit_button {
@@ -48,12 +67,11 @@
     }
   }
   .profile_details_left {
-    width: 25%;
     padding-top: 15px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: end;
+    align-items: flex-end;
     .profile_details {
       .profile_image_wrap {
         width: 100%;

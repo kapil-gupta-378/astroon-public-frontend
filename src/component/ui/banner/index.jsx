@@ -1,7 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './banner.module.scss';
-import Button from '../../common/button';
 import HomePageImage from '../../../../public/assets/images/homepage.svg';
 function Banner() {
   return (
@@ -14,9 +13,6 @@ function Banner() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             tristique consectetur placerat tortor adipiscing. Nascetur quam
           </p>
-          <Button data-content="explore" kind="text">
-            Explore
-          </Button>
         </div>
         <div className="home_images">
           <Image src={HomePageImage} alt="" width="420px" height="570px" />

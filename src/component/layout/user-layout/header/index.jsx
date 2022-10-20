@@ -5,46 +5,20 @@ import Link from 'next/link';
 import searchIcon from '../../../../../public/assets/images/search.png';
 import walletIcon from '../../../../../public/assets/images/wallet.png';
 import Button from '../../../common/button';
-import Web3 from 'web3';
-import Web3Modal from 'web3modal';
 import { useEffect } from 'react';
-
+import { useAccount, useConnectModal } from '@web3modal/react';
+import DialogBox from '../../../common/dialoag-box';
+import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 const Header = () => {
-  const [chainId, setChainId] = useState();
+  const { open } = useConnectModal();
+  const { isConnected } = useAccount();
   const header = useRef();
   const handleNav = () => {
     header.current.classList.toggle(styles.open_nav);
   };
 
-  async function connectwallet() {
-    const INFURA_ID = '460f40a260564ac4a4f4b3fffb032dad';
+  const [walletConnetDialog, setwalletConnetDialog] = useState(false);
 
-    const providerOptions = {
-      walletconnect: {
-        // package: WalletConnectProvider, // required
-        options: {
-          infuraId: INFURA_ID, // required
-        },
-      },
-    };
-    let web3Modal;
-
-    if (typeof window !== 'undefined') {
-      web3Modal = new Web3Modal({
-        network: 'mainnet', // optional
-        cacheProvider: true,
-        providerOptions, // required
-      });
-    }
-    try {
-      const provider = await web3Modal.connect();
-      const web3 = new Web3(provider);
-      const chainId = await web3.eth.getChainId();
-      setChainId(chainId);
-    } catch (error) {
-      return chainId;
-    }
-  }
   useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', function () {});
@@ -135,9 +109,6 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">NFT</a>
-                </li>
-                <li className="nav-item">
                   <Link href="/app">
                     <a className="nav-link text-white">App</a>
                   </Link>
@@ -151,7 +122,9 @@ const Header = () => {
                   <a className="nav-link text-white">Merch</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">Gallery</a>
+                  <Link href="/gallery">
+                    <a className="nav-link text-white">Gallery</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link href="/blog">
@@ -165,9 +138,9 @@ const Header = () => {
                 </li>
                 <li className="nav-item">
                   <Button
-                    data-content="WalletConnect"
+                    data-content={isConnected ? 'Connected' : 'Connect Wallet'}
                     kind="wallet-connect"
-                    onClick={connectwallet}
+                    onClick={() => setwalletConnetDialog(true)}
                   >
                     <Image src={walletIcon} alt="wallet" />
                   </Button>
@@ -176,6 +149,26 @@ const Header = () => {
             </div>
           </div>
         </nav>
+        <DialogBox
+          closeButtonHandler={() => setwalletConnetDialog(false)}
+          mainHading={'Connect Your Wallet'}
+          handleShow={walletConnetDialog}
+        >
+          <div className={styles.wallet_connect_modal}>
+            <div className={styles.wallet_connect_modal_icon_wrap}>
+              <Image
+                src={metamaskIcon}
+                width={40}
+                height={40}
+                alt="metamask-icon"
+              />
+              <span>Metamask</span>
+            </div>
+            <button onClick={open} className={styles.wallet_connect_modal_btn}>
+              {isConnected ? 'Connected ' : 'Wallet Connect'}
+            </button>
+          </div>
+        </DialogBox>
       </div>
     </>
   );

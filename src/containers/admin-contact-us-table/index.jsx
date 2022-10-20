@@ -10,7 +10,7 @@ import {
 } from '../../../services/api/contactUs';
 import { toast, ToastContainer } from 'react-toastify';
 import ContactUsDialogBox from '../../component/common/contact-us-dialog-box';
-import ReplyDialogBox from '../../component/common/reply-dialoag-box ';
+import ReplyDialogBox from '../../component/common/reply-dialoag-box';
 
 const ContactUsTable = () => {
   const [adminContactUsData, setContactUsData] = useState([]);

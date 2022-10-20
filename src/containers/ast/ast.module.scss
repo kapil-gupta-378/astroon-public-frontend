@@ -8,13 +8,15 @@
 .ast_page_wrap {
   margin: 25px auto;
 
-  .heading1 {
-    @include heading_9;
-  }
+  .banner {
+    p {
+      @include heading_9;
+    }
 
-  .heading2 {
-    @include heading_10;
-    text-shadow: 0px 16px 10px rgba(0, 0, 0, 0.18);
+    h1 {
+      @include heading_10;
+      text-shadow: 0px 16px 10px rgba(0, 0, 0, 0.18);
+    }
   }
 
   .description_wrap {

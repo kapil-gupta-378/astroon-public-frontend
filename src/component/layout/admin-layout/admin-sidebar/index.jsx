@@ -6,7 +6,9 @@ import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-ic
 const AdminSidebar = () => {
   return (
     <aside className={styles.admin_sidebar_wrap}>
-      <h3 className={styles.logo_wrap}>Logo</h3>
+      <Link href={'/'}>
+        <h3 className={styles.logo_wrap}>Logo</h3>
+      </Link>
       <div className={styles.navigation_wrap}>
         <div>
           <Image
