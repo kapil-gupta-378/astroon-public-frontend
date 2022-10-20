@@ -9,12 +9,30 @@ import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react'; // 
 import ErrorFallback from '../src/component/common/error-fallback';
 import getConfig from 'next/config';
 import 'react-toastify/dist/ReactToastify.css';
+import { chains, providers } from '@web3modal/ethereum';
+import { Web3Modal } from '@web3modal/react';
 const { publicRuntimeConfig } = getConfig();
 const rollbarConfig = {
   accessToken: publicRuntimeConfig.rollbarClientToken,
   environment: 'production',
 };
 function MyApp({ Component, pageProps }) {
+  // Configure web3modal
+  const modalConfig = {
+    projectId: process.env.NEXT_PUBLIC_WEB3_MODAL_ID,
+    theme: 'dark',
+    accentColor: 'default',
+    ethereum: {
+      appName: 'Astroon',
+      chains: [chains.goerli],
+      providers: [
+        providers.walletConnectProvider({
+          projectId: process.env.NEXT_PUBLIC_WEB3_MODAL_ID,
+        }),
+      ],
+    },
+  };
+
   return (
     <RollbarProvider config={rollbarConfig}>
       <ErrorBoundary
@@ -29,6 +47,7 @@ function MyApp({ Component, pageProps }) {
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Layout>
+              <Web3Modal config={modalConfig} />
               <Component {...pageProps} />
             </Layout>
           </PersistGate>

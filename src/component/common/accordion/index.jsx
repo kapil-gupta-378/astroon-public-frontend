@@ -14,7 +14,7 @@ const Accordion = ({ data, id }) => {
             aria-expanded="false"
             aria-controls={`collapse${id}`}
           >
-            {data.question}
+            {data.title}
           </button>
         </h2>
         <div
@@ -23,7 +23,7 @@ const Accordion = ({ data, id }) => {
           aria-labelledby={`heading${id}`}
           data-bs-parent="#accordionExample"
         >
-          <div className={styles.accordion_body}>{data.answer}</div>
+          <div className={styles.accordion_body}>{data.description}</div>
         </div>
       </div>
     </div>
