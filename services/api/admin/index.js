@@ -56,7 +56,7 @@ export const updateAdminDataApi = async (id, data) => {
   });
   return xhr.data;
 };
-export const updateAdminProfileApi = async (data) => {
+export const updateAdminProfileImageToServerApi = async (data) => {
   const xhr = await axios.post(
     `${APP_URL}upload?fileFor=profile&fileType=image`,
     data,
