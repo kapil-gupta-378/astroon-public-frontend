@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   fetchAdminApi,
   updateAdminDataApi,
-  updateAdminProfileApi,
+  updateAdminProfileImageToServerApi,
 } from '../../../services/api/admin';
 import styles from './profileDetail.module.scss';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
@@ -68,7 +68,7 @@ const ProfileEdit = () => {
   const uploadDataToServer = async () => {
     const body = new FormData();
     body.append('file', newUpadateImageURL);
-    const imageResponse = await updateAdminProfileApi(body);
+    const imageResponse = await updateAdminProfileImageToServerApi(body);
     const data = {
       firstName: firstName,
       lastName: lastName,

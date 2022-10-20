@@ -1,0 +1,60 @@
+@import '../../../styles/typography.module';
+.create_blog_page_wrap {
+  padding: 3%;
+  overflow-y: scroll;
+  height: 657px;
+  &::-webkit-scrollbar {
+    width: 3px;
+    background-color: #050430;
+    position: absolute;
+    left: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #001764;
+  }
+  .header {
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 45px;
+    h3 {
+      display: inline;
+      color: #ffff;
+      margin-left: 10px;
+      @include heading-12;
+      margin-bottom: 0px;
+    }
+  }
+  .create_blog_form_wrap {
+    padding: 0px 3%;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+    .blog_upload_image_wrap {
+      .image_input {
+        visibility: hidden;
+      }
+      .switchs_wrap {
+        padding-top: 30px;
+        color: white;
+        label {
+          margin-left: 20px;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  .ckEditor_wrap {
+    .content_heading {
+      color: white;
+    }
+  }
+  .btn_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

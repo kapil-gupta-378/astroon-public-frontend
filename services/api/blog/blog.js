@@ -37,3 +37,29 @@ export const blogDataOperationApi = async (data) => {
 
   return xhr.data;
 };
+
+export const createBlogApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}blog`,
+    data: data,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  });
+
+  return xhr.data;
+};
+
+export const uploadBlogBannerImageToServer = async (data) => {
+  const xhr = await axios.post(
+    `${APP_URL}upload?fileFor=banner&fileType=image`,
+    data,
+    {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    },
+  );
+  return xhr.data.data;
+};
