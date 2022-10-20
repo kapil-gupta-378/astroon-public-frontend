@@ -135,9 +135,6 @@ const Header = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">NFT</a>
-                </li>
-                <li className="nav-item">
                   <Link href="/app">
                     <a className="nav-link text-white">App</a>
                   </Link>
@@ -151,7 +148,9 @@ const Header = () => {
                   <a className="nav-link text-white">Merch</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link text-white">Gallery</a>
+                  <Link href="/gallery">
+                    <a className="nav-link text-white">Gallery</a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <Link href="/blog">
