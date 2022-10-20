@@ -20,12 +20,12 @@ const ContactUsDialogBox = ({
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac
               nibh ut in. Convallis in tristique dui sit vestibulum habitant
             </p>
-            <div className="row">
+            <div className={`row ${styles.attachment}`}>
               <Image
-                // src={finalData.attachments}
-                src={'/assets/images/card_avatar.svg'}
-                height={50}
-                width={50}
+                src={finalData.attachments}
+                // src={'/assets/images/card_avatar.svg'}
+                height={100}
+                width={100}
                 layout="fixed"
                 id="attachment_id"
                 alt=""

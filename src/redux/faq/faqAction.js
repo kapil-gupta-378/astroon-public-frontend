@@ -1,4 +1,4 @@
-import { getFaqDataApi } from '../../../services/api/faq/faq';
+import { getFaqDataApi } from '../../../services/api/faq';
 import { setFaqdata } from './faqSlice';
 
 export const fetchFaqData = () => {
