@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import searchIcon from '../../../../../public/assets/images/search.png';
 import walletIcon from '../../../../../public/assets/images/wallet.png';
 import Button from '../../../common/button';
 import { useEffect } from 'react';
