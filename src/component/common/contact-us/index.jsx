@@ -211,7 +211,7 @@ const ContactUs = ({ handleShow, handleClose }) => {
                     className={styles.contact_text_area}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    rows={4}
+                    rows={5}
                     cols={4}
                   />
                 </div>
@@ -283,6 +283,13 @@ const ContactUs = ({ handleShow, handleClose }) => {
                 </div>
               </div>
               <div className={styles.dialog_footer}>
+                <button
+                  onClick={handleClose}
+                  type="button"
+                  className={styles.cancel_btn}
+                >
+                  Cancel
+                </button>{' '}
                 <Button onClick={submitContactDetails}>Submit a request</Button>
               </div>
             </div>

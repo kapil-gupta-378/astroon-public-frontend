@@ -41,6 +41,7 @@
       }
     }
     .not_member_yet {
+      line-height: 65px !important;
       @include heading_8;
       text-align: center;
       font-family: 'SF Pro Display', sans-serif;

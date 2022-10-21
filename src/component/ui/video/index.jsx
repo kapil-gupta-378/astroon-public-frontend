@@ -19,12 +19,9 @@ const Video = () => {
   return (
     <>
       <div className={style.video_border}>
-        <video
-          className={style.animation_video}
-          ref={videoRef}
-          src="https://static.videezy.com/system/resources/previews/000/044/249/original/01__2822_29.mp4"
-          type="video/mp4"
-        />
+        <video className={style.animation_video} ref={videoRef}>
+          <source src="/assets/videos/videos.mp4" type="video/mp4" />
+        </video>
         <div className={style.video_btn_wrp}>
           <button
             type="button"
