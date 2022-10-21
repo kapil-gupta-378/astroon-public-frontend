@@ -183,3 +183,15 @@ body {
   --ck-color-base-text: #fff !important;
   --ck-color-button-default-hover-background: #6a6969 !important;
 }
+
+/* contactUs modal css */
+.contact_form_modal {
+  .modal-body {
+    flex: 0;
+    padding: 0 !important;
+  }
+  .modal-dialog {
+    transition: unset !important;
+    transform: none !important;
+  }
+}
