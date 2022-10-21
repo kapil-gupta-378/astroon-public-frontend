@@ -16,11 +16,8 @@ const AdminFAQTable = () => {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState();
-  const [pageNumber, setPageNumber] = useState(1);
-  const [pageLimit, setPageLimit] = useState(6);
   const [adminFAQData, setAdminFAQData] = useState([]);
   const [adminLoading, setAdminLoading] = useState(true);
-  const [adminFAQCount, setAdminFAQCount] = useState('');
   const route = useRouter();
 
   useEffect(() => {
@@ -28,31 +25,10 @@ const AdminFAQTable = () => {
   }, []);
 
   const getFAQData = async () => {
-    const res = await getFaqDataApi(pageNumber, pageLimit);
+    const res = await getFaqDataApi();
     if (res) {
       setAdminFAQData(res.rows);
       setAdminLoading(false);
-      setAdminFAQCount(res.count);
-    } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    }
-  };
-
-  const fetchMoreData = async () => {
-    const res = await getFaqDataApi(pageNumber, pageLimit);
-    if (res.success) {
-      setAdminFAQData(res.rows);
-      setAdminLoading(false);
-      setAdminFAQCount(res.count);
-      setPageNumber((value) => value + 1);
     } else {
       toast.error(res.message, {
         position: 'top-right',
@@ -126,6 +102,7 @@ const AdminFAQTable = () => {
         });
         setDeleteDialog(false);
         getFaqDataApi();
+        setDeleteItemId('');
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -161,8 +138,6 @@ const AdminFAQTable = () => {
           data={adminFAQData}
           loading={adminLoading}
           handleDeleteItem={handleDeleteDialog}
-          fetchMoreData={fetchMoreData}
-          dataCount={adminFAQCount}
         />
       </section>
       <ToastContainer />

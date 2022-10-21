@@ -131,11 +131,11 @@ const Header = () => {
                     <a className="nav-link text-white">Blog</a>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className={`${styles.header_search} nav-link text-white`}>
                     <Image src={searchIcon} alt="search" />
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Button
                     data-content={isConnected ? 'Connected' : 'Connect Wallet'}

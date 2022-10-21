@@ -11,13 +11,7 @@ import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
 
 const Footer = () => {
-  const [isContact, setIsContact] = useState(false);
-  const handleShow = () => {
-    setIsContact(true);
-  };
-  const handleClose = () => {
-    setIsContact(false);
-  };
+  const [modalShow, setModalShow] = useState(false);
   return (
     <div className={styles.footer_wrap}>
       <div className={`row container ${styles.container}`}>
@@ -30,7 +24,7 @@ const Footer = () => {
             width={18}
             height={18}
             alt="contact"
-            onClick={handleShow}
+            onClick={() => setModalShow(true)}
           />
           <Image src={opensea} width={18} height={18} alt="opensea" />
           <Image src={discord} width={18} height={18} alt="discord" />
@@ -39,7 +33,7 @@ const Footer = () => {
           <Image src={message} width={18} height={18} alt="message" />
         </div>
       </div>
-      <ContactUs handleShow={isContact} handleClose={handleClose} />
+      <ContactUs show={modalShow} onHide={() => setModalShow(false)} />
     </div>
   );
 };
