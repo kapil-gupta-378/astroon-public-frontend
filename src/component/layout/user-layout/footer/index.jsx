@@ -11,7 +11,7 @@ import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
 
 const Footer = () => {
-  const [isContact, setIsContact] = useState(true);
+  const [isContact, setIsContact] = useState(false);
   const handleShow = () => {
     setIsContact(true);
   };
