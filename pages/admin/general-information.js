@@ -1,7 +1,8 @@
 import React from 'react';
+import GeneralInformation from '../../src/containers/general-information';
 
 const GeneralInformationPage = () => {
-  return <div>GeneralInformationPage</div>;
+  return <GeneralInformation />;
 };
 
 export default GeneralInformationPage;
