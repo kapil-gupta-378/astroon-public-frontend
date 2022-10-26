@@ -1,15 +1,17 @@
 @import '../../../../styles/typography.module';
-.dialogbox_wrap {
-  background: url('../../../../public/assets/images/contact_us_bg.svg');
-  width: 100%;
-  height: 100vh;
-  overflow: auto;
 
+.dialogbox_wrap {
   position: fixed;
   display: flex;
-  top: 0;
-  left: 0;
-  background: rgba(3, 2, 35, 0.89);
+  background: rgba(3, 2, 35, 0.97);
+  margin: 0 auto;
+  left: 43px;
+  right: 0;
+  top: 55px;
+  bottom: 0;
+  width: 70%;
+  overflow-y: scroll;
+  height: 500px;
 
   &::-webkit-scrollbar {
     width: 0.4rem;
@@ -40,7 +42,7 @@
         #fe19c1 78.72%,
         #faff00 102.46%
       );
-      box-shadow: 0px 20px 50px 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0px 20px 50px 10px rgb(0 0 0 / 20%);
       border-radius: 0px;
       left: 50%;
       transform: translate(-50%, -50%);
@@ -97,6 +99,15 @@
         border-radius: 268px;
         @include heading_7;
         color: #020039;
+      }
+      .cancel_btn {
+        margin-right: 30px;
+        background: transparent;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
       }
     }
   }

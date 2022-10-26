@@ -10,8 +10,9 @@ import {
   insertContactUsDetailApi,
 } from '../../../../services/api/contactUs';
 import { toast, ToastContainer } from 'react-toastify';
+import Modal from 'react-bootstrap/Modal';
 
-const ContactUs = ({ handleShow, handleClose }) => {
+const ContactUs = (props) => {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [getReason, setReason] = useState('');
@@ -100,7 +101,7 @@ const ContactUs = ({ handleShow, handleClose }) => {
               progress: undefined,
             });
             setTimeout(() => {
-              handleClose();
+              props.onHide();
             }, 2000);
           } else {
             toast.error(res.message, {
@@ -149,8 +150,14 @@ const ContactUs = ({ handleShow, handleClose }) => {
   };
 
   return (
-    <div className="dialog_box">
-      {handleShow && (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      className="contact_form_modal"
+    >
+      <Modal.Body>
         <div className={styles.dialogbox_wrap}>
           <div className={styles.modal_content}>
             <div className="row">
@@ -211,7 +218,7 @@ const ContactUs = ({ handleShow, handleClose }) => {
                     className={styles.contact_text_area}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    rows={4}
+                    rows={5}
                     cols={4}
                   />
                 </div>
@@ -283,14 +290,21 @@ const ContactUs = ({ handleShow, handleClose }) => {
                 </div>
               </div>
               <div className={styles.dialog_footer}>
+                <button
+                  onClick={props.onHide}
+                  type="button"
+                  className={styles.cancel_btn}
+                >
+                  Cancel
+                </button>{' '}
                 <Button onClick={submitContactDetails}>Submit a request</Button>
               </div>
             </div>
           </div>
           <ToastContainer />
         </div>
-      )}
-    </div>
+      </Modal.Body>
+    </Modal>
   );
 };
 

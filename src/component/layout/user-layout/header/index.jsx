@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import styles from './header.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
-import searchIcon from '../../../../../public/assets/images/search.png';
 import walletIcon from '../../../../../public/assets/images/wallet.png';
 import Button from '../../../common/button';
 import { useEffect } from 'react';
@@ -131,11 +130,11 @@ const Header = () => {
                     <a className="nav-link text-white">Blog</a>
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className={`${styles.header_search} nav-link text-white`}>
                     <Image src={searchIcon} alt="search" />
                   </a>
-                </li>
+                </li> */}
                 <li className="nav-item">
                   <Button
                     data-content={isConnected ? 'Connected' : 'Connect Wallet'}
