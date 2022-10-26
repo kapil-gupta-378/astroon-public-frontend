@@ -61,6 +61,11 @@
       margin-left: 15px;
       margin-top: 20px;
       gap: 17px;
+      a {
+        &:focus {
+          color: white;
+        }
+      }
     }
   }
 }
