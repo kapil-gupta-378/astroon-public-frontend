@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './login.module.scss';
-import loginUpRightImage from '../../../public/assets/images/login-page-icon.svg';
+import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { loginUserApi } from '../../../services/api/user';
@@ -55,6 +55,17 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0].errorDetail.isEmail, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
         // throw error;
       }
     } else {

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './forgotpassword.module.scss';
-import loginUpRightImage from '../../../public/assets/images/forgot-password-page-icon.svg';
+import loginUpRightImage from '../../../public/assets/images/forgot-password-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { forgotPasswordUserApi } from '../../../services/api/user';
@@ -49,6 +49,17 @@ const ForgotPassword = () => {
           draggable: true,
           progress: undefined,
         });
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0].errorDetail.isEmail, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
         // throw error;
       }
     } else {

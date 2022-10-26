@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './signUp.module.scss';
-import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.svg';
+import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { createUserApi } from '../../../services/api/user';
@@ -67,7 +67,18 @@ const SignUp = () => {
           draggable: true,
           progress: undefined,
         });
-        throw error;
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0].errorDetail.isEmail, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+        // throw error;
       }
     } else {
       toast.error('Please Fill All Feilds', {
