@@ -104,7 +104,7 @@ const AdminSidebar = () => {
             className={styles.dropdown_btn}
             onClick={() => setOpenDropDown((value) => !value)}
           >
-            Dropdown button
+            Settings
           </a>
 
           {openDropDown && (
