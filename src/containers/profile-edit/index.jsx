@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import {
+  changeAdminRoleApi,
   fetchAdminApi,
   updateAdminDataApi,
   updateAdminProfileImageToServerApi,
@@ -27,7 +28,7 @@ const ProfileEdit = () => {
   const [userName, setUseraName] = useState('');
   const [email, setEmail] = useState('');
   const [role, setRole] = useState();
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState();
   const [profileImage, setProfileImage] = useState();
   const [newUpadateImageURL, setNewUpadateImageURL] = useState();
   const [pageLoadinng, setPageLoading] = useState(true);
@@ -50,8 +51,16 @@ const ProfileEdit = () => {
     setLastName(data.lastName);
     setUseraName(data.userName);
     setEmail(data.email);
-    setRole(data.role.name);
-    setStatus(() => (data.isActive ? 'active' : 'inactive'));
+    setRole(
+      data.role.name === 'admin'
+        ? { value: 'admin', label: 'Admin' }
+        : { value: 'subadmin', label: 'Sub Admin' },
+    );
+    setStatus(
+      data.isBlocked
+        ? { value: true, label: 'Inactive' }
+        : { value: false, label: 'Active' },
+    );
     setProfileImage(data.profileImage);
     setPageLoading(false);
   };
@@ -67,6 +76,12 @@ const ProfileEdit = () => {
 
   const uploadDataToServer = async () => {
     try {
+      if (role) {
+        data = {
+          name: role.value,
+        };
+        await changeAdminRoleApi(id, data);
+      }
       let imageResponse;
       if (newUpadateImageURL) {
         const body = new FormData();
@@ -78,7 +93,7 @@ const ProfileEdit = () => {
         firstName: firstName,
         lastName: lastName,
         profileImage: imageResponse?.fileName,
-        isBlocked: status,
+        isBlocked: status.value,
       };
       const res = await updateAdminDataApi(id, data);
       if (res.success) {
@@ -165,13 +180,13 @@ const ProfileEdit = () => {
                   selectedOption={role}
                   label={'Role'}
                   options={rollSelectOptions}
-                  handleChange={(value) => setRole(value.value)}
+                  handleChange={(value) => setRole(value)}
                 />
                 <FormSelect
                   selectedOption={status}
                   label={'Status'}
                   options={statusSelctOptions}
-                  handleChange={(value) => setStatus(value.value)}
+                  handleChange={(value) => setStatus(value)}
                 />
               </div>
             </div>

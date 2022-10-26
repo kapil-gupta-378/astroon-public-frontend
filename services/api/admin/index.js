@@ -88,3 +88,15 @@ export const createAdminAuditApi = async (data) => {
   });
   return xhr.data;
 };
+
+export const changeAdminRoleApi = async (id, data) => {
+  const xhr = await axios.request({
+    method: 'put',
+    url: `${APP_URL}role/${id}`,
+    data,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  });
+  return xhr.data;
+};
