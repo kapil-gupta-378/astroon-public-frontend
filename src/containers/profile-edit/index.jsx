@@ -18,8 +18,8 @@ const rollSelectOptions = [
   { value: 'subadmin', label: 'Sub Admin' },
 ];
 const statusSelctOptions = [
-  { value: 'active', label: 'Active' },
-  { value: 'inactive', label: 'Inactive' },
+  { value: false, label: 'Active' },
+  { value: true, label: 'Inactive' },
 ];
 const ProfileEdit = () => {
   const [firstName, setFirstName] = useState('');
@@ -66,15 +66,20 @@ const ProfileEdit = () => {
   };
 
   const uploadDataToServer = async () => {
-    const body = new FormData();
-    body.append('file', newUpadateImageURL);
-    const imageResponse = await updateAdminProfileImageToServerApi(body);
-    const data = {
-      firstName: firstName,
-      lastName: lastName,
-      profileImage: imageResponse.fileName,
-    };
     try {
+      let imageResponse;
+      if (newUpadateImageURL) {
+        const body = new FormData();
+        body.append('file', newUpadateImageURL);
+        imageResponse = await updateAdminProfileImageToServerApi(body);
+      }
+
+      const data = {
+        firstName: firstName,
+        lastName: lastName,
+        profileImage: imageResponse?.fileName,
+        isBlocked: status,
+      };
       const res = await updateAdminDataApi(id, data);
       if (res.success) {
         toast.success(res.message, {
@@ -160,13 +165,13 @@ const ProfileEdit = () => {
                   selectedOption={role}
                   label={'Role'}
                   options={rollSelectOptions}
-                  handleChange={(value) => setRole(value)}
+                  handleChange={(value) => setRole(value.value)}
                 />
                 <FormSelect
                   selectedOption={status}
                   label={'Status'}
                   options={statusSelctOptions}
-                  handleChange={(value) => setStatus(value)}
+                  handleChange={(value) => setStatus(value.value)}
                 />
               </div>
             </div>
