@@ -195,3 +195,59 @@ body {
     transform: none !important;
   }
 }
+
+// css for user header
+
+.user_header_wrap {
+  .navbar {
+    padding: 20px 0px;
+    .container {
+      .navbar-brand {
+        font-size: 24px;
+        font-weight: 500;
+        color: white;
+        text-decoration: none;
+      }
+      .navbar-toggler {
+        border-color: white;
+        color: white;
+      }
+
+      .items_wrap {
+        .navbar-nav {
+          width: 100%;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 30px;
+          a {
+            color: #efefef;
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: none;
+            &:focus {
+              font-weight: 500;
+              color: white;
+            }
+          }
+          div {
+            color: #efefef;
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 1023px) {
+    .navbar {
+      .container {
+        .items_wrap {
+          .navbar-nav {
+            align-items: center;
+          }
+        }
+      }
+    }
+  } /* 980 */
+}
