@@ -34,3 +34,28 @@ export const updateGeneralSettingsApi = async (id, data) => {
   });
   return xhr.data;
 };
+
+export const uploadBrandingLogoApi = async (data) => {
+  const xhr = await axios.post(
+    `${APP_URL}upload?fileFor=brandingLogo&fileType=image`,
+    data,
+    {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    },
+  );
+  return xhr.data.data;
+};
+export const uploadWebsiteLogoApi = async (data) => {
+  const xhr = await axios.post(
+    `${APP_URL}upload?fileFor=websiteLogo&fileType=image`,
+    data,
+    {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    },
+  );
+  return xhr.data.data;
+};
