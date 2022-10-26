@@ -6,6 +6,8 @@ import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import {
   getGeneralSettingsApi,
   updateGeneralSettingsApi,
+  uploadBrandingLogoApi,
+  uploadWebsiteLogoApi,
 } from '../../../services/api/general-settings';
 import Button from '../../component/common/button';
 import FileInput from '../../component/common/file-input';
@@ -16,9 +18,9 @@ const GeneralSettings = () => {
   const [websiteName, setWebsiteName] = useState('');
   const [websiteEmail, setWebsiteEmail] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
-  const [, setWebsiteLogo] = useState('');
+  const [websiteLogo, setWebsiteLogo] = useState('');
   // const [websiteLogoURL, setWebsiteLogoURL] = useState('');
-  const [, setBrandingLogo] = useState('');
+  const [brandingLogo, setBrandingLogo] = useState('');
   // const [brandingLogoURL, setBrandingLogoURL] = useState('');
   const [brandingWebsite, setBrandingWebsite] = useState('');
   const [settingsId, setSettingsId] = useState('');
@@ -39,15 +41,17 @@ const GeneralSettings = () => {
   };
 
   const updateSettingsData = async () => {
-    const data = {
-      websiteName: websiteName,
-      websiteEmail: websiteEmail,
-      adminEmail: adminEmail,
-      websiteLogo: 'logo',
-      brandingLogo: 'logo',
-      brandingWebsite: brandingWebsite,
-    };
     try {
+      const { brandingLogoResponse, websiteLogoResponse } =
+        await uploadImagetoServer();
+      const data = {
+        websiteName: websiteName,
+        websiteEmail: websiteEmail,
+        adminEmail: adminEmail,
+        websiteLogo: websiteLogoResponse,
+        brandingLogo: brandingLogoResponse,
+        brandingWebsite: brandingWebsite,
+      };
       const response = await updateGeneralSettingsApi(settingsId, data);
       if (response.success) {
         toast.success(response.message, {
@@ -60,6 +64,26 @@ const GeneralSettings = () => {
           progress: undefined,
         });
       }
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const uploadImagetoServer = async () => {
+    try {
+      const brandingImageData = new FormData();
+      brandingImageData.append('file', brandingLogo);
+      const brandingLogoResponse = await uploadBrandingLogoApi(
+        brandingImageData,
+      );
+      const websiteLogoData = new FormData();
+      websiteLogoData.append('file', websiteLogo);
+      const websiteLogoResponse = await uploadWebsiteLogoApi(websiteLogoData);
+
+      return {
+        brandingLogoResponse: brandingLogoResponse.fileName,
+        websiteLogoResponse: websiteLogoResponse.fileName,
+      };
     } catch (error) {
       return error;
     }
