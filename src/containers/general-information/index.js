@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import {
   getGeneralInformationApi,
   updateGeneralInformationApi,
+  uploadHomePageYoutubeThumbnailApi,
 } from '../../../services/api/general-information/general-information';
 
 const GeneralInformation = () => {
@@ -19,7 +20,7 @@ const GeneralInformation = () => {
   const [youtubeURL, setYoutubeURL] = useState('');
   const [emailLink, setEmailLink] = useState();
   const [homeVideoLink, setHomeVideoLink] = useState('');
-  const [, setHomeVideoThumbnail] = useState('');
+  const [homeVideoThumbnail, setHomeVideoThumbnail] = useState('');
   const [settingsId, setSettingsId] = useState('');
 
   const route = useRouter();
@@ -41,16 +42,20 @@ const GeneralInformation = () => {
   };
 
   const updateSettingsData = async () => {
-    const data = {
-      facebookUrl: facebookURL,
-      twitterUrl: twitterURL,
-      discordUrl: discordURL,
-      youtubeUrl: youtubeURL,
-      emailLink: emailLink,
-      youtubeVideoLink: homeVideoLink,
-      //   youtubeThumbnailImage: homeVideoThumbnail,
-    };
     try {
+      const youtubeThumbnail = new FormData();
+      youtubeThumbnail.append('file', homeVideoThumbnail);
+      const youtubeThumbnailresponse =
+        await uploadHomePageYoutubeThumbnailApi();
+      const data = {
+        facebookUrl: facebookURL,
+        twitterUrl: twitterURL,
+        discordUrl: discordURL,
+        youtubeUrl: youtubeURL,
+        emailLink: emailLink,
+        youtubeVideoLink: homeVideoLink,
+        youtubeThumbnailImage: youtubeThumbnailresponse.fileName,
+      };
       const response = await updateGeneralInformationApi(settingsId, data);
       if (response.success) {
         toast.success(response.message, {

@@ -34,3 +34,16 @@ export const updateGeneralInformationApi = async (id, data) => {
   });
   return xhr.data;
 };
+
+export const uploadHomePageYoutubeThumbnailApi = async (data) => {
+  const xhr = await axios.post(
+    `${APP_URL}upload?fileFor=profile&fileType=image`,
+    data,
+    {
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    },
+  );
+  return xhr.data.data;
+};
