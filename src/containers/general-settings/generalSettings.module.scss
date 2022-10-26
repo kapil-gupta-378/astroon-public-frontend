@@ -1,0 +1,36 @@
+@import '../../../styles/typography.module';
+.GeneralSettings_wrap {
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  .header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 45px;
+    h3 {
+      display: inline;
+      color: #ffff;
+      margin-left: 10px;
+      @include heading-12;
+      margin-bottom: 0px;
+    }
+  }
+  .inputs_wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 45px;
+
+    .flex_box_item {
+      width: 30%;
+    }
+  }
+  .footer_wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 45px;
+  }
+}

@@ -1,0 +1,45 @@
+@import '../../../../styles/typography.module';
+.file_input_wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  border: 1px solid rgb(255, 255, 255, 0.3);
+  color: #fff;
+  border-radius: 4px;
+  padding: 12px;
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  input {
+    visibility: hidden;
+    width: 0px;
+  }
+  label {
+    @include heading_7;
+    position: absolute;
+    top: -12px;
+    left: 17px;
+    top: -9px;
+    left: 17px;
+    padding: 0px 24px 0px 12px;
+    line-height: 16px;
+  }
+
+  span {
+    color: white;
+    font-weight: 500;
+    align-items: center;
+    justify-content: space-between;
+  }
+  button {
+    background: #808080;
+    border: 1px solid #ffffff;
+    border-radius: 55px;
+    padding: 3px 21px;
+    color: white;
+    font-weight: 500;
+  }
+}
