@@ -6,12 +6,13 @@ import message from '../../../../../public/assets/images/message.svg';
 import opensea from '../../../../../public/assets/images/opensea_icon.svg';
 import discord from '../../../../../public/assets/images/discord_icon.svg';
 import contact from '../../../../../public/assets/images/contact.svg';
-
+import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
 import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
 
 const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
+
   return (
     <div className={styles.footer_wrap}>
       <div className={`row container ${styles.container}`}>
@@ -26,6 +27,14 @@ const Footer = () => {
             alt="contact"
             onClick={() => setModalShow(true)}
           />
+          <a
+            style={{ height: '20px' }}
+            target={'_blank'}
+            href="https://www.tutorialspoint.com/website_development/website_development_tutorial.pdf"
+            rel="noreferrer"
+          >
+            <Image src={privacyIcon} width={18} height={18} alt="contact" />
+          </a>
           <Image src={opensea} width={18} height={18} alt="opensea" />
           <Image src={discord} width={18} height={18} alt="discord" />
           <Image src={twitter} width={18} height={18} alt="twitter" />
