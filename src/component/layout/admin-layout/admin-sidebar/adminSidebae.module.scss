@@ -1,6 +1,7 @@
 @import '../../../../../styles/typography.module';
 .admin_sidebar_wrap {
-  padding: 10% 10% 16% 10%;
+  min-height: 120vh;
+  padding: 10% 10% 55% 10%;
   background: rgba(255, 255, 255, 0.03);
   .logo_wrap {
     @include heading_9;
@@ -22,6 +23,9 @@
       color: rgba(184, 184, 184, 0.9);
       vertical-align: bottom;
       &:focus {
+        color: white;
+      }
+      &:hover {
         color: white;
       }
     }

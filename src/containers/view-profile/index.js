@@ -36,7 +36,7 @@ const ViewProfile = () => {
     setUseraName(data.userName);
     setEmail(data.email);
     setRole(data.role.name);
-    setStatus(() => (data.isActive ? 'active' : 'inactive'));
+    setStatus(() => (data.isBlocked ? 'inactive' : 'active'));
     setProfileImage(data.profileImage);
     setPageLoading(false);
   };

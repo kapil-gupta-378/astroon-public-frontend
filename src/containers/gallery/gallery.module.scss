@@ -1,0 +1,26 @@
+@import '../../../styles/typography.module';
+.gallery_wrap {
+  overflow: hidden;
+  padding: 60px 0px;
+  display: flex;
+  flex-direction: column;
+  .gallery_heading {
+    padding: 50px;
+    @include heading_2;
+  }
+  .upper_wrap {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    .image_wrap {
+      position: relative;
+      width: 30%;
+    }
+    .video_wrap {
+      width: 70%;
+    }
+  }
+}

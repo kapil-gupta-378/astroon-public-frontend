@@ -30,7 +30,7 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/content-management">Content Management</Link>
+          <Link href="/admin/management">Content Management</Link>
         </div>
         <div>
           <Image
@@ -50,7 +50,9 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/contact-us">Contact-Us</Link>
+          <Link href="/admin/contact-us">
+            Client Inquiries & Support Request
+          </Link>
         </div>
         <div>
           <Image
@@ -62,7 +64,7 @@ const AdminSidebar = () => {
           />
           <Link href="/admin/faq">FAQ</Link>
         </div>
-        <div>
+        {/* <div>
           <Image
             width={15}
             height={15}
@@ -71,8 +73,8 @@ const AdminSidebar = () => {
             alt="nav_image"
           />
           <Link href="/admin/management">Category Management</Link>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <Image
             width={15}
             height={15}
@@ -81,8 +83,8 @@ const AdminSidebar = () => {
             alt="nav_image"
           />
           <Link href="/admin/management">CMS Page Management</Link>
-        </div>
-        <div>
+        </div> */}
+        {/* <div>
           <Image
             width={15}
             height={15}
@@ -91,7 +93,7 @@ const AdminSidebar = () => {
             alt="nav_image"
           />
           <Link href="/admin/management">News & Announcements</Link>
-        </div>
+        </div> */}
         <div>
           <Image
             width={15}
@@ -116,7 +118,7 @@ const AdminSidebar = () => {
             </div>
           )}
         </div>
-        <div>
+        {/* <div>
           <Image
             width={15}
             height={15}
@@ -137,7 +139,7 @@ const AdminSidebar = () => {
             alt="nav_image"
           />
           <Link href="/admin/management">Menu System</Link>
-        </div>
+        </div> */}
       </div>
     </aside>
   );

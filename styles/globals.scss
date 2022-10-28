@@ -23,12 +23,19 @@ body {
 
 .filter_wrap {
   .css-b62m3t-container {
-    .css-1s2u09g-control {
+    .css-1s2u09g-control,
+    .css-1pahdxg-control {
       background: transparent;
       border-radius: 30px;
       display: flex;
       justify-content: center;
       align-items: center;
+      box-shadow: unset !important;
+      border-color: hsl(0, 0%, 70%);
+      &:hover {
+        border-color: hsl(0, 0%, 70%);
+        box-shadow: unset !important;
+      }
       .css-319lph-ValueContainer {
         color: #fff;
         font-size: 14px;
@@ -76,10 +83,11 @@ body {
     }
   }
   .css-b62m3t-container {
-    .css-1s2u09g-control {
+    .css-1s2u09g-control,
+    .css-lpahdxg-control {
       background: transparent;
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       width: 100%;
       outline: none;
@@ -95,6 +103,7 @@ body {
       .css-319lph-ValueContainer {
         color: #fff;
         font-size: 14px;
+        text-align-last: left;
         .css-1pndypt-Input {
           color: white;
         }
@@ -149,7 +158,7 @@ body {
       }
       .css-qc6sy-singleValue {
         color: white;
-        text-align: center;
+        text-align: left;
       }
       .css-14el2xx-placeholder {
         div {
@@ -207,6 +216,10 @@ body {
         font-weight: 500;
         color: white;
         text-decoration: none;
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
       }
       .navbar-toggler {
         border-color: white;
@@ -250,4 +263,72 @@ body {
       }
     }
   } /* 980 */
+}
+
+// css for video thumbnail package
+.react-thumbnail-generator {
+  position: absolute;
+  top: 0;
+  img {
+    object-fit: contain;
+    border-radius: 30px;
+    width: 100%;
+  }
+}
+//css for profile
+.profile_dropdown {
+  .dropdown-toggle {
+    background-color: transparent !important;
+    border: transparent;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    &:focus {
+      box-shadow: unset !important;
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+  }
+  .dropdown-menu {
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      font-size: 14px;
+      &:hover {
+        color: #000;
+        background-color: transparent;
+      }
+      span {
+        margin-block-end: 8px;
+      }
+    }
+  }
+}
+
+//  css for react slice Slider
+
+.slick-slider {
+  width: 100%;
+
+  .slick-prev {
+    top: 505px;
+    left: 0px;
+    background: transparent;
+    height: 44px;
+    width: 75px;
+    &::before {
+      content: '' !important;
+    }
+  }
+  .slick-next {
+    top: 502px;
+    right: 0px;
+    background: transparent;
+    height: 44px;
+    width: 75px;
+    &::before {
+      content: '' !important;
+    }
+  }
 }

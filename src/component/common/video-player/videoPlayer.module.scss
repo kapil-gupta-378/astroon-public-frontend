@@ -1,0 +1,125 @@
+.video_border {
+  position: relative;
+
+  .animation_video {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border-radius: 30px;
+  }
+  .video_btn_wrp {
+    position: absolute;
+    top: 46%;
+    transform: translateY(-46%);
+    left: 0;
+    right: 0;
+    text-align: center;
+    button {
+      background: transparent;
+      border: transparent;
+      border-radius: 50%;
+      height: 36px;
+      width: 36px;
+    }
+  }
+}
+//  Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 10.5%;
+      width: 40%;
+      background-size: 100% 85px;
+    }
+    .animation_video {
+      height: 72%;
+      margin-top: unset;
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 18.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 53%;
+      margin-top: unset;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 18.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 53%;
+      margin-top: unset;
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 24.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 40%;
+      margin-top: unset;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 27%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 34%;
+      margin-top: unset;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 30.5%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 26.5%;
+      margin-top: unset;
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .video_border {
+    display: flex;
+    align-items: center;
+    &::before {
+      bottom: 31.8%;
+      width: 40%;
+    }
+    .animation_video {
+      height: 23.5%;
+      margin-top: unset;
+    }
+  }
+} /* 320 */

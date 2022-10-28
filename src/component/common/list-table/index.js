@@ -88,9 +88,14 @@ const ListTable = ({
                       <td>{item.email}</td>
                       <td>{item.role.name}</td>
                       <td>
-                        {item.isActive && (
-                          <div>
-                            <span className={styles.dot}></span>
+                        {item.isBlocked ? (
+                          <div className={styles.inactive}>
+                            <span></span>
+                            <span>inactive</span>
+                          </div>
+                        ) : (
+                          <div className={styles.active}>
+                            <span></span>
                             <span>active</span>
                           </div>
                         )}
