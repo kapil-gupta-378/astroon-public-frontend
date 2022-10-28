@@ -305,3 +305,30 @@ body {
     }
   }
 }
+
+//  css for react slice Slider
+
+.slick-slider {
+  width: 100%;
+
+  .slick-prev {
+    top: 505px;
+    left: 0px;
+    background: transparent;
+    height: 44px;
+    width: 75px;
+    &::before {
+      content: '' !important;
+    }
+  }
+  .slick-next {
+    top: 502px;
+    right: 0px;
+    background: transparent;
+    height: 44px;
+    width: 75px;
+    &::before {
+      content: '' !important;
+    }
+  }
+}
