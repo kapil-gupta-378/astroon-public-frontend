@@ -216,6 +216,10 @@ body {
         font-weight: 500;
         color: white;
         text-decoration: none;
+        a {
+          text-decoration: none;
+          color: #fff;
+        }
       }
       .navbar-toggler {
         border-color: white;
@@ -261,6 +265,17 @@ body {
   } /* 980 */
 }
 
+// css for video thumbnail package
+.react-thumbnail-generator {
+  margin-left: 32px;
+  margin-right: 30px;
+  position: absolute;
+  top: 0;
+  img {
+    object-fit: contain;
+    width: 100%;
+  }
+}
 //css for profile
 .profile_dropdown {
   .dropdown-toggle {

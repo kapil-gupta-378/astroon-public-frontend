@@ -36,7 +36,9 @@ const Header = () => {
         expand="lg"
       >
         <Container>
-          <Navbar.Brand>Logo</Navbar.Brand>
+          <Navbar.Brand>
+            <Link href={'/'}>Logo</Link>
+          </Navbar.Brand>
           <Navbar.Toggle
             onClick={() => setMobileNavExpended((value) => !value)}
             aria-controls="basic-navbar-nav"
