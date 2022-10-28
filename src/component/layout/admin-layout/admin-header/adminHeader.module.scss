@@ -5,8 +5,9 @@
   .header_nav_wrap {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     .header_left {
-      width: 90%;
+      width: 50%;
       h3 {
         @include heading_5;
       }
@@ -17,14 +18,17 @@
       }
     }
     .header_right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      width: 10%;
-      .avatar_wrap {
-        width: 45%;
-        height: 35px;
-        position: relative;
+      width: 15%;
+      text-align: right;
+
+      span {
+        position: relative !important;
+        img {
+          width: 45px !important;
+          height: 35px !important;
+          margin-right: 15px !important;
+          position: relative !important;
+        }
       }
     }
   }

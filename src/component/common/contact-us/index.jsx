@@ -135,6 +135,17 @@ const ContactUs = (props) => {
           draggable: true,
           progress: undefined,
         });
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0].errorDetail.isEmail, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       }
     } else {
       toast.error('Please Fill All Fields', {
@@ -175,7 +186,7 @@ const ContactUs = (props) => {
               <div className={styles.input_wrap}>
                 <TextInput
                   title={'Email Address'}
-                  handleType={'text'}
+                  handleType={'email'}
                   kind="fullborder"
                   placeHolder="Enter your email"
                   handleValue={email}
@@ -224,17 +235,17 @@ const ContactUs = (props) => {
                 </div>
                 <br />
                 <div className={inputStyles.input_wrap}>
-                  <label
+                  <div
                     className={inputStyles.corner_border_label}
                     style={{ background: 'rgb(5, 5, 45)' }}
                   >
-                    Attachments
-                  </label>
+                    <label>Attachments</label>
+                  </div>
+
                   <div
                     style={{
                       padding: 0,
                       width: '100%',
-                      position: 'relative',
                       overflow: 'hidden',
                       cursor: 'pointer',
                       display: 'inline-block',
@@ -273,6 +284,8 @@ const ContactUs = (props) => {
                     </div>
                     <input
                       style={{
+                        width: '297px',
+                        height: '68px',
                         cursor: 'pointer',
                         fontSize: '100px',
                         position: 'absolute',

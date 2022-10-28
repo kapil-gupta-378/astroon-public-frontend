@@ -11,24 +11,31 @@ import {
   deleteFaqDataApi,
 } from '../../../services/api/faq';
 import styles from './adminFAQTable.module.scss';
-
 const AdminFAQTable = () => {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState();
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
   const [adminFAQData, setAdminFAQData] = useState([]);
   const [adminLoading, setAdminLoading] = useState(true);
+  const [adminFAQCount, setAdminFAQCount] = useState('');
+  const [isSort, setIsSort] = useState(true);
   const route = useRouter();
 
   useEffect(() => {
-    getFAQData();
+    setPageLimit(6);
+    setPageNumber(1);
+    getFAQData(1, 6);
+    setPageNumber((value) => value + 1);
   }, []);
 
-  const getFAQData = async () => {
-    const res = await getFaqDataApi();
+  const getFAQData = async (pageNo, pageLim) => {
+    const res = await getFaqDataApi(pageNo, pageLim);
     if (res) {
       setAdminFAQData(res.rows);
       setAdminLoading(false);
+      setAdminFAQCount(res.count);
     } else {
       toast.error(res.message, {
         position: 'top-right',
@@ -42,11 +49,98 @@ const AdminFAQTable = () => {
     }
   };
 
+  const fetchMoreData = async () => {
+    const res = await getFaqDataApi(pageNumber, pageLimit);
+    setAdminFAQData((value) => [...value, ...res.rows]);
+    setAdminLoading(false);
+    setAdminFAQCount((value) => {
+      return value - 6;
+    });
+    setPageNumber((value) => value + 1);
+  };
   const handleSearchFAQTitle = async (e) => {
     try {
       const searchFAQ = e.target.value;
       setSearchKeyWord(searchFAQ);
       const res = await faqDataOperationApi(`title=${searchFAQ}`);
+      if (res.success) {
+        setAdminFAQData(res.data.rows);
+        setAdminLoading(false);
+        setAdminFAQCount(res.data.count);
+      } else {
+        setAdminLoading(false);
+        toast.error(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      setAdminLoading(false);
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // throw error;
+    }
+  };
+  const handleDeleteDialog = (id) => {
+    setDeleteItemId(id);
+    setDeleteDialog(true);
+  };
+  const handleDeleteDialogCancel = () => {
+    setDeleteItemId('');
+    setDeleteDialog(false);
+  };
+  const handleDeleteFAQ = async (id) => {
+    try {
+      const res = await deleteFaqDataApi(id);
+      if (res.success) {
+        toast.success(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setDeleteDialog(false);
+        getFaqDataApi(1, 6);
+        setDeleteItemId('');
+      }
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setDeleteDialog(false);
+    }
+  };
+
+  const handleSorting = async (sortBy) => {
+    setAdminLoading(true);
+    if (sortBy == 'DESC') {
+      setIsSort(true);
+    } else {
+      setIsSort(false);
+    }
+    try {
+      const res = await faqDataOperationApi(`sortBy=${sortBy}`);
       if (res.success) {
         setAdminFAQData(res.data.rows);
         setAdminLoading(false);
@@ -76,48 +170,6 @@ const AdminFAQTable = () => {
       // throw error;
     }
   };
-
-  const handleDeleteDialog = (id) => {
-    setDeleteItemId(id);
-    setDeleteDialog(true);
-  };
-
-  const handleDeleteDialogCancel = () => {
-    setDeleteItemId('');
-    setDeleteDialog(false);
-  };
-
-  const handleDeleteFAQ = async (id) => {
-    try {
-      const res = await deleteFaqDataApi(id);
-      if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setDeleteDialog(false);
-        getFaqDataApi();
-        setDeleteItemId('');
-      }
-    } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setDeleteDialog(false);
-    }
-  };
-
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
@@ -138,6 +190,10 @@ const AdminFAQTable = () => {
           data={adminFAQData}
           loading={adminLoading}
           handleDeleteItem={handleDeleteDialog}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminFAQCount}
+          handleSorting={handleSorting}
+          isSort={isSort}
         />
       </section>
       <ToastContainer />
@@ -153,5 +209,4 @@ const AdminFAQTable = () => {
     </main>
   );
 };
-
 export default AdminFAQTable;
