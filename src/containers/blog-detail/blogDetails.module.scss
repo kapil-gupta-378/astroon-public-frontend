@@ -1,6 +1,7 @@
 @import '../../../styles/typography.module';
 .blog_detail_wrap {
   margin-top: 50px;
+  height: 100vh;
   .blog_heading {
     @include heading_2;
   }

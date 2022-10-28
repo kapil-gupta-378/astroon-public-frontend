@@ -36,7 +36,7 @@ const DialogBox = ({
             </div>
             {content && <p className={styles.dialog_body}>{content}</p>}
             {children && <div className={styles.dialog_body}>{children}</div>}
-            {inputValue && (
+            {inputValue !== undefined && (
               <div className={styles.input_wrap}>
                 <TextInput
                   titleBackground={'#AF3277'}

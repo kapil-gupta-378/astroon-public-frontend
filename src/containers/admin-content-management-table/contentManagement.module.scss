@@ -1,0 +1,21 @@
+.content_management_wrap {
+  padding: 3%;
+  .top_bar {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    .top_bar_left {
+      width: 50%;
+    }
+    .top_bar_right {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 30px;
+      .filter_wrap {
+        width: 25%;
+      }
+    }
+  }
+}
