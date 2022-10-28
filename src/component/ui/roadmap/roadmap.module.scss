@@ -82,6 +82,37 @@
   }
 }
 
+@media only screen and (max-width: 979px) {
+  .roadmap_wrapper {
+    .roadmap_image {
+      width: 78%;
+
+      .roadmap_text {
+        width: 42%;
+        &:nth-child(2) {
+          top: 0;
+          left: -30px;
+        }
+
+        &:nth-child(3) {
+          top: 105px;
+          left: -105px;
+        }
+
+        &:nth-child(4) {
+          bottom: 85px;
+          right: -105px;
+        }
+
+        &:nth-child(5) {
+          bottom: -130px;
+          left: 0px;
+        }
+      }
+    }
+  }
+} /* 768 */
+
 @media screen and (max-width: 768px) {
   .roadmap_wrapper {
     .roadmap_image {

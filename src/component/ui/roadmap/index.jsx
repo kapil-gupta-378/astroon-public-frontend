@@ -18,8 +18,7 @@ const Roadmap = () => {
               <p>2022</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent tristique consectetur placerat tortor adipiscing.
-                Nascetur quam.
+                Praesent tristique
               </p>
             </div>
 
@@ -27,8 +26,7 @@ const Roadmap = () => {
               <p>2022</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent tristique consectetur placerat tortor adipiscing.
-                Nascetur quam.
+                Praesent tristique .
               </p>
             </div>
 
@@ -36,8 +34,7 @@ const Roadmap = () => {
               <p>2022</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent tristique consectetur placerat tortor adipiscing.
-                Nascetur quam.
+                Praesent tristique .
               </p>
             </div>
 
@@ -45,8 +42,7 @@ const Roadmap = () => {
               <p>2022</p>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Praesent tristique consectetur placerat tortor adipiscing.
-                Nascetur quam.
+                Praesent tristique .
               </p>
             </div>
           </div>
