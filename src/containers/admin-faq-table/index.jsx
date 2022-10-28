@@ -66,6 +66,7 @@ const AdminFAQTable = () => {
       if (res.success) {
         setAdminFAQData(res.data.rows);
         setAdminLoading(false);
+        setAdminFAQCount(res.data.count);
       } else {
         setAdminLoading(false);
         toast.error(res.message, {
@@ -114,7 +115,7 @@ const AdminFAQTable = () => {
           progress: undefined,
         });
         setDeleteDialog(false);
-        getFaqDataApi();
+        getFaqDataApi(1, 6);
         setDeleteItemId('');
       }
     } catch (error) {

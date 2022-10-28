@@ -30,7 +30,7 @@ const FAQTable = ({
           loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>Yay! You have seen it all</b>
+              <b>No more data available</b>
             </p>
           }
           // below props only if you need pull down functionality

@@ -21,20 +21,44 @@ const ContactUsTable = () => {
   const [reply, setReply] = useState('');
   const [isReplyDialogShow, setIsReplyDialogShow] = useState(false);
   const [parentId, setParentId] = useState('');
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
+  const [adminContactUsCount, setAdminContactUsCount] = useState('');
 
   useEffect(() => {
-    const Data = async () => {
-      await getContactUsData();
-    };
-    Data();
+    setPageLimit(6);
+    setPageNumber(1);
+    getContactUsData(1, 6);
+    setPageNumber((value) => value + 1);
   }, []);
 
-  const getContactUsData = async () => {
-    const res = await getContactUsDataApi();
+  const getContactUsData = async (pageNo, pageLim) => {
+    const res = await getContactUsDataApi(pageNo, pageLim);
     if (res) {
-      setContactUsData(res.data);
+      setContactUsData(res.data.rows);
       setContactUsLoading(false);
+      setAdminContactUsCount(res.data.count);
+    } else {
+      toast.error(res.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
+  };
+
+  const fetchMoreData = async () => {
+    const res = await getContactUsDataApi(pageNumber, pageLimit);
+    setContactUsData((value) => [...value, ...res.data.rows]);
+    setContactUsLoading(false);
+    setAdminContactUsCount((value) => {
+      return value - 6;
+    });
+    setPageNumber((value) => value + 1);
   };
 
   const handleOpenContactUsPopup = async (id) => {
@@ -82,8 +106,9 @@ const ContactUsTable = () => {
         `username=${searchContactUs}`,
       );
       if (res.success) {
-        setContactUsData(res.data);
+        setContactUsData(res.data.rows);
         setContactUsLoading(false);
+        setAdminContactUsCount(res.data.count);
       } else {
         setContactUsLoading(false);
         toast.error(res.message, {
@@ -199,6 +224,8 @@ const ContactUsTable = () => {
           data={adminContactUsData}
           loading={contactUsLoading}
           handlePopup={handleOpenContactUsPopup}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminContactUsCount}
         />
       </section>
       <ContactUsDialogBox
