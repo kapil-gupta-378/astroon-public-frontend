@@ -2,6 +2,10 @@
 .blog_detail_wrap {
   margin-top: 50px;
   min-height: 100vh;
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
   .blog_heading {
     @include heading_2;
   }
