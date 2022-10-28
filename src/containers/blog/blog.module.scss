@@ -8,12 +8,8 @@
   }
   .blog_main_wrap {
     margin-top: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     .blog_list_wrap {
       display: grid;
-      grid-template-rows: 50% 50%;
       grid-template-columns: 28% 28% 28%;
       grid-column-gap: 80px;
       grid-row-gap: 35px;
