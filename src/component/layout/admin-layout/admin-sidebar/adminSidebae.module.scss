@@ -1,5 +1,6 @@
 @import '../../../../../styles/typography.module';
 .admin_sidebar_wrap {
+  min-height: 120vh;
   padding: 10% 10% 55% 10%;
   background: rgba(255, 255, 255, 0.03);
   .logo_wrap {
