@@ -62,20 +62,40 @@
           & [data-testid='table_profile_image'] {
             border-radius: 50%;
           }
-          div {
+          .active {
             display: flex;
             justify-content: flex-start;
             align-items: center;
             flex-direction: row;
-            .dot {
+            :nth-child(1) {
               background: rgba(36, 255, 0, 0.8980392157);
               border-radius: 50%;
               width: 4px;
               height: 4px;
             }
-            span {
+            :nth-child(2) {
+              color: rgba(36, 255, 0, 0.8980392157);
               margin-left: 5px;
             }
+          }
+          .inactive {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: row;
+            :nth-child(1) {
+              background: #ff0000;
+              border-radius: 50%;
+              width: 4px;
+              height: 4px;
+            }
+            :nth-child(2) {
+              color: #ff0000;
+              margin-left: 5px;
+            }
+          }
+          span {
+            margin-left: 5px;
           }
         }
         :nth-child(6) {
