@@ -36,20 +36,17 @@ const DialogBox = ({
             </div>
             {content && <p className={styles.dialog_body}>{content}</p>}
             {children && <div className={styles.dialog_body}>{children}</div>}
-            {inputValue && (
-              <div className={styles.input_wrap}>
-                <TextInput
-                  titleBackground={'#AF3277'}
-                  title={'Comment'}
-                  handleType={'text'}
-                  kind="fullborder"
-                  placeHolder="Add Comment"
-                  handleValue={inputValue}
-                  handleOnChange={(e) => onChangeInput(e.target.value)}
-                />
-              </div>
-            )}
-
+            <div className={styles.input_wrap}>
+              <TextInput
+                titleBackground={'#AF3277'}
+                title={'Comment'}
+                handleType={'text'}
+                kind="fullborder"
+                placeHolder="Add Comment"
+                handleValue={inputValue}
+                handleOnChange={(e) => onChangeInput(e.target.value)}
+              />
+            </div>
             <div className={styles.dialog_footer}>
               {leftButtonName && (
                 <button

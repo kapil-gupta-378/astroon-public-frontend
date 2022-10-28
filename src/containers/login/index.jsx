@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
 import styles from './login.module.scss';
-import loginUpRightImage from '../../../public/assets/images/login-page-icon.svg';
+import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { loginUserApi } from '../../../services/api/user';
@@ -13,6 +13,18 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const rememberMe = localStorage.getItem('rememberMe');
+  const token = localStorage.getItem('token');
+  const [isLogin, setIsLogin] = useState(false);
+
+  useEffect(() => {
+    if (rememberMe && token) {
+      router.push('admin/admin-management');
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, []);
 
   const handleLogin = async () => {
     if (username && password) {
@@ -55,6 +67,17 @@ const Login = () => {
           draggable: true,
           progress: undefined,
         });
+        if (error.response.data.statusCode === 400) {
+          toast.error(error.response.data.message[0].errorDetail.isEmail, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
         // throw error;
       }
     } else {
@@ -72,55 +95,75 @@ const Login = () => {
   const redirectToForgot = () => {
     Router.push('forgot-password');
   };
+  const isRememberMe = (event) => {
+    if (event.target.checked) {
+      localStorage.setItem('rememberMe', 'true');
+    } else {
+      localStorage.removeItem('rememberMe', 'false');
+    }
+  };
   return (
-    <div className={styles.login_wrap}>
-      <div className={styles.left_wrap}>
-        <div>
-          <h1>Login Now</h1>
-        </div>
-        <div className={styles.form_wrap}>
-          <TextInput
-            handleType="text"
-            handleValue={username}
-            handleOnChange={(e) => setUsername(e.target.value)}
-            title="Username/Email"
-            placeHolder="Enter your username/email"
-            kind="fullborder"
-          />
-          <TextInput
-            handleType="password"
-            handleValue={password}
-            handleOnChange={(e) => setPassword(e.target.value)}
-            title="Password"
-            placeHolder="Enter your password"
-            kind="fullborder"
-          />
-        </div>
-        <div className={styles.remember_me_btn}>
-          <input className={styles.check_btn} type="checkbox" />
-          <span className={styles.remember_me}>Remember Me</span>
-          <span className={styles.forget_pass_text} onClick={redirectToForgot}>
-            Forgot Password?
-          </span>
-        </div>
+    <React.Fragment>
+      {isLogin ? (
+        <div className={styles.login_wrap}>
+          <div className={styles.left_wrap}>
+            <div>
+              <h1>Login Now</h1>
+            </div>
+            <div className={styles.form_wrap}>
+              <TextInput
+                handleType="text"
+                handleValue={username}
+                handleOnChange={(e) => setUsername(e.target.value)}
+                title="Username/Email"
+                placeHolder="Enter your username/email"
+                kind="fullborder"
+              />
+              <TextInput
+                handleType="password"
+                handleValue={password}
+                handleOnChange={(e) => setPassword(e.target.value)}
+                title="Password"
+                placeHolder="Enter your password"
+                kind="fullborder"
+              />
+            </div>
+            <div className={styles.remember_me_btn}>
+              <input
+                onChange={isRememberMe}
+                className={styles.check_btn}
+                type="checkbox"
+              />
+              <span className={styles.remember_me}>Remember Me</span>
+              <span
+                className={styles.forget_pass_text}
+                onClick={redirectToForgot}
+              >
+                Forgot Password?
+              </span>
+            </div>
 
-        <div className={styles.btn_wrap}>
-          <span>
-            <Button onClick={handleLogin}>Login Now</Button>
-          </span>
+            <div className={styles.btn_wrap}>
+              <span>
+                <Button onClick={handleLogin}>Login Now</Button>
+              </span>
+            </div>
+            <p className={styles.not_member_yet}>
+              Not a member yet?{' '}
+              <Link href="/sign-up">
+                <a>Register Now</a>
+              </Link>
+            </p>
+          </div>
+          <div className={styles.right_wrap}>
+            <Image src={loginUpRightImage} layout="responsive" alt="login" />
+          </div>
+          <ToastContainer />
         </div>
-        <p className={styles.not_member_yet}>
-          Not a member yet?{' '}
-          <Link href="/sign-up">
-            <a>Register Now</a>
-          </Link>
-        </p>
-      </div>
-      <div className={styles.right_wrap}>
-        <Image src={loginUpRightImage} layout="responsive" alt="login" />
-      </div>
-      <ToastContainer />
-    </div>
+      ) : (
+        ''
+      )}
+    </React.Fragment>
   );
 };
 

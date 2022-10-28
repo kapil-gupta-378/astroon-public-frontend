@@ -28,22 +28,46 @@ const AdminBlogTable = () => {
   const [isFilter, setIsFilter] = useState(false);
   const [startDate, setStartDate] = useState(todayDate);
   const [endDate, setEndDate] = useState(todayDate);
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
+  const [adminBlogCount, setAdminBlogCount] = useState('');
 
   const route = useRouter();
 
   useEffect(() => {
-    const Data = async () => {
-      await getBlogData();
-    };
-    Data();
+    setPageLimit(6);
+    setPageNumber(1);
+    getBlogData(1, 6);
+    setPageNumber((value) => value + 1);
   }, []);
 
-  const getBlogData = async () => {
-    const res = await getBlogDataApi();
+  const getBlogData = async (pageNo, pageLim) => {
+    const res = await getBlogDataApi(pageNo, pageLim);
     if (res) {
       setAdminBlogData(res.rows);
       setBlogLoading(false);
+      setAdminBlogCount(res.count);
+    } else {
+      toast.error(res.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
+  };
+
+  const fetchMoreData = async () => {
+    const res = await getBlogDataApi(pageNumber, pageLimit);
+    setAdminBlogData((value) => [...value, ...res.rows]);
+    setBlogLoading(false);
+    setAdminBlogCount((value) => {
+      return value - 6;
+    });
+    setPageNumber((value) => value + 1);
   };
 
   const handleCommentsPopupOpen = (blogId) => {
@@ -167,6 +191,7 @@ const AdminBlogTable = () => {
       if (res.success) {
         setAdminBlogData(res.data.rows);
         setBlogLoading(false);
+        setAdminBlogCount(res.data.count);
       } else {
         setBlogLoading(false);
         toast.error(res.message, {
@@ -287,6 +312,8 @@ const AdminBlogTable = () => {
           data={adminBlogData}
           loading={blogLoading}
           handlePopup={handleCommentsPopupOpen}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminBlogCount}
         />
       </section>
       <DialogBox
