@@ -15,11 +15,7 @@ export const getFaqDataApi = async (page, limit) => {
 };
 
 export const createAdminFAQApi = async (data) => {
-  const xhr = await axios.post(`${APP_URL}faq`, data, {
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
-  });
+  const xhr = await axios.post(`${APP_URL}faq`, data, {});
   return xhr.data;
 };
 
@@ -27,9 +23,6 @@ export const getFaqDataUsingIdApi = async (id) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}faq/${id}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -40,9 +33,6 @@ export const updateFaqDataApi = async (id, data) => {
     method: 'put',
     url: `${APP_URL}faq/${id}`,
     data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -52,9 +42,6 @@ export const deleteFaqDataApi = async (id) => {
   const xhr = await axios.request({
     method: 'delete',
     url: `${APP_URL}faq/${id}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -64,9 +51,6 @@ export const faqDataOperationApi = async (search) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}faq?${search}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;

@@ -4,9 +4,6 @@ export const getGeneralInformationApi = async () => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}general-information`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr.data;
 };
@@ -16,9 +13,6 @@ export const postGeneralInformationApi = async (data) => {
     method: 'post',
     url: `${APP_URL}general-information`,
     data: data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr;
 };
@@ -28,9 +22,6 @@ export const updateGeneralInformationApi = async (id, data) => {
     method: 'put',
     url: `${APP_URL}general-information/${id}`,
     data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr.data;
 };
