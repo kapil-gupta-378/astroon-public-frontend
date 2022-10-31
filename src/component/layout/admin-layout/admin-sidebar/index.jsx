@@ -30,7 +30,7 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/management">Content Management</Link>
+          <Link href="/admin/content-management">Content Management</Link>
         </div>
         <div>
           <Image

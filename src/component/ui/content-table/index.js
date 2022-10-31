@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './contentTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
 const ContentTable = ({
@@ -13,7 +12,7 @@ const ContentTable = ({
   dataCount,
   onClickUserName,
 }) => {
-  const router = useRouter();
+  // const router = useRouter();
   return (
     <div id={'table_scroll'} className={styles.table_wrap}>
       {!loading ? (
@@ -69,7 +68,7 @@ const ContentTable = ({
                       <td>
                         {moment(item.createdAt.toString()).format('DD/MM/YYYY')}
                       </td>
-                      <td
+                      {/* <td
                         style={{ cursor: 'pointer' }}
                         onClick={() =>
                           router.push(`/admin/edit-profile/${item.id}`)
@@ -88,7 +87,7 @@ const ContentTable = ({
                         <button className={styles.table_btn_disapprove}>
                           Disapprove
                         </button>
-                      </td>
+                      </td> */}
                       <td
                         style={{ cursor: 'pointer' }}
                         onClick={() => handleDeleteItem(item.id)}
