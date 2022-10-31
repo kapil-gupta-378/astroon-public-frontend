@@ -14,3 +14,26 @@
     width: 77.16%;
   }
 }
+
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .admin_layout_wrap {
+    .left_wrap {
+      width: 8%;
+    }
+    .right_wrap {
+      width: 92%;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
