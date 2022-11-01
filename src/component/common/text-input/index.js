@@ -10,6 +10,8 @@ const TextInput = ({
   handleType,
   inputDiabled,
   titleBackground,
+  inputHeight,
+  textarea,
 }) => {
   return (
     <div className={styles.input_wrap}>
@@ -21,16 +23,31 @@ const TextInput = ({
           {title}
         </label>
       )}
-      <input
-        disabled={inputDiabled}
-        type={handleType}
-        value={handleValue}
-        onChange={handleOnChange}
-        className={`${
-          kind === 'cornerborder' ? styles.corner_border : styles.full_border
-        }`}
-        placeholder={placeHolder}
-      />
+      {textarea ? (
+        <textarea
+          style={{ height: inputHeight }}
+          disabled={inputDiabled}
+          type={handleType}
+          value={handleValue}
+          onChange={handleOnChange}
+          className={`${
+            kind === 'cornerborder' ? styles.corner_border : styles.full_border
+          }`}
+          placeholder={placeHolder}
+        />
+      ) : (
+        <input
+          style={{ height: inputHeight }}
+          disabled={inputDiabled}
+          type={handleType}
+          value={handleValue}
+          onChange={handleOnChange}
+          className={`${
+            kind === 'cornerborder' ? styles.corner_border : styles.full_border
+          }`}
+          placeholder={placeHolder}
+        />
+      )}
     </div>
   );
 };
@@ -42,11 +59,16 @@ TextInput.propTypes = {
   handleOnChange: PropTypes.func,
   handleType: PropTypes.string,
   inputDiabled: PropTypes.bool,
+  height: PropTypes.string,
+  ElementName: PropTypes.string,
+  textarea: PropTypes.string,
 };
 TextInput.defaultProps = {
   kind: 'fullborder',
   inputDiabled: false,
   titleBackground: '#05052d',
+  height: '50px',
+  textarea: false,
 };
 
 export default TextInput;

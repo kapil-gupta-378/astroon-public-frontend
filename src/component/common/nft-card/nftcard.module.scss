@@ -39,6 +39,7 @@
   .nft_card_sec {
     color: #ffffff;
     font-family: 'Rubik';
+    width: 100%;
     .nft_card_art {
       display: flex;
       flex-direction: row;
@@ -46,15 +47,18 @@
       .nft_card_heading_wrap {
         display: inline-block;
         width: 45%;
-        p {
-          font-size: 14px;
-          padding: 15px 10px 2px 25px;
-          display: inline-block;
-        }
-        h6 {
-          font-size: 15px;
-          display: inline-block;
-          padding: 0px 20px 0px 20px;
+        div {
+          p {
+            font-size: 14px;
+            display: inline-block;
+            margin-bottom: 1px;
+            margin-top: 15px;
+            margin-right: 10px;
+          }
+          h6 {
+            font-size: 15px;
+            display: inline-block;
+          }
         }
       }
     }
@@ -62,7 +66,7 @@
       background: linear-gradient(#0d0e31 0 0) padding-box,
         linear-gradient(to right, #faff00, #fe19c1) border-box;
       color: #fff;
-      padding: 10px 25px;
+      padding: 10px 14px;
       border: 1px solid transparent;
       border-radius: 50px;
       display: inline-block;
@@ -90,71 +94,25 @@
 } /* 1024 */
 @media only screen and (max-width: 1023px) {
   .nft_card_wrap {
-    display: inline-block;
-    vertical-align: middle;
-    width: 46%;
-    height: unset;
-    margin: 130px 10px 0;
-    &:nth-child(3) {
-      margin-top: 172px;
-    }
     .nft_card_sec {
-      .nft_card_art {
-        .nft_card_heading_wrap {
-          p {
-            font-size: 14px;
-            padding: 15px 10px 2px 0px;
-            display: inline-block;
-          }
-          h6 {
-            font-size: 15px;
-            display: inline-block;
-            padding: 0px 20px 0px 40px;
-          }
-        }
-      }
-      .opensea_btn {
-      }
-      .nft_card_price {
-        h5 {
-        }
-        p {
-        }
-      }
+      padding: 0px 24px;
     }
   }
 } /* 980 */
 @media only screen and (max-width: 979px) {
   .nft_card_wrap {
-    display: inline-block;
-    vertical-align: middle;
-    width: 46%;
-    height: unset;
-    margin: 130px 10px 0;
-    &:nth-child(3) {
-      margin-top: 172px;
-    }
     .nft_card_sec {
       .nft_card_art {
         .nft_card_heading_wrap {
           p {
             font-size: 14px;
-            padding: 15px 10px 2px 0px;
+
             display: inline-block;
           }
           h6 {
             font-size: 15px;
             display: inline-block;
-            padding: 0px 20px 0px 40px;
           }
-        }
-      }
-      .opensea_btn {
-      }
-      .nft_card_price {
-        h5 {
-        }
-        p {
         }
       }
     }
@@ -162,80 +120,27 @@
 } /* 768 */
 @media only screen and (max-width: 767px) {
   .nft_card_wrap {
-    .nft_heading {
-      @include heading_3;
-      text-align: center;
-      margin: 60px;
-      font-family: 'Roboto Slab';
-    }
-    background: linear-gradient(
-      181.02deg,
-      rgba(162, 70, 211, 0) 90.89%,
-      #a246d3 99.12%
-    );
     width: 308px;
     .nft_card_img_wrap {
-      width: 100%;
-      position: relative;
-      border-radius: 25px;
-      height: 140px;
-      position: relative;
       .backgroud_nft_card {
-        position: absolute;
         left: -58px;
         top: -91px;
       }
       .img_nft_card {
-        position: absolute !important;
         top: -147px;
         left: -9px;
       }
     }
     .nft_card_sec {
-      color: #ffffff;
-      font-family: 'Rubik';
       .nft_card_art {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         .nft_card_heading_wrap {
-          display: inline-block;
           width: 45%;
-          p {
-            font-size: 14px;
-            padding: 15px 10px 2px 0px;
-            display: inline-block;
-          }
-          h6 {
-            font-size: 15px;
-            display: inline-block;
-            padding: 0px 20px 0px 35px;
-          }
         }
-      }
-      .opensea_btn {
-        background: linear-gradient(#0d0e31 0 0) padding-box,
-          linear-gradient(to right, #faff00, #fe19c1) border-box;
-        color: #fff;
-        padding: 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
-        display: inline-block;
-        font-size: 12px;
-        cursor: pointer;
       }
       .nft_card_price {
-        display: flex;
-        justify-content: center;
-        font-family: 'Rubik';
         padding: 20px 0px 25px 0px;
-        h5 {
-          color: #faff00;
-        }
         p {
-          font-size: 12px;
           padding: 5px 20px;
-          color: white;
         }
       }
     }
@@ -243,79 +148,40 @@
 } /* 650 */
 @media only screen and (max-width: 649px) {
   .nft_card_wrap {
-    .nft_heading {
-      @include heading_3;
-      text-align: center;
-      margin: 60px;
-      font-family: 'Roboto Slab';
-    }
-    background: linear-gradient(
-      181.02deg,
-      rgba(162, 70, 211, 0) 90.89%,
-      #a246d3 99.12%
-    );
     width: 308px;
     .nft_card_img_wrap {
-      width: 100%;
-      position: relative;
-      border-radius: 25px;
-      height: 140px;
-      position: relative;
       .backgroud_nft_card {
-        position: absolute;
         left: -58px;
         top: -91px;
       }
       .img_nft_card {
-        position: absolute !important;
         top: -147px;
         left: -9px;
       }
     }
     .nft_card_sec {
-      color: #ffffff;
-      font-family: 'Rubik';
       .nft_card_art {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         .nft_card_heading_wrap {
-          display: inline-block;
           width: 45%;
           p {
             font-size: 14px;
-            padding: 15px 10px 2px 0px;
+
             display: inline-block;
           }
           h6 {
             font-size: 15px;
             display: inline-block;
-            padding: 0px 20px 0px 35px;
           }
         }
       }
-      .opensea_btn {
-        background: linear-gradient(#0d0e31 0 0) padding-box,
-          linear-gradient(to right, #faff00, #fe19c1) border-box;
-        color: #fff;
-        padding: 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
-        display: inline-block;
-        font-size: 12px;
-        cursor: pointer;
-      }
       .nft_card_price {
-        display: flex;
-        justify-content: center;
-        font-family: 'Rubik';
         padding: 20px 0px 25px 0px;
         h5 {
           color: #faff00;
         }
         p {
           font-size: 12px;
-          padding: 5px 20px;
+
           color: white;
         }
       }
@@ -324,162 +190,67 @@
 } /* 480 */
 @media only screen and (max-width: 479px) {
   .nft_card_wrap {
-    .nft_heading {
-      @include heading_3;
-      text-align: center;
-      margin: 60px;
-      font-family: 'Roboto Slab';
-    }
-    background: linear-gradient(
-      181.02deg,
-      rgba(162, 70, 211, 0) 90.89%,
-      #a246d3 99.12%
-    );
-    width: 308px;
+    width: 280px;
     .nft_card_img_wrap {
-      width: 100%;
-      position: relative;
-      border-radius: 25px;
-      height: 140px;
-      position: relative;
       .backgroud_nft_card {
-        position: absolute;
         left: -58px;
         top: -91px;
+        span {
+          width: 370px !important;
+        }
       }
       .img_nft_card {
-        position: absolute !important;
         top: -147px;
-        left: -9px;
+        left: 20px;
+        span {
+          width: 229px !important;
+        }
       }
     }
     .nft_card_sec {
-      color: #ffffff;
-      font-family: 'Rubik';
-      .nft_card_art {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        .nft_card_heading_wrap {
-          display: inline-block;
-          width: 45%;
-          p {
-            font-size: 14px;
-            padding: 15px 10px 2px 0px;
-            display: inline-block;
-          }
-          h6 {
-            font-size: 15px;
-            display: inline-block;
-            padding: 0px 20px 0px 35px;
-          }
-        }
-      }
       .opensea_btn {
-        background: linear-gradient(#0d0e31 0 0) padding-box,
-          linear-gradient(to right, #faff00, #fe19c1) border-box;
-        color: #fff;
-        padding: 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
-        display: inline-block;
-        font-size: 12px;
-        cursor: pointer;
+        padding: 10px 7px;
       }
       .nft_card_price {
-        display: flex;
-        justify-content: center;
-        font-family: 'Rubik';
         padding: 20px 0px 25px 0px;
-        h5 {
-          color: #faff00;
-        }
-        p {
-          font-size: 12px;
-          padding: 5px 20px;
-          color: white;
-        }
       }
     }
   }
 } /* 375 */
 @media only screen and (max-width: 374px) {
   .nft_card_wrap {
-    padding-left: 0.1rem;
     .nft_heading {
-      @include heading_3;
-      text-align: center;
-      margin: 60px;
-      font-family: 'Roboto Slab';
     }
-    background: linear-gradient(
-      181.02deg,
-      rgba(162, 70, 211, 0) 90.89%,
-      #a246d3 99.12%
-    );
-    width: 308px;
+    width: 250px;
     .nft_card_img_wrap {
-      width: 100%;
-      position: relative;
-      border-radius: 25px;
-      height: 140px;
-      position: relative;
       .backgroud_nft_card {
-        position: absolute;
-        left: -58px;
-        top: -91px;
+        left: -51px;
+        span {
+          width: 324px !important;
+        }
       }
       .img_nft_card {
-        position: absolute !important;
-        top: -147px;
-        left: -9px;
+        top: -155px;
+        left: 7px;
+        span {
+          width: 225px !important;
+        }
       }
     }
     .nft_card_sec {
-      color: #ffffff;
-      font-family: 'Rubik';
+      width: 100%;
+      padding: 0px 11px;
       .nft_card_art {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
         .nft_card_heading_wrap {
-          display: inline-block;
           width: 45%;
-          p {
-            font-size: 14px;
-            padding: 15px 10px 2px 0px;
-            display: inline-block;
-          }
-          h6 {
-            font-size: 15px;
-            display: inline-block;
-            padding: 0px 20px 0px 35px;
-          }
         }
       }
       .opensea_btn {
-        background: linear-gradient(#0d0e31 0 0) padding-box,
-          linear-gradient(to right, #faff00, #fe19c1) border-box;
-        color: #fff;
-        padding: 10px 25px;
-        border: 1px solid transparent;
-        border-radius: 50px;
-        display: inline-block;
-        font-size: 12px;
-        cursor: pointer;
+        padding: 10px 7px;
       }
       .nft_card_price {
-        display: flex;
-        justify-content: center;
-        font-family: 'Rubik';
-        padding: 20px 0px 25px 0px;
-        h5 {
-          color: #faff00;
-        }
         p {
-          font-size: 12px;
           padding: 5px 20px;
-          color: white;
         }
       }
     }

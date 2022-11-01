@@ -9,6 +9,7 @@ import { useAccount, useConnectModal } from '@web3modal/react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 const Header = () => {
   const { open } = useConnectModal();
   const { isConnected } = useAccount();
@@ -80,6 +81,9 @@ const Header = () => {
                 >
                   <Image src={walletIcon} alt="wallet" />
                 </Button>
+              </Nav.Item>
+              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                <UserProfileDropDown />
               </Nav.Item>
             </Nav>
           </Navbar.Collapse>

@@ -332,3 +332,41 @@ body {
     }
   }
 }
+
+// css for user Profile dropdown in user header
+
+.user_profile_dropdown {
+  .dropdown {
+    border: 1px solid #ffffff;
+    border-radius: 30px;
+    .dropdown-toggle {
+      padding: 5px 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dropdown-menu {
+      width: 135px;
+      min-width: unset;
+      left: unset;
+      right: 0;
+      top: 46px;
+      background: #323154;
+      box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.15);
+      border-radius: 13px;
+      a {
+        .item_div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          font-size: 13px;
+          font-weight: 400;
+          line-height: 18px;
+        }
+        &:hover {
+          background: #cccccc26;
+        }
+      }
+    }
+  }
+}
