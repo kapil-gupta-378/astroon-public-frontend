@@ -85,12 +85,8 @@
 @media only screen and (max-width: 1199px) {
   .login_wrap {
     .left_wrap {
-      .form_wrap {
-        gap: 20px;
-      }
       padding: 10% 9%;
       .remember_me_btn {
-        line-height: 25px;
         .forget_pass_text {
           margin-left: 98px;
         }
@@ -104,12 +100,8 @@
 @media only screen and (max-width: 1023px) {
   .login_wrap {
     .left_wrap {
-      .form_wrap {
-        gap: 20px;
-      }
-      padding: 10% 9%;
+      padding: 6% 9%;
       .remember_me_btn {
-        line-height: 35px;
         .forget_pass_text {
           margin-left: 84px;
         }
@@ -122,24 +114,41 @@
 } /* 980 */
 @media only screen and (max-width: 979px) {
   .login_wrap {
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    h1 {
+      text-align: center !important;
+    }
     .left_wrap {
+      width: 100%;
       .form_wrap {
-        gap: 15px;
-        margin: 10% 0% 0% 0%;
-      }
-      padding: 6% 9%;
-      p {
-        padding: 0% 7.5% 0% 7.5%;
+        gap: 30px;
       }
       .remember_me_btn {
-        line-height: 25px;
+        line-height: 55px;
+        font-size: 14px;
         .forget_pass_text {
-          margin-left: 16px;
+          margin-left: 400px;
+        }
+      }
+      .not_member_yet {
+        line-height: 50px !important;
+        font-size: 15px;
+      }
+      h1 {
+        font-size: 21px;
+      }
+      .btn_wrap {
+        text-align: center;
+        button:not(:disabled) {
+          width: 33%;
+          font-size: 12px;
         }
       }
     }
     .right_wrap {
-      padding: 7% 6%;
+      padding: 0% 0%;
     }
   }
 } /* 768 */
@@ -147,25 +156,29 @@
   .login_wrap {
     .left_wrap {
       .form_wrap {
-        gap: 15px;
-        margin: 8% 0% 0% 0%;
-      }
-      padding: 6% 6%;
-      p {
-        padding: 0% 7.5% 0% 7.5%;
+        gap: 30px;
       }
       .remember_me_btn {
-        line-height: 25px;
+        line-height: 55px;
+        font-size: 11px;
         .forget_pass_text {
-          margin-left: 16px;
+          margin-left: 348px;
         }
       }
       .not_member_yet {
-        font-size: 9px;
+        line-height: 40px !important;
+        font-size: 11px;
       }
-    }
-    .right_wrap {
-      padding: 7% 6%;
+      h1 {
+        font-size: 21px;
+      }
+      .btn_wrap {
+        text-align: center;
+        button:not(:disabled) {
+          width: 28%;
+          font-size: 12px;
+        }
+      }
     }
   }
 } /* 650 */
@@ -173,32 +186,29 @@
   .login_wrap {
     .left_wrap {
       .form_wrap {
-        gap: 15px;
-        margin: 8% 0% 0% 0%;
-      }
-      padding: 15% 6%;
-      p {
-        padding: 0% 7.5% 0% 7.5%;
+        gap: 30px;
       }
       .remember_me_btn {
-        line-height: 27px;
-        font-size: 10px;
+        line-height: 55px;
+        font-size: 11px;
         .forget_pass_text {
-          margin-left: 12px;
+          margin-left: 208px;
         }
       }
+      .not_member_yet {
+        line-height: 40px !important;
+        font-size: 11px;
+      }
       h1 {
-        font-size: 15px;
+        font-size: 21px;
       }
       .btn_wrap {
-        cursor: pointer;
-        width: 100%;
-        font-size: 11px;
-        margin-bottom: 10px;
+        text-align: center;
+        button:not(:disabled) {
+          width: 39%;
+          font-size: 9px;
+        }
       }
-    }
-    .right_wrap {
-      padding: 25% 6%;
     }
   }
 } /* 480 */
@@ -206,33 +216,29 @@
   .login_wrap {
     .left_wrap {
       .form_wrap {
-        gap: 15px;
-        margin: 8% 0% 0% 0%;
-      }
-      padding: 15% 6%;
-      p {
-        padding: 0% 7.5% 0% 7.5%;
+        gap: 30px;
       }
       .remember_me_btn {
-        line-height: 27px;
-        font-size: 7px;
+        line-height: 50px;
+        font-size: 10px;
         .forget_pass_text {
-          margin-left: 12px;
+          margin-left: 137px;
         }
+      }
+      .not_member_yet {
+        line-height: 40px !important;
+        font-size: 11px;
       }
       h1 {
-        font-size: 15px;
+        font-size: 19px;
       }
       .btn_wrap {
-        margin-bottom: -20px;
+        text-align: center;
         button:not(:disabled) {
-          width: 100%;
-          font-size: 10px;
+          width: 39%;
+          font-size: 9px;
         }
       }
-    }
-    .right_wrap {
-      padding: 25% 6%;
     }
   }
 } /* 375 */
@@ -240,33 +246,29 @@
   .login_wrap {
     .left_wrap {
       .form_wrap {
-        gap: 15px;
-        margin: 8% 0% 0% 0%;
-      }
-      padding: 15% 6%;
-      p {
-        padding: 0% 7.5% 0% 7.5%;
+        gap: 25px;
       }
       .remember_me_btn {
-        line-height: 27px;
-        font-size: 6px;
+        line-height: 42px;
+        font-size: 9px;
         .forget_pass_text {
-          margin-left: 10px;
+          margin-left: 107px;
         }
       }
+      .not_member_yet {
+        line-height: 35px !important;
+        font-size: 9px;
+      }
       h1 {
-        font-size: 12px;
+        font-size: 15px;
       }
       .btn_wrap {
-        margin-bottom: -20px;
+        text-align: center;
         button:not(:disabled) {
-          width: 100%;
+          width: 46%;
           font-size: 9px;
         }
       }
-    }
-    .right_wrap {
-      padding: 25% 6%;
     }
   }
 } /* 320 */

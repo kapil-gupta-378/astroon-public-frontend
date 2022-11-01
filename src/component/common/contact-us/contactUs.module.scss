@@ -112,3 +112,82 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 70%;
+      }
+      .dialog_footer {
+        text-align: center;
+      }
+    }
+    right: 25px;
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 65%;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 75%;
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 80%;
+      }
+    }
+    right: 40px;
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 100%;
+      }
+      .dialog_footer {
+        text-align: center;
+        .cancel_btn {
+          margin: 10px;
+        }
+      }
+    }
+    right: 65px;
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 100%;
+      }
+    }
+    right: 75px;
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .input_wrap {
+        width: 100%;
+      }
+    }
+    right: 75px;
+  }
+} /* 320 */
