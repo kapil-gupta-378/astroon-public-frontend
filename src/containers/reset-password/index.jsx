@@ -74,7 +74,7 @@ const ResetPassword = () => {
       try {
         const res = await resetPasswordUserApi(data, token);
         if (res.success) {
-          toast.error(res.message, {
+          toast.success(res.message, {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,

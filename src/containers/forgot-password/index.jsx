@@ -85,7 +85,7 @@ const ForgotPassword = () => {
         </div>
         <div className={styles.form_wrap}>
           <TextInput
-            handleType="text"
+            handleType="email"
             handleValue={email}
             handleOnChange={(e) => setEmail(e.target.value)}
             title="Email"

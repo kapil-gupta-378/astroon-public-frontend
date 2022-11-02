@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import style from './banner.module.scss';
-import HomePageImage from '../../../../public/assets/images/homepage.svg';
+import HomePageImage from '../../../../public/assets/images/homepage.png';
 function Banner() {
   return (
     <div className={style['home_wrp']}>

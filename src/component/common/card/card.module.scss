@@ -78,4 +78,22 @@
 @media only screen and (max-width: 479px) {
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .card_wrap {
+    width: 255px;
+    .card_img_wrap {
+      .backgroud_card {
+        left: -18px;
+        span {
+          width: 300px !important;
+        }
+      }
+      .img_card {
+        top: -145px;
+        left: -10px;
+        span {
+          width: 272px !important;
+        }
+      }
+    }
+  }
 } /* 320 */
