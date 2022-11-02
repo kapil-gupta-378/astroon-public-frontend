@@ -1,10 +1,16 @@
-import React from 'react';
-import Login from '../../../containers/login';
+import Router from 'next/router';
+import React, { useEffect } from 'react';
 import AdminHeader from './admin-header';
 import AdminSidebar from './admin-sidebar';
 import styles from './adminLayout.module.scss';
 const AdminLayout = ({ children }) => {
   let token = localStorage.getItem('token');
+  useEffect(() => {
+    if (!token) {
+      Router.push('/login');
+    }
+  }, []);
+
   return (
     <>
       {token ? (
@@ -18,7 +24,7 @@ const AdminLayout = ({ children }) => {
           </div>
         </div>
       ) : (
-        <Login />
+        ''
       )}
     </>
   );

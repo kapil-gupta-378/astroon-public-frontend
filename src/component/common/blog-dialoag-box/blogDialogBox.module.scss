@@ -12,9 +12,11 @@
   .modal_content {
     width: 37%;
     background: url('../../../../public/assets/images/dialogBackgorund.png');
-
     border-radius: 25px;
-    padding: 8px 38px;
+    padding: 31px 38px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
     .modal_header {
       .dailog_title {
         @include heading_12;

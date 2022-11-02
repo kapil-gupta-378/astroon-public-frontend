@@ -11,12 +11,19 @@ import getConfig from 'next/config';
 import 'react-toastify/dist/ReactToastify.css';
 import { chains, providers } from '@web3modal/ethereum';
 import { Web3Modal } from '@web3modal/react';
+import {
+  requestInterceptor,
+  responseInterceptor,
+} from '../services/interceptor';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 const { publicRuntimeConfig } = getConfig();
 const rollbarConfig = {
   accessToken: publicRuntimeConfig.rollbarClientToken,
   environment: 'production',
 };
 function MyApp({ Component, pageProps }) {
+  const route = useRouter();
   // Configure web3modal
   const modalConfig = {
     projectId: process.env.NEXT_PUBLIC_WEB3_MODAL_ID,
@@ -32,6 +39,11 @@ function MyApp({ Component, pageProps }) {
       ],
     },
   };
+
+  useEffect(() => {
+    requestInterceptor();
+    responseInterceptor(route);
+  }, []);
 
   return (
     <RollbarProvider config={rollbarConfig}>

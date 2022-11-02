@@ -1,13 +1,10 @@
 import React from 'react';
-import styles from './listTable.module.scss';
+import styles from './contentTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
-import editIcon from '../../../../public/assets/images/Edit-table-icon.svg';
 import Image from 'next/image';
-import PropTypes from 'prop-types';
-import defaultProfileImage from '../../../../public/assets/images/Dummy_Image.svg';
+import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useRouter } from 'next/router';
-const ListTable = ({
+const ContentTable = ({
   data,
   loading,
   handleDeleteItem,
@@ -15,10 +12,7 @@ const ListTable = ({
   dataCount,
   onClickUserName,
 }) => {
-  const router = useRouter();
-  const ImageLoader = ({ src }) => {
-    return `${src}`;
-  };
+  // const router = useRouter();
   return (
     <div id={'table_scroll'} className={styles.table_wrap}>
       {!loading ? (
@@ -30,7 +24,7 @@ const ListTable = ({
           loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
-              <b>No more data available</b>
+              <b>Yay! You have seen it all</b>
             </p>
           }
           // below props only if you need pull down functionality
@@ -51,11 +45,10 @@ const ListTable = ({
               <thead>
                 <tr>
                   <th scope="col">S.No.</th>
-                  <th scope="col">Profile</th>
                   <th scope="col">Username</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Role</th>
-                  <th scope="col">Status</th>
+                  <th scope="col">Content Name</th>
+                  <th scope="col">Content Type</th>
+                  <th scope="col">Upload Date</th>
                 </tr>
               </thead>
 
@@ -64,41 +57,26 @@ const ListTable = ({
                   return (
                     <tr key={item.id}>
                       <th scope="row">{idx + 1}</th>
-                      <td>
-                        <Image
-                          loader={ImageLoader}
-                          src={
-                            item.profileImage
-                              ? item.profileImage
-                              : defaultProfileImage
-                          }
-                          data-testid="table_profile_image"
-                          width={20}
-                          height={20}
-                          layout="fixed"
-                          alt="delte-icon"
-                        />
-                      </td>
                       <td
                         style={{ cursor: 'pointer' }}
                         onClick={() => onClickUserName(item.id)}
                       >
-                        {item.userName}
+                        {item.user.userName}
                       </td>
-                      <td>{item.email}</td>
-                      <td>{item.role.name}</td>
+                      <td>{item.contentName}</td>
+                      <td>{item.contentType}</td>
                       <td>
-                        {item.isBlocked ? (
-                          <div className={styles.inactive}>
-                            <span></span>
-                            <span>inactive</span>
-                          </div>
-                        ) : (
-                          <div className={styles.active}>
-                            <span></span>
-                            <span>active</span>
-                          </div>
-                        )}
+                        {moment(item.createdAt.toString()).format('DD/MM/YYYY')}
+                      </td>
+                      {/* <td
+                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                          router.push(`/admin/edit-profile/${item.id}`)
+                        }
+                      >
+                        <button className={styles.table_btn_approve}>
+                          Approve
+                        </button>
                       </td>
                       <td
                         style={{ cursor: 'pointer' }}
@@ -106,14 +84,10 @@ const ListTable = ({
                           router.push(`/admin/edit-profile/${item.id}`)
                         }
                       >
-                        <Image
-                          src={editIcon}
-                          width={15}
-                          height={15}
-                          layout="fixed"
-                          alt="delte-icon"
-                        />
-                      </td>
+                        <button className={styles.table_btn_disapprove}>
+                          Disapprove
+                        </button>
+                      </td> */}
                       <td
                         style={{ cursor: 'pointer' }}
                         onClick={() => handleDeleteItem(item.id)}
@@ -144,10 +118,4 @@ const ListTable = ({
   );
 };
 
-ListTable.proptypes = {
-  data: PropTypes.array,
-  loading: PropTypes.bool,
-  handleDeleteItem: PropTypes.func,
-};
-
-export default ListTable;
+export default ContentTable;

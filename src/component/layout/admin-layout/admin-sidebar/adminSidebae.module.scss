@@ -3,6 +3,13 @@
   min-height: 120vh;
   padding: 10% 10% 55% 10%;
   background: rgba(255, 255, 255, 0.03);
+  -webkit-transition: all 0.5s 0s ease;
+  -moz-transition: all 0.5s 0s ease;
+  -o-transition: all 0.5s 0s ease;
+  transition: all 0.5s 0s ease;
+  .sidebar_open_btn {
+    display: none;
+  }
   .logo_wrap {
     @include heading_9;
     font-weight: 500;
@@ -73,3 +80,45 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .openSideBar {
+    left: 0 !important;
+  }
+  .admin_sidebar_wrap {
+    left: -271px;
+    background-color: #05052c;
+    position: absolute;
+    padding: 10% 8% 5% 4%;
+    min-height: 107vh;
+    z-index: 99;
+    .openSideBar {
+      left: 0 !important;
+    }
+    .sidebar_open_btn {
+      position: absolute;
+      border: 2px white solid;
+      background: transparent;
+      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 20px;
+      right: 14px;
+      border-radius: 7px;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

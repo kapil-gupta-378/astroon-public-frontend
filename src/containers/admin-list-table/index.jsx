@@ -80,6 +80,11 @@ const AdminListTable = () => {
     setPageNumber((value) => value + 1);
   };
   const handleDeleteAdmin = async (id, comment) => {
+    const paramsObj = {
+      page: pageNumber,
+      limit: pageLimit,
+      role: role,
+    };
     const data = {
       comment: comment.toString(),
       description: id.toString(),
@@ -102,7 +107,7 @@ const AdminListTable = () => {
           progress: undefined,
         });
         setDeleteDialog(false);
-        dispatch(fetchAdminListData());
+        dispatch(fetchAdminListData(paramsObj));
       }
     } catch (error) {
       toast.error(error.response.data.message, {

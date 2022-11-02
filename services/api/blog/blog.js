@@ -18,9 +18,6 @@ export const deleteBlogDataApi = async (id) => {
   const xhr = await axios.request({
     method: 'delete',
     url: `${APP_URL}blog/${id}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -30,9 +27,6 @@ export const blogDataOperationApi = async (data) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}blog/list?${data}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -43,9 +37,6 @@ export const createBlogApi = async (data) => {
     method: 'post',
     url: `${APP_URL}blog`,
     data: data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
