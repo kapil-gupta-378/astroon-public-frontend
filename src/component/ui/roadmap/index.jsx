@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './roadmap.module.scss';
 import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
+import RoadmapMobileImage from '../../../../public/assets/images/roadmap_desktop.svg';
 
 const Roadmap = () => {
   return (
@@ -12,8 +13,13 @@ const Roadmap = () => {
             <h3>Roadmap</h3>
           </div>
           <div className={`${styles.roadmap_image} position-relative `}>
-            <Image src={RoadmapImage} alt="roadmap" />
+            <div className={styles.roadmap_desktop}>
+              <Image src={RoadmapImage} alt="roadmap" />
+            </div>
 
+            <div className={styles.roadmap_mobile}>
+              <Image src={RoadmapMobileImage} alt="roadmap" />
+            </div>
             <div className={`${styles.roadmap_text}`}>
               <p>2022</p>
               <p>
