@@ -11,17 +11,6 @@
     left: 17px;
     padding: 0px 24px 0px 12px;
     line-height: 16px;
-
-    // &::after {
-    //   content: ' ';
-    //   // background-color: inherit;
-    //   width: 136%;
-    //   height: 13px;
-    //   position: absolute;
-    //   left: -9px;
-    //   top: 5px;
-    //   z-index: -1;
-    // }
   }
   .corner_border {
     width: 100%;
@@ -34,7 +23,7 @@
     color: #fff;
     font-size: 13px;
     border-radius: 4px;
-    padding: 12px;
+    padding: 12px 28px;
 
     &::placeholder {
       color: #ffffff;
@@ -49,7 +38,7 @@
     border: 1px solid rgb(255, 255, 255, 0.3);
     color: #fff;
     border-radius: 4px;
-    padding: 12px;
+    padding: 12px 28px;
 
     &::placeholder {
       color: #ffffff;
@@ -65,7 +54,6 @@
       font-size: 12px;
     }
     .full_border {
-      padding: 10px;
     }
   }
 } /* 1024 */
@@ -74,7 +62,6 @@
 @media only screen and (max-width: 979px) {
   .input_wrap {
     .full_border {
-      padding: 8px;
       font-size: 13px;
     }
   }
@@ -95,7 +82,6 @@
       font-size: 12px;
     }
     .full_border {
-      padding: 10px;
       font-size: 11px;
     }
   }
@@ -106,7 +92,6 @@
       font-size: 10px;
     }
     .full_border {
-      padding: 8px;
       font-size: 9px;
     }
   }
@@ -117,7 +102,6 @@
       font-size: 9px;
     }
     .full_border {
-      padding: 7px;
       font-size: 8px;
     }
   }
