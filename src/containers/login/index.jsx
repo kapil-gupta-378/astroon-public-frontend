@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
-import Link from 'next/link';
 import styles from './login.module.scss';
 import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
@@ -148,12 +147,12 @@ const Login = () => {
                 <Button onClick={handleLogin}>Login Now</Button>
               </span>
             </div>
-            <p className={styles.not_member_yet}>
+            {/* <p className={styles.not_member_yet}>
               Not a member yet?{' '}
               <Link href="/sign-up">
                 <a>Register Now</a>
               </Link>
-            </p>
+            </p> */}
           </div>
           <div className={styles.right_wrap}>
             <Image src={loginUpRightImage} layout="responsive" alt="login" />

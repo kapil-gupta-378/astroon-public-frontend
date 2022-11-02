@@ -279,6 +279,7 @@ const ContactUs = (props) => {
                           float: 'right',
                           padding: '14px 30px',
                           marginBottom: 0,
+                          cursor: 'pointer',
                         }}
                       >
                         Upload File
@@ -286,7 +287,6 @@ const ContactUs = (props) => {
                     </div>
                     <input
                       style={{
-                        width: '435px',
                         height: '68px',
                         cursor: 'pointer',
                         fontSize: '100px',
