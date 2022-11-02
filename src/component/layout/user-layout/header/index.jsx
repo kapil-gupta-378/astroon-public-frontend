@@ -28,7 +28,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="user_header_wrap">
+    <div className={`user_header_wrap ${styles.header_wrapper}`}>
       <Navbar
         expanded={MobileNavExpended}
         collapseOnSelect={true}
@@ -73,18 +73,22 @@ const Header = () => {
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'blog'}>Blog</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                <Button
-                  data-content={isConnected ? 'Connected' : 'Connect Wallet'}
-                  kind="wallet-connect"
-                  onClick={() => setwalletConnetDialog(true)}
-                >
-                  <Image src={walletIcon} alt="wallet" />
-                </Button>
-              </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                <UserProfileDropDown />
-              </Nav.Item>
+              {!isConnected && (
+                <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                  <Button
+                    data-content={isConnected ? 'Connected' : 'Connect Wallet'}
+                    kind="wallet-connect"
+                    onClick={() => setwalletConnetDialog(true)}
+                  >
+                    <Image src={walletIcon} alt="wallet" />
+                  </Button>
+                </Nav.Item>
+              )}
+              {isConnected && (
+                <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                  <UserProfileDropDown />
+                </Nav.Item>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
