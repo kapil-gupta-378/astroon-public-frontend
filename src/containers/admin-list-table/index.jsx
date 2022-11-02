@@ -18,7 +18,7 @@ const AdminListTable = () => {
   const [searchKeyWord, setSearchKeyWord] = useState();
   const [pageNumber, setPageNumber] = useState();
   const [pageLimit, setPageLimit] = useState();
-  const [role, setRole] = useState('admin');
+  const [role, setRole] = useState('');
   const dispatch = useDispatch();
   const route = useRouter();
   const filterByOptions = [

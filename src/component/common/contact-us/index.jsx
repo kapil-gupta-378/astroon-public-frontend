@@ -268,7 +268,9 @@ const ContactUs = (props) => {
                           opacity: '0.5',
                         }}
                       >
-                        Add file or drop files here
+                        {attachment
+                          ? attachment.name
+                          : 'Add file or drop files here'}
                       </p>
                       <h6
                         style={{
@@ -284,7 +286,7 @@ const ContactUs = (props) => {
                     </div>
                     <input
                       style={{
-                        width: '297px',
+                        width: '435px',
                         height: '68px',
                         cursor: 'pointer',
                         fontSize: '100px',

@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: center;
-  margin-top: 50px;
+  margin-top: 10px;
   height: 559px;
   position: relative;
 
@@ -50,6 +50,8 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 80px;
     &::before {
       bottom: 10.5%;
       width: 40%;
@@ -65,8 +67,10 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 60px;
     &::before {
-      bottom: 18.5%;
+      bottom: 8%;
       width: 40%;
     }
     .animation_video {
@@ -79,8 +83,10 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 60px;
     &::before {
-      bottom: 18.5%;
+      bottom: 8%;
       width: 40%;
     }
     .animation_video {
@@ -93,8 +99,10 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 43px;
     &::before {
-      bottom: 24.5%;
+      bottom: 4%;
       width: 40%;
     }
     .animation_video {
@@ -108,7 +116,7 @@
     display: flex;
     align-items: center;
     &::before {
-      bottom: 27%;
+      bottom: 4%;
       width: 40%;
     }
     .animation_video {
@@ -121,8 +129,10 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 30px;
     &::before {
-      bottom: 30.5%;
+      bottom: -2.5%;
       width: 40%;
     }
     .animation_video {
@@ -135,8 +145,10 @@
   .video_border {
     display: flex;
     align-items: center;
+    height: auto;
+    padding: 25px;
     &::before {
-      bottom: 31.8%;
+      bottom: -6%;
       width: 40%;
     }
     .animation_video {
