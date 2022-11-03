@@ -12,7 +12,9 @@
   h3 {
     @include heading_2;
   }
-
+  .mobile_work_image {
+    display: none;
+  }
   .work_image {
     width: 90%;
     position: absolute;
@@ -81,34 +83,181 @@
 } /* 980 */
 @media only screen and (max-width: 979px) {
   .work_wrap {
+    height: 20%;
     .work_image {
-      width: 70%;
+      display: none;
+    }
+    .mobile_work_image {
+      width: 100%;
       top: 39px;
       left: 106px;
+      display: block;
+      text-align: center;
+
+      span {
+        margin: auto !important;
+        width: 300px !important;
+      }
     }
     .earn_text {
-      top: 154px;
-      left: -11px;
+      top: 160px;
+      left: 300px;
     }
     .learn_text {
-      top: 318px;
-      left: 155px;
+      top: 515px;
+      left: 295px;
     }
     .shop_text {
-      right: 96px;
-      top: 320px;
+      top: 895px;
+      right: 290px;
     }
     .trade_text {
-      top: 113px;
-      right: -53px;
+      top: 1190px;
+      right: 290px;
     }
   }
 } /* 768 */
 @media only screen and (max-width: 767px) {
+  .work_wrap {
+    height: 20%;
+    .work_image {
+      display: none;
+    }
+    .mobile_work_image {
+      width: 100%;
+      top: 39px;
+      left: 106px;
+      display: block;
+      text-align: center;
+
+      span {
+        margin: auto !important;
+        width: 300px !important;
+      }
+    }
+    .earn_text {
+      top: 160px;
+      left: 235px;
+    }
+    .learn_text {
+      top: 515px;
+      left: 240px;
+    }
+    .shop_text {
+      top: 895px;
+      right: 225px;
+    }
+    .trade_text {
+      top: 1190px;
+      right: 225px;
+    }
+  }
 } /* 650 */
 @media only screen and (max-width: 649px) {
+  .work_wrap {
+    height: 20%;
+    .work_image {
+      display: none;
+    }
+    .mobile_work_image {
+      width: 100%;
+      top: 39px;
+      left: 106px;
+      display: block;
+      text-align: center;
+
+      span {
+        margin: auto !important;
+        width: 300px !important;
+      }
+    }
+    .earn_text {
+      top: 160px;
+      left: 150px;
+    }
+    .learn_text {
+      top: 515px;
+      left: 150px;
+    }
+    .shop_text {
+      top: 895px;
+      right: 140px;
+    }
+    .trade_text {
+      top: 1190px;
+      right: 140px;
+    }
+  }
 } /* 480 */
 @media only screen and (max-width: 479px) {
+  .work_wrap {
+    height: 20%;
+    .work_image {
+      display: none;
+    }
+    .mobile_work_image {
+      width: 100%;
+      top: 39px;
+      left: 106px;
+      display: block;
+      text-align: center;
+
+      span {
+        margin: auto !important;
+        width: 300px !important;
+      }
+    }
+    .earn_text {
+      top: 160px;
+      left: 95px;
+    }
+    .learn_text {
+      top: 515px;
+      left: 95px;
+    }
+    .shop_text {
+      top: 895px;
+      right: 85px;
+    }
+    .trade_text {
+      top: 1190px;
+      right: 85px;
+    }
+  }
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .work_wrap {
+    height: 20%;
+    .work_image {
+      display: none;
+    }
+    .mobile_work_image {
+      width: 100%;
+      top: 39px;
+      left: 106px;
+      display: block;
+      text-align: center;
+
+      span {
+        margin: auto !important;
+        width: 300px !important;
+      }
+    }
+    .earn_text {
+      top: 160px;
+      left: 70px;
+    }
+    .learn_text {
+      top: 515px;
+      left: 70px;
+    }
+    .shop_text {
+      top: 895px;
+      right: 55px;
+    }
+    .trade_text {
+      top: 1190px;
+      right: 55px;
+    }
+  }
 } /* 320 */

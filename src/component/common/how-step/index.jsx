@@ -1,13 +1,26 @@
 import Image from 'next/image';
 import React from 'react';
-import workFlowImage from '../../../../public/assets/images/workflow.svg';
+import workFlowDesktopImage from '../../../../public/assets/images/workflow.svg';
+import workFlowMobileImage from '../../../../public/assets/images/workmobileflow.svg';
 import styles from './howStep.module.scss';
 const HowStep = ({ title }) => {
   return (
     <div className={styles.work_wrap}>
       <h3>{title}</h3>
       <div className={styles.work_image}>
-        <Image src={workFlowImage} layout="responsive" alt="image work" />
+        <Image
+          src={workFlowDesktopImage}
+          layout="responsive"
+          alt="image work"
+        />
+      </div>
+      <div className={styles.mobile_work_image}>
+        <Image
+          src={workFlowMobileImage}
+          layout="responsive"
+          alt="image work"
+          className={styles.mobile_image}
+        />
       </div>
       <p className={styles.earn_text}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
