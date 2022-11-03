@@ -1,5 +1,5 @@
 .blog_table_wrap {
-  padding: 3%;
+  padding: 3% 3% 11% 3%;
   .top_bar {
     display: flex;
     flex-direction: row;
@@ -19,3 +19,38 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .blog_table_wrap {
+    .top_bar {
+      padding: 20px;
+      justify-content: flex-start;
+      .top_bar_left {
+        width: 100%;
+      }
+      .top_bar_right {
+        width: 35%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 30px;
+        .filter_wrap {
+          width: 30%;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
