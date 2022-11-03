@@ -3,13 +3,22 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './adminSidebae.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
 
 const AdminSidebar = () => {
   const [openDropDown, setOpenDropDown] = useState(false);
   return (
     <aside className={styles.admin_sidebar_wrap}>
       <Link href={'/'}>
-        <h3 className={styles.logo_wrap}>Logo</h3>
+        <h3 className={styles.logo_wrap}>
+          <Image
+            src={logoIcon}
+            height={100}
+            width={150}
+            layout="fixed"
+            alt="logo"
+          />
+        </h3>
       </Link>
       <div className={styles.navigation_wrap}>
         <div>

@@ -9,6 +9,7 @@ import { useAccount, useConnectModal } from '@web3modal/react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 const Header = () => {
   const { open } = useConnectModal();
@@ -38,7 +39,15 @@ const Header = () => {
       >
         <Container>
           <Navbar.Brand>
-            <Link href={'/'}>Logo</Link>
+            <Link href={'/'}>
+              <Image
+                src={logoIcon}
+                height={100}
+                width={150}
+                layout="fixed"
+                alt="logo"
+              />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle
             onClick={() => setMobileNavExpended((value) => !value)}

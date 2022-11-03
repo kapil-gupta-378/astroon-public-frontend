@@ -6,8 +6,9 @@ import cardBackIcon from '../../../../public/assets/images/forword_icon.svg';
 import cardForwordIcon from '../../../../public/assets/images/backword_icon.svg';
 import Button from '../../common/button';
 import Slider from 'react-slick';
-
+import { useState } from 'react';
 const OurArtworks = () => {
+  const [slider, setSlider] = useState();
   const settings = {
     dots: false,
     infinite: true,
@@ -75,11 +76,20 @@ const OurArtworks = () => {
       },
     ],
   };
+
+  const next = () => {
+    slider.slickNext();
+  };
+
+  const previous = () => {
+    slider.slickPrev();
+  };
+
   return (
     <div className={`container ${styles.nft_card_wrap}`}>
       <h3 className={styles.nft_card_heading}>Our Artworks</h3>
       <div className={styles.nft_cards_wrap}>
-        <Slider {...settings}>
+        <Slider ref={(c) => (slider = c)} {...settings}>
           {[...Array(8).keys()].map((_, idx) => (
             <NFTCard key={idx} />
           ))}
@@ -87,7 +97,7 @@ const OurArtworks = () => {
       </div>
 
       <div className={styles.nft_card_navigation_btn}>
-        <button className={styles.back_btn}>
+        <button className={styles.back_btn} onClick={previous}>
           <Image
             src={cardForwordIcon}
             width={10}
@@ -97,7 +107,7 @@ const OurArtworks = () => {
           />
         </button>
         <Button kind="text">View More</Button>
-        <button className={styles.forword_btn}>
+        <button className={styles.forword_btn} onClick={next}>
           <Image
             src={cardBackIcon}
             width={10}

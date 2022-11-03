@@ -1,5 +1,6 @@
 @import '../../../../styles/typography.module';
 .team_wrap {
+  text-align: -webkit-center !important;
   .team_heading {
     @include heading_2;
     text-align: center;
@@ -34,6 +35,9 @@
 
 // 1024 -
 @media only screen and (max-width: 1199px) {
+  .team_wrap {
+    text-align: -webkit-center !important;
+  }
 }
 // 980 -
 @media only screen and (max-width: 1023px) {
