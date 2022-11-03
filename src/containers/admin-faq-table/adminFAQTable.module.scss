@@ -16,6 +16,10 @@
       align-items: center;
       justify-content: flex-end;
       gap: 30px;
+      .add_btn_wrap {
+        display: flex;
+        justify-content: end;
+      }
       .filter_wrap {
         width: 30%;
       }

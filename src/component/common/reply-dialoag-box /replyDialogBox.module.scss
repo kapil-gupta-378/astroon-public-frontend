@@ -14,7 +14,9 @@
     background: url('../../../../public/assets/images/dialogBackgorund.png');
 
     border-radius: 25px;
-    padding: 8px 38px;
+    padding: 39px 30px;
+    height: 596px;
+
     .modal_header {
       .dailog_title {
         @include heading_12;
