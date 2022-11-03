@@ -1,0 +1,163 @@
+@import '../../../styles/typography.module';
+.profile_wrap {
+  margin-top: 40px;
+  margin-bottom: 80px;
+  .user_profile_image_wrap {
+    .user_cover_image {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      background: #323154;
+      border-radius: 20px;
+      margin-bottom: 60px;
+      .profile_image {
+        position: absolute;
+        bottom: -19%;
+        left: 47%;
+      }
+      .Update_image_btn {
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_13;
+        background: transparent;
+        padding: 7px 17px;
+        position: absolute;
+        right: 26px;
+        bottom: 26px;
+      }
+    }
+
+    .wallet_address {
+      width: 15%;
+      border: 1px solid #ffffff;
+      border-radius: 268px;
+      margin: 0 auto;
+      padding: 6px 15px;
+      color: white;
+      font-size: 14px;
+      span {
+        margin-right: 10px !important;
+      }
+    }
+  }
+  .user_nft_wrapper {
+    margin-top: 60px;
+    .section_headeing {
+      @include heading_2;
+    }
+
+    .nft_list {
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: 28% 28% 28%;
+      grid-column-gap: 80px;
+      grid-row-gap: 35px;
+    }
+  }
+
+  .user_edit_profile_form_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 0px 15%;
+    margin-top: 32px;
+    .submit_btn {
+      margin: 0px auto;
+    }
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .user_cover_image {
+        .profile_image {
+          left: 46%;
+        }
+      }
+      .wallet_address {
+        width: 17%;
+      }
+    }
+    .user_nft_wrapper {
+      .nft_list {
+        grid-template-columns: 44% 44%;
+      }
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .wallet_address {
+        width: 23%;
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .profile_wrap {
+    .user_nft_wrapper {
+      .nft_list {
+        grid-template-columns: 100%;
+        justify-items: center;
+        align-items: center;
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .user_cover_image {
+        .profile_image {
+          left: 43%;
+        }
+      }
+      .wallet_address {
+        width: 33%;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .wallet_address {
+        width: 35%;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .user_cover_image {
+        .Update_image_btn {
+          bottom: 200px;
+        }
+      }
+      .wallet_address {
+        width: 45%;
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .profile_wrap {
+    .user_profile_image_wrap {
+      .user_cover_image {
+        .profile_image {
+          left: 35%;
+        }
+        .Update_image_btn {
+          bottom: 200px;
+        }
+      }
+      .wallet_address {
+        width: 52%;
+      }
+    }
+  }
+} /* 320 */

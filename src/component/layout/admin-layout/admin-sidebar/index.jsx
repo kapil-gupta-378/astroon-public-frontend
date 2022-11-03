@@ -3,6 +3,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './adminSidebar.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
@@ -13,7 +14,15 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
       }`}
     >
       <Link href={'/'}>
-        <h3 className={styles.logo_wrap}>Logo</h3>
+        <h3 className={styles.logo_wrap}>
+          <Image
+            src={logoIcon}
+            height={100}
+            width={150}
+            layout="fixed"
+            alt="logo"
+          />
+        </h3>
       </Link>
       <div className={styles.navigation_wrap}>
         <div onClick={() => setOpenSideBar(false)}>

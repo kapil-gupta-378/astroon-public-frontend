@@ -6,6 +6,7 @@ import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg'
 import logout from '../../../../../public/assets/images/logout.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
 
 const AdminHeader = ({ setOpenSideBar }) => {
   const router = useRouter();
@@ -17,7 +18,15 @@ const AdminHeader = ({ setOpenSideBar }) => {
     <div className={styles.admin_header_wrap}>
       <div className={styles.header_nav_wrap}>
         <div className={styles.header_left}>
-          <h3 className={styles.logo_wrap}>Logo</h3>
+          <div className={styles.logo_wrap}>
+            <Image
+              src={logoIcon}
+              width={100}
+              layout="fixed"
+              height={60}
+              alt="logo"
+            />
+          </div>
           <h3>Welcome Back</h3>
           <p>Hello Admin, Good Morning!</p>
         </div>

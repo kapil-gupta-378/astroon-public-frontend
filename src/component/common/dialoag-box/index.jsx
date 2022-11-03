@@ -49,7 +49,6 @@ const DialogBox = ({
                 />
               </div>
             )}
-
             <div className={styles.dialog_footer}>
               {leftButtonName && (
                 <button

@@ -55,6 +55,13 @@ export const getcontactUsDataDetailsApi = async (id) => {
 };
 
 export const replyByUserApi = async (data) => {
-  const xhr = await axios.post(`${APP_URL}contact-us/reply`, data);
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}contact-us/reply`,
+    data,
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token'),
+    },
+  });
   return xhr.data;
 };

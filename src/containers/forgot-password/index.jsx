@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
-import Link from 'next/link';
 import styles from './forgotpassword.module.scss';
 import loginUpRightImage from '../../../public/assets/images/forgot-password-page-icon.png';
 import TextInput from '../../component/common/text-input';
@@ -86,7 +85,7 @@ const ForgotPassword = () => {
         </div>
         <div className={styles.form_wrap}>
           <TextInput
-            handleType="text"
+            handleType="email"
             handleValue={email}
             handleOnChange={(e) => setEmail(e.target.value)}
             title="Email"
@@ -97,12 +96,12 @@ const ForgotPassword = () => {
         <div className={styles.btn_wrap}>
           <Button onClick={handleForgotPassword}>Submit</Button>
         </div>
-        <p className={styles.not_member_yet}>
+        {/* <p className={styles.not_member_yet}>
           Not a member yet?{' '}
           <Link href="/sign-up">
             <a>Register Now</a>
           </Link>
-        </p>
+        </p> */}
       </div>
       <div className={styles.right_wrap}>
         <Image src={loginUpRightImage} layout="responsive" alt="login" />

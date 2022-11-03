@@ -9,6 +9,8 @@ import { useAccount, useConnectModal } from '@web3modal/react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
+import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 const Header = () => {
   const { open } = useConnectModal();
   const { isConnected } = useAccount();
@@ -27,7 +29,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="user_header_wrap">
+    <div className={`user_header_wrap ${styles.header_wrapper}`}>
       <Navbar
         expanded={MobileNavExpended}
         collapseOnSelect={true}
@@ -37,7 +39,15 @@ const Header = () => {
       >
         <Container>
           <Navbar.Brand>
-            <Link href={'/'}>Logo</Link>
+            <Link href={'/'}>
+              <Image
+                src={logoIcon}
+                height={100}
+                width={150}
+                layout="fixed"
+                alt="logo"
+              />
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle
             onClick={() => setMobileNavExpended((value) => !value)}
@@ -72,15 +82,22 @@ const Header = () => {
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'blog'}>Blog</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                <Button
-                  data-content={isConnected ? 'Connected' : 'Connect Wallet'}
-                  kind="wallet-connect"
-                  onClick={() => setwalletConnetDialog(true)}
-                >
-                  <Image src={walletIcon} alt="wallet" />
-                </Button>
-              </Nav.Item>
+              {!isConnected && (
+                <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                  <Button
+                    data-content={isConnected ? 'Connected' : 'Connect Wallet'}
+                    kind="wallet-connect"
+                    onClick={() => setwalletConnetDialog(true)}
+                  >
+                    <Image src={walletIcon} alt="wallet" />
+                  </Button>
+                </Nav.Item>
+              )}
+              {isConnected && (
+                <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                  <UserProfileDropDown />
+                </Nav.Item>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

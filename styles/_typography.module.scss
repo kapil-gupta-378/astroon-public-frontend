@@ -99,6 +99,7 @@
   text-align: center;
   font-weight: 400;
 }
+
 @mixin heading_12 {
   font-size: 20px;
   color: $text-01-color;
@@ -106,4 +107,11 @@
   text-align: center;
   font-weight: 600;
   font-family: 'Rubik';
+}
+@mixin heading_13 {
+  font-size: 13px;
+  color: $text-01-color;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 400;
 }
