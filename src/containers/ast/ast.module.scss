@@ -171,4 +171,11 @@
 @media only screen and (max-width: 479px) {
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .ast_page_wrap {
+    .banner {
+      h1 {
+        font-size: 77px;
+      }
+    }
+  }
 } /* 320 */
