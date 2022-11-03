@@ -7,7 +7,7 @@ import cardForwordIcon from '../../../../public/assets/images/backword_icon.svg'
 import Slider from 'react-slick';
 import { useState } from 'react';
 const Team = () => {
-  const [slider, setSlider] = useState();
+  const [slider] = useState();
   const settings = {
     dots: false,
     infinite: true,

@@ -8,7 +8,7 @@ import Button from '../../common/button';
 import Slider from 'react-slick';
 import { useState } from 'react';
 const OurArtworks = () => {
-  const [slider, setSlider] = useState();
+  const [slider] = useState();
   const settings = {
     dots: false,
     infinite: true,
