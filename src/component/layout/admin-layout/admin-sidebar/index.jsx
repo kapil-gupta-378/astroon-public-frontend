@@ -1,31 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import styles from './adminSidebae.module.scss';
+import styles from './adminSidebar.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
-import hamburgerIcon from '../../../../../public/assets/images/hamburgurIcon.svg';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
-  const [openSideBar, setOpenSideBar] = useState(false);
   return (
     <aside
       className={`${styles.admin_sidebar_wrap} ${
         openSideBar && styles.openSideBar
       }`}
     >
-      <button
-        onClick={() => setOpenSideBar((value) => !value)}
-        className={styles.sidebar_open_btn}
-      >
-        <Image
-          src={hamburgerIcon}
-          width={30}
-          height={30}
-          layout={'fixed'}
-          alt={'hamburgerimag'}
-        />
-      </button>
       <Link href={'/'}>
         <h3 className={styles.logo_wrap}>Logo</h3>
       </Link>
@@ -129,10 +115,14 @@ const AdminSidebar = () => {
 
           {openDropDown && (
             <div className={styles.dropdown_wrap}>
-              <Link href={'/admin/general-settings'}>General Settings</Link>
-              <Link href={'/admin/general-information'}>
-                General Information
-              </Link>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/general-settings'}>General Settings</Link>
+              </div>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/general-information'}>
+                  General Information
+                </Link>
+              </div>
             </div>
           )}
         </div>
