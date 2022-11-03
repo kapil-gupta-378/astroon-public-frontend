@@ -39,3 +39,32 @@
     margin-top: 45px;
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .general_information_wrap {
+    margin-top: 20px;
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .general_information_wrap {
+    .body {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .flex_box_item {
+        width: 80%;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
