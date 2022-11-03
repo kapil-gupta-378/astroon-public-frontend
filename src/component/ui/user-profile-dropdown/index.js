@@ -6,7 +6,9 @@ import ethereumIconWhite from '../../../../public/assets/images/ethereum-icon-wh
 import styles from './userProfileDropdown.module.scss';
 import editIcon from '../../../../public/assets/images/edit-icon-white.svg';
 import logoutIcon from '../../../../public/assets/images/logout-icon-white.svg';
+import { useRouter } from 'next/router';
 const UserProfileDropDown = () => {
+  const router = useRouter();
   return (
     <div className={'user_profile_dropdown'}>
       <NavDropdown
@@ -22,9 +24,9 @@ const UserProfileDropDown = () => {
         id="basic-nav-dropdown"
       >
         <NavDropdown.Item>
-          <div className="item_div">
+          <div onClick={() => router.push('/profile/1')} className="item_div">
             <Image src={editIcon} width={14} height={14} alt="icon" />
-            <span>Edit Profile</span>
+            <span> Profile</span>
           </div>
         </NavDropdown.Item>
         <NavDropdown.Item>
