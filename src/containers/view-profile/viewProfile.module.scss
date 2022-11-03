@@ -106,3 +106,52 @@
     }
   }
 }
+
+// display: flex;
+// /* flex-direction: column; */
+// justify-content: center;
+// align-items: center;
+// gap: 119px;
+// flex-direction: column-reverse;
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .profile_details_wrap {
+    margin-bottom: 30px;
+    .profile_details_right {
+      .form_body {
+        flex-direction: column-reverse;
+        .name_input_wrap {
+          justify-content: center;
+          align-items: center;
+        }
+      }
+      .form_body {
+        gap: 40px;
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .profile_details_wrap {
+    padding: 8% 3% 3% 3%;
+    margin-bottom: 30px;
+    .profile_details_right {
+      .header {
+        h3 {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
