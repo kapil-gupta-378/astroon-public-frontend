@@ -144,9 +144,7 @@ const AdminListTable = () => {
             />
           </div>
           <div className={styles.add_btn_wrap}>
-            <Button onClick={() => route.push('addAdmin')}>
-              Add Admin Account
-            </Button>
+            <Button onClick={() => route.push('addAdmin')}>Add Account</Button>
           </div>
         </div>
       </section>
