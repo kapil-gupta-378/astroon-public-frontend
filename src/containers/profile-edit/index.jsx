@@ -106,6 +106,7 @@ const ProfileEdit = () => {
           draggable: true,
           progress: undefined,
         });
+        router.back();
       }
     } catch (error) {
       toast.error(error.response.data.message, {

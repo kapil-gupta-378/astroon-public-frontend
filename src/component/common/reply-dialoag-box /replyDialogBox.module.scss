@@ -10,13 +10,12 @@
   left: 0;
   background: rgba(3, 2, 35, 0.89);
   .modal_content {
-    width: 37%;
+    width: 47%;
     background: url('../../../../public/assets/images/dialogBackgorund.png');
-
+    background-repeat: no-repeat;
     border-radius: 25px;
     padding: 39px 30px;
-    height: 596px;
-
+    background-size: cover;
     .modal_header {
       .dailog_title {
         @include heading_12;
@@ -62,3 +61,65 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 60%;
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 80%;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 80%;
+      .input_wrap {
+        padding: 0px 10px 20px 10px;
+      }
+      .dialog_footer {
+        .dialog_left_btn {
+          padding: 7px 20px;
+        }
+        .dialog_right_btn {
+          padding: 7px 20px;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 80%;
+      .input_wrap {
+        padding: 0px 10px 20px 10px;
+      }
+      .dialog_body {
+        width: 100%;
+        margin: 0px 0px 26px 0px;
+      }
+      .dialog_footer {
+        .dialog_left_btn {
+          padding: 7px 20px;
+        }
+        .dialog_right_btn {
+          padding: 7px 20px;
+        }
+      }
+    }
+  }
+} /* 320 */

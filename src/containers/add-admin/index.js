@@ -72,6 +72,7 @@ const AddAdmin = () => {
           draggable: true,
           progress: undefined,
         });
+        router.back();
       } else {
         toast.success(res.message, {
           position: 'top-right',

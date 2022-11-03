@@ -122,6 +122,12 @@
     }
     .left_wrap {
       width: 100%;
+      .heading_log_wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
       .form_wrap {
         gap: 30px;
       }
