@@ -4,9 +4,6 @@ export const getGeneralSettingsApi = async () => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}general-settings`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr.data;
 };
@@ -16,9 +13,6 @@ export const postGeneralSettingsApi = async (data) => {
     method: 'post',
     url: `${APP_URL}general-settings`,
     data: data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr;
 };
@@ -28,9 +22,6 @@ export const updateGeneralSettingsApi = async (id, data) => {
     method: 'put',
     url: `${APP_URL}general-settings/${id}`,
     data,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
   return xhr.data;
 };

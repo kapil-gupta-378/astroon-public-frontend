@@ -32,78 +32,72 @@ const ContactUsDialogBox = ({
               />
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.email}
-                    handleOnChange={''}
                     title="Email Address"
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.username}
-                    handleOnChange={''}
                     title="Username"
                   />
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.reasonForContact}
-                    handleOnChange={''}
                     title="Reason for Contact"
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.subject}
-                    handleOnChange={''}
                     title="Subject"
                   />
                 </div>
               </div>
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.subject}
-                    handleOnChange={''}
                     title="Subject"
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.description}
-                    handleOnChange={''}
                     title="Description"
                   />
                 </div>
@@ -113,21 +107,17 @@ const ContactUsDialogBox = ({
               <div className={styles.text_msg}>
                 <h5>Messages</h5>
                 {finalData.replies.length !== 0 ? (
-                  finalData.replies.map((reply) => {
+                  finalData.replies.map((reply, idx) => {
                     return (
-                      <>
-                        <div className="col-12">
-                          <li>{reply.description}</li>
-                        </div>
-                      </>
+                      <div key={idx} className="col-12">
+                        <li>{reply.description}</li>
+                      </div>
                     );
                   })
                 ) : (
-                  <>
-                    <div className="col-12">
-                      <li>NA</li>
-                    </div>
-                  </>
+                  <div className="col-12">
+                    <li>NA</li>
+                  </div>
                 )}
               </div>
             </div>
@@ -139,13 +129,15 @@ const ContactUsDialogBox = ({
               >
                 Cancel
               </button>
-              <button
-                onClick={() => rightBlogButtonHandler(finalData.id)}
-                type="button"
-                className={styles.dialog_right_btn}
-              >
-                Reply
-              </button>
+              {finalData.status !== 'replied' && (
+                <button
+                  onClick={() => rightBlogButtonHandler(finalData.id)}
+                  type="button"
+                  className={styles.dialog_right_btn}
+                >
+                  Reply
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -27,6 +27,9 @@ const Header = () => {
       });
     }
   }, []);
+  useEffect(() => {
+    if (isConnected) setwalletConnetDialog(false);
+  }, [isConnected]);
 
   return (
     <div className={`user_header_wrap ${styles.header_wrapper}`}>

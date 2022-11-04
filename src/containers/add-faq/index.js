@@ -37,6 +37,7 @@ const AddFAQ = () => {
             draggable: true,
             progress: undefined,
           });
+          router.back();
         } else {
           toast.error(res.message, {
             position: 'top-right',

@@ -7,6 +7,7 @@ import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { loginUserApi } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
+import logoIcon from '../../../public/assets/images/Logo.png';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -106,8 +107,15 @@ const Login = () => {
       {isLogin ? (
         <div className={styles.login_wrap}>
           <div className={styles.left_wrap}>
-            <div>
-              <h1>Login Now</h1>
+            <div className={styles.heading_log_wrap}>
+              <Image
+                src={logoIcon}
+                width={150}
+                layout="fixed"
+                height={100}
+                alt="logo"
+              />
+              <h1>Login</h1>
             </div>
             <div className={styles.form_wrap}>
               <TextInput
@@ -146,7 +154,7 @@ const Login = () => {
 
             <div className={styles.btn_wrap}>
               <span>
-                <Button onClick={handleLogin}>Login Now</Button>
+                <Button onClick={handleLogin}>Login</Button>
               </span>
             </div>
             {/* <p className={styles.not_member_yet}>

@@ -43,10 +43,14 @@ const GeneralInformation = () => {
 
   const updateSettingsData = async () => {
     try {
+      let youtubeThumbnailresponse;
       const youtubeThumbnail = new FormData();
       youtubeThumbnail.append('file', homeVideoThumbnail);
-      const youtubeThumbnailresponse =
-        await uploadHomePageYoutubeThumbnailApi();
+      if (homeVideoThumbnail) {
+        youtubeThumbnailresponse = await uploadHomePageYoutubeThumbnailApi(
+          youtubeThumbnail,
+        );
+      }
       const data = {
         facebookUrl: facebookURL,
         twitterUrl: twitterURL,
@@ -89,6 +93,7 @@ const GeneralInformation = () => {
       <section className={styles.body}>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={facebookURL}
             handleOnChange={(e) => setFacebookURL(e.target.value)}
             title={'Facebook URL'}
@@ -96,6 +101,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={twitterURL}
             handleOnChange={(e) => setTwitterURL(e.target.value)}
             title={'Twitter URL'}
@@ -103,6 +109,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={discordURL}
             handleOnChange={(e) => setDiscordURL(e.target.value)}
             title={'Discord URL'}
@@ -110,6 +117,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={youtubeURL}
             handleOnChange={(e) => setYoutubeURL(e.target.value)}
             title={'Youtube URL'}
@@ -117,6 +125,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={emailLink}
             handleOnChange={(e) => setEmailLink(e.target.value)}
             title={'Website Name'}
@@ -124,6 +133,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={homeVideoLink}
             handleOnChange={(e) => setHomeVideoLink(e.target.value)}
             title={'Website Name'}

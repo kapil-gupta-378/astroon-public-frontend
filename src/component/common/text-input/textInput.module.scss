@@ -89,20 +89,12 @@
 @media only screen and (max-width: 479px) {
   .input_wrap {
     .corner_border_label {
-      font-size: 10px;
+      font-size: 13px;
     }
     .full_border {
-      font-size: 9px;
+      font-size: 12px;
     }
   }
 } /* 375 */
 @media only screen and (max-width: 374px) {
-  .input_wrap {
-    .corner_border_label {
-      font-size: 9px;
-    }
-    .full_border {
-      font-size: 8px;
-    }
-  }
 } /* 320 */

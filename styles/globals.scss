@@ -173,6 +173,7 @@ body {
     .css-26l3qy-menu {
       display: block;
       width: 100% !important;
+      z-index: 6;
     }
   }
 }
@@ -283,6 +284,7 @@ body {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    width: 68px;
     &:focus {
       box-shadow: unset !important;
       background-color: transparent !important;

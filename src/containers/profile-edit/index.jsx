@@ -106,6 +106,7 @@ const ProfileEdit = () => {
           draggable: true,
           progress: undefined,
         });
+        router.back();
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -130,91 +131,93 @@ const ProfileEdit = () => {
         </div>
       ) : (
         <>
-          <div className={styles.profile_details_right}>
-            <div onClick={() => router.back()} className={styles.header}>
-              <Image
-                src={backArrowIcon}
-                width={20}
-                height={20}
-                alt="backarrow"
-                layout="fixed"
-              />
-              <h3>Edit Account</h3>
-            </div>
-            <div className={styles.form_body}>
-              <div className={styles.name_input_wrap}>
-                <TextInput
-                  title={'First Name'}
-                  kind={'fullborder'}
-                  handleValue={firstName}
-                  handleType={'text'}
-                  handleOnChange={(e) => setFirstName(e.target.value)}
-                />
-                <TextInput
-                  title={'Last Name'}
-                  kind={'fullborder'}
-                  handleValue={lastName}
-                  handleType={'text'}
-                  handleOnChange={(e) => setLastName(e.target.value)}
-                />
-              </div>
-              <TextInput
-                title={'Username'}
-                kind={'fullborder'}
-                handleValue={userName}
-                handleType={'text'}
-                inputDiabled={true}
-                handleOnChange={(e) => setUseraName(e.target.value)}
-              />
-              <TextInput
-                title={'Email Address'}
-                kind={'fullborder'}
-                handleValue={email}
-                handleType={'email'}
-                inputDiabled={true}
-                handleOnChange={(e) => setEmail(e.target.value)}
-              />
-
-              <div className={styles.name_input_wrap}>
-                <FormSelect
-                  selectedOption={role}
-                  label={'Role'}
-                  options={rollSelectOptions}
-                  handleChange={(value) => setRole(value)}
-                />
-                <FormSelect
-                  selectedOption={status}
-                  label={'Status'}
-                  options={statusSelctOptions}
-                  handleChange={(value) => setStatus(value)}
-                />
-              </div>
-            </div>
-            <div className={styles.submit_button}>
-              <Button onClick={uploadDataToServer}>Submit</Button>
-            </div>
+          <div onClick={() => router.back()} className={styles.header}>
+            <Image
+              src={backArrowIcon}
+              width={20}
+              height={20}
+              alt="backarrow"
+              layout="fixed"
+            />
+            <h3>Edit Account</h3>
           </div>
-          <div className={styles.profile_details_left}>
-            <div className={styles.profile_details}>
-              <div className={styles.profile_image_wrap}>
-                <Image
-                  loader={ImageLoader}
-                  src={profileImage ? profileImage : defaltProfileImage}
-                  width={180}
-                  height={180}
-                  layout="fixed"
-                  alt="profile_image"
-                  priority
+          <div className={styles.profile_details_right_main}>
+            <div className={styles.profile_details_right}>
+              <div className={styles.form_body}>
+                <div className={styles.name_input_wrap}>
+                  <TextInput
+                    title={'First Name'}
+                    kind={'fullborder'}
+                    handleValue={firstName}
+                    handleType={'text'}
+                    handleOnChange={(e) => setFirstName(e.target.value)}
+                  />
+                  <TextInput
+                    title={'Last Name'}
+                    kind={'fullborder'}
+                    handleValue={lastName}
+                    handleType={'text'}
+                    handleOnChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
+                <TextInput
+                  title={'Username'}
+                  kind={'fullborder'}
+                  handleValue={userName}
+                  handleType={'text'}
+                  inputDiabled={true}
+                  handleOnChange={(e) => setUseraName(e.target.value)}
                 />
+                <TextInput
+                  title={'Email Address'}
+                  kind={'fullborder'}
+                  handleValue={email}
+                  handleType={'email'}
+                  inputDiabled={true}
+                  handleOnChange={(e) => setEmail(e.target.value)}
+                />
+
+                <div className={styles.name_input_wrap}>
+                  <FormSelect
+                    selectedOption={role}
+                    label={'Role'}
+                    options={rollSelectOptions}
+                    handleChange={(value) => setRole(value)}
+                  />
+                  <FormSelect
+                    selectedOption={status}
+                    label={'Status'}
+                    options={statusSelctOptions}
+                    handleChange={(value) => setStatus(value)}
+                  />
+                </div>
               </div>
-              <div className={styles.profile_upload_image_wrap}>
-                <Button onClick={uploadImageToProfiel}>Update Image</Button>
-                <input
-                  accept="image/*"
-                  ref={ImageInputRef}
-                  type="file"
-                  onChange={uploadNewProfileImage}
-                />
+              <div className={styles.submit_button}>
+                <Button onClick={uploadDataToServer}>Submit</Button>
+              </div>
+            </div>
+            <div className={styles.profile_details_left}>
+              <div className={styles.profile_details}>
+                <div className={styles.profile_image_wrap}>
+                  <Image
+                    loader={ImageLoader}
+                    src={profileImage ? profileImage : defaltProfileImage}
+                    width={180}
+                    height={180}
+                    layout="fixed"
+                    alt="profile_image"
+                    priority
+                  />
+                </div>
+                <div className={styles.profile_upload_image_wrap}>
+                  <Button onClick={uploadImageToProfiel}>Update Image</Button>
+                  <input
+                    accept="image/*"
+                    ref={ImageInputRef}
+                    type="file"
+                    onChange={uploadNewProfileImage}
+                  />
+                </div>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { forgotPasswordUserApi } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
+import logoIcon from '../../../public/assets/images/Logo.png';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -92,7 +93,14 @@ const ForgotPassword = () => {
   return (
     <div className={styles.forgot_password_wrap}>
       <div className={styles.left_wrap}>
-        <div>
+        <div className={styles.heading_log_wrap}>
+          <Image
+            src={logoIcon}
+            width={150}
+            layout="fixed"
+            height={100}
+            alt="logo"
+          />
           <h1>Forgot Your Password</h1>
           <p>
             Enter the email address associated with your

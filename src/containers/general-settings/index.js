@@ -40,7 +40,9 @@ const GeneralSettings = () => {
     }
   };
 
-  const updateSettingsData = async () => {
+  const updateSettingsData = async (e) => {
+    e.preventDefault();
+
     try {
       const { brandingLogoResponse, websiteLogoResponse } =
         await uploadImagetoServer();
@@ -69,16 +71,20 @@ const GeneralSettings = () => {
     }
   };
 
-  const uploadImagetoServer = async () => {
+  async function uploadImagetoServer() {
     try {
-      const brandingImageData = new FormData();
-      brandingImageData.append('file', brandingLogo);
-      const brandingLogoResponse = await uploadBrandingLogoApi(
-        brandingImageData,
-      );
-      const websiteLogoData = new FormData();
-      websiteLogoData.append('file', websiteLogo);
-      const websiteLogoResponse = await uploadWebsiteLogoApi(websiteLogoData);
+      let brandingLogoResponse;
+      let websiteLogoResponse;
+      if (brandingLogo) {
+        const brandingImageData = new FormData();
+        brandingImageData.append('file', brandingLogo);
+        brandingLogoResponse = await uploadBrandingLogoApi(brandingImageData);
+      }
+      if (websiteLogo) {
+        const websiteLogoData = new FormData();
+        websiteLogoData.append('file', websiteLogo);
+        websiteLogoResponse = await uploadWebsiteLogoApi(websiteLogoData);
+      }
 
       return {
         brandingLogoResponse: brandingLogoResponse.fileName,
@@ -87,69 +93,77 @@ const GeneralSettings = () => {
     } catch (error) {
       return error;
     }
-  };
+  }
 
   return (
     <main className={styles.GeneralSettings_wrap}>
-      <section className={styles.header}>
-        <div onClick={() => route.back()} className={styles.header_left}>
-          <Image
-            src={backArrowIcon}
-            width={20}
-            height={20}
-            alt="backarrow"
-            layout="fixed"
-          />
-          <h3>General Settings</h3>
-        </div>
-      </section>
-      <section className={styles.inputs_wrap}>
-        <div className={styles.flex_box_item}>
-          <TextInput
-            handleValue={websiteName}
-            handleOnChange={(e) => setWebsiteName(e.target.value)}
-            title={'Website Name'}
-          />
-        </div>
-        <div className={styles.flex_box_item}>
-          <TextInput
-            handleValue={websiteEmail}
-            handleOnChange={(e) => setWebsiteEmail(e.target.value)}
-            title={'Website Email'}
-          />
-        </div>
-        <div className={styles.flex_box_item}>
-          <TextInput
-            handleValue={adminEmail}
-            handleOnChange={(e) => setAdminEmail(e.target.value)}
-            title={'Admin Email'}
-          />
-        </div>
-        <div className={styles.flex_box_item}>
-          <FileInput
-            inputOnChange={(e) => setWebsiteLogo(e.target.files[0])}
-            title={'Website Logo'}
-            titleBackground={'#05052d'}
-          />
-        </div>
-        <div className={styles.flex_box_item}>
-          <FileInput
-            inputOnChange={(e) => setBrandingLogo(e.target.files[0])}
-            title={'Branding Logo'}
-            titleBackground={'#05052d'}
-          />
-        </div>
-        <div className={styles.flex_box_item}>
-          <TextInput
-            handleValue={brandingWebsite}
-            handleOnChange={(e) => setBrandingWebsite(e.target.value)}
-            title={'Branding Website'}
-          />
-        </div>
-      </section>
-      <section className={styles.footer_wrap}>
-        <Button onClick={updateSettingsData}>Submit</Button>
-      </section>
+      <form onSubmit={updateSettingsData}>
+        <section className={styles.header}>
+          <div onClick={() => route.back()} className={styles.header_left}>
+            <Image
+              src={backArrowIcon}
+              width={20}
+              height={20}
+              alt="backarrow"
+              layout="fixed"
+            />
+            <h3>General Settings</h3>
+          </div>
+        </section>
+        <section className={styles.inputs_wrap}>
+          <div className={styles.flex_box_item}>
+            <TextInput
+              height={'50px'}
+              handleValue={websiteName}
+              handleOnChange={(e) => setWebsiteName(e.target.value)}
+              title={'Website Name'}
+            />
+          </div>
+          <div className={styles.flex_box_item}>
+            <TextInput
+              height={'50px'}
+              handleValue={websiteEmail}
+              handleOnChange={(e) => setWebsiteEmail(e.target.value)}
+              title={'Website Email'}
+              handleType="email"
+            />
+          </div>
+          <div className={styles.flex_box_item}>
+            <TextInput
+              height={'50px'}
+              handleValue={adminEmail}
+              handleOnChange={(e) => setAdminEmail(e.target.value)}
+              title={'Admin Email'}
+              handleType="email"
+            />
+          </div>
+          <div className={styles.flex_box_item}>
+            <FileInput
+              inputOnChange={(e) => setWebsiteLogo(e.target.files[0])}
+              title={'Website Logo'}
+              titleBackground={'#05052d'}
+            />
+          </div>
+          <div className={styles.flex_box_item}>
+            <FileInput
+              inputOnChange={(e) => setBrandingLogo(e.target.files[0])}
+              title={'Branding Logo'}
+              titleBackground={'#05052d'}
+            />
+          </div>
+          <div className={styles.flex_box_item}>
+            <TextInput
+              height={'50px'}
+              handleValue={brandingWebsite}
+              handleOnChange={(e) => setBrandingWebsite(e.target.value)}
+              title={'Branding Website'}
+            />
+          </div>
+        </section>
+        <section className={styles.footer_wrap}>
+          <Button type="submit">Submit</Button>
+        </section>
+      </form>
       <ToastContainer />
     </main>
   );
