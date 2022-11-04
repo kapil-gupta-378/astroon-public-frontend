@@ -39,7 +39,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.email}
-                    handleOnChange={''}
                     title="Email Address"
                   />
                 </div>
@@ -51,7 +50,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.username}
-                    handleOnChange={''}
                     title="Username"
                   />
                 </div>
@@ -65,7 +63,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.reasonForContact}
-                    handleOnChange={''}
                     title="Reason for Contact"
                   />
                 </div>
@@ -77,7 +74,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.subject}
-                    handleOnChange={''}
                     title="Subject"
                   />
                 </div>
@@ -91,7 +87,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.subject}
-                    handleOnChange={''}
                     title="Subject"
                   />
                 </div>
@@ -103,7 +98,6 @@ const ContactUsDialogBox = ({
                     handleType={'text'}
                     kind="fullborder"
                     handleValue={finalData.description}
-                    handleOnChange={''}
                     title="Description"
                   />
                 </div>
@@ -113,21 +107,17 @@ const ContactUsDialogBox = ({
               <div className={styles.text_msg}>
                 <h5>Messages</h5>
                 {finalData.replies.length !== 0 ? (
-                  finalData.replies.map((reply) => {
+                  finalData.replies.map((reply, idx) => {
                     return (
-                      <>
-                        <div className="col-12">
-                          <li>{reply.description}</li>
-                        </div>
-                      </>
+                      <div key={idx} className="col-12">
+                        <li>{reply.description}</li>
+                      </div>
                     );
                   })
                 ) : (
-                  <>
-                    <div className="col-12">
-                      <li>NA</li>
-                    </div>
-                  </>
+                  <div className="col-12">
+                    <li>NA</li>
+                  </div>
                 )}
               </div>
             </div>

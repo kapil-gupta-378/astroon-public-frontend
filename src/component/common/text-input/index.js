@@ -61,7 +61,7 @@ TextInput.propTypes = {
   inputDiabled: PropTypes.bool,
   height: PropTypes.string,
   ElementName: PropTypes.string,
-  textarea: PropTypes.string,
+  textarea: PropTypes.bool,
 };
 TextInput.defaultProps = {
   kind: 'fullborder',
@@ -69,6 +69,7 @@ TextInput.defaultProps = {
   titleBackground: '#05052d',
   inputHeight: '50px',
   textarea: false,
+  handleOnChange: () => false,
 };
 
 export default TextInput;
