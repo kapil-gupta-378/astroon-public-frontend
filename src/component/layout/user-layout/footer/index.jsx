@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './footer.module.scss';
 import twitter from '../../../../../public/assets/images/twitter.svg';
 import insta from '../../../../../public/assets/images/instagram.svg';
@@ -9,10 +9,20 @@ import contact from '../../../../../public/assets/images/contact.svg';
 import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
 import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
+import { getGeneralInformationApi } from '../../../../../services/api/general-information/general-information';
 
 const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [data, setData] = useState({});
 
+  useEffect(() => {
+    fetchComponentData();
+  }, []);
+
+  const fetchComponentData = async () => {
+    const data = await getGeneralInformationApi();
+    setData(data.data);
+  };
   return (
     <div className={styles.footer_wrap}>
       <div className={`row container ${styles.container}`}>
@@ -35,11 +45,21 @@ const Footer = () => {
           >
             <Image src={privacyIcon} width={18} height={18} alt="contact" />
           </a>
-          <Image src={opensea} width={18} height={18} alt="opensea" />
-          <Image src={discord} width={18} height={18} alt="discord" />
-          <Image src={twitter} width={18} height={18} alt="twitter" />
-          <Image src={insta} width={18} height={18} alt="insta" />
-          <Image src={message} width={18} height={18} alt="message" />
+          <a target={'_blank'} href={`${data.facebookUrl}`} rel="noreferrer">
+            <Image src={opensea} width={18} height={18} alt="opensea" />
+          </a>
+          <a target={'_blank'} href={data.discordUrl} rel="noreferrer">
+            <Image src={discord} width={18} height={18} alt="discord" />
+          </a>
+          <a target={'_blank'} href={data.twitterUrl} rel="noreferrer">
+            <Image src={twitter} width={18} height={18} alt="twitter" />
+          </a>
+          <a target={'_blank'} href={data.twitterUrl} rel="noreferrer">
+            <Image src={insta} width={18} height={18} alt="insta" />
+          </a>
+          <a target={'_blank'} href={data.emailLink} rel="noreferrer">
+            <Image src={message} width={18} height={18} alt="message" />
+          </a>
         </div>
       </div>
       <ContactUs show={modalShow} onHide={() => setModalShow(false)} />
