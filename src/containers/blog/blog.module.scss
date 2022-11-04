@@ -18,6 +18,12 @@
       color: #fff;
       text-align: center;
     }
+    .item_center {
+      display: flex;
+      height: 80vh;
+      justify-content: center;
+      align-items: center;
+    }
   }
 
   .card_navigation_btn {

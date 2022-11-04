@@ -12,13 +12,39 @@ const ForgotPassword = () => {
 
   const handleForgotPassword = async () => {
     if (email) {
-      const data = {
-        email: email,
-      };
-      try {
-        const res = await forgotPasswordUserApi(data);
-        if (res.success) {
-          toast.success(res.message, {
+      if (
+        email.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        )
+      ) {
+        const data = {
+          email: email,
+        };
+        try {
+          const res = await forgotPasswordUserApi(data);
+          if (res.success) {
+            toast.success(res.message, {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          } else {
+            toast.error(res.message, {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        } catch (error) {
+          toast.error(error.response.data.message, {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -27,19 +53,21 @@ const ForgotPassword = () => {
             draggable: true,
             progress: undefined,
           });
-        } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          if (error.response.data.statusCode === 400) {
+            toast.error(error.response.data.message[0].errorDetail.isEmail, {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+          // throw error;
         }
-      } catch (error) {
-        toast.error(error.response.data.message, {
+      } else {
+        toast.error('Please enter valid email', {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -48,18 +76,6 @@ const ForgotPassword = () => {
           draggable: true,
           progress: undefined,
         });
-        if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-        // throw error;
       }
     } else {
       toast.error('Please Fill Email Feild', {

@@ -80,6 +80,11 @@
   }
 } /* 1024 */
 @media only screen and (max-width: 1023px) {
+  .work_wrap {
+    h3 {
+      font-size: 22px;
+    }
+  }
 } /* 980 */
 @media only screen and (max-width: 979px) {
   .work_wrap {
@@ -100,20 +105,19 @@
       }
     }
     .earn_text {
-      top: 160px;
-      left: 300px;
+      left: 40%;
     }
     .learn_text {
-      top: 515px;
-      left: 295px;
+      top: 38%;
+      left: 40%;
     }
     .shop_text {
-      top: 895px;
-      right: 290px;
+      top: 67%;
+      left: 40%;
     }
     .trade_text {
-      top: 1190px;
-      right: 290px;
+      top: 89%;
+      left: 40%;
     }
   }
 } /* 768 */
@@ -136,20 +140,16 @@
       }
     }
     .earn_text {
-      top: 160px;
-      left: 235px;
+      left: 37%;
     }
     .learn_text {
-      top: 515px;
-      left: 240px;
+      left: 37%;
     }
     .shop_text {
-      top: 895px;
-      right: 225px;
+      left: 37%;
     }
     .trade_text {
-      top: 1190px;
-      right: 225px;
+      left: 37%;
     }
   }
 } /* 650 */
@@ -172,20 +172,16 @@
       }
     }
     .earn_text {
-      top: 160px;
-      left: 150px;
+      left: 34%;
     }
     .learn_text {
-      top: 515px;
-      left: 150px;
+      left: 34%;
     }
     .shop_text {
-      top: 895px;
-      right: 140px;
+      left: 34%;
     }
     .trade_text {
-      top: 1190px;
-      right: 140px;
+      left: 34%;
     }
   }
 } /* 480 */
@@ -208,26 +204,25 @@
       }
     }
     .earn_text {
-      top: 160px;
-      left: 95px;
+      left: 29%;
     }
     .learn_text {
-      top: 515px;
-      left: 95px;
+      left: 29%;
     }
     .shop_text {
-      top: 895px;
-      right: 85px;
+      left: 29%;
     }
     .trade_text {
-      top: 1190px;
-      right: 85px;
+      left: 29%;
     }
   }
 } /* 375 */
 @media only screen and (max-width: 374px) {
   .work_wrap {
     height: 20%;
+    h3 {
+      font-size: 30px;
+    }
     .work_image {
       display: none;
     }
@@ -244,20 +239,16 @@
       }
     }
     .earn_text {
-      top: 160px;
-      left: 70px;
+      left: 25%;
     }
     .learn_text {
-      top: 515px;
-      left: 70px;
+      left: 25%;
     }
     .shop_text {
-      top: 895px;
-      right: 55px;
+      left: 25%;
     }
     .trade_text {
-      top: 1190px;
-      right: 55px;
+      left: 25%;
     }
   }
 } /* 320 */

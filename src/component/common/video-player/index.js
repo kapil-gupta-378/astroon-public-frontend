@@ -1,9 +1,10 @@
 import React, { useRef, useState } from 'react';
 import styles from './videoPlayer.module.scss';
 // import videoThumbnail from '../../../../public/assets/images/videoThumbnail.png';
-import VideoThumbnail from 'react-video-thumbnail';
+// import VideoThumbnail from 'react-video-thumbnail';
 const VideoPlayer = () => {
   const [playing, setPlaying] = useState(false);
+  // const [showThumb, setShowThumb] = useState(false);
 
   const videoRef = useRef(null);
 
@@ -11,6 +12,7 @@ const VideoPlayer = () => {
     if (control === 'play') {
       videoRef.current.play();
       setPlaying(true);
+      // setShowThumb(true);
     } else if (control === 'pause') {
       videoRef.current.pause();
       setPlaying(false);
@@ -21,7 +23,7 @@ const VideoPlayer = () => {
       <video className={styles.animation_video} ref={videoRef}>
         <source src="/assets/videos/videos.mp4" type="video/mp4" />
       </video>
-      {!playing && <VideoThumbnail videoUrl={'/assets/videos/videos.mp4'} />}
+      {/* {!showThumb && <VideoThumbnail videoUrl={'/assets/videos/videos.mp4'} />} */}
       <div className={styles.video_btn_wrp}>
         <button
           type="button"
