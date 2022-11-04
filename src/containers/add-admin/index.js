@@ -26,7 +26,7 @@ const AddAdmin = () => {
   const [userName, setUseraName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState();
+  const [role, setRole] = useState('');
   const [status, setStatus] = useState('');
   const [profileImage, setProfileImage] = useState();
   const [newUpadateImageURL, setNewUpadateImageURL] = useState();
@@ -49,7 +49,8 @@ const AddAdmin = () => {
     setNewUpadateImageURL(imageResponse.fileName);
   };
 
-  const uploadDataToServer = async () => {
+  async function uploadDataToServer(e) {
+    e.preventDefault();
     const data = {
       firstName: firstName,
       lastName: lastName,
@@ -85,32 +86,34 @@ const AddAdmin = () => {
         });
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (error.response) {
+        toast.error(error?.response?.data?.message[0].errorDetail.isNotEmpty, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
-  };
+  }
   return (
     <main className={styles.profile_details_wrap}>
-      <>
-        <div onClick={() => router.back()} className={styles.header}>
-          <Image
-            src={backArrowIcon}
-            width={20}
-            height={20}
-            alt="backarrow"
-            layout="fixed"
-          />
-          <h3>Add Account</h3>
-        </div>
-        <div className={styles.profile_details_right_main}>
-          <div className={styles.profile_details_right}>
+      <div onClick={() => router.back()} className={styles.header}>
+        <Image
+          src={backArrowIcon}
+          width={20}
+          height={20}
+          alt="backarrow"
+          layout="fixed"
+        />
+        <h3>Add Account</h3>
+      </div>
+      <div className={styles.profile_details_right_main}>
+        <div className={styles.profile_details_right}>
+          <form onSubmit={uploadDataToServer}>
             <div className={styles.form_body}>
               <div className={styles.name_input_wrap}>
                 <TextInput
@@ -120,6 +123,7 @@ const AddAdmin = () => {
                   handleValue={firstName}
                   handleType={'text'}
                   handleOnChange={(e) => setFirstName(e.target.value)}
+                  isRequired={true}
                 />
                 <TextInput
                   titleBackground={'#05052d'}
@@ -128,6 +132,7 @@ const AddAdmin = () => {
                   handleValue={lastName}
                   handleType={'text'}
                   handleOnChange={(e) => setLastName(e.target.value)}
+                  isRequired={true}
                 />
               </div>
               <TextInput
@@ -137,6 +142,7 @@ const AddAdmin = () => {
                 handleValue={userName}
                 handleType={'text'}
                 handleOnChange={(e) => setUseraName(e.target.value)}
+                isRequired={true}
               />
               <TextInput
                 titleBackground={'#05052d'}
@@ -145,6 +151,7 @@ const AddAdmin = () => {
                 handleValue={email}
                 handleType={'email'}
                 handleOnChange={(e) => setEmail(e.target.value)}
+                isRequired={true}
               />
               <TextInput
                 titleBackground={'#05052d'}
@@ -171,34 +178,34 @@ const AddAdmin = () => {
               </div>
             </div>
             <div className={styles.submit_button}>
-              <Button onClick={uploadDataToServer}>Submit</Button>
+              <Button type="submit">Submit</Button>
             </div>
-          </div>
-          <div className={styles.profile_details_left}>
-            <div className={styles.profile_details}>
-              <div className={styles.profile_image_wrap}>
-                <Image
-                  loader={ImageLoader}
-                  src={profileImage ? profileImage : defaltProfileImage}
-                  width={180}
-                  height={180}
-                  layout="fixed"
-                  alt="profile_image"
-                />
-              </div>
-              <div className={styles.profile_upload_image_wrap}>
-                <Button onClick={uploadImageToProfiel}>Upload Image</Button>
-                <input
-                  accept="image/*"
-                  ref={ImageInputRef}
-                  type="file"
-                  onChange={uploadNewProfileImage}
-                />
-              </div>
+          </form>
+        </div>
+        <div className={styles.profile_details_left}>
+          <div className={styles.profile_details}>
+            <div className={styles.profile_image_wrap}>
+              <Image
+                loader={ImageLoader}
+                src={profileImage ? profileImage : defaltProfileImage}
+                width={180}
+                height={180}
+                layout="fixed"
+                alt="profile_image"
+              />
+            </div>
+            <div className={styles.profile_upload_image_wrap}>
+              <Button onClick={uploadImageToProfiel}>Upload Image</Button>
+              <input
+                accept="image/*"
+                ref={ImageInputRef}
+                type="file"
+                onChange={uploadNewProfileImage}
+              />
             </div>
           </div>
         </div>
-      </>
+      </div>
       <ToastContainer />
     </main>
   );
