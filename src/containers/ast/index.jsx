@@ -111,26 +111,27 @@ const AST = () => {
       <HowStep title="How it Works?" />
       <div className={styles.tokenomics_wrap}>
         <h3>Tokenomics</h3>
-
-        <PieChart width={700} height={700}>
-          <Pie
-            data={pieChartData}
-            cx={350}
-            cy={300}
-            labelLine={true}
-            label={renderCustomizedLabel}
-            outerRadius={250}
-            fill="#8884d8"
-            dataKey="value"
-          >
-            {pieChartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
+        <ResponsiveContainer width="100%" height={500}>
+          <PieChart width={400} height={400}>
+            <Pie
+              data={pieChartData}
+              cx="50%"
+              cy="50%"
+              labelLine={true}
+              label={renderCustomizedLabel}
+              outerRadius={140}
+              fill="#8884d8"
+              dataKey="value"
+            >
+              {pieChartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
       </div>
     </section>
   );
