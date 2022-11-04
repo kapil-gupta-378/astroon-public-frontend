@@ -139,13 +139,15 @@ const ContactUsDialogBox = ({
               >
                 Cancel
               </button>
-              <button
-                onClick={() => rightBlogButtonHandler(finalData.id)}
-                type="button"
-                className={styles.dialog_right_btn}
-              >
-                Reply
-              </button>
+              {finalData.status !== 'replied' && (
+                <button
+                  onClick={() => rightBlogButtonHandler(finalData.id)}
+                  type="button"
+                  className={styles.dialog_right_btn}
+                >
+                  Reply
+                </button>
+              )}
             </div>
           </div>
         </div>
