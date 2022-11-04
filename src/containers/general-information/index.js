@@ -43,10 +43,14 @@ const GeneralInformation = () => {
 
   const updateSettingsData = async () => {
     try {
+      let youtubeThumbnailresponse;
       const youtubeThumbnail = new FormData();
       youtubeThumbnail.append('file', homeVideoThumbnail);
-      const youtubeThumbnailresponse =
-        await uploadHomePageYoutubeThumbnailApi();
+      if (homeVideoThumbnail) {
+        youtubeThumbnailresponse = await uploadHomePageYoutubeThumbnailApi(
+          youtubeThumbnail,
+        );
+      }
       const data = {
         facebookUrl: facebookURL,
         twitterUrl: twitterURL,

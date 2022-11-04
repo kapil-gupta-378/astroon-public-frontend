@@ -12,6 +12,7 @@ const TextInput = ({
   titleBackground,
   inputHeight,
   textarea,
+  isRequired,
 }) => {
   return (
     <div className={styles.input_wrap}>
@@ -25,6 +26,7 @@ const TextInput = ({
       )}
       {textarea ? (
         <textarea
+          required={isRequired}
           style={{ height: inputHeight }}
           disabled={inputDiabled}
           type={handleType}
@@ -37,6 +39,7 @@ const TextInput = ({
         />
       ) : (
         <input
+          required={isRequired}
           style={{ height: inputHeight }}
           disabled={inputDiabled}
           type={handleType}
@@ -61,7 +64,8 @@ TextInput.propTypes = {
   inputDiabled: PropTypes.bool,
   height: PropTypes.string,
   ElementName: PropTypes.string,
-  textarea: PropTypes.string,
+  textarea: PropTypes.bool,
+  isRequired: PropTypes.bool,
 };
 TextInput.defaultProps = {
   kind: 'fullborder',
@@ -69,6 +73,8 @@ TextInput.defaultProps = {
   titleBackground: '#05052d',
   inputHeight: '50px',
   textarea: false,
+  handleOnChange: () => false,
+  isRequired: false,
 };
 
 export default TextInput;
