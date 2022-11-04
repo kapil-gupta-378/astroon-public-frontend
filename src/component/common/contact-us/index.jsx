@@ -11,6 +11,7 @@ import {
 } from '../../../../services/api/contactUs';
 import { toast, ToastContainer } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
+import { useRouter } from 'next/router';
 
 const ContactUs = (props) => {
   const [email, setEmail] = useState('');
@@ -20,6 +21,7 @@ const ContactUs = (props) => {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     getResonForContact();
@@ -100,9 +102,8 @@ const ContactUs = (props) => {
               draggable: true,
               progress: undefined,
             });
-            setTimeout(() => {
-              props.onHide();
-            }, 2000);
+            props.onHide();
+            router.push('/thank-you');
           } else {
             toast.error(res.message, {
               position: 'top-right',
@@ -282,7 +283,7 @@ const ContactUs = (props) => {
                           cursor: 'pointer',
                         }}
                       >
-                        Upload File
+                        {attachment ? 'Change File' : 'Upload File'}
                       </h6>
                     </div>
                     <input

@@ -136,12 +136,14 @@ const Login = () => {
               />
             </div>
             <div className={styles.remember_me_btn}>
-              <input
-                onChange={isRememberMe}
-                className={styles.check_btn}
-                type="checkbox"
-              />
-              <span className={styles.remember_me}>Remember Me</span>
+              <div className={styles.inline}>
+                <input
+                  onChange={isRememberMe}
+                  className={styles.check_btn}
+                  type="checkbox"
+                />
+                <span className={styles.remember_me}>Remember Me</span>
+              </div>
               <span
                 className={styles.forget_pass_text}
                 onClick={redirectToForgot}

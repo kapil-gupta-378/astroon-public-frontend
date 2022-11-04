@@ -83,7 +83,7 @@ const Header = () => {
                 <Link href={'/gallery'}>Gallery</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                <Link href={'blog'}>Blog</Link>
+                <Link href={'/blog'}>Blog</Link>
               </Nav.Item>
               {!isConnected && (
                 <Nav.Item onClick={() => setMobileNavExpended(false)}>

@@ -14,6 +14,7 @@ const NFTCard = () => {
             height={283}
             alt="img"
             layout="fixed"
+            priority
           />
         </div>
         <div className={styles.img_nft_card}>
@@ -23,6 +24,7 @@ const NFTCard = () => {
             height={287}
             layout="fixed"
             alt="nft_card"
+            priority
           />
         </div>
       </div>

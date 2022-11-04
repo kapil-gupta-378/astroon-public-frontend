@@ -26,6 +26,7 @@
       outline: none;
       border: none;
       height: 100%;
+      opacity: 50%;
     }
     .forword_btn {
       height: 100%;
@@ -57,19 +58,31 @@
   .nft_card_wrap {
     padding: 0px;
     .nft_card_navigation_btn {
-      margin: -45px 0px 80px 0px;
+      margin: 45px 0px 55px 0px;
     }
   }
 } /* 650 */
 @media only screen and (max-width: 649px) {
   .nft_card_wrap {
     padding: 0px;
+    .nft_card_navigation_btn {
+      margin: 45px 15px 40px 15px;
+    }
   }
 } /* 480 */
 @media only screen and (max-width: 479px) {
   .nft_card_wrap {
     padding: 0px;
+    .nft_card_navigation_btn {
+      margin: 45px 5px 40px 5px;
+    }
   }
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .nft_card_wrap {
+    padding: 0px;
+    .nft_card_navigation_btn {
+      margin: 30px -4px 30px -4px;
+    }
+  }
 } /* 320 */

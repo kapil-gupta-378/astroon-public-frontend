@@ -73,6 +73,10 @@
         margin-left: 10px;
         color: #9d9ca3;
       }
+      .inline {
+        display: flex;
+        justify-content: space-between;
+      }
     }
   }
   .right_wrap {

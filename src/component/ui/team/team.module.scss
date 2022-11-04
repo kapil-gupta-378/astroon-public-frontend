@@ -15,20 +15,22 @@
   .card_navigation_btn {
     margin: 55px 0px 80px 0px;
     text-align: center;
-    .back_btn {
-      background: rgba(162, 70, 211, 0.3);
+    .disable_btn {
+      background: #a246d3;
       border-radius: 8px;
       padding: 6px 24px;
       outline: none;
       border: none;
       margin-right: 18px;
+      opacity: 50%;
     }
-    .forword_btn {
+    .enable_btn {
       background: #7d13b6;
       border-radius: 8px;
       padding: 6px 24px;
       outline: none;
       border: none;
+      margin-right: 18px;
     }
   }
 }

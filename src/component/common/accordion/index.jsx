@@ -21,7 +21,7 @@ const Accordion = ({ data, id }) => {
           id={`collapse${id}`}
           className={`accordion-collapse collapse ${styles.accordion_body_wrap}`}
           aria-labelledby={`heading${id}`}
-          data-bs-parent="#accordionExample"
+          // data-bs-parent="#accordionExample"
         >
           <div className={styles.accordion_body}>{data.description}</div>
         </div>

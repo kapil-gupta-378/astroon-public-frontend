@@ -52,8 +52,10 @@ const Blog = () => {
             <h3 className={styles.data_not_found}>Data Not Found</h3>
           )
         ) : (
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
+          <div className={styles.item_center}>
+            <div className="spinner-border text-primary" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         )}
       </div>

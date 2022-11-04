@@ -13,6 +13,7 @@ const Card = () => {
             height={283}
             alt="img"
             layout="fixed"
+            priority
           />
         </div>
         <div className={styles.img_card}>
@@ -22,6 +23,7 @@ const Card = () => {
             height={287}
             layout="fixed"
             alt="card_avatar"
+            priority
           />
         </div>
       </div>
