@@ -5,12 +5,64 @@
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
+
   flex-direction: row;
   .left_wrap {
     width: 22.83%;
+    -webkit-transition: all 0.5s 0s ease;
+    -moz-transition: all 0.5s 0s ease;
+    -o-transition: all 0.5s 0s ease;
+    transition: all 0.5s 0s ease;
   }
   .right_wrap {
     // overflow: scroll;
     width: 77.16%;
+    min-height: 100vh;
   }
 }
+
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .admin_layout_wrap {
+    overflow: hidden;
+    position: relative;
+    .openSideBar {
+      right: 0px !important;
+    }
+    .left_wrap {
+      width: 33%;
+      padding: 3% 4% 5% 4%;
+      right: -347px;
+      top: 100px;
+      background-color: #05052c;
+      position: absolute;
+      min-height: 130vh;
+      z-index: 99;
+    }
+    .right_wrap {
+      width: 100%;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .admin_layout_wrap {
+    .left_wrap {
+      width: 49%;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .admin_layout_wrap {
+    .left_wrap {
+      right: -388px;
+      width: 80%;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

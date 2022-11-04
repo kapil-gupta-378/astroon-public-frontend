@@ -27,9 +27,6 @@ export const getContactUsDataApi = async (page, limit) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}contact-us`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
     params: {
       page: page,
       limit: limit,
@@ -43,9 +40,6 @@ export const contactUsDataOperationApi = async (data) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}contact-us?${data}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;
@@ -55,9 +49,6 @@ export const getcontactUsDataDetailsApi = async (id) => {
   const xhr = await axios.request({
     method: 'get',
     url: `${APP_URL}contact-us/${id}`,
-    headers: {
-      Authorization: 'Bearer ' + localStorage.getItem('token'),
-    },
   });
 
   return xhr.data;

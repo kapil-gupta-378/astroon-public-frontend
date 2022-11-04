@@ -1,14 +1,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import styles from './adminSidebae.module.scss';
+import styles from './adminSidebar.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
   return (
-    <aside className={styles.admin_sidebar_wrap}>
+    <aside
+      className={`${styles.admin_sidebar_wrap} ${
+        openSideBar && styles.openSideBar
+      }`}
+    >
       <Link href={'/'}>
         <h3 className={styles.logo_wrap}>
           <Image
@@ -21,7 +25,7 @@ const AdminSidebar = () => {
         </h3>
       </Link>
       <div className={styles.navigation_wrap}>
-        <div>
+        <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -31,7 +35,7 @@ const AdminSidebar = () => {
           />
           <Link href="/admin/admin-management">Admin Management</Link>
         </div>
-        {/* <div>
+        <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -39,9 +43,9 @@ const AdminSidebar = () => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/management">Content Management</Link>
-        </div> */}
-        <div>
+          <Link href="/admin/content-management">Content Management</Link>
+        </div>
+        <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -51,7 +55,7 @@ const AdminSidebar = () => {
           />
           <Link href="/admin/blog">Blog</Link>
         </div>
-        <div>
+        <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -63,7 +67,7 @@ const AdminSidebar = () => {
             Client Inquiries & Support Request
           </Link>
         </div>
-        <div>
+        <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -120,10 +124,14 @@ const AdminSidebar = () => {
 
           {openDropDown && (
             <div className={styles.dropdown_wrap}>
-              <Link href={'/admin/general-settings'}>General Settings</Link>
-              <Link href={'/admin/general-information'}>
-                General Information
-              </Link>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/general-settings'}>General Settings</Link>
+              </div>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/general-information'}>
+                  General Information
+                </Link>
+              </div>
             </div>
           )}
         </div>

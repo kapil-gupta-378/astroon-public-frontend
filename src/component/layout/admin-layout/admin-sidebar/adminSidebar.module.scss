@@ -3,6 +3,10 @@
   min-height: 120vh;
   padding: 10% 10% 55% 10%;
   background: rgba(255, 255, 255, 0.03);
+
+  .sidebar_open_btn {
+    display: none;
+  }
   .logo_wrap {
     @include heading_9;
     font-weight: 500;
@@ -73,3 +77,29 @@
     }
   }
 }
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .admin_sidebar_wrap {
+    background-color: unset;
+    position: absolute;
+    padding: 10% 8% 5% 4%;
+    min-height: 107vh;
+    z-index: 99;
+    .logo_wrap {
+      display: none;
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

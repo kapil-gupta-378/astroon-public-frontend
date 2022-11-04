@@ -32,7 +32,7 @@ const ContactUsDialogBox = ({
               />
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -44,7 +44,7 @@ const ContactUsDialogBox = ({
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -58,7 +58,7 @@ const ContactUsDialogBox = ({
               </div>
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -70,7 +70,7 @@ const ContactUsDialogBox = ({
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -84,7 +84,7 @@ const ContactUsDialogBox = ({
               </div>
             </div>
             <div className="row">
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -96,7 +96,7 @@ const ContactUsDialogBox = ({
                   />
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}

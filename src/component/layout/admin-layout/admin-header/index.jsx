@@ -5,8 +5,10 @@ import styles from './adminHeader.module.scss';
 import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg';
 import logout from '../../../../../public/assets/images/logout.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
+import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
+import logoIcon from '../../../../../public/assets/images/Logo.png';
 
-const AdminHeader = () => {
+const AdminHeader = ({ setOpenSideBar }) => {
   const router = useRouter();
   const Logout = () => {
     localStorage.clear();
@@ -16,6 +18,15 @@ const AdminHeader = () => {
     <div className={styles.admin_header_wrap}>
       <div className={styles.header_nav_wrap}>
         <div className={styles.header_left}>
+          <div className={styles.logo_wrap}>
+            <Image
+              src={logoIcon}
+              width={100}
+              layout="fixed"
+              height={60}
+              alt="logo"
+            />
+          </div>
           <h3>Welcome Back</h3>
           <p>Hello Admin, Good Morning!</p>
         </div>
@@ -43,6 +54,19 @@ const AdminHeader = () => {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+
+          <button
+            onClick={() => setOpenSideBar((value) => !value)}
+            className={styles.sidebar_open_btn}
+          >
+            <Image
+              src={hamburgerIcon}
+              width={20}
+              height={20}
+              layout={'fixed'}
+              alt={'hamburgerimag'}
+            />
+          </button>
         </div>
       </div>
     </div>

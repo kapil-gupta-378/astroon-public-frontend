@@ -106,6 +106,7 @@ const GeneralSettings = () => {
       <section className={styles.inputs_wrap}>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={websiteName}
             handleOnChange={(e) => setWebsiteName(e.target.value)}
             title={'Website Name'}
@@ -113,6 +114,7 @@ const GeneralSettings = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={websiteEmail}
             handleOnChange={(e) => setWebsiteEmail(e.target.value)}
             title={'Website Email'}
@@ -120,6 +122,7 @@ const GeneralSettings = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={adminEmail}
             handleOnChange={(e) => setAdminEmail(e.target.value)}
             title={'Admin Email'}
@@ -141,6 +144,7 @@ const GeneralSettings = () => {
         </div>
         <div className={styles.flex_box_item}>
           <TextInput
+            height={'50px'}
             handleValue={brandingWebsite}
             handleOnChange={(e) => setBrandingWebsite(e.target.value)}
             title={'Branding Website'}

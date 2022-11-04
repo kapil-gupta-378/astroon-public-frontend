@@ -67,7 +67,7 @@ TextInput.defaultProps = {
   kind: 'fullborder',
   inputDiabled: false,
   titleBackground: '#05052d',
-  height: '50px',
+  inputHeight: '50px',
   textarea: false,
 };
 
