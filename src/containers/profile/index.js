@@ -7,9 +7,11 @@ import NFTCard from '../../component/common/nft-card';
 import { useRouter } from 'next/router';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
+import { useAccount } from '@web3modal/react';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 const Profile = () => {
   const route = useRouter();
-
+  const { address } = useAccount();
   return (
     <main className={`container ${styles.profile_wrap}`}>
       <section>
@@ -22,11 +24,19 @@ const Profile = () => {
               Add/Update Cover
             </button>
           </div>
-
-          <div className={styles.wallet_address}>
-            <Image src={ethIconWhite} width={13} height={13} alt="eth" />
-            isjsdf8994e....
-          </div>
+          <OverlayTrigger
+            placement={'auto'}
+            overlay={
+              <Tooltip>
+                <strong>{address}</strong>.
+              </Tooltip>
+            }
+          >
+            <div className={styles.wallet_address}>
+              <Image src={ethIconWhite} width={13} height={13} alt="eth" />
+              {`${address.slice(0, 9)}...`}
+            </div>
+          </OverlayTrigger>
         </div>
       </section>
 
