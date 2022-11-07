@@ -5,9 +5,9 @@ import styles from './login.module.scss';
 import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { loginUserApi } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
 import logoIcon from '../../../public/assets/images/Logo.png';
+import { loginUserApi } from '../../../services/api/admin';
 
 const Login = () => {
   const [username, setUsername] = useState('');
