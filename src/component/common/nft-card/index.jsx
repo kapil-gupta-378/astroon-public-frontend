@@ -1,23 +1,24 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './nftcard.module.scss';
-import cardback from '../../../../public/assets/images/card_back.svg';
 
-const NFTCard = () => {
+const NFTCard = ({ nftData }) => {
+  const ImageLoader = ({ src }) => {
+    return `${src}`;
+  };
   return (
-    <div className={`container ${styles.nft_card_wrap}`}>
+    <div className={`${styles.nft_card_wrap}`}>
       <div className={styles.nft_card_img_wrap}>
         <div className={styles.backgroud_nft_card}>
           <Image
-            src={cardback}
-            width={420}
-            height={283}
+            loader={ImageLoader}
+            src={nftData.image_thumbnail_url}
             alt="img"
-            layout="fixed"
+            layout="fill"
             priority
           />
         </div>
-        <div className={styles.img_nft_card}>
+        {/* <div className={styles.img_nft_card}>
           <Image
             src={'/assets/images/nft_card.svg'}
             width={322}
@@ -26,7 +27,7 @@ const NFTCard = () => {
             alt="nft_card"
             priority
           />
-        </div>
+        </div> */}
       </div>
       <div className={styles.nft_card_sec}>
         <div className={styles.nft_card_art}>
@@ -42,9 +43,16 @@ const NFTCard = () => {
               />
             </div>
 
-            <h6>Art #1234</h6>
+            <h6>{nftData.name}</h6>
           </div>
-          <button className={styles.opensea_btn}>View on Opensea</button>
+          <a
+            href={nftData.permalink}
+            target="_blank"
+            className={styles.opensea_btn}
+            rel="noreferrer"
+          >
+            View on Opensea
+          </a>
         </div>
         <div className={styles.nft_card_price}>
           <h5>0.207 ETH</h5>
