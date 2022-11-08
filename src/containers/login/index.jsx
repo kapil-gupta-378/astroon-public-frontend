@@ -26,7 +26,8 @@ const Login = () => {
     }
   }, []);
 
-  const handleLogin = async () => {
+  async function handleLogin(e) {
+    e.preventDefault();
     if (username && password) {
       const data = {
         userName: username,
@@ -91,7 +92,7 @@ const Login = () => {
         progress: undefined,
       });
     }
-  };
+  }
   const redirectToForgot = () => {
     Router.push('forgot-password');
   };
@@ -105,70 +106,72 @@ const Login = () => {
   return (
     <React.Fragment>
       {isLogin ? (
-        <div className={styles.login_wrap}>
-          <div className={styles.left_wrap}>
-            <div className={styles.heading_log_wrap}>
-              <Image
-                src={logoIcon}
-                width={150}
-                layout="fixed"
-                height={100}
-                alt="logo"
-              />
-              <h1>Login</h1>
-            </div>
-            <div className={styles.form_wrap}>
-              <TextInput
-                handleType="text"
-                handleValue={username}
-                handleOnChange={(e) => setUsername(e.target.value)}
-                title="Username/Email"
-                placeHolder="Enter your username/email"
-                kind="fullborder"
-              />
-              <TextInput
-                handleType="password"
-                handleValue={password}
-                handleOnChange={(e) => setPassword(e.target.value)}
-                title="Password"
-                placeHolder="Enter your password"
-                kind="fullborder"
-              />
-            </div>
-            <div className={styles.remember_me_btn}>
-              <div className={styles.inline}>
-                <input
-                  onChange={isRememberMe}
-                  className={styles.check_btn}
-                  type="checkbox"
+        <form onSubmit={handleLogin}>
+          <div className={styles.login_wrap}>
+            <div className={styles.left_wrap}>
+              <div className={styles.heading_log_wrap}>
+                <Image
+                  src={logoIcon}
+                  width={150}
+                  layout="fixed"
+                  height={100}
+                  alt="logo"
                 />
-                <span className={styles.remember_me}>Remember Me</span>
+                <h1>Login</h1>
               </div>
-              <span
-                className={styles.forget_pass_text}
-                onClick={redirectToForgot}
-              >
-                Forgot Password?
-              </span>
-            </div>
+              <div className={styles.form_wrap}>
+                <TextInput
+                  handleType="text"
+                  handleValue={username}
+                  handleOnChange={(e) => setUsername(e.target.value)}
+                  title="Username/Email"
+                  placeHolder="Enter your username/email"
+                  kind="fullborder"
+                />
+                <TextInput
+                  handleType="password"
+                  handleValue={password}
+                  handleOnChange={(e) => setPassword(e.target.value)}
+                  title="Password"
+                  placeHolder="Enter your password"
+                  kind="fullborder"
+                />
+              </div>
+              <div className={styles.remember_me_btn}>
+                <div className={styles.inline}>
+                  <input
+                    onChange={isRememberMe}
+                    className={styles.check_btn}
+                    type="checkbox"
+                  />
+                  <span className={styles.remember_me}>Remember Me</span>
+                </div>
+                <span
+                  className={styles.forget_pass_text}
+                  onClick={redirectToForgot}
+                >
+                  Forgot Password?
+                </span>
+              </div>
 
-            <div className={styles.btn_wrap}>
-              <span>
-                <Button onClick={handleLogin}>Login</Button>
-              </span>
-            </div>
-            {/* <p className={styles.not_member_yet}>
+              <div className={styles.btn_wrap}>
+                <span>
+                  <Button type="submit">Login</Button>
+                </span>
+              </div>
+              {/* <p className={styles.not_member_yet}>
               Not a member yet?{' '}
               <Link href="/sign-up">
                 <a>Register Now</a>
               </Link>
             </p> */}
+            </div>
+            <div className={styles.right_wrap}>
+              <Image src={loginUpRightImage} layout="responsive" alt="login" />
+            </div>
+            <ToastContainer />
           </div>
-          <div className={styles.right_wrap}>
-            <Image src={loginUpRightImage} layout="responsive" alt="login" />
-          </div>
-          <ToastContainer />
-        </div>
+        </form>
       ) : (
         ''
       )}
