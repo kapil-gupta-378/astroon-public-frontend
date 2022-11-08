@@ -128,3 +128,12 @@ export const resetPasswordUserApi = async (data, resetPasswordToken) => {
 
   return xhr.data;
 };
+
+export const getCurrentLoginAdminData = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}users/profile`,
+  });
+
+  return xhr.data;
+};

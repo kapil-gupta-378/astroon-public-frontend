@@ -30,9 +30,24 @@ const Profile = () => {
   const { address } = route.query;
   const imageInputImageRef = useRef();
   const coverImageInputImageRef = useRef();
+  const { isUserConnected } = useSelector((state) => state.walletReducer);
   useEffect(() => {
     fetchUserData();
   }, []);
+  useEffect(() => {
+    if (!isUserConnected) {
+      toast.error('Please connect your wallet', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      route.push('/');
+    }
+  }, [isUserConnected]);
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
@@ -113,159 +128,165 @@ const Profile = () => {
     coverImageInputImageRef.current.click();
   };
   return (
-    <main className={`container ${styles.profile_wrap}`}>
-      <section>
-        <div className={styles.user_profile_image_wrap}>
-          <div
-            className={`${styles.user_cover_image} ${
-              !userData.coverImage && styles.cover_background
-            }`}
-          >
-            <div
-              onClick={openDisplayImageInput}
-              className={styles.profile_image}
-            >
-              <Image
-                loader={ImageLoader}
-                src={
-                  userData.profileImage
-                    ? typeof userData.profileImage === 'string'
-                      ? userData.profileImage
-                      : URL.createObjectURL(userData.profileImage)
-                    : avatar
+    <>
+      {isUserConnected ? (
+        <main className={`container ${styles.profile_wrap}`}>
+          <section>
+            <div className={styles.user_profile_image_wrap}>
+              <div
+                className={`${styles.user_cover_image} ${
+                  !userData.coverImage && styles.cover_background
+                }`}
+              >
+                <div
+                  onClick={openDisplayImageInput}
+                  className={styles.profile_image}
+                >
+                  <Image
+                    loader={ImageLoader}
+                    src={
+                      userData.profileImage
+                        ? typeof userData.profileImage === 'string'
+                          ? userData.profileImage
+                          : URL.createObjectURL(userData.profileImage)
+                        : avatar
+                    }
+                    alt="avatar"
+                    width={80}
+                    height={80}
+                  />
+
+                  <input
+                    ref={imageInputImageRef}
+                    className={styles.displayname_input}
+                    type="file"
+                    accept="image/*"
+                    name="profileImage"
+                    onChange={updateProfileImageState}
+                  />
+                </div>
+                {userData.coverImage && (
+                  <Image
+                    loader={ImageLoader}
+                    src={
+                      userData.coverImage
+                        ? typeof userData.coverImage === 'string'
+                          ? userData.coverImage
+                          : URL.createObjectURL(userData.coverImage)
+                        : avatar
+                    }
+                    layout="fill"
+                    alt="coverimage"
+                    data-testid="cover_image"
+                  />
+                )}
+                <button
+                  onClick={() =>
+                    route.pathname === '/user-profile/[address]'
+                      ? route.push(`/edit-user-profile/${address}`)
+                      : openCoverImageInput()
+                  }
+                  className={styles.Update_image_btn}
+                >
+                  {route.pathname === '/user-profile/[address]'
+                    ? 'Update Profile'
+                    : 'Update Cover Image'}
+
+                  <input
+                    ref={coverImageInputImageRef}
+                    className={styles.coverName_input}
+                    type="file"
+                    accept="image/*"
+                    name="coverImage"
+                    onChange={updateCoverImageState}
+                  />
+                </button>
+              </div>
+              <OverlayTrigger
+                placement={'auto'}
+                overlay={
+                  <Tooltip>
+                    <strong>{address}</strong>
+                  </Tooltip>
                 }
-                alt="avatar"
-                width={80}
-                height={80}
-              />
-
-              <input
-                ref={imageInputImageRef}
-                className={styles.displayname_input}
-                type="file"
-                accept="image/*"
-                name="profileImage"
-                onChange={updateProfileImageState}
-              />
-            </div>
-            {userData.coverImage && (
-              <Image
-                loader={ImageLoader}
-                src={
-                  userData.coverImage
-                    ? typeof userData.coverImage === 'string'
-                      ? userData.coverImage
-                      : URL.createObjectURL(userData.coverImage)
-                    : avatar
-                }
-                layout="fill"
-                alt="coverimage"
-                data-testid="cover_image"
-              />
-            )}
-            <button
-              onClick={() =>
-                route.pathname === '/user-profile/[address]'
-                  ? route.push(`/edit-user-profile/${address}`)
-                  : openCoverImageInput()
-              }
-              className={styles.Update_image_btn}
-            >
-              {route.pathname === '/user-profile/[address]'
-                ? 'Update Profile'
-                : 'Update Cover Image'}
-
-              <input
-                ref={coverImageInputImageRef}
-                className={styles.coverName_input}
-                type="file"
-                accept="image/*"
-                name="coverImage"
-                onChange={updateCoverImageState}
-              />
-            </button>
-          </div>
-          <OverlayTrigger
-            placement={'auto'}
-            overlay={
-              <Tooltip>
-                <strong>{address}</strong>
-              </Tooltip>
-            }
-          >
-            <div className={styles.wallet_address}>
-              <Image src={ethIconWhite} width={13} height={13} alt="eth" />
-              {`${address ? `${address.slice(0, 9)}...` : ''}`}
-            </div>
-          </OverlayTrigger>
-        </div>
-      </section>
-
-      {route.pathname === '/user-profile/[address]' && (
-        <section className={styles.user_nft_wrapper}>
-          <h3 className={styles.section_headeing}>My NFT’s</h3>
-          {userData.assets ? (
-            <div className={styles.nft_list}>
-              {userData.assets.map((nftData, idx) => (
-                <NFTCard nftData={nftData} key={idx} />
-              ))}
-            </div>
-          ) : (
-            <div className={styles.data_not_found}>
-              <h3>Data not found</h3>
-            </div>
-          )}
-        </section>
-      )}
-      {route.pathname === '/edit-user-profile/[address]' && (
-        <form onSubmit={updataProfile}>
-          <section className={styles.user_edit_profile_form_wrap}>
-            <TextInput
-              handleName={'displayName'}
-              title={'Display Name'}
-              placeHolder="Enter your display name"
-              inputHeight={'63px'}
-              handleValue={userData.displayName}
-              handleOnChange={(e) => updateState(e)}
-              titleBackground={'rgb(15 15 45)'}
-            />
-            <TextInput
-              handleName={'customUrl'}
-              title={'Custom URL'}
-              placeHolder="astroon.abc/enter your custom url"
-              inputHeight={'63px'}
-              handleValue={userData.customUrl}
-              handleOnChange={(e) => updateState(e)}
-              titleBackground={'rgb(14 16 44)'}
-            />
-            <TextInput
-              handleName={'email'}
-              handleType={'email'}
-              titleBackground={'rgb(33 33 64)'}
-              title={'Email Address'}
-              placeHolder="Enter your email address"
-              inputHeight={'63px'}
-              handleValue={userData.email}
-              handleOnChange={(e) => updateState(e)}
-            />
-            <TextInput
-              title={'Bio'}
-              handleName={'bio'}
-              placeHolder="Write a brief description about yourself"
-              inputHeight={'120px'}
-              textarea={true}
-              titleBackground={'rgb(89 47 93)'}
-              handleValue={userData.bio}
-              handleOnChange={(e) => updateState(e)}
-            />
-            <div className={styles.submit_btn}>
-              <Button type="submit">Submit</Button>
+              >
+                <div className={styles.wallet_address}>
+                  <Image src={ethIconWhite} width={13} height={13} alt="eth" />
+                  {`${address ? `${address.slice(0, 9)}...` : ''}`}
+                </div>
+              </OverlayTrigger>
             </div>
           </section>
-        </form>
+
+          {route.pathname === '/user-profile/[address]' && (
+            <section className={styles.user_nft_wrapper}>
+              <h3 className={styles.section_headeing}>My NFT’s</h3>
+              {userData.assets ? (
+                <div className={styles.nft_list}>
+                  {userData.assets.map((nftData, idx) => (
+                    <NFTCard nftData={nftData} key={idx} />
+                  ))}
+                </div>
+              ) : (
+                <div className={styles.data_not_found}>
+                  <h3>Data not found</h3>
+                </div>
+              )}
+            </section>
+          )}
+          {route.pathname === '/edit-user-profile/[address]' && (
+            <form onSubmit={updataProfile}>
+              <section className={styles.user_edit_profile_form_wrap}>
+                <TextInput
+                  handleName={'displayName'}
+                  title={'Display Name'}
+                  placeHolder="Enter your display name"
+                  inputHeight={'63px'}
+                  handleValue={userData.displayName}
+                  handleOnChange={(e) => updateState(e)}
+                  titleBackground={'rgb(15 15 45)'}
+                />
+                <TextInput
+                  handleName={'customUrl'}
+                  title={'Custom URL'}
+                  placeHolder="astroon.abc/enter your custom url"
+                  inputHeight={'63px'}
+                  handleValue={userData.customUrl}
+                  handleOnChange={(e) => updateState(e)}
+                  titleBackground={'rgb(14 16 44)'}
+                />
+                <TextInput
+                  handleName={'email'}
+                  handleType={'email'}
+                  titleBackground={'rgb(33 33 64)'}
+                  title={'Email Address'}
+                  placeHolder="Enter your email address"
+                  inputHeight={'63px'}
+                  handleValue={userData.email}
+                  handleOnChange={(e) => updateState(e)}
+                />
+                <TextInput
+                  title={'Bio'}
+                  handleName={'bio'}
+                  placeHolder="Write a brief description about yourself"
+                  inputHeight={'120px'}
+                  textarea={true}
+                  titleBackground={'rgb(89 47 93)'}
+                  handleValue={userData.bio}
+                  handleOnChange={(e) => updateState(e)}
+                />
+                <div className={styles.submit_btn}>
+                  <Button type="submit">Submit</Button>
+                </div>
+              </section>
+            </form>
+          )}
+          <ToastContainer />
+        </main>
+      ) : (
+        <div style={{ height: '100vh' }}></div>
       )}
-      <ToastContainer />
-    </main>
+    </>
   );
 };
 

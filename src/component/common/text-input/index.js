@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styles from './textInput.module.scss';
 import PropTypes from 'prop-types';
+import Image from 'next/image';
+import passwordShowIcon from '../../../../public/assets/images/eyeIcon.svg';
+import passwordhideIcon from '../../../../public/assets/images/eyeHideIcon.svg';
 const TextInput = ({
   title,
   placeHolder,
@@ -15,6 +18,15 @@ const TextInput = ({
   isRequired,
   handleName,
 }) => {
+  const [inputType, setInputType] = useState(handleType);
+  const inputRef = useRef();
+  const showPassword = () => {
+    if (inputRef.current.type === 'password') {
+      setInputType('text');
+    } else {
+      setInputType('password');
+    }
+  };
   return (
     <div className={styles.input_wrap}>
       {title && (
@@ -40,19 +52,37 @@ const TextInput = ({
           placeholder={placeHolder}
         />
       ) : (
-        <input
-          name={handleName}
-          required={isRequired}
-          style={{ height: inputHeight }}
-          disabled={inputDiabled}
-          type={handleType}
-          value={handleValue}
-          onChange={handleOnChange}
-          className={`${
-            kind === 'cornerborder' ? styles.corner_border : styles.full_border
-          }`}
-          placeholder={placeHolder}
-        />
+        <div>
+          <input
+            ref={inputRef}
+            name={handleName}
+            required={isRequired}
+            style={{ height: inputHeight }}
+            disabled={inputDiabled}
+            type={inputType}
+            value={handleValue}
+            onChange={handleOnChange}
+            className={`${
+              kind === 'cornerborder'
+                ? styles.corner_border
+                : styles.full_border
+            }`}
+            placeholder={placeHolder}
+          />
+          {handleType === 'password' && (
+            <div onClick={showPassword} className={styles.showHideIcon}>
+              <Image
+                src={
+                  inputType === 'password' ? passwordShowIcon : passwordhideIcon
+                }
+                width={15}
+                height={15}
+                layout="fixed"
+                alt={'showpass'}
+              />
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

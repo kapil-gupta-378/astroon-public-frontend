@@ -8,9 +8,19 @@ import editIcon from '../../../../public/assets/images/edit-icon-white.svg';
 import logoutIcon from '../../../../public/assets/images/logout-icon-white.svg';
 import { useRouter } from 'next/router';
 import { useAccount } from '@web3modal/react';
+import { useDispatch } from 'react-redux';
+import {
+  setIsUserConnected,
+  setToken,
+} from '../../../redux/persist/wallet/walletSlice';
 const UserProfileDropDown = () => {
   const { address } = useAccount();
   const router = useRouter();
+  const dispatch = useDispatch();
+  const disconnect = () => {
+    dispatch(setIsUserConnected(false));
+    dispatch(setToken(''));
+  };
 
   return (
     <div className={'user_profile_dropdown'}>
@@ -36,7 +46,7 @@ const UserProfileDropDown = () => {
           </div>
         </NavDropdown.Item>
         <NavDropdown.Item>
-          <div className="item_div">
+          <div className="item_div" onClick={disconnect}>
             <Image src={logoutIcon} width={14} height={14} alt="icon" />
 
             <span>Sign Out</span>

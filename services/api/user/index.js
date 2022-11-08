@@ -24,3 +24,20 @@ export const updataUserProfileImageApi = async (data) => {
   );
   return xhr.data.data;
 };
+
+export const getNonceApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}users/get-address-nonce`,
+    data,
+  });
+  return xhr.data;
+};
+export const varivarifieSignatureApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}users/verify-signature`,
+    data,
+  });
+  return xhr.data;
+};
