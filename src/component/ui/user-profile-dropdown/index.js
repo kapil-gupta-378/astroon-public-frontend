@@ -7,8 +7,11 @@ import styles from './userProfileDropdown.module.scss';
 import editIcon from '../../../../public/assets/images/edit-icon-white.svg';
 import logoutIcon from '../../../../public/assets/images/logout-icon-white.svg';
 import { useRouter } from 'next/router';
+import { useAccount } from '@web3modal/react';
 const UserProfileDropDown = () => {
+  const { address } = useAccount();
   const router = useRouter();
+
   return (
     <div className={'user_profile_dropdown'}>
       <NavDropdown
@@ -24,9 +27,12 @@ const UserProfileDropDown = () => {
         id="basic-nav-dropdown"
       >
         <NavDropdown.Item>
-          <div onClick={() => router.push('/profile/1')} className="item_div">
+          <div
+            onClick={() => router.push(`/user-profile/${address}`)}
+            className="item_div"
+          >
             <Image src={editIcon} width={14} height={14} alt="icon" />
-            <span> Profile</span>
+            <span>Profile</span>
           </div>
         </NavDropdown.Item>
         <NavDropdown.Item>
@@ -37,7 +43,7 @@ const UserProfileDropDown = () => {
           </div>
         </NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">
+        <NavDropdown.Item href="#">
           <div className={styles.balance}> Balance</div>
           <div className={styles.ethereum}>
             <Image

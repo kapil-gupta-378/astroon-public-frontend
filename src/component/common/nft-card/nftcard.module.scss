@@ -13,7 +13,7 @@
     #a246d3 99.12%
   );
   width: 308px;
-  height: 384px;
+  // height: 384px;
   border-radius: 25px;
   display: flex;
   justify-content: flex-end;
@@ -26,9 +26,10 @@
     height: 140px;
     position: relative;
     .backgroud_nft_card {
-      position: absolute;
-      left: -58px;
-      top: -91px;
+      span {
+        border-top-right-radius: 25px;
+        border-top-left-radius: 25px;
+      }
     }
     .img_nft_card {
       position: absolute !important;
@@ -73,6 +74,7 @@
       display: inline-block;
       font-size: 12px;
       cursor: pointer;
+      text-decoration: none;
     }
     .nft_card_price {
       display: flex;
