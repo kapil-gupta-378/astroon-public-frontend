@@ -4,6 +4,8 @@ const initialState = {
   walletAddress: '',
   networkId: '',
   balance: '',
+  isUserConnected: false,
+  token: '',
 };
 
 export const walletSlice = createSlice({
@@ -19,9 +21,20 @@ export const walletSlice = createSlice({
     setBalance: (state, action) => {
       state.balance = action.payload;
     },
+    setIsUserConnected: (state, action) => {
+      state.isUserConnected = action.payload;
+    },
+    setToken: (state, action) => {
+      state.token = action.payload;
+    },
   },
 });
 
-export const { setWalletAddress, setNetworkId, setBalance } =
-  walletSlice.actions;
+export const {
+  setWalletAddress,
+  setNetworkId,
+  setBalance,
+  setIsUserConnected,
+  setToken,
+} = walletSlice.actions;
 export default walletSlice.reducer;
