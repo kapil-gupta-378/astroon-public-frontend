@@ -83,6 +83,7 @@ const ResetPassword = () => {
             draggable: true,
             progress: undefined,
           });
+          router.push('/login');
         } else {
           toast.error(res.message, {
             position: 'top-right',
