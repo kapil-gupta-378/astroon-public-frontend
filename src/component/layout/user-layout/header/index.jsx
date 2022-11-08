@@ -71,6 +71,9 @@ const Header = () => {
                 <Link href={'/ast'}>Token</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                <Link href={'/nft'}>NFT</Link>
+              </Nav.Item>
+              <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/app'}>App</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>

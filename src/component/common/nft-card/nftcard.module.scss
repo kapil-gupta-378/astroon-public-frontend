@@ -13,7 +13,6 @@
     #a246d3 99.12%
   );
   width: 308px;
-  // height: 384px;
   border-radius: 25px;
   display: flex;
   justify-content: flex-end;
@@ -25,6 +24,11 @@
     border-radius: 25px;
     height: 140px;
     position: relative;
+    .backgroud_nft_card_position {
+      position: absolute;
+      left: -75px;
+      top: -91px;
+    }
     .backgroud_nft_card {
       span {
         border-top-right-radius: 25px;
@@ -93,12 +97,23 @@
   }
 }
 
+.card_height {
+  height: 384px;
+}
+
 @media only screen and (max-width: 1199px) {
 } /* 1024 */
 @media only screen and (max-width: 1023px) {
   .nft_card_wrap {
     .nft_card_sec {
       padding: 0px 24px;
+    }
+    .nft_card_img_wrap {
+      .backgroud_nft_card_position {
+        position: absolute;
+        left: -75px;
+        top: -91px;
+      }
     }
   }
 } /* 980 */
@@ -119,12 +134,20 @@
         }
       }
     }
+    .image_width {
+      width: 420px;
+    }
   }
 } /* 768 */
 @media only screen and (max-width: 767px) {
   .nft_card_wrap {
     width: 308px;
     .nft_card_img_wrap {
+      .backgroud_nft_card_position {
+        position: absolute;
+        left: -40px;
+        top: -91px;
+      }
       .backgroud_nft_card {
         left: -58px;
         top: -91px;
@@ -147,10 +170,16 @@
         }
       }
     }
+    .image_width {
+      width: 420px;
+    }
   }
 } /* 650 */
 @media only screen and (max-width: 649px) {
   .nft_card_wrap {
+    .image_width {
+      width: 420px;
+    }
     width: 308px;
     .nft_card_img_wrap {
       .backgroud_nft_card {
@@ -193,6 +222,9 @@
 } /* 480 */
 @media only screen and (max-width: 479px) {
   .nft_card_wrap {
+    .image_width {
+      width: 420px;
+    }
     width: 280px;
     .nft_card_img_wrap {
       .backgroud_nft_card {
@@ -222,10 +254,13 @@
 } /* 375 */
 @media only screen and (max-width: 374px) {
   .nft_card_wrap {
-    .nft_heading {
-    }
     width: 250px;
     .nft_card_img_wrap {
+      .backgroud_nft_card_position {
+        position: absolute;
+        left: -40px;
+        top: -91px;
+      }
       .backgroud_nft_card {
         left: -51px;
         span {

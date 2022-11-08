@@ -211,7 +211,7 @@ const Profile = () => {
               ))}
             </div>
           ) : (
-            <div>
+            <div className={styles.data_not_found}>
               <h3>Data not found</h3>
             </div>
           )}
