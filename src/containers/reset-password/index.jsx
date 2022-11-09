@@ -8,9 +8,9 @@ import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { toast, ToastContainer } from 'react-toastify';
 import {
-  verifyResetPasswordTokenUserApi,
   resetPasswordUserApi,
-} from '../../../services/api/user';
+  verifyResetPasswordTokenUserApi,
+} from '../../../services/api/admin';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -83,6 +83,7 @@ const ResetPassword = () => {
             draggable: true,
             progress: undefined,
           });
+          router.push('/login');
         } else {
           toast.error(res.message, {
             position: 'top-right',

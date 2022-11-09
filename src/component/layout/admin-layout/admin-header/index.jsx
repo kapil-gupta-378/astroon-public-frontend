@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styles from './adminHeader.module.scss';
 import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg';
@@ -7,13 +7,40 @@ import logout from '../../../../../public/assets/images/logout.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
+import { getCurrentLoginAdminData } from '../../../../../services/api/admin';
 
 const AdminHeader = ({ setOpenSideBar }) => {
+  const [dataState, setdataState] = useState({});
   const router = useRouter();
   const Logout = () => {
     localStorage.clear();
     router.push('/login');
   };
+
+  useEffect(() => {
+    loadInitialData();
+  }, []);
+
+  const loadInitialData = async () => {
+    const response = await getCurrentLoginAdminData();
+    setdataState(response.data);
+  };
+
+  const greetingForAdmin = () => {
+    let greeting;
+    const date = new Date();
+    const hour = date.getHours();
+
+    if (hour < 12) {
+      greeting = 'Good morning !';
+    } else if (hour < 17) {
+      greeting = 'Good afternoon !';
+    } else {
+      greeting = 'Good evening !';
+    }
+    return greeting;
+  };
+
   return (
     <div className={styles.admin_header_wrap}>
       <div className={styles.header_nav_wrap}>
@@ -28,7 +55,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
             />
           </div>
           <h3>Welcome Back</h3>
-          <p>Hello Admin, Good Morning!</p>
+          <p>{`Hello ${dataState.firstName}, ${greetingForAdmin()}`}</p>
         </div>
         <div className={styles.header_right}>
           <Dropdown className="profile_dropdown">

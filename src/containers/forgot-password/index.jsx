@@ -4,9 +4,9 @@ import styles from './forgotpassword.module.scss';
 import loginUpRightImage from '../../../public/assets/images/forgot-password-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { forgotPasswordUserApi } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
 import logoIcon from '../../../public/assets/images/Logo.png';
+import { forgotPasswordUserApi } from '../../../services/api/admin';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');

@@ -45,6 +45,13 @@
       opacity: 0.5;
     }
   }
+
+  .showHideIcon {
+    position: absolute;
+    right: 15px;
+    top: 16px;
+    cursor: pointer;
+  }
 }
 
 // Responsive breakpoints

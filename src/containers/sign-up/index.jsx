@@ -5,8 +5,8 @@ import styles from './signUp.module.scss';
 import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { createUserApi } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
+import { createUserApi } from '../../../services/api/admin';
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastname] = useState('');

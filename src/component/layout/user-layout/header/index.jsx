@@ -5,20 +5,27 @@ import Link from 'next/link';
 import walletIcon from '../../../../../public/assets/images/wallet.png';
 import Button from '../../../common/button';
 import { useEffect } from 'react';
-import { useAccount, useConnectModal } from '@web3modal/react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
+import {
+  getNonceApi,
+  varivarifieSignatureApi,
+} from '../../../../../services/api/user';
+import {
+  setIsUserConnected,
+  setToken,
+} from '../../../../redux/persist/wallet/walletSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getWeb3Provider } from '../../../../../services/web3';
 const Header = () => {
-  const { open } = useConnectModal();
-  const { isConnected } = useAccount();
-
+  const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
 
   const [walletConnetDialog, setwalletConnetDialog] = useState(false);
-
+  const { isUserConnected } = useSelector((state) => state.walletReducer);
   useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', function () {});
@@ -27,9 +34,40 @@ const Header = () => {
       });
     }
   }, []);
-  useEffect(() => {
-    if (isConnected) setwalletConnetDialog(false);
-  }, [isConnected]);
+
+  const varifieSignatureAndLogin = async () => {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const { web3 } = await getWeb3Provider();
+      const accounts = await web3.eth.getAccounts();
+      const networkId = await web3.eth.net.getId();
+      const data = {
+        walletAddress: accounts[0],
+      };
+      const responseNonce = await getNonceApi(data);
+      if (responseNonce.success) {
+        let sign = await web3.eth.personal.sign(
+          responseNonce.data,
+          accounts[0],
+        );
+        const data = {
+          nonce: responseNonce.data,
+          signature: sign,
+          networkId: networkId,
+        };
+        const responseSignature = await varivarifieSignatureApi(data);
+        if (responseSignature.success) {
+          localStorage.setItem('isConnected', true);
+          dispatch(setIsUserConnected(true));
+          dispatch(setToken(responseSignature.data));
+          setwalletConnetDialog(false);
+        }
+      }
+    } catch (error) {
+      setwalletConnetDialog(false);
+      return error;
+    }
+  };
 
   return (
     <div className={`user_header_wrap ${styles.header_wrapper}`}>
@@ -71,6 +109,9 @@ const Header = () => {
                 <Link href={'/ast'}>Token</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                <Link href={'/nft'}>NFT</Link>
+              </Nav.Item>
+              <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/app'}>App</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
@@ -85,10 +126,10 @@ const Header = () => {
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/blog'}>Blog</Link>
               </Nav.Item>
-              {!isConnected && (
+              {!isUserConnected && (
                 <Nav.Item onClick={() => setMobileNavExpended(false)}>
                   <Button
-                    data-content={isConnected ? 'Connected' : 'Connect Wallet'}
+                    data-content={'Connect Wallet'}
                     kind="wallet-connect"
                     onClick={() => setwalletConnetDialog(true)}
                   >
@@ -96,7 +137,7 @@ const Header = () => {
                   </Button>
                 </Nav.Item>
               )}
-              {isConnected && (
+              {isUserConnected && (
                 <Nav.Item onClick={() => setMobileNavExpended(false)}>
                   <UserProfileDropDown />
                 </Nav.Item>
@@ -120,8 +161,11 @@ const Header = () => {
             />
             <span>Metamask</span>
           </div>
-          <button onClick={open} className={styles.wallet_connect_modal_btn}>
-            {isConnected ? 'Connected ' : 'Wallet Connect'}
+          <button
+            onClick={varifieSignatureAndLogin}
+            className={styles.wallet_connect_modal_btn}
+          >
+            {'Wallet Connect'}
           </button>
         </div>
       </DialogBox>
