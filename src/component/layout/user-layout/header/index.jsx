@@ -7,7 +7,7 @@ import Button from '../../../common/button';
 import { useEffect } from 'react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Container, Nav, Navbar, ToastContainer } from 'react-bootstrap';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 import {
@@ -20,6 +20,7 @@ import {
 } from '../../../../redux/persist/wallet/walletSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getWeb3Provider } from '../../../../../services/web3';
+import { toast } from 'react-toastify';
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
@@ -35,21 +36,56 @@ const Header = () => {
     }
   }, []);
 
-  const varifieSignatureAndLogin = async () => {
+  const connectWallet = () => {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent,
+      )
+    ) {
+      connectMobileWallet();
+    } else {
+      if (window.ethereum && window.ethereum.isMetaMask) {
+        connectComputerWallet();
+      } else {
+        toast.error('Please download metamask extention', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        window.location.href =
+          process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
+      }
+    }
+  };
+
+  const connectMobileWallet = async () => {
+    const { web3 } = await getWeb3Provider();
+    const accounts = await web3.eth.getAccounts();
+    const networkId = await web3.eth.net.getId();
+    varifieSignature(accounts[0], networkId);
+  };
+  const connectComputerWallet = async () => {
+    const { web3 } = await getWeb3Provider();
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+    const networkId = await web3.eth.net.getId();
+    varifieSignature(accounts[0], networkId);
+  };
+
+  const varifieSignature = async (address, networkId) => {
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
       const { web3 } = await getWeb3Provider();
-      const accounts = await web3.eth.getAccounts();
-      const networkId = await web3.eth.net.getId();
       const data = {
-        walletAddress: accounts[0],
+        walletAddress: address,
       };
       const responseNonce = await getNonceApi(data);
       if (responseNonce.success) {
-        let sign = await web3.eth.personal.sign(
-          responseNonce.data,
-          accounts[0],
-        );
+        let sign = await web3.eth.personal.sign(responseNonce.data, address);
         const data = {
           nonce: responseNonce.data,
           signature: sign,
@@ -162,13 +198,14 @@ const Header = () => {
             <span>Metamask</span>
           </div>
           <button
-            onClick={varifieSignatureAndLogin}
+            onClick={connectWallet}
             className={styles.wallet_connect_modal_btn}
           >
             {'Wallet Connect'}
           </button>
         </div>
       </DialogBox>
+      <ToastContainer />
     </div>
   );
 };

@@ -16,6 +16,7 @@ import Button from '../../component/common/button';
 import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
+import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -133,6 +134,7 @@ const AST = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
+      <BuyTokenModal />
     </section>
   );
 };
