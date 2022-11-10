@@ -1,0 +1,50 @@
+@import '../../../../styles/_typography.module.scss';
+.inner_wrap {
+  background: #ffce00;
+  padding: 7%;
+  border-radius: 20px;
+  .statics {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 3px 30px 3px;
+    .statics_heading {
+      @include heading_8;
+      color: black;
+      font-family: 'Rubik';
+      text-align: center;
+    }
+    .statics_data {
+      @include heading_2;
+      color: black;
+      font-family: 'Rubik';
+      font-size: 35px;
+    }
+  }
+  .slider_wrap {
+    margin-bottom: 30px;
+  }
+  .buy_btn_wrap {
+    display: flex;
+    justify-content: center;
+
+    .buy_btn {
+      border: 1.5px solid #000000;
+      border-radius: 268px;
+      background: transparent;
+      padding: 6px 28px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+  }
+}
+
+@media only screen and (max-width: 479px) {
+  .inner_wrap {
+    .statics {
+      flex-direction: column;
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

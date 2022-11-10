@@ -1,5 +1,5 @@
 // import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Cell,
   Line,
@@ -32,6 +32,9 @@ const pieChartData = [
   { name: 'Group D', value: 200 },
 ];
 const AST = () => {
+  const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
+  const [sliderValue, setSliderValue] = useState(0);
+
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
   const RADIAN = Math.PI / 180;
@@ -105,7 +108,7 @@ const AST = () => {
           </ResponsiveContainer>
         </div>
         <div className={styles.btn_wrap}>
-          <Button>Buy $AST</Button>
+          <Button onClick={() => setShowBuyTokenModal(true)}>Buy $AST</Button>
         </div>
       </div>
 
@@ -134,7 +137,13 @@ const AST = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <BuyTokenModal />
+      <BuyTokenModal
+        sliderOnChange={setSliderValue}
+        sliderValue={sliderValue}
+        modalShowHandler={setShowBuyTokenModal}
+        modalShow={showBuyTokenModal}
+        quantity={sliderValue}
+      />
     </section>
   );
 };
