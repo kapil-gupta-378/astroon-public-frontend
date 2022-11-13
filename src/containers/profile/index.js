@@ -127,6 +127,7 @@ const Profile = () => {
   const openCoverImageInput = () => {
     coverImageInputImageRef.current.click();
   };
+
   return (
     <>
       {isUserConnected ? (
@@ -221,7 +222,7 @@ const Profile = () => {
           {route.pathname === '/user-profile/[address]' && (
             <section className={styles.user_nft_wrapper}>
               <h3 className={styles.section_headeing}>My NFT’s</h3>
-              {userData.assets ? (
+              {userData.assets.length !== 0 ? (
                 <div className={styles.nft_list}>
                   {userData.assets.map((nftData, idx) => (
                     <NFTCard nftData={nftData} key={idx} />

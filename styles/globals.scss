@@ -386,6 +386,8 @@ body {
         ),
         url('../public/assets/images/dialogBackgorund.png'), #a04141;
       border-radius: 20px;
+      overflow: hidden;
+      border: 0px;
       .modal-header {
         display: unset;
         border-bottom: unset;

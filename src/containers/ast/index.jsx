@@ -16,7 +16,7 @@ import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
-import { getTokenDataApi } from '../../../services/api/astroon token';
+import { getTokenDataApi } from '../../../services/api/astroon-token';
 import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
