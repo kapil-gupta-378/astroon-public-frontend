@@ -5,7 +5,7 @@ import blogReducer from './blog/blogSlice';
 import adminReducer from './admin/adminSlice';
 import contentReducer from './content/contentSlice';
 import userReducer from './user/userSlice';
-
+import globalLoadingReducer from './global-loading/globalLoadingSlice';
 import walletReducer from './persist/wallet/walletSlice';
 export const rootReducer = combineReducers({
   homeReducer,
@@ -15,4 +15,5 @@ export const rootReducer = combineReducers({
   contentReducer,
   userReducer,
   walletReducer,
+  globalLoadingReducer,
 });

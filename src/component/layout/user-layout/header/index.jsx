@@ -17,14 +17,16 @@ import {
 import {
   setIsUserConnected,
   setToken,
+  setWalletAddress,
 } from '../../../../redux/persist/wallet/walletSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeb3Provider } from '../../../../../services/web3';
+import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
-
+  const route = useRouter();
   const [walletConnetDialog, setwalletConnetDialog] = useState(false);
   const { isUserConnected } = useSelector((state) => state.walletReducer);
   useEffect(() => {
@@ -94,9 +96,21 @@ const Header = () => {
         const responseSignature = await varivarifieSignatureApi(data);
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
+          localStorage.setItem('userToken', responseSignature.data.token);
           dispatch(setIsUserConnected(true));
-          dispatch(setToken(responseSignature.data));
+          dispatch(setToken(responseSignature.data.token));
+          dispatch(setWalletAddress(address));
           setwalletConnetDialog(false);
+          toast.success('Wallet Connected', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          route.push(`/user-profile/${address}`);
         }
       }
     } catch (error) {

@@ -1,5 +1,5 @@
 // import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Cell,
   Line,
@@ -12,11 +12,16 @@ import {
   YAxis,
 } from 'recharts';
 import Button from '../../component/common/button';
-// import mainHeadingBackground from '../../../public/assets/images/AST-page-heading-background.svg';
 import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
+import { getTokenDataApi } from '../../../services/api/astroon token';
+import { toast, ToastContainer } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
+import { convertEtherToWei } from '../../../services/web3/currencyMethods';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -34,6 +39,19 @@ const pieChartData = [
 const AST = () => {
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(0);
+  const [tokenData, setTokenData] = useState({});
+  const { walletAddress, isUserConnected } = useSelector(
+    (state) => state.walletReducer,
+  );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    fetchTokenData();
+  }, []);
+  const fetchTokenData = async () => {
+    const response = await getTokenDataApi();
+    setTokenData(response);
+  };
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
 
@@ -62,6 +80,52 @@ const AST = () => {
       </text>
     );
   };
+
+  const buyToken = async () => {
+    if (isUserConnected) {
+      try {
+        dispatch(setGlobalLoading(true));
+        const AstTokenContract = await getContractInstance();
+
+        const TokenRateInEthForBuyCount = convertEtherToWei(
+          sliderValue * Number(tokenData.rate),
+        );
+        const tokenTransition = await AstTokenContract.methods
+          .buyTokens()
+          .send({
+            from: walletAddress,
+            value: TokenRateInEthForBuyCount,
+          });
+
+        if (tokenTransition) {
+          toast.success('Token Transfered Successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setShowBuyTokenModal(false);
+          dispatch(setGlobalLoading(false));
+        }
+      } catch (error) {
+        dispatch(setGlobalLoading(false));
+      }
+    } else {
+      toast.error('Please connect your wallet', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   return (
     <section className={`container ${styles.ast_page_wrap}`}>
       <div className={styles.banner}>
@@ -138,12 +202,15 @@ const AST = () => {
         </ResponsiveContainer>
       </div>
       <BuyTokenModal
+        tokenData={tokenData}
         sliderOnChange={setSliderValue}
         sliderValue={sliderValue}
         modalShowHandler={setShowBuyTokenModal}
         modalShow={showBuyTokenModal}
-        quantity={sliderValue}
+        selectedQuantity={sliderValue}
+        handleFunction={buyToken}
       />
+      <ToastContainer />
     </section>
   );
 };

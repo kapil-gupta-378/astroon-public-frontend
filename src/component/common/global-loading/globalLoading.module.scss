@@ -1,0 +1,12 @@
+.global_Loading_wrap {
+  height: 101%;
+  width: 101%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: #0000009e;
+  z-index: 999999999;
+}

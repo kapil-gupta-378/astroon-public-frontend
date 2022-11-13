@@ -7,14 +7,13 @@ import styles from './userProfileDropdown.module.scss';
 import editIcon from '../../../../public/assets/images/edit-icon-white.svg';
 import logoutIcon from '../../../../public/assets/images/logout-icon-white.svg';
 import { useRouter } from 'next/router';
-import { useAccount } from '@web3modal/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   setIsUserConnected,
   setToken,
 } from '../../../redux/persist/wallet/walletSlice';
 const UserProfileDropDown = () => {
-  const { address } = useAccount();
+  const { walletAddress } = useSelector((state) => state.walletReducer);
   const router = useRouter();
   const dispatch = useDispatch();
   const disconnect = () => {
@@ -38,7 +37,7 @@ const UserProfileDropDown = () => {
       >
         <NavDropdown.Item>
           <div
-            onClick={() => router.push(`/user-profile/${address}`)}
+            onClick={() => router.push(`/user-profile/${walletAddress}`)}
             className="item_div"
           >
             <Image src={editIcon} width={14} height={14} alt="icon" />
