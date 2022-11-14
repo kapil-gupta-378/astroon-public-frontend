@@ -7,6 +7,7 @@ import contentReducer from './content/contentSlice';
 import userReducer from './user/userSlice';
 import globalLoadingReducer from './global-loading/globalLoadingSlice';
 import walletReducer from './persist/wallet/walletSlice';
+import tokenReducer from './token/tokenSlice';
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -16,4 +17,5 @@ export const rootReducer = combineReducers({
   userReducer,
   walletReducer,
   globalLoadingReducer,
+  tokenReducer,
 });

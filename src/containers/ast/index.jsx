@@ -16,12 +16,11 @@ import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
-import { getTokenDataApi } from '../../../services/api/astroon-token';
 import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
-import { convertEtherToWei } from '../../../services/web3/currencyMethods';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import { buyToken } from '../../../services/web3/tokenMothods';
+import { fetchFaqData } from '../../redux/token/tokenAction';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -38,19 +37,18 @@ const pieChartData = [
 ];
 const AST = () => {
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
-  const [sliderValue, setSliderValue] = useState(0);
-  const [tokenData, setTokenData] = useState({});
+  const [sliderValue, setSliderValue] = useState(1);
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
+  const { tokenData } = useSelector((state) => state.tokenReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
     fetchTokenData();
   }, []);
   const fetchTokenData = async () => {
-    const response = await getTokenDataApi();
-    setTokenData(response);
+    dispatch(fetchFaqData());
   };
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -81,23 +79,17 @@ const AST = () => {
     );
   };
 
-  const buyToken = async () => {
+  const buyTokenHandler = async () => {
     if (isUserConnected) {
       try {
         dispatch(setGlobalLoading(true));
-        const AstTokenContract = await getContractInstance();
-
-        const TokenRateInEthForBuyCount = convertEtherToWei(
-          sliderValue * Number(tokenData.rate),
+        const tokenTransition = await buyToken(
+          sliderValue,
+          tokenData.rate,
+          walletAddress,
         );
-        const tokenTransition = await AstTokenContract.methods
-          .buyTokens()
-          .send({
-            from: walletAddress,
-            value: TokenRateInEthForBuyCount,
-          });
 
-        if (tokenTransition) {
+        if (tokenTransition.status) {
           toast.success('Token Transfered Successfully', {
             position: 'top-right',
             autoClose: 5000,
@@ -208,7 +200,7 @@ const AST = () => {
         modalShowHandler={setShowBuyTokenModal}
         modalShow={showBuyTokenModal}
         selectedQuantity={sliderValue}
-        handleFunction={buyToken}
+        handleFunction={buyTokenHandler}
       />
       <ToastContainer />
     </section>
