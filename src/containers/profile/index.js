@@ -203,19 +203,32 @@ const Profile = () => {
                   />
                 </button>
               </div>
-              <OverlayTrigger
-                placement={'auto'}
-                overlay={
-                  <Tooltip>
-                    <strong>{address}</strong>
-                  </Tooltip>
-                }
-              >
-                <div className={styles.wallet_address}>
-                  <Image src={ethIconWhite} width={13} height={13} alt="eth" />
-                  {`${address ? `${address.slice(0, 9)}...` : ''}`}
+              <div className={styles.btn_wrap}>
+                <OverlayTrigger
+                  placement={'auto'}
+                  overlay={
+                    <Tooltip>
+                      <strong>{address}</strong>
+                    </Tooltip>
+                  }
+                >
+                  <div className={styles.wallet_address}>
+                    <Image
+                      src={ethIconWhite}
+                      width={13}
+                      height={13}
+                      alt="eth"
+                    />
+                    {`${address ? `${address.slice(0, 9)}...` : ''}`}
+                  </div>
+                </OverlayTrigger>
+                <div
+                  onClick={() => route.push('/ast')}
+                  className={styles.wallet_address}
+                >
+                  Buy Token
                 </div>
-              </OverlayTrigger>
+              </div>
             </div>
           </section>
 
