@@ -5,7 +5,9 @@ import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
 import GlobalLoading from '../../common/global-loading';
 import { useSelector } from 'react-redux';
-
+import Image from 'next/image';
+import downArrowIcon from '../../../../public/assets/images/Arrow_down.svg';
+import upArrowIcon from '../../../../public/assets/images/Arrow_Up.svg';
 const BuyTokenModal = ({
   modalShow,
   handleFunction,
@@ -65,7 +67,30 @@ const BuyTokenModal = ({
                   </Tooltip>
                 }
               > */}
-                <h2 className={styles.statics_data}>{selectedQuantity}</h2>
+                <div className={styles.value_wrap}>
+                  <h2 className={styles.statics_data}>{selectedQuantity}</h2>
+                  <div className={styles.arrow_wrap}>
+                    <Image
+                      onClick={() => sliderOnChange((value) => value + 1)}
+                      src={upArrowIcon}
+                      width={15}
+                      height={15}
+                      alt={'down'}
+                    />
+                    <Image
+                      onClick={() => {
+                        if (sliderValue >= 1) {
+                          sliderOnChange((value) => value - 1);
+                        }
+                      }}
+                      src={downArrowIcon}
+                      width={15}
+                      height={15}
+                      alt={'down'}
+                    />
+                  </div>
+                </div>
+
                 {/* </OverlayTrigger> */}
               </div>
             </div>
