@@ -65,10 +65,24 @@ const Header = () => {
   };
 
   const connectMobileWallet = async () => {
-    const { web3 } = await getWeb3Provider();
-    const accounts = await web3.eth.getAccounts();
-    const networkId = await web3.eth.net.getId();
-    varifieSignature(accounts[0], networkId);
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      const { web3 } = await getWeb3Provider();
+      const accounts = await web3.eth.getAccounts();
+      const networkId = await web3.eth.net.getId();
+      varifieSignature(accounts[0], networkId);
+    } else {
+      toast.error('Please download metamask extention', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      window.location.href =
+        process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
+    }
   };
   const connectComputerWallet = async () => {
     const { web3 } = await getWeb3Provider();
