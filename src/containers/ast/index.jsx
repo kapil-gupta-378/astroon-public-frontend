@@ -83,13 +83,13 @@ const AST = () => {
     if (isUserConnected) {
       try {
         dispatch(setGlobalLoading(true));
-        const tokenTransition = await buyToken(
+        const tokenTransaction = await buyToken(
           sliderValue,
           tokenData.rate,
           walletAddress,
         );
 
-        if (tokenTransition.status) {
+        if (tokenTransaction.status) {
           toast.success('Token Transfered Successfully', {
             position: 'top-right',
             autoClose: 5000,
