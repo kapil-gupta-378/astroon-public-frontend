@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
   };
 
   useEffect(() => {
-    requestInterceptor();
+    requestInterceptor(route);
     responseInterceptor(route);
   }, []);
 

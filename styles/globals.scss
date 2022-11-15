@@ -372,3 +372,36 @@ body {
     }
   }
 }
+
+// css for token modal
+
+.buy_token_modal_ast_page_bootstrap {
+  .modal-dialog {
+    .modal-content {
+      padding: 3%;
+      background: linear-gradient(
+          0deg,
+          rgba(254, 25, 193, 0.3),
+          rgba(254, 25, 193, 0.3)
+        ),
+        url('../public/assets/images/dialogBackgorund.png'), #a04141;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 0px;
+      .modal-header {
+        display: unset;
+        border-bottom: unset;
+        .modal-title {
+          @include heading_12;
+        }
+        .btn-close {
+          position: absolute;
+          right: 16px;
+          top: 16px;
+          font-size: 10px;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
