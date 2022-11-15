@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import downArrowIcon from '../../../../public/assets/images/Arrow_down.svg';
 import upArrowIcon from '../../../../public/assets/images/Arrow_Up.svg';
+import darkDownArrowIcon from '../../../../public/assets/images/Arrow_down dark.svg';
 const BuyTokenModal = ({
   modalShow,
   handleFunction,
@@ -83,7 +84,7 @@ const BuyTokenModal = ({
                           sliderOnChange((value) => value - 1);
                         }
                       }}
-                      src={downArrowIcon}
+                      src={sliderValue >= 1 ? darkDownArrowIcon : downArrowIcon}
                       width={15}
                       height={15}
                       alt={'down'}
