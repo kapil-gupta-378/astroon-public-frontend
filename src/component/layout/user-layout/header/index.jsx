@@ -26,6 +26,8 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import { getWalletAstTokenBalance } from '../../../../../services/web3/walletMothods';
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
+const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
+const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
@@ -43,37 +45,17 @@ const Header = () => {
     dispatch(fetchCurrencyData());
   }, []);
 
-  const connectWallet = () => {
-    if (
-      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent,
-      )
-    ) {
-      connectMobileWallet();
-    } else {
-      if (window.ethereum && window.ethereum.isMetaMask) {
-        connectComputerWallet();
-      } else {
-        toast.error('Please download metamask extention', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        window.location.href =
-          process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
-      }
-    }
-  };
-
-  const connectMobileWallet = async () => {
+  const connectWallet = async () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
       const { web3 } = await getWeb3Provider();
       const accounts = await web3.eth.getAccounts();
       const networkId = await web3.eth.net.getId();
+      if (envNetworkId !== networkId) {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: envNetworkIdInHex }],
+        });
+      }
       varifieSignature(accounts[0], networkId);
     } else {
       toast.error('Please download metamask extention', {
@@ -88,14 +70,6 @@ const Header = () => {
       window.location.href =
         process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
     }
-  };
-  const connectComputerWallet = async () => {
-    const { web3 } = await getWeb3Provider();
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    });
-    const networkId = await web3.eth.net.getId();
-    varifieSignature(accounts[0], networkId);
   };
 
   const varifieSignature = async (address, networkId) => {
