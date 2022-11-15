@@ -1,7 +1,10 @@
 import Web3 from 'web3';
 import ASTTokenContractABI from '../../smart-contracts/contract-abi/astTokenABI.json';
+import ASTTokenCoreContractABI from '../../smart-contracts/contract-abi/astTokenCoreABI.json';
 const ASTTokenContractAddress =
   process.env.NEXT_PUBLIC_AST_TOKEN_IMPLEMENTATION_CONTRACT_ADDRESS;
+const ASTTokenCoreContractAddress =
+  process.env.NEXT_PUBLIC_AST_TOKEN_CORE_CONTRACT_ADDRESS;
 export const getWeb3Provider = () => {
   return new Promise(async (resolve, reject) => {
     if (window.ethereum) {
@@ -32,11 +35,12 @@ export const getWeb3Provider = () => {
   });
 };
 
-export const getContractInstance = async () => {
+export const getContractInstance = async (tokenCoreContract = false) => {
   const { web3 } = await getWeb3Provider();
-  const AstTokenContract = new web3.eth.Contract(
-    ASTTokenContractABI,
-    ASTTokenContractAddress,
-  );
+  const abi = tokenCoreContract ? ASTTokenCoreContractABI : ASTTokenContractABI;
+  const contractAddress = tokenCoreContract
+    ? ASTTokenCoreContractAddress
+    : ASTTokenContractAddress;
+  const AstTokenContract = new web3.eth.Contract(abi, contractAddress);
   return AstTokenContract;
 };

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   walletAddress: '',
   networkId: '',
-  balance: '',
+  balance: 0,
   isUserConnected: false,
   userToken: '',
 };

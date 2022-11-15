@@ -15,6 +15,7 @@ import {
   varivarifieSignatureApi,
 } from '../../../../../services/api/user';
 import {
+  setBalance,
   setIsUserConnected,
   setToken,
   setWalletAddress,
@@ -23,12 +24,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { getWalletAstTokenBalance } from '../../../../../services/web3/walletMothods';
+import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
   const route = useRouter();
   const [walletConnetDialog, setwalletConnetDialog] = useState(false);
   const { isUserConnected } = useSelector((state) => state.walletReducer);
+
   useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on('accountsChanged', function () {});
@@ -36,6 +40,7 @@ const Header = () => {
         window.location.reload();
       });
     }
+    dispatch(fetchCurrencyData());
   }, []);
 
   const connectWallet = () => {
@@ -108,12 +113,15 @@ const Header = () => {
           networkId: networkId,
         };
         const responseSignature = await varivarifieSignatureApi(data);
+        const walletBalance = await getWalletAstTokenBalance(address);
+
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
           localStorage.setItem('userToken', responseSignature.data.token);
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));
+          dispatch(setBalance(walletBalance));
           setwalletConnetDialog(false);
           toast.success('Wallet Connected', {
             position: 'top-right',

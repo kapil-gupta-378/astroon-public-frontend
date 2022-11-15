@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { NavDropdown } from 'react-bootstrap';
+import { NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import defaltProfileImage from '../../../../public/assets/images/dummyProfileImage.png';
 import ethereumIconWhite from '../../../../public/assets/images/ethereum-icon-white.svg';
 import styles from './userProfileDropdown.module.scss';
@@ -13,7 +13,10 @@ import {
   setToken,
 } from '../../../redux/persist/wallet/walletSlice';
 const UserProfileDropDown = () => {
-  const { walletAddress } = useSelector((state) => state.walletReducer);
+  const { walletAddress, balance } = useSelector(
+    (state) => state.walletReducer,
+  );
+  const { ethUsdPrice } = useSelector((state) => state.currencyReducer);
   const router = useRouter();
   const dispatch = useDispatch();
   const disconnect = () => {
@@ -54,17 +57,29 @@ const UserProfileDropDown = () => {
         <NavDropdown.Divider />
         <NavDropdown.Item href="#">
           <div className={styles.balance}> Balance</div>
-          <div className={styles.ethereum}>
-            <Image
-              src={ethereumIconWhite}
-              width={15}
-              height={15}
-              alt="ethereum_icon"
-              layout="fixed"
-            />
-            0.00 ETH
+          <OverlayTrigger
+            placement={'auto'}
+            overlay={
+              <Tooltip>
+                <strong>{balance}</strong>
+              </Tooltip>
+            }
+          >
+            <div className={styles.ethereum}>
+              <Image
+                src={ethereumIconWhite}
+                width={15}
+                height={15}
+                alt="ethereum_icon"
+                layout="fixed"
+              />
+              {Number(balance).toFixed(4)} AST
+            </div>
+          </OverlayTrigger>
+
+          <div className={styles.usd}>
+            ${(0.0001 * balance * ethUsdPrice).toFixed(2)} USD
           </div>
-          <div className={styles.usd}>$0.00 USD</div>
         </NavDropdown.Item>
       </NavDropdown>
     </div>

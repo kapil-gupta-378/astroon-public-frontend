@@ -8,6 +8,7 @@ import userReducer from './user/userSlice';
 import globalLoadingReducer from './global-loading/globalLoadingSlice';
 import walletReducer from './persist/wallet/walletSlice';
 import tokenReducer from './token/tokenSlice';
+import currencyReducer from './currency/currencySlice';
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -18,4 +19,5 @@ export const rootReducer = combineReducers({
   walletReducer,
   globalLoadingReducer,
   tokenReducer,
+  currencyReducer,
 });
