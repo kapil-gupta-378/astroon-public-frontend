@@ -10,7 +10,6 @@ import ListTable from '../../component/common/list-table';
 import SearchBar from '../../component/common/SearchBar';
 import { fetchAdminListData } from '../../redux/admin/adminAction';
 import styles from './adminListTable.module.scss';
-
 const AdminListTable = () => {
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
@@ -126,6 +125,11 @@ const AdminListTable = () => {
   const gotoProfile = (id) => {
     route.push(`/admin/view-profile/${id}`);
   };
+// start callback handler with debounce technic
+  const changeHandler = event => {
+    setSearchKeyWord(event.target.value);
+  };
+// end callback handler with debounce technic
 
   return (
     <main className={styles.admin_List_table_wrap}>
@@ -133,7 +137,7 @@ const AdminListTable = () => {
         <div className={styles.top_bar_left}>
           <SearchBar
             inputValue={searchKeyWord}
-            onChangeInputHandler={(e) => setSearchKeyWord(e.target.value)}
+            typeValue={changeHandler}
           />
         </div>
         <div className={styles.top_bar_right}>

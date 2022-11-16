@@ -215,7 +215,8 @@ const ContactUsTable = () => {
         <div className={styles.top_bar_left}>
           <SearchBar
             inputValue={searchContact}
-            onChangeInputHandler={handleContactUsSearch}
+            typeValue={handleContactUsSearch}
+            // onChangeInputHandler={handleContactUsSearch}
           />
         </div>
       </section>
