@@ -372,3 +372,61 @@ body {
     }
   }
 }
+
+// content management card css
+
+.content-management {
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: transparent;
+    background-clip: border-box;
+    border-radius: 15px;
+    border: unset;
+  }
+  .btn-primary {
+    color: #fff;
+    background-color: #020039;
+    border-color: #020039;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: 0 26px;
+    font-family: 'Rubik';
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 33.98px;
+    &:hover {
+      background-color: #020039;
+      border-color: #020039;
+    }
+  }
+  .card-body {
+    padding: 0rem 0rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 125px;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 45px;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 25px;
+    }
+  }
+} /* 375 */
