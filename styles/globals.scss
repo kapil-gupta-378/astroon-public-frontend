@@ -372,3 +372,93 @@ body {
     }
   }
 }
+
+// content management card css
+
+.content-management {
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: transparent;
+    background-clip: border-box;
+    border-radius: 15px;
+    border: unset;
+  }
+  .btn-primary {
+    color: #fff;
+    background-color: #020039;
+    border-color: #020039;
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    margin: 0 26px;
+    font-family: 'Rubik';
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 33.98px;
+    &:hover {
+      background-color: #020039;
+      border-color: #020039;
+    }
+  }
+  .card-body {
+    padding: 0rem 0rem;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 125px;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 45px;
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .content-management {
+    .btn-primary {
+      margin: 0px 25px;
+    }
+  }
+} /* 375 */
+// css for token modal
+
+.buy_token_modal_ast_page_bootstrap {
+  .modal-dialog {
+    .modal-content {
+      padding: 3%;
+      background: linear-gradient(
+          0deg,
+          rgba(254, 25, 193, 0.3),
+          rgba(254, 25, 193, 0.3)
+        ),
+        url('../public/assets/images/dialogBackgorund.png'), #a04141;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 0px;
+      .modal-header {
+        display: unset;
+        border-bottom: unset;
+        .modal-title {
+          @include heading_12;
+        }
+        .btn-close {
+          position: absolute;
+          right: 16px;
+          top: 16px;
+          font-size: 10px;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

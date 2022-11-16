@@ -127,15 +127,18 @@ const ContactUs = (props) => {
           });
         }
       } catch (error) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        if (error.response) {
+          toast.error(error.response.data.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+
         if (error.response.data.statusCode === 400) {
           toast.error(error.response.data.message[0].errorDetail.isEmail, {
             position: 'top-right',

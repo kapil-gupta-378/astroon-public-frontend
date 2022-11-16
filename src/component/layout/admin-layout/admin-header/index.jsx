@@ -13,7 +13,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
   const [dataState, setdataState] = useState({});
   const router = useRouter();
   const Logout = () => {
-    localStorage.clear();
+    localStorage.removeItem('adminToken');
     router.push('/login');
   };
 

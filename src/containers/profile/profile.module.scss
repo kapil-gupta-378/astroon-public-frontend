@@ -46,17 +46,24 @@
         }
       }
     }
+    .btn_wrap {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
 
     .wallet_address {
       width: 15%;
       border: 1px solid #ffffff;
       border-radius: 268px;
-      margin: 0 auto;
       padding: 6px 15px;
       color: white;
       font-size: 14px;
+      text-align: center;
+      cursor: pointer;
       span {
-        margin-right: 10px !important;
+        margin-right: 6px !important;
       }
     }
   }

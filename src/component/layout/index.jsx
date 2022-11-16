@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
     '/forgot-password',
     `${`/reset/[token]`}`,
   ];
-
   return (
     <>
       {router.pathname.includes('/admin') ? (

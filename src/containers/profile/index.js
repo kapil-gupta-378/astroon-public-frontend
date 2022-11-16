@@ -21,19 +21,30 @@ import {
 } from '../../../services/api/user';
 import { toast, ToastContainer } from 'react-toastify';
 import { useRef } from 'react';
+import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
+import { fetchFaqData } from '../../redux/token/tokenAction';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import { buyToken } from '../../../services/web3/tokenMothods';
 const Profile = () => {
   const { userData } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
+  const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
+  const [sliderValue, setSliderValue] = useState(1);
+  const { isUserConnected, walletAddress } = useSelector(
+    (state) => state.walletReducer,
+  );
+  const { tokenData } = useSelector((state) => state.tokenReducer);
   const route = useRouter();
   const dispatch = useDispatch();
   const { address } = route.query;
   const imageInputImageRef = useRef();
   const coverImageInputImageRef = useRef();
-  const { isUserConnected } = useSelector((state) => state.walletReducer);
   useEffect(() => {
     fetchUserData();
+    fetchTokenData();
   }, []);
+
   useEffect(() => {
     if (!isUserConnected) {
       toast.error('Please connect your wallet', {
@@ -48,6 +59,10 @@ const Profile = () => {
       route.push('/');
     }
   }, [isUserConnected]);
+
+  const fetchTokenData = async () => {
+    dispatch(fetchFaqData());
+  };
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
@@ -58,6 +73,46 @@ const Profile = () => {
   const updateState = (e) => {
     dispatch(updateUserData(e));
   };
+
+  const buyTokenHandler = async () => {
+    if (isUserConnected) {
+      try {
+        dispatch(setGlobalLoading(true));
+        const tokenTransition = await buyToken(
+          sliderValue,
+          tokenData.rate,
+          walletAddress,
+        );
+        if (tokenTransition.status) {
+          toast.success('Token Transfered Successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setShowBuyTokenModal(false);
+          dispatch(setGlobalLoading(false));
+        }
+      } catch (error) {
+        dispatch(setGlobalLoading(false));
+        setShowBuyTokenModal(false);
+      }
+    } else {
+      toast.error('Please connect your wallet', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
   async function updataProfile(e) {
     e.preventDefault();
     try {
@@ -127,6 +182,7 @@ const Profile = () => {
   const openCoverImageInput = () => {
     coverImageInputImageRef.current.click();
   };
+
   return (
     <>
       {isUserConnected ? (
@@ -202,26 +258,39 @@ const Profile = () => {
                   />
                 </button>
               </div>
-              <OverlayTrigger
-                placement={'auto'}
-                overlay={
-                  <Tooltip>
-                    <strong>{address}</strong>
-                  </Tooltip>
-                }
-              >
-                <div className={styles.wallet_address}>
-                  <Image src={ethIconWhite} width={13} height={13} alt="eth" />
-                  {`${address ? `${address.slice(0, 9)}...` : ''}`}
+              <div className={styles.btn_wrap}>
+                <OverlayTrigger
+                  placement={'auto'}
+                  overlay={
+                    <Tooltip>
+                      <strong>{address}</strong>
+                    </Tooltip>
+                  }
+                >
+                  <div className={styles.wallet_address}>
+                    <Image
+                      src={ethIconWhite}
+                      width={13}
+                      height={13}
+                      alt="eth"
+                    />
+                    {`${address ? `${address.slice(0, 9)}...` : ''}`}
+                  </div>
+                </OverlayTrigger>
+                <div
+                  onClick={() => setShowBuyTokenModal(true)}
+                  className={styles.wallet_address}
+                >
+                  Buy Token
                 </div>
-              </OverlayTrigger>
+              </div>
             </div>
           </section>
 
           {route.pathname === '/user-profile/[address]' && (
             <section className={styles.user_nft_wrapper}>
               <h3 className={styles.section_headeing}>My NFT’s</h3>
-              {userData.assets ? (
+              {userData.assets.length !== 0 ? (
                 <div className={styles.nft_list}>
                   {userData.assets.map((nftData, idx) => (
                     <NFTCard nftData={nftData} key={idx} />
@@ -282,6 +351,15 @@ const Profile = () => {
             </form>
           )}
           <ToastContainer />
+          <BuyTokenModal
+            tokenData={tokenData}
+            sliderOnChange={setSliderValue}
+            sliderValue={sliderValue}
+            modalShowHandler={setShowBuyTokenModal}
+            modalShow={showBuyTokenModal}
+            selectedQuantity={sliderValue}
+            handleFunction={buyTokenHandler}
+          />
         </main>
       ) : (
         <div style={{ height: '100vh' }}></div>
