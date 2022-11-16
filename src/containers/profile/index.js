@@ -77,14 +77,53 @@ const Profile = () => {
   const buyTokenHandler = async () => {
     if (isUserConnected) {
       try {
-        dispatch(setGlobalLoading(true));
-        const tokenTransaction = await buyToken(
-          sliderValue,
-          tokenData.rate,
-          walletAddress,
-        );
-        if (tokenTransaction.status) {
-          toast.success('Token Transfered Successfully', {
+        if (tokenData.isPrivateSale || tokenData.isPublicSale) {
+          let tokenTransaction;
+          if (tokenData.isPrivateSale) {
+            if (userData.whiteListedUser) {
+              dispatch(setGlobalLoading(true));
+              tokenTransaction = await buyToken(
+                sliderValue,
+                tokenData.rate,
+                walletAddress,
+                tokenData.isPrivateSale,
+              );
+            } else {
+              toast.error('Currently token are availble for private user', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          } else {
+            dispatch(setGlobalLoading(true));
+            tokenTransaction = await buyToken(
+              sliderValue,
+              tokenData.rate,
+              walletAddress,
+              tokenData.isPrivateSale,
+            );
+          }
+
+          if (tokenTransaction.status) {
+            toast.success('Token Transfered Successfully', {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setShowBuyTokenModal(false);
+            dispatch(setGlobalLoading(false));
+          }
+        } else {
+          toast.error('Sale is not live', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -93,12 +132,9 @@ const Profile = () => {
             draggable: true,
             progress: undefined,
           });
-          setShowBuyTokenModal(false);
-          dispatch(setGlobalLoading(false));
         }
       } catch (error) {
         dispatch(setGlobalLoading(false));
-        setShowBuyTokenModal(false);
       }
     } else {
       toast.error('Please connect your wallet', {
