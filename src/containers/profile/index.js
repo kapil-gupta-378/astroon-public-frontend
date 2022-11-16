@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { fetchAdminListData } from '../../redux/user/userAction';
+import { fetchUserDataAction } from '../../redux/user/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   updateCoverImage,
@@ -22,7 +22,7 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import { useRef } from 'react';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
-import { fetchFaqData } from '../../redux/token/tokenAction';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
 const Profile = () => {
@@ -61,13 +61,13 @@ const Profile = () => {
   }, [isUserConnected]);
 
   const fetchTokenData = async () => {
-    dispatch(fetchFaqData());
+    dispatch(fetchTokenDataAction());
   };
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchAdminListData());
+    dispatch(fetchUserDataAction());
   };
 
   const updateState = (e) => {

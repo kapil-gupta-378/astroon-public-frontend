@@ -1,7 +1,7 @@
 import { getTokenDataApi } from '../../../services/api/astroon-token';
 import { setTokendata, setTokenDataLoading } from './tokenSlice';
 
-export const fetchFaqData = () => {
+export const fetchTokenDataAction = () => {
   return async (dispatch) => {
     try {
       dispatch(setTokenDataLoading(true));
