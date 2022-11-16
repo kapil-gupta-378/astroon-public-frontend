@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   walletAddress: '',
   networkId: '',
-  balance: '',
+  balance: 0,
   isUserConnected: false,
-  token: '',
+  userToken: '',
 };
 
 export const walletSlice = createSlice({
@@ -25,7 +25,7 @@ export const walletSlice = createSlice({
       state.isUserConnected = action.payload;
     },
     setToken: (state, action) => {
-      state.token = action.payload;
+      state.userToken = action.payload;
     },
   },
 });

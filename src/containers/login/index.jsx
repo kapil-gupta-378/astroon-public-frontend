@@ -14,11 +14,11 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
   const rememberMe = localStorage.getItem('rememberMe');
-  const token = localStorage.getItem('token');
+  const adminToken = localStorage.getItem('adminToken');
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (rememberMe && token) {
+    if (rememberMe && adminToken) {
       router.push('admin/admin-management');
       setIsLogin(false);
     } else {
@@ -37,7 +37,7 @@ const Login = () => {
         const res = await loginUserApi(data);
         if (res.success) {
           router.push('/admin/admin-management');
-          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('adminToken', res.data.token);
           toast.success(res.message, {
             position: 'top-right',
             autoClose: 5000,

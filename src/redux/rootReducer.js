@@ -5,8 +5,10 @@ import blogReducer from './blog/blogSlice';
 import adminReducer from './admin/adminSlice';
 import contentReducer from './content/contentSlice';
 import userReducer from './user/userSlice';
-
+import globalLoadingReducer from './global-loading/globalLoadingSlice';
 import walletReducer from './persist/wallet/walletSlice';
+import tokenReducer from './token/tokenSlice';
+import currencyReducer from './currency/currencySlice';
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -15,4 +17,7 @@ export const rootReducer = combineReducers({
   contentReducer,
   userReducer,
   walletReducer,
+  globalLoadingReducer,
+  tokenReducer,
+  currencyReducer,
 });
