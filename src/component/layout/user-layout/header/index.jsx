@@ -187,7 +187,7 @@ const Header = () => {
                 </Nav.Item>
               )}
               {isUserConnected && (
-                <Nav.Item onClick={() => setMobileNavExpended(false)}>
+                <Nav.Item>
                   <UserProfileDropDown />
                 </Nav.Item>
               )}

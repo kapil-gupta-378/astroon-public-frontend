@@ -21,7 +21,10 @@ export const buyToken = async (
 
     tokenTransition = await AstTokenContract.methods
       .preSaleBuy([
-        merkleData.merkleProof[merkleData.merkleProof.length - 1].merkleProof,
+        merkleData.merkleProof.length !== 0
+          ? merkleData.merkleProof[merkleData.merkleProof.length - 1]
+              .merkleProof
+          : merkleData.merkleRoot,
       ])
       .send({
         from: walletAddress,
