@@ -29,6 +29,7 @@ import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
+import { createMarkleTree } from '../../../../utils/markleMethods';
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
@@ -46,6 +47,7 @@ const Header = () => {
     dispatch(fetchCurrencyData());
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
+    createMarkleTree();
   }, []);
 
   const connectWallet = async () => {
