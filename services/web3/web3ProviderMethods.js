@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import ASTTokenContractABI from '../../smart-contracts/contract-abi/astTokenABI.json';
 import ASTTokenCoreContractABI from '../../smart-contracts/contract-abi/astTokenCoreABI.json';
 const ASTTokenContractAddress =
-  process.env.NEXT_PUBLIC_AST_TOKEN_IMPLEMENTATION_CONTRACT_ADDRESS;
+  process.env.NEXT_PUBLIC_AST_TOKEN_PROXY_CONTRACT_ADDRESS;
 const ASTTokenCoreContractAddress =
   process.env.NEXT_PUBLIC_AST_TOKEN_CORE_CONTRACT_ADDRESS;
 export const getWeb3Provider = () => {
