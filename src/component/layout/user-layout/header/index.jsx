@@ -51,7 +51,9 @@ const Header = () => {
   const connectWallet = async () => {
     if (window.ethereum && window.ethereum.isMetaMask) {
       const { web3 } = await getWeb3Provider();
-      const accounts = await web3.eth.getAccounts();
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      });
       const networkId = await web3.eth.net.getId();
       if (envNetworkId !== networkId) {
         await window.ethereum.request({

@@ -21,6 +21,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
+import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
+import { setBalance } from '../../redux/persist/wallet/walletSlice';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -128,6 +130,8 @@ const AST = () => {
             setShowBuyTokenModal(false);
             dispatch(setGlobalLoading(false));
             dispatch(fetchTokenDataAction());
+            const walletBalance = await getWalletAstTokenBalance(walletAddress);
+            dispatch(setBalance(walletBalance));
           }
         } else {
           toast.error('Sale is not live', {
