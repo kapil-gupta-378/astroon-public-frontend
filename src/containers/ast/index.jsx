@@ -127,6 +127,7 @@ const AST = () => {
             });
             setShowBuyTokenModal(false);
             dispatch(setGlobalLoading(false));
+            dispatch(fetchTokenDataAction());
           }
         } else {
           toast.error('Sale is not live', {
@@ -140,6 +141,7 @@ const AST = () => {
           });
         }
       } catch (error) {
+        dispatch(fetchTokenDataAction());
         dispatch(setGlobalLoading(false));
       }
     } else {
@@ -153,6 +155,11 @@ const AST = () => {
         progress: undefined,
       });
     }
+  };
+
+  const closeModal = () => {
+    setShowBuyTokenModal(false);
+    setSliderValue(1);
   };
 
   return (
@@ -234,7 +241,7 @@ const AST = () => {
         tokenData={tokenData}
         sliderOnChange={setSliderValue}
         sliderValue={sliderValue}
-        modalShowHandler={setShowBuyTokenModal}
+        modalShowHandler={closeModal}
         modalShow={showBuyTokenModal}
         selectedQuantity={sliderValue}
         handleFunction={buyTokenHandler}

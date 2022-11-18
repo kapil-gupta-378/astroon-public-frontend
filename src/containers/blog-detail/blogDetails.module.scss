@@ -24,3 +24,18 @@
     }
   }
 }
+
+@media only screen and (max-width: 767px) {
+  .blog_detail_wrap {
+    .blog_content {
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+      padding: 0px 0%;
+      p {
+        color: white;
+      }
+    }
+  }
+} /* 650 */
