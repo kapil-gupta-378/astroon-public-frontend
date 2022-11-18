@@ -25,6 +25,8 @@ import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
+import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
+import { setBalance } from '../../redux/persist/wallet/walletSlice';
 const Profile = () => {
   const { userData } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
@@ -121,6 +123,8 @@ const Profile = () => {
             });
             setShowBuyTokenModal(false);
             dispatch(setGlobalLoading(false));
+            const walletBalance = await getWalletAstTokenBalance(walletAddress);
+            dispatch(setBalance(walletBalance));
           }
         } else {
           toast.error('Sale is not live', {
