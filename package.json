@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "ngrok": "ngrok http 3000",
     "build:development": "env-cmd -f .env.development yarn next build",
     "start:development": "env-cmd -f .env.development yarn next start",
     "start": "next start",
@@ -58,6 +59,7 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
+    "ngrok": "^4.3.3",
     "prettier": "^2.7.1",
     "sass": "^1.54.8"
   }

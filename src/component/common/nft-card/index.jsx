@@ -5,7 +5,7 @@ import cardback from '../../../../public/assets/images/card_back.svg';
 
 const NFTCard = ({ nftData }) => {
   const myRef = useRef(null);
-  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   const ImageLoader = ({ src }) => {
     return `${src}`;
@@ -13,25 +13,24 @@ const NFTCard = ({ nftData }) => {
 
   const getDimensions = () => ({
     width: window.innerWidth,
-    height: window.innerHeight
-  })
+    height: window.innerHeight,
+  });
 
   useEffect(() => {
     const handleResize = () => {
-      setDimensions(getDimensions())
-    }
+      setDimensions(getDimensions());
+    };
 
     if (myRef.current) {
-      setDimensions(getDimensions())
+      setDimensions(getDimensions());
     }
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [myRef])
-
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [myRef]);
 
   return (
     <div
@@ -61,7 +60,13 @@ const NFTCard = ({ nftData }) => {
             <Image
               src={cardback}
               // eslint-disable-next-line prettier/prettier
-              width={dimensions?.width < 430 ? 300 : ( dimensions?.width  > 550 && dimensions?.width  < 775 ? 350 : 420)}
+              width={
+                dimensions?.width < 430
+                  ? 300
+                  : dimensions?.width > 550 && dimensions?.width < 775
+                  ? 350
+                  : 420
+              }
               height={283}
               alt="img"
               layout="fixed"

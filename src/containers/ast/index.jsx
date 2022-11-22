@@ -20,7 +20,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
-import { fetchFaqData } from '../../redux/token/tokenAction';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
+import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
+import { setBalance } from '../../redux/persist/wallet/walletSlice';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -42,13 +44,14 @@ const AST = () => {
     (state) => state.walletReducer,
   );
   const { tokenData } = useSelector((state) => state.tokenReducer);
+  const { userData } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    fetchTokenData();
+    fetchTokenDataHandler();
   }, []);
-  const fetchTokenData = async () => {
-    dispatch(fetchFaqData());
+  const fetchTokenDataHandler = async () => {
+    dispatch(fetchTokenDataAction());
   };
 
   const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -82,15 +85,56 @@ const AST = () => {
   const buyTokenHandler = async () => {
     if (isUserConnected) {
       try {
-        dispatch(setGlobalLoading(true));
-        const tokenTransition = await buyToken(
-          sliderValue,
-          tokenData.rate,
-          walletAddress,
-        );
+        if (tokenData.isPrivateSale || tokenData.isPublicSale) {
+          let tokenTransaction;
+          if (tokenData.isPrivateSale) {
+            if (userData.whiteListedUser) {
+              dispatch(setGlobalLoading(true));
+              tokenTransaction = await buyToken(
+                sliderValue,
+                tokenData.rate,
+                walletAddress,
+                tokenData.isPrivateSale,
+              );
+            } else {
+              toast.error('Currently token are availble for private user', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          } else {
+            dispatch(setGlobalLoading(true));
+            tokenTransaction = await buyToken(
+              sliderValue,
+              tokenData.rate,
+              walletAddress,
+              tokenData.isPrivateSale,
+            );
+          }
 
-        if (tokenTransition.status) {
-          toast.success('Token Transfered Successfully', {
+          if (tokenTransaction.status) {
+            toast.success('Token Transfered Successfully', {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setShowBuyTokenModal(false);
+            dispatch(setGlobalLoading(false));
+            dispatch(fetchTokenDataAction());
+            const walletBalance = await getWalletAstTokenBalance(walletAddress);
+            dispatch(setBalance(walletBalance));
+          }
+        } else {
+          toast.error('Sale is not live', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -99,10 +143,9 @@ const AST = () => {
             draggable: true,
             progress: undefined,
           });
-          setShowBuyTokenModal(false);
-          dispatch(setGlobalLoading(false));
         }
       } catch (error) {
+        dispatch(fetchTokenDataAction());
         dispatch(setGlobalLoading(false));
       }
     } else {
@@ -116,6 +159,11 @@ const AST = () => {
         progress: undefined,
       });
     }
+  };
+
+  const closeModal = () => {
+    setShowBuyTokenModal(false);
+    setSliderValue(1);
   };
 
   return (
@@ -197,7 +245,7 @@ const AST = () => {
         tokenData={tokenData}
         sliderOnChange={setSliderValue}
         sliderValue={sliderValue}
-        modalShowHandler={setShowBuyTokenModal}
+        modalShowHandler={closeModal}
         modalShow={showBuyTokenModal}
         selectedQuantity={sliderValue}
         handleFunction={buyTokenHandler}
