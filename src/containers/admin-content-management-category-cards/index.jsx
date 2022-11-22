@@ -5,7 +5,7 @@ import ContentManagementCards from '../../component/common/content-management-ca
 const ContentManagementCategoryCards = () => {
   return (
     <main className={styles.content_management_wrap}>
-      <ContentManagementCards />;
+      <ContentManagementCards />
     </main>
   );
 };

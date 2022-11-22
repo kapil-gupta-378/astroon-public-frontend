@@ -43,10 +43,10 @@ const AdminBlogTable = () => {
 
   const getBlogData = async (pageNo, pageLim) => {
     const res = await getBlogDataApi(pageNo, pageLim);
-    if (res) {
-      setAdminBlogData(res.rows);
+    if (res.success) {
+      setAdminBlogData(res.data.rows);
       setBlogLoading(false);
-      setAdminBlogCount(res.count);
+      setAdminBlogCount(res.data.count);
     } else {
       toast.error(res.message, {
         position: 'top-right',
@@ -244,6 +244,7 @@ const AdminBlogTable = () => {
           setAdminBlogData(res.data.rows);
           setIsFilter(false);
           setBlogLoading(false);
+          setAdminBlogCount(res.data.count);
         } else {
           setIsFilter(false);
           setBlogLoading(false);

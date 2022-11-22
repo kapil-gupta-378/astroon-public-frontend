@@ -2,15 +2,21 @@ import React from 'react';
 import Image from 'next/image';
 import TextInput from '../text-input';
 import styles from './nftDialogBox.module.scss';
+import defaultProfileImage from '../../../../public/assets/images/Dummy_Image.svg';
 
 const NFTDialogBox = ({
   leftBlogButtonHandler,
   rightBlogButtonHandler,
   handleShow,
   showNFT,
+  finalData,
   inputValue,
   onChangeInput,
+  handleSubmit,
 }) => {
+  const ImageLoader = ({ src }) => {
+    return `${src}`;
+  };
   return (
     <div className="dialog_box">
       {handleShow && (
@@ -50,7 +56,12 @@ const NFTDialogBox = ({
               <div className={styles.nft_submit_frm}>
                 <div className={`row ${styles.attachment}`}>
                   <Image
-                    src={'/assets/images/card_avatar.svg'}
+                    loader={ImageLoader}
+                    src={
+                      finalData.image_thumbnail_url
+                        ? finalData.image_thumbnail_url
+                        : defaultProfileImage
+                    }
                     height={100}
                     width={100}
                     layout="fixed"
@@ -65,7 +76,7 @@ const NFTDialogBox = ({
                         titleBackground={'#AF3277'}
                         handleType={'text'}
                         kind="fullborder"
-                        handleValue={''}
+                        handleValue={finalData.name}
                         title="Name"
                       />
                     </div>
@@ -76,7 +87,7 @@ const NFTDialogBox = ({
                         titleBackground={'#AF3277'}
                         handleType={'text'}
                         kind="fullborder"
-                        handleValue={''}
+                        handleValue={finalData.ether_price}
                         title="Price"
                       />
                     </div>
@@ -100,7 +111,7 @@ const NFTDialogBox = ({
                         titleBackground={'#AF3277'}
                         handleType={'text'}
                         kind="fullborder"
-                        handleValue={''}
+                        handleValue={finalData.dollar_price}
                         title="Price in USD"
                       />
                     </div>
@@ -108,14 +119,14 @@ const NFTDialogBox = ({
                 </div>
                 <div className={styles.dialog_footer}>
                   <button
-                    onClick={leftBlogButtonHandler}
+                    onClick={() => leftBlogButtonHandler()}
                     type="button"
                     className={styles.dialog_left_btn}
                   >
                     Cancel
                   </button>
                   <button
-                    onClick={() => rightBlogButtonHandler()}
+                    onClick={() => handleSubmit()}
                     type="button"
                     className={styles.dialog_right_btn}
                   >
