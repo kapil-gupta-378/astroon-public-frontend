@@ -1,0 +1,161 @@
+@import '../../../../styles/typography.module';
+.dialogbox_wrap {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: rgba(3, 2, 35, 0.89);
+  .modal_content {
+    width: 37%;
+    background: url('../../../../public/assets/images/dialogBackgorund.png');
+    background-repeat: no-repeat;
+    position: relative;
+
+    border-radius: 25px;
+    padding: 40px 38px;
+    .cross_close_btn {
+      position: absolute;
+      right: 20px;
+      top: 14px;
+      background: transparent;
+      border: none;
+    }
+    .modal_header {
+      .dailog_title {
+        @include heading_12;
+        margin-bottom: 20px;
+      }
+    }
+    .input_wrap {
+      padding: 0px 40px 20px 40px;
+    }
+    .dialog_body {
+      width: 80%;
+      margin-bottom: 20px;
+      @include heading_7;
+      font-size: 13px;
+      text-align: center;
+      line-height: 18px;
+      margin: 0px auto 25px auto;
+    }
+
+    .dialog_footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      .dialog_left_btn {
+        background: transparent;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        margin-right: 30px;
+        @include heading_7;
+      }
+      .dialog_right_btn {
+        background: #ffffff;
+        padding: 10px;
+        padding: 7px 39px;
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        @include heading_7;
+        color: #020039;
+      }
+    }
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 45%;
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 55%;
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 66%;
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .dialogbox_wrap {
+    .modal_content {
+      .modal_header {
+        .dailog_title {
+          font-size: 15px;
+          margin-bottom: 8px;
+        }
+      }
+      .input_wrap {
+        padding: 0px 0px 20px 0px;
+      }
+      .dialog_body {
+        width: 100%;
+        font-size: 9px;
+        margin: 0px auto 14px auto;
+      }
+
+      .dialog_footer {
+        .dialog_left_btn {
+          padding: 7px 25px;
+          margin-right: 0px;
+        }
+        .dialog_right_btn {
+          padding: 7px 25px;
+        }
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .dialogbox_wrap {
+    .modal_content {
+      width: 79%;
+      .modal_header {
+        .dailog_title {
+          line-height: 18px;
+        }
+      }
+      .input_wrap {
+        padding: 0px 0px 20px 0px;
+      }
+      .dialog_body {
+        width: 100%;
+        font-size: 9px;
+        margin: 0px auto 14px auto;
+        line-height: 15px;
+      }
+
+      .dialog_footer {
+        .dialog_left_btn {
+          padding: 7px 25px;
+          margin-right: 0px;
+        }
+        .dialog_right_btn {
+          padding: 7px 25px;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */

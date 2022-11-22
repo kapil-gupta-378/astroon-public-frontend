@@ -462,6 +462,9 @@ body {
         iframe {
           min-height: 300px;
         }
+        span {
+          width: 100% !important;
+        }
       }
       .modal-header {
         border-bottom: unset;
