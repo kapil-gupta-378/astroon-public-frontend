@@ -165,7 +165,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/faq">White Listed User</Link>
+          <Link href="/admin/white-list-user">White Listed User</Link>
         </div>
       </div>
     </aside>
