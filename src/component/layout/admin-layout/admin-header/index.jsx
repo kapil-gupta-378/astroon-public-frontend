@@ -52,6 +52,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
               layout="fixed"
               height={60}
               alt="logo"
+              priority
             />
           </div>
           <h3>Welcome Back</h3>

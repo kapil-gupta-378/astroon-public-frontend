@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { fetchAdminListData } from '../../redux/user/userAction';
+import { fetchUserDataAction } from '../../redux/user/userAction';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   updateCoverImage,
@@ -22,9 +22,11 @@ import {
 import { toast, ToastContainer } from 'react-toastify';
 import { useRef } from 'react';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
-import { fetchFaqData } from '../../redux/token/tokenAction';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
+import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
+import { setBalance } from '../../redux/persist/wallet/walletSlice';
 const Profile = () => {
   const { userData } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
@@ -61,13 +63,13 @@ const Profile = () => {
   }, [isUserConnected]);
 
   const fetchTokenData = async () => {
-    dispatch(fetchFaqData());
+    dispatch(fetchTokenDataAction());
   };
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchAdminListData());
+    dispatch(fetchUserDataAction());
   };
 
   const updateState = (e) => {
@@ -77,14 +79,55 @@ const Profile = () => {
   const buyTokenHandler = async () => {
     if (isUserConnected) {
       try {
-        dispatch(setGlobalLoading(true));
-        const tokenTransition = await buyToken(
-          sliderValue,
-          tokenData.rate,
-          walletAddress,
-        );
-        if (tokenTransition.status) {
-          toast.success('Token Transfered Successfully', {
+        if (tokenData.isPrivateSale || tokenData.isPublicSale) {
+          let tokenTransaction;
+          if (tokenData.isPrivateSale) {
+            if (userData.whiteListedUser) {
+              dispatch(setGlobalLoading(true));
+              tokenTransaction = await buyToken(
+                sliderValue,
+                tokenData.rate,
+                walletAddress,
+                tokenData.isPrivateSale,
+              );
+            } else {
+              toast.error('Currently token are availble for private user', {
+                position: 'top-right',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+            }
+          } else {
+            dispatch(setGlobalLoading(true));
+            tokenTransaction = await buyToken(
+              sliderValue,
+              tokenData.rate,
+              walletAddress,
+              tokenData.isPrivateSale,
+            );
+          }
+
+          if (tokenTransaction.status) {
+            toast.success('Token Transfered Successfully', {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setShowBuyTokenModal(false);
+            dispatch(setGlobalLoading(false));
+            const walletBalance = await getWalletAstTokenBalance(walletAddress);
+            dispatch(setBalance(walletBalance));
+          }
+        } else {
+          toast.error('Sale is not live', {
             position: 'top-right',
             autoClose: 5000,
             hideProgressBar: false,
@@ -93,12 +136,9 @@ const Profile = () => {
             draggable: true,
             progress: undefined,
           });
-          setShowBuyTokenModal(false);
-          dispatch(setGlobalLoading(false));
         }
       } catch (error) {
         dispatch(setGlobalLoading(false));
-        setShowBuyTokenModal(false);
       }
     } else {
       toast.error('Please connect your wallet', {
