@@ -24,6 +24,7 @@ const VideoManagement = () => {
   const [isShow, setIsShow] = useState(false);
   const [getPage, setPages] = useState();
   const [videoAttachment, setVideoAttachment] = useState('');
+  const [isVideoAttachment, setIsVideoAttachment] = useState('');
   const [getUpdatePage, setUpdatePages] = useState();
   const [videoList, setVideoList] = useState([]);
   const [isLoading, setLoasing] = useState(true);
@@ -73,8 +74,25 @@ const VideoManagement = () => {
     setUpdateItemId('');
     setVideoUpdateAttachmentURL('');
   };
-  const getVideoUrl = (e) => {
-    setVideoAttachment(e.target.files[0]);
+  const getVideoUrl = async (e) => {
+    let attachment = e.target.files[0];
+    setIsVideoAttachment(e.target.files[0]);
+    const fileBody = new FormData();
+    fileBody.append('file', attachment);
+    let fileResponse = await uploadVideosApi(fileBody);
+    if (fileResponse.success) {
+      setVideoAttachment(fileResponse.data.fileName);
+    } else {
+      toast.error(fileResponse.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   const handleVideo = async () => {
     if (getPage && (videoAttachmentURL || videoAttachment)) {
@@ -98,48 +116,29 @@ const VideoManagement = () => {
       }
       if (finalAttachment) {
         try {
-          let fileResponse;
-          if (videoAttachment) {
-            const fileBody = new FormData();
-            fileBody.append('file', finalAttachment);
-            fileResponse = await uploadVideosApi(fileBody);
-          }
-          if (videoAttachmentURL || fileResponse.success) {
-            let data = {
-              url: videoAttachmentURL
-                ? videoAttachmentURL
-                : fileResponse.data.fileName,
-              videoType: getPage,
-            };
-            const res = await insertVideosForPagesApi(data);
-            if (res.success) {
-              toast.success(res.message, {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-              setPages('');
-              setVideoAttachment('');
-              setIsShow(false);
-              getVideosData();
-              setVideoAttachmentURL('');
-            } else {
-              toast.error(res.message, {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }
+          let data = {
+            url: videoAttachmentURL ? videoAttachmentURL : videoAttachment,
+            videoType: getPage,
+          };
+          const res = await insertVideosForPagesApi(data);
+          if (res.success) {
+            toast.success(res.message, {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            setPages('');
+            setVideoAttachment('');
+            setIsShow(false);
+            getVideosData();
+            setVideoAttachmentURL('');
+            setIsVideoAttachment('');
           } else {
-            toast.error(fileResponse.message, {
+            toast.error(res.message, {
               position: 'top-right',
               autoClose: 5000,
               hideProgressBar: false,
@@ -186,6 +185,7 @@ const VideoManagement = () => {
     setIsShow(false);
     getVideosData();
     setVideoAttachmentURL('');
+    setIsVideoAttachment('');
   };
   const handleUpdateVideo = async () => {
     if (getUpdatePage && videoUpdateAttachmentURL) {
@@ -219,6 +219,7 @@ const VideoManagement = () => {
             setUpdatePages('');
             setUpdateItemId('');
             setVideoUpdateAttachmentURL('');
+            setIsVideoAttachment('');
           } else {
             toast.error(res.message, {
               position: 'top-right',
@@ -288,7 +289,7 @@ const VideoManagement = () => {
         handleShow={isShow}
         onChangeSelect={(value) => setPages(value)}
         selectOption={pageSelectOptions}
-        videoAttachment={videoAttachment}
+        isVideoAttachment={isVideoAttachment}
         uploadVideoAttachment={getVideoUrl}
         videoAttachmentURL={videoAttachmentURL}
         setVideoAttachmentURL={setVideoAttachmentURL}

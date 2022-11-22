@@ -10,11 +10,10 @@ const VideoDialogBox = ({
   handleShow,
   selectOption,
   onChangeSelect,
-  videoAttachment,
+  isVideoAttachment,
   uploadVideoAttachment,
   videoAttachmentURL,
   setVideoAttachmentURL,
-  getPage,
 }) => {
   return (
     <div className="dialog_box">
@@ -32,7 +31,6 @@ const VideoDialogBox = ({
               <div className="col-lg-12">
                 <div className={styles.input_wrap}>
                   <FormSelect
-                    selectedOption={getPage}
                     titleBackground="rgb(175, 50, 119)"
                     label={'Page'}
                     options={selectOption}
@@ -73,8 +71,8 @@ const VideoDialogBox = ({
                           opacity: '0.5',
                         }}
                       >
-                        {videoAttachment
-                          ? videoAttachment.name
+                        {isVideoAttachment
+                          ? isVideoAttachment.name
                           : 'select video'}
                       </p>
                       <h6
@@ -87,7 +85,7 @@ const VideoDialogBox = ({
                           cursor: 'pointer',
                         }}
                       >
-                        {videoAttachment ? 'Change Video' : 'Upload Video'}
+                        {isVideoAttachment ? 'Change Video' : 'Upload Video'}
                       </h6>
                     </div>
                     <input
