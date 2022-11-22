@@ -14,6 +14,10 @@ const ContentManagementCards = () => {
     router.push('content-management/nft-management');
   };
 
+  const redirectTOVideoManagement = () => {
+    router.push('content-management/video-management');
+  };
+
   return (
     <>
       <div className="content-management">
@@ -32,7 +36,12 @@ const ContentManagementCards = () => {
           <Card>
             <Image variant="top" src={video_card} alt="video_card" />
             <Card.Body>
-              <Button variant="primary">Video Management</Button>
+              <Button
+                variant="primary"
+                onClick={() => redirectTOVideoManagement()}
+              >
+                Video Management
+              </Button>
             </Card.Body>
           </Card>
           <Card>
