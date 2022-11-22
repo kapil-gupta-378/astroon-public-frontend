@@ -18,7 +18,7 @@ const Login = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (rememberMe || token) {
+    if (rememberMe && adminToken) {
       router.push('admin/admin-management');
       setIsLogin(false);
     } else {
