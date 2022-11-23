@@ -9,6 +9,7 @@ import globalLoadingReducer from './global-loading/globalLoadingSlice';
 import walletReducer from './persist/wallet/walletSlice';
 import tokenReducer from './token/tokenSlice';
 import currencyReducer from './currency/currencySlice';
+import whiteListUserReducer from './white-list-user/whiteListSlice';
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -20,4 +21,5 @@ export const rootReducer = combineReducers({
   globalLoadingReducer,
   tokenReducer,
   currencyReducer,
+  whiteListUserReducer,
 });

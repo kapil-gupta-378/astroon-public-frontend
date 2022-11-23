@@ -1,0 +1,117 @@
+.white_List_table_wrap {
+  padding: 3% 3% 4% 3%;
+  .top_bar {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    .top_bar_left {
+      width: 60%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .top_bar_right {
+      width: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 30px;
+      .add_btn_wrap {
+        display: flex;
+        justify-content: end;
+        .csv_File_Input {
+          width: 0px;
+        }
+      }
+      .filter_wrap {
+        width: 30%;
+      }
+      .add_btn_wrap {
+        width: 70%;
+      }
+    }
+  }
+
+  .submit_btn_wrap {
+    display: flex;
+    margin-top: 30px;
+    justify-content: center;
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+  .white_List_table_wrap {
+    .top_bar {
+      .top_bar_right {
+        width: 50%;
+        .add_btn_wrap {
+          width: 60%;
+        }
+      }
+    }
+  }
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+  .white_List_table_wrap {
+    .top_bar {
+      .top_bar_right {
+        width: 60%;
+        .add_btn_wrap {
+          width: 41%;
+        }
+      }
+    }
+  }
+} /* 980 */
+@media only screen and (max-width: 979px) {
+  .white_List_table_wrap {
+    .top_bar {
+      .top_bar_right {
+        .add_btn_wrap {
+          width: 52%;
+        }
+      }
+    }
+  }
+} /* 768 */
+@media only screen and (max-width: 767px) {
+  .white_List_table_wrap {
+    .top_bar {
+      .top_bar_right {
+        .add_btn_wrap {
+          width: 62%;
+        }
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
+  .white_List_table_wrap {
+    .top_bar {
+      padding: 20px;
+      .top_bar_right {
+        .add_btn_wrap {
+          width: 100%;
+        }
+      }
+    }
+  }
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .white_List_table_wrap {
+    .top_bar {
+      flex-direction: column;
+      padding: 20px;
+      gap: 30px;
+      .top_bar_right {
+        width: 100%;
+        .add_btn_wrap {
+          width: 100%;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+} /* 320 */
