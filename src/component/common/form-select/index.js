@@ -1,9 +1,23 @@
 import React from 'react';
 import Select from 'react-select';
-const FormSelect = ({ selectedOption, handleChange, options, label }) => {
+const FormSelect = ({
+  selectedOption,
+  handleChange,
+  options,
+  label,
+  titleBackground,
+}) => {
   return (
     <div className="form_select_wrap">
-      <label>{label}</label>
+      <label
+        style={{
+          background: titleBackground,
+          lineHeight: '17px',
+          padding: '0px 20px 0px 10px',
+        }}
+      >
+        {label}
+      </label>
       <Select
         value={selectedOption}
         onChange={handleChange}
@@ -11,6 +25,10 @@ const FormSelect = ({ selectedOption, handleChange, options, label }) => {
       />
     </div>
   );
+};
+
+FormSelect.defaultProps = {
+  titleBackground: '#05052d',
 };
 
 export default FormSelect;

@@ -11,7 +11,7 @@ export const getBlogDataApi = async (page, limit) => {
     },
   });
 
-  return xhr.data.data;
+  return xhr.data;
 };
 
 export const deleteBlogDataApi = async (id) => {

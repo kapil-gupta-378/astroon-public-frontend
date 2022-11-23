@@ -1,101 +1,58 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
-import { adminAuditApi } from '../../../services/api/admin';
-import { deleteContentApi } from '../../../services/api/content/content';
-import BlogDialogBox from '../../component/common/blog-dialoag-box';
+import {
+  validateOpenseaURLApi,
+  insertNFTDataApi,
+  getNFTDataApi,
+  deleteNFTDataApi,
+} from '../../../services/api/content-management/nft-management';
 import Button from '../../component/common/button';
-import DialogBox from '../../component/common/dialoag-box';
+import NFTDeleteDialogBox from '../../component/common/nft-delete-dialoag-box';
 import NFTDialogBox from '../../component/common/nft-dialog-box';
-import SearchBar from '../../component/common/SearchBar';
-import Sort from '../../component/common/sort';
-import ContentTable from '../../component/ui/content-table';
-import { fetchAdminListData } from '../../redux/admin/adminAction';
-import { fetchContentListData } from '../../redux/content/contentAction';
+import NFTContentManagementTable from '../../component/ui/nft-content-management-table';
 import styles from './nftManagement.module.scss';
 
 const NFTManagement = () => {
-  const todayDate = new Date().toISOString().slice(0, 10);
   const [deleteItemId, setDeleteItemId] = useState('');
   const [deleteDialog, setDeleteDialog] = useState(false);
-  const [deleteItemComment, setDeleteItemComment] = useState('');
-  const [pageNumber, setPageNumber] = useState();
-  const [pageLimit, setPageLimit] = useState();
-  const [sortBy, setSortBy] = useState('ASC');
-  const [isSorted, setIsSorted] = useState(false);
-  const [searchKeyWord, setSearchKeyWord] = useState();
   const [isShow, setIsShow] = useState(false);
-  const [startDate, setStartDate] = useState(todayDate);
-  const [endDate, setEndDate] = useState(todayDate);
   const [nftFormShow, setNftFormShow] = useState(false);
   const [openseaLink, setOpenseaLink] = useState('');
-  const { contentListData, contentLoading, contentListCount } = useSelector(
-    (state) => state.contentReducer,
-  );
+  const [getNFTData, setNFTData] = useState('');
+  const [nftListData, setNFTListData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const dispatch = useDispatch();
-  const route = useRouter();
   useEffect(() => {
-    setPageLimit(6);
-    setPageNumber(1);
-    const paramsObj = {
-      page: 1,
-      limit: 6,
-      sortBy: sortBy,
-    };
-    dispatch(fetchContentListData(paramsObj));
-    setPageNumber((value) => value + 1);
+    getNFTFinalData();
   }, []);
 
-  useEffect(() => {
-    if (searchKeyWord) {
-      const paramsObj = {
-        page: 1,
-        limit: 6,
-        sortBy: sortBy,
-        search: searchKeyWord,
-      };
-      dispatch(fetchContentListData(paramsObj));
+  const getNFTFinalData = async () => {
+    const res = await getNFTDataApi();
+    if (res.success) {
+      setNFTListData(res.data.rows);
+      setIsLoading(false);
+    } else {
+      toast.error(res.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setIsLoading(false);
     }
-  }, [searchKeyWord]);
+  };
 
-  const fetchMoreData = () => {
-    const paramsObj = {
-      page: pageNumber,
-      limit: pageLimit,
-      sortBy: sortBy,
-      search: searchKeyWord,
-    };
-    dispatch(fetchContentListData(paramsObj, true));
-    setPageNumber((value) => value + 1);
-  };
-  const handleSortingFunction = (value) => {
-    setSortBy(value);
-    setIsSorted((value) => !value);
-    const paramsObj = {
-      page: 1,
-      limit: 6,
-      sortBy: value,
-    };
-    dispatch(fetchContentListData(paramsObj));
-  };
   const handleDeleteDialog = (id) => {
     setDeleteItemId(id);
     setDeleteDialog(true);
   };
-  const handleDeleteContent = async (id, comment) => {
-    const data = {
-      comment: comment.toString(),
-      description: id.toString(),
-      action: 'delete',
-    };
+
+  const handleDeleteNFT = async () => {
     try {
-      if (comment) {
-        await adminAuditApi(data);
-        setDeleteItemComment('');
-      }
-      const res = await deleteContentApi(id);
+      const res = await deleteNFTDataApi(deleteItemId);
       if (res.success) {
         toast.success(res.message, {
           position: 'top-right',
@@ -106,8 +63,9 @@ const NFTManagement = () => {
           draggable: true,
           progress: undefined,
         });
+        setDeleteItemId('');
+        getNFTFinalData();
         setDeleteDialog(false);
-        dispatch(fetchAdminListData());
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -119,41 +77,72 @@ const NFTManagement = () => {
         draggable: true,
         progress: undefined,
       });
+      setDeleteItemId('');
       setDeleteDialog(false);
     }
   };
-  const gotoProfile = (id) => {
-    route.push(`/admin/view-profile/${id}`);
-  };
+
   const handleCloseNFTPopup = () => {
     setIsShow(false);
     setNftFormShow(false);
+    setOpenseaLink('');
+    setNFTData('');
+    setDeleteItemId('');
+    setDeleteDialog(false);
   };
-  const cancelContentFilter = () => {
-    setIsShow(false);
-    setStartDate(todayDate);
-    setEndDate(todayDate);
-  };
-  const handleContentFilter = () => {
-    const paramsObj = {
-      page: 1,
-      limit: 6,
-      sortBy: sortBy,
-      startDate: startDate,
-      endDate: endDate,
-    };
-    dispatch(fetchContentListData(paramsObj));
-    setIsShow(false);
-  };
-  const handleOpenseaLink = () => {
+
+  const handleOpenseaLink = async () => {
     const expression = /^(https:\/\/testnets\.)opensea\.[a-z]{2}$/gm;
     const regex = new RegExp(expression);
     const url = openseaLink;
     const result = url.substring(0, 27);
-    if (result.match(regex)) {
-      setNftFormShow(true);
+
+    if (openseaLink) {
+      if (result.match(regex)) {
+        try {
+          let data = {
+            url: openseaLink,
+          };
+          const res = await validateOpenseaURLApi(data);
+          if (res.success) {
+            setNFTData(res.data);
+            setNftFormShow(true);
+          } else {
+            toast.error(res.message, {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        } catch (error) {
+          toast.error(error.response.data.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          // throw error;
+        }
+      } else {
+        toast.error('Please enter valid URL', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     } else {
-      toast.error('Please enter valid URL', {
+      toast.error('Please enter opensea URL', {
         position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
@@ -164,64 +153,87 @@ const NFTManagement = () => {
       });
     }
   };
+
+  const handleNFTData = async () => {
+    try {
+      let data = {
+        url: openseaLink,
+        nft: getNFTData,
+      };
+      const res = await insertNFTDataApi(data);
+      if (res.success) {
+        toast.success(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setIsShow(false);
+        setNftFormShow(false);
+        setOpenseaLink('');
+        setNFTData(res.data);
+        getNFTFinalData();
+      } else {
+        toast.error(res.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      toast.error(error.response.data.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      // throw error;
+    }
+  };
   return (
     <main className={styles.content_management_wrap}>
       <section className={styles.top_bar}>
-        <div className={styles.top_bar_left}>
-          <SearchBar
-            inputValue={searchKeyWord}
-            onChangeInputHandler={(e) => setSearchKeyWord(e.target.value)}
-          />
-        </div>
         <div className={styles.top_bar_right}>
-          <div className={styles.filter_wrap}>
-            <Sort handleSorting={handleSortingFunction} isSort={isSorted} />
-          </div>
           <div className={''}>
             <Button onClick={() => setIsShow(true)}>Add NFT</Button>
           </div>
         </div>
       </section>
       <section className={styles.list_table_wrap}>
-        <ContentTable
-          data={contentListData}
-          loading={contentLoading}
+        <NFTContentManagementTable
+          data={nftListData}
+          loading={isLoading}
           handleDeleteItem={handleDeleteDialog}
-          fetchMoreData={fetchMoreData}
-          dataCount={contentListCount}
-          onClickUserName={gotoProfile}
         />
       </section>
-      <DialogBox
+      <NFTDeleteDialogBox
         mainHading="You’re about to delete this Content"
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"
-        leftButtonHandler={() => setDeleteDialog(false)}
-        rightButtonHandler={() =>
-          handleDeleteContent(deleteItemId, deleteItemComment)
-        }
+        leftButtonHandler={handleCloseNFTPopup}
+        rightButtonHandler={() => handleDeleteNFT(deleteItemId)}
         leftButtonName="Cancel"
         rightButtonName="Delete"
         handleShow={deleteDialog}
-        inputValue={deleteItemComment}
-        onChangeInput={(value) => setDeleteItemComment(value)}
       />
       <NFTDialogBox
         leftBlogButtonHandler={handleCloseNFTPopup}
         rightBlogButtonHandler={handleOpenseaLink}
         handleShow={isShow}
-        // finalData={contactUsViewData}
+        finalData={getNFTData}
         showNFT={nftFormShow}
         inputValue={openseaLink}
         onChangeInput={(value) => setOpenseaLink(value)}
-      />
-      <BlogDialogBox
-        // handleFilterBlogShow={isFilter}
-        startDatevalue={startDate}
-        endDatevalue={endDate}
-        setStartDate={setStartDate}
-        setEndDate={setEndDate}
-        leftBlogButtonHandler={cancelContentFilter}
-        rightBlogButtonHandler={handleContentFilter}
+        handleSubmit={handleNFTData}
       />
       <ToastContainer />
     </main>

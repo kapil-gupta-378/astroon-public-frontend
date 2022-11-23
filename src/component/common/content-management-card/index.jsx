@@ -14,6 +14,14 @@ const ContentManagementCards = () => {
     router.push('content-management/nft-management');
   };
 
+  const redirectTOVideoManagement = () => {
+    router.push('content-management/video-management');
+  };
+
+  const redirectTOGalleryManagement = () => {
+    router.push('content-management/gallery-management');
+  };
+
   return (
     <>
       <div className="content-management">
@@ -32,19 +40,29 @@ const ContentManagementCards = () => {
           <Card>
             <Image variant="top" src={video_card} alt="video_card" />
             <Card.Body>
-              <Button variant="primary">Video Management</Button>
+              <Button
+                variant="primary"
+                onClick={() => redirectTOVideoManagement()}
+              >
+                Video Management
+              </Button>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Image variant="top" src={gallery_card} alt="gallery_card" />
+            <Card.Body>
+              <Button
+                variant="primary"
+                onClick={() => redirectTOGalleryManagement()}
+              >
+                Gallery Management
+              </Button>
             </Card.Body>
           </Card>
           <Card>
             <Image variant="top" src={game_card} alt="game_card" />
             <Card.Body>
               <Button variant="primary">Game Management</Button>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Image variant="top" src={gallery_card} alt="gallery_card" />
-            <Card.Body>
-              <Button variant="primary">Gallery Management</Button>
             </Card.Body>
           </Card>
         </Row>

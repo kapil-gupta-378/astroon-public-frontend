@@ -68,19 +68,9 @@ body {
   label {
     @include heading_7;
     position: absolute;
-    top: -12px;
-    left: 34px;
+    top: -9px;
+    left: 20px;
     z-index: 2;
-    &::after {
-      content: ' ';
-      background-color: #05052d;
-      width: 179%;
-      height: 13px;
-      position: absolute;
-      left: -9px;
-      top: 5px;
-      z-index: -1;
-    }
   }
   .css-b62m3t-container {
     .css-1s2u09g-control,
@@ -460,6 +450,34 @@ body {
           color: #fff;
         }
       }
+    }
+  }
+}
+
+// video-popup css
+.video_popup {
+  .modal-dialog {
+    .modal-content {
+      .modal-body {
+        iframe {
+          min-height: 300px;
+        }
+        span {
+          width: 100% !important;
+        }
+      }
+      .modal-header {
+        border-bottom: unset;
+      }
+      background-color: 'transperent';
+      background: linear-gradient(
+          0deg,
+          rgba(254, 25, 193, 0.3),
+          rgba(254, 25, 193, 0.3)
+        ),
+        url('../public/assets/images/dialogBackgorund.png'), #a04141;
+      border-radius: 20px;
+      overflow: hidden;
     }
   }
 }
