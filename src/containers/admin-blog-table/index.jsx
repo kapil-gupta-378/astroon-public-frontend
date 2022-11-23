@@ -293,9 +293,11 @@ const AdminBlogTable = () => {
     <main className={styles.blog_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
+          
           <SearchBar
             inputValue={searchBlog}
-            onChangeInputHandler={handleSearchBlogTitle}
+            typeValue={handleSearchBlogTitle}
+            // onChangeInputHandler={handleSearchBlogTitle}
           />
         </div>
         <div className={styles.top_bar_right}>
