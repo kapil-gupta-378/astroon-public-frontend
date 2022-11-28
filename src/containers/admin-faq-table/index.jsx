@@ -170,13 +170,17 @@ const AdminFAQTable = () => {
       // throw error;
     }
   };
+
+  
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
+          
           <SearchBar
             inputValue={searchKeyWord}
-            onChangeInputHandler={handleSearchFAQTitle}
+            typeValue={handleSearchFAQTitle}
+            // onChangeInputHandler={handleSearchFAQTitle}
           />
         </div>
         <div className={styles.top_bar_right}>
