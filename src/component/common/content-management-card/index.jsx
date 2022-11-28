@@ -22,6 +22,10 @@ const ContentManagementCards = () => {
     router.push('content-management/gallery-management');
   };
 
+  const redirectTOGamesManagement = () => {
+    router.push('content-management/games-management');
+  };
+
   return (
     <>
       <div className="content-management">
@@ -49,6 +53,17 @@ const ContentManagementCards = () => {
             </Card.Body>
           </Card>
           <Card>
+            <Image variant="top" src={game_card} alt="game_card" />
+            <Card.Body>
+              <Button
+                variant="primary"
+                onClick={() => redirectTOGamesManagement()}
+              >
+                Game Management
+              </Button>
+            </Card.Body>
+          </Card>
+          <Card>
             <Image variant="top" src={gallery_card} alt="gallery_card" />
             <Card.Body>
               <Button
@@ -57,12 +72,6 @@ const ContentManagementCards = () => {
               >
                 Gallery Management
               </Button>
-            </Card.Body>
-          </Card>
-          <Card>
-            <Image variant="top" src={game_card} alt="game_card" />
-            <Card.Body>
-              <Button variant="primary">Game Management</Button>
             </Card.Body>
           </Card>
         </Row>

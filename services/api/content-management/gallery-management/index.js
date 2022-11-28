@@ -1,7 +1,12 @@
 import axios from 'axios';
 const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export const getGalleryForFileApi = async () => {
+export const getGalleryForUserFileApi = async () => {
+  const xhr = await axios.get(`${APP_URL}gallery-management/list`);
+  return xhr.data;
+};
+
+export const getGalleryForAdminFileApi = async () => {
   const xhr = await axios.get(`${APP_URL}gallery-management`);
   return xhr.data;
 };

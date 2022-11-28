@@ -91,4 +91,16 @@
 @media only screen and (max-width: 479px) {
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .nft_card_wrap {
+    .nft_card_price {
+      padding-right: 30%;
+    }
+    .nft_card_img_wrap {
+      .img_nft_card {
+        span {
+          width: 240px !important;
+        }
+      }
+    }
+  }
 } /* 320 */

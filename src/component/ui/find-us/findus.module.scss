@@ -34,6 +34,9 @@
       justify-content: space-evenly;
       width: 40%;
       margin: auto;
+      a {
+        text-decoration: none;
+      }
       .app_store_btn {
         background-color: #faff00;
         border-radius: 268px;
@@ -124,3 +127,30 @@
     }
   }
 } /* 375 */
+
+@media only screen and (max-width: 374px) {
+  .findus_wrap {
+    .findus_on_your_wrap {
+      .findus_content {
+        .app_store_btn {
+          .app_store_btn_dis {
+            .app_store_btn_img {
+              width: 27%;
+              padding: 7px 5px;
+            }
+            .app_store_btn_text {
+              p {
+                font-size: 9px;
+              }
+              h6 {
+                font-size: 10px;
+                margin-top: -35px;
+                margin-right: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+} /* 320*/
