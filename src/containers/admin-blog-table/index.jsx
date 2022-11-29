@@ -62,7 +62,7 @@ const AdminBlogTable = () => {
 
   const fetchMoreData = async () => {
     const res = await getBlogDataApi(pageNumber, pageLimit);
-    setAdminBlogData((value) => [...value, ...res.rows]);
+    setAdminBlogData((value) => [...value, ...res.data.rows]);
     setBlogLoading(false);
     setAdminBlogCount((value) => {
       return value - 6;

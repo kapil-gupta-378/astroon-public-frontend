@@ -15,6 +15,7 @@ const GalleryDialogBox = ({
   galleryAttachmentURL,
   setGalleryAttachmentURL,
   getFile,
+  isDisabled,
 }) => {
   return (
     <div className="dialog_box">
@@ -215,6 +216,7 @@ const GalleryDialogBox = ({
                 onClick={() => rightBlogButtonHandler()}
                 type="button"
                 className={styles.dialog_right_btn}
+                disabled={isDisabled == true ? true : false}
               >
                 Submit
               </button>

@@ -30,10 +30,17 @@ const VideoManagement = () => {
   const [isLoading, setLoasing] = useState(true);
   const [videoAttachmentURL, setVideoAttachmentURL] = useState('');
   const [videoUpdateAttachmentURL, setVideoUpdateAttachmentURL] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     getVideosData();
   }, []);
+
+  useEffect(() => {
+    if (videoAttachmentURL) {
+      setIsDisabled(false);
+    }
+  }, [videoAttachmentURL]);
 
   const getVideosData = async () => {
     const res = await getVideosForPagesApi();
@@ -65,14 +72,17 @@ const VideoManagement = () => {
   };
 
   const handleCloseVideoPopup = () => {
-    setIsShow(false);
-    setPages('');
-    setVideoAttachment('');
-    setVideoAttachmentURL('');
     setUpdateDialog(false);
     setUpdatePages('');
     setUpdateItemId('');
     setVideoUpdateAttachmentURL('');
+    setPages('');
+    setVideoAttachment('');
+    setIsShow(false);
+    getVideosData();
+    setVideoAttachmentURL('');
+    setIsVideoAttachment('');
+    setIsDisabled(true);
   };
   const getVideoUrl = async (e) => {
     let attachment = e.target.files[0];
@@ -82,6 +92,7 @@ const VideoManagement = () => {
     let fileResponse = await uploadVideosApi(fileBody);
     if (fileResponse.success) {
       setVideoAttachment(fileResponse.data.fileName);
+      setIsDisabled(false);
     } else {
       toast.error(fileResponse.message, {
         position: 'top-right',
@@ -131,12 +142,17 @@ const VideoManagement = () => {
               draggable: true,
               progress: undefined,
             });
+            setUpdateDialog(false);
+            setUpdatePages('');
+            setUpdateItemId('');
+            setVideoUpdateAttachmentURL('');
             setPages('');
             setVideoAttachment('');
             setIsShow(false);
             getVideosData();
             setVideoAttachmentURL('');
             setIsVideoAttachment('');
+            setIsDisabled(true);
           } else {
             toast.error(res.message, {
               position: 'top-right',
@@ -214,11 +230,15 @@ const VideoManagement = () => {
               draggable: true,
               progress: undefined,
             });
-            getVideosData();
             setUpdateDialog(false);
             setUpdatePages('');
             setUpdateItemId('');
             setVideoUpdateAttachmentURL('');
+            setPages('');
+            setVideoAttachment('');
+            setIsShow(false);
+            getVideosData();
+            setVideoAttachmentURL('');
             setIsVideoAttachment('');
           } else {
             toast.error(res.message, {
@@ -294,6 +314,7 @@ const VideoManagement = () => {
         videoAttachmentURL={videoAttachmentURL}
         setVideoAttachmentURL={setVideoAttachmentURL}
         getPage={getPage}
+        isDisabled={isDisabled}
       />
       <UpdateVideoDialogBox
         leftBlogButtonHandler={handleCloseUpdateVideoPopup}
