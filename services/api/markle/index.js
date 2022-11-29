@@ -23,3 +23,26 @@ export const postWhiteListAddressApi = async (data) => {
   });
   return xhr.data.data;
 };
+
+export const getMerkleSeedDataApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}whitelist-seed/check`,
+  });
+  return xhr.data.data;
+};
+export const getSeedWhiteListAddressApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}whitelist-seed/list`,
+  });
+  return xhr.data.data;
+};
+export const postSeedWhiteListAddressApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}whitelist-seed/create`,
+    data: data,
+  });
+  return xhr.data.data;
+};

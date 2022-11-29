@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import Button from '../../component/common/button';
-import styles from './whiteListUser.module.scss';
+import styles from './whiteListSeedUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWhiteListUserDataAction } from '../../redux/white-list-user/whiteListAction';
-import { setWhiteListUserData } from '../../redux/white-list-user/whiteListSlice';
-import WhiteListUserTable from '../../component/ui/white-list-user-table';
+import { fetchWhiteListSeedUserDataAction } from '../../redux/white-list-seed-user/whiteListSeedAction';
+import { setWhiteListSeedUserData } from '../../redux/white-list-seed-user/whiteListSeedSlice';
+import WhiteListSeedUserTable from '../../component/ui/white-list-seed-user-table';
 import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
 import Web3 from 'web3';
-import { postWhiteListAddressApi } from '../../../services/api/markle';
+import { postSeedWhiteListAddressApi } from '../../../services/api/markle';
 import { csvFileHandler } from '../../utils/whiteListUser';
 
-const WhiteListUser = () => {
+const WhiteListSeedUser = () => {
   // This state will store the parsed data
   const [, setRawCsvFileData] = useState([]);
 
@@ -26,16 +26,17 @@ const WhiteListUser = () => {
   const allowedExtensions = ['csv'];
 
   const { whiteListUserData } = useSelector(
-    (state) => state.whiteListUserReducer,
+    (state) => state.whiteListSeedUserReducer,
   );
 
   const { walletAddress } = useSelector((state) => state.walletReducer);
+
   const dispatch = useDispatch();
 
   const csvFileInputRef = useRef();
 
   useEffect(() => {
-    dispatch(fetchWhiteListUserDataAction());
+    dispatch(fetchWhiteListSeedUserDataAction());
   }, []);
 
   const setNewDataForTable = (csvFileData, oldWhiteListAddress) => {
@@ -50,7 +51,7 @@ const WhiteListUser = () => {
     }
 
     const oldNewMergeAddressArray = newAddressArray.concat(oldWhiteListAddress);
-    dispatch(setWhiteListUserData(oldNewMergeAddressArray));
+    dispatch(setWhiteListSeedUserData(oldNewMergeAddressArray));
   };
 
   const openCsvFileInput = () => {
@@ -61,14 +62,14 @@ const WhiteListUser = () => {
     const filterArray = whiteListUserData.filter(
       (item) => item.walletAddress !== address,
     );
-    dispatch(setWhiteListUserData(filterArray));
+    dispatch(setWhiteListSeedUserData(filterArray));
   };
 
   const resetTableData = () => {
-    dispatch(fetchWhiteListUserDataAction());
+    dispatch(fetchWhiteListSeedUserDataAction());
   };
 
-  const createWhiteListUser = async () => {
+  const createWhiteListSeedUser = async () => {
     try {
       const web3 = await getContractInstance();
       let newArray = [];
@@ -82,7 +83,7 @@ const WhiteListUser = () => {
       };
 
       try {
-        const response = await postWhiteListAddressApi(data);
+        const response = await postSeedWhiteListAddressApi(data);
         if (response) {
           try {
             const contraactResponse = await web3.methods
@@ -116,7 +117,7 @@ const WhiteListUser = () => {
         <div className={styles.top_bar_right}>
           <Button onClick={resetTableData}>Reset</Button>
           <div className={styles.add_btn_wrap}>
-            <Button onClick={openCsvFileInput}>Add Private User</Button>
+            <Button onClick={openCsvFileInput}>Add Seed User</Button>
             <input
               onChange={(e) =>
                 csvFileHandler(
@@ -137,17 +138,17 @@ const WhiteListUser = () => {
         </div>
       </section>
       <section className={styles.list_table_wrap}>
-        <WhiteListUserTable
+        <WhiteListSeedUserTable
           data={whiteListUserData}
           handleDeleteItem={deleteAddressFromWhiteListArray}
         />
       </section>
       <div className={styles.submit_btn_wrap}>
-        <Button onClick={createWhiteListUser}>Submit</Button>
+        <Button onClick={createWhiteListSeedUser}>Submit</Button>
       </div>
       <ToastContainer />
     </main>
   );
 };
 
-export default WhiteListUser;
+export default WhiteListSeedUser;

@@ -10,6 +10,8 @@ import walletReducer from './persist/wallet/walletSlice';
 import tokenReducer from './token/tokenSlice';
 import currencyReducer from './currency/currencySlice';
 import whiteListUserReducer from './white-list-user/whiteListSlice';
+import whiteListSeedUserReducer from './white-list-seed-user/whiteListSeedSlice';
+
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -22,4 +24,5 @@ export const rootReducer = combineReducers({
   tokenReducer,
   currencyReducer,
   whiteListUserReducer,
+  whiteListSeedUserReducer,
 });

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const router = useRouter();
   const [openDropDown, setOpenDropDown] = useState(false);
-
+  const [openUserDropDown, setOpenUserDropDown] = useState(false);
   return (
     <aside
       className={`${styles.admin_sidebar_wrap} ${
@@ -143,12 +143,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <a
             className={styles.dropdown_btn}
-            onClick={() => setOpenDropDown((value) => !value)}
+            onClick={() => setOpenUserDropDown((value) => !value)}
           >
             Settings
           </a>
 
-          {openDropDown && (
+          {openUserDropDown && (
             <div className={styles.dropdown_wrap}>
               <div
                 className={`${
@@ -161,7 +161,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
               </div>
               <div
                 className={
-                  router.pathname === '/admin/general-information' ??
+                  router.pathname === '/admin/general-information' &&
                   styles.activeLink
                 }
                 onClick={() => setOpenSideBar(false)}
@@ -195,6 +195,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/management">Menu System</Link>
         </div> */}
+        {/* <div onClick={() => setOpenSideBar(false)}>
         <div
           className={`${styles.nav_link_div} ${
             router.pathname === '/admin/white-list-user' && styles.activeLink
@@ -209,6 +210,42 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             alt="nav_image"
           />
           <Link href="/admin/white-list-user">White Listed User</Link>
+        </div> */}
+        <div className={`${styles.nav_dropdown_link} `}>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <a
+            className={styles.dropdown_btn}
+            onClick={() => setOpenDropDown((value) => !value)}
+          >
+            White Listed User
+          </a>
+
+          {openDropDown && (
+            <div className={styles.dropdown_wrap}>
+              <div
+                className={
+                  router.pathname === '/admin/seed-sale' && styles.activeLink
+                }
+                onClick={() => setOpenSideBar(false)}
+              >
+                <Link href={'/admin/seed-sale'}>Seed Sale</Link>
+              </div>
+              <div
+                className={
+                  router.pathname === '/admin/private-sale' && styles.activeLink
+                }
+                onClick={() => setOpenSideBar(false)}
+              >
+                <Link href={'/admin/private-sale'}>Private Sale</Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </aside>
