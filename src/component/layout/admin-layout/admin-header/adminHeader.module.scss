@@ -25,10 +25,11 @@
       }
     }
     .header_right {
-      width: 15%;
+      width: 30%;
       text-align: right;
       display: flex;
       justify-content: flex-end;
+      align-items: center;
       .sidebar_open_btn {
         background: transparent;
         display: none;

@@ -293,7 +293,6 @@ const AdminBlogTable = () => {
     <main className={styles.blog_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
-          
           <SearchBar
             inputValue={searchBlog}
             typeValue={handleSearchBlogTitle}

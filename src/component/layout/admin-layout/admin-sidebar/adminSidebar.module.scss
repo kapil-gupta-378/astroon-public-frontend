@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
-    div {
+    .nav_dropdown_link {
       &:hover {
         span {
           img {
@@ -31,7 +31,35 @@
         }
       }
 
-      &:focus-within {
+      span {
+        img {
+          opacity: 50%;
+        }
+      }
+
+      a {
+        margin-left: 10px;
+        @include heading_11;
+        font-size: 13px;
+        text-decoration: none;
+        text-align: start;
+        color: rgba(184, 184, 184, 0.9);
+        vertical-align: bottom;
+      }
+    }
+    .activeLink {
+      span {
+        img {
+          opacity: 100% !important;
+        }
+      }
+
+      a {
+        color: white !important;
+      }
+    }
+    .nav_link_div {
+      &:hover {
         span {
           img {
             opacity: 100%;
@@ -42,6 +70,18 @@
           color: white;
         }
       }
+
+      // &:focus-within {
+      //   span {
+      //     img {
+      //       opacity: 100%;
+      //     }
+      //   }
+
+      //   a {
+      //     color: white;
+      //   }
+      // }
 
       span {
         img {

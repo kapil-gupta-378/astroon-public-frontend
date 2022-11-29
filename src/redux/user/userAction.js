@@ -8,6 +8,16 @@ export const fetchUserDataAction = () => {
       dispatch(setUserData(data.data));
       dispatch(setUserDataLoading(false));
     } catch (error) {
+      dispatch(
+        setUserData({
+          bio: '',
+          displayName: '',
+          email: '',
+          customUrl: '',
+          assets: [],
+        }),
+      );
+
       dispatch(setUserDataLoading(false));
     }
   };
