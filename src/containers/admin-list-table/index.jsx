@@ -15,22 +15,19 @@ const AdminListTable = () => {
   const [deleteItemId, setDeleteItemId] = useState('');
   const [deleteItemComment, setDeleteItemComment] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState();
-  const [pageNumber, setPageNumber] = useState();
-  const [pageLimit, setPageLimit] = useState();
-  const [role, setRole] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageLimit] = useState(6);
+  const [role, setRole] = useState('admin');
   const dispatch = useDispatch();
   const route = useRouter();
   const filterByOptions = [
     { value: 'admin', label: 'Admin' },
-    { value: 'user', label: 'User' },
     { value: 'subadmin', label: 'Sub Admin' },
   ];
   const { adminListData, adminLoading, adminListCount } = useSelector(
     (state) => state.adminReducer,
   );
   useEffect(() => {
-    setPageLimit(6);
-    setPageNumber(1);
     const paramsObj = {
       page: pageNumber,
       limit: pageLimit,
@@ -125,20 +122,17 @@ const AdminListTable = () => {
   const gotoProfile = (id) => {
     route.push(`/admin/view-profile/${id}`);
   };
-// start callback handler with debounce technic
-  const changeHandler = event => {
+  // start callback handler with debounce technic
+  const changeHandler = (event) => {
     setSearchKeyWord(event.target.value);
   };
-// end callback handler with debounce technic
+  // end callback handler with debounce technic
 
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
-          <SearchBar
-            inputValue={searchKeyWord}
-            typeValue={changeHandler}
-          />
+          <SearchBar inputValue={searchKeyWord} typeValue={changeHandler} />
         </div>
         <div className={styles.top_bar_right}>
           <div className={styles.filter_wrap}>

@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import styles from './adminSidebar.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
+import { useRouter } from 'next/router';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
+  const router = useRouter();
   const [openDropDown, setOpenDropDown] = useState(false);
   const [openUserDropDown, setOpenUserDropDown] = useState(false);
   return (
@@ -14,19 +16,22 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
         openSideBar && styles.openSideBar
       }`}
     >
-      <Link href={'/'}>
-        <h3 className={styles.logo_wrap}>
-          <Image
-            src={logoIcon}
-            height={100}
-            width={150}
-            layout="fixed"
-            alt="logo"
-          />
-        </h3>
-      </Link>
+      <h3 className={styles.logo_wrap}>
+        <Image
+          src={logoIcon}
+          height={100}
+          width={150}
+          layout="fixed"
+          alt="logo"
+        />
+      </h3>
       <div className={styles.navigation_wrap}>
-        <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/admin-management' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -36,7 +41,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/admin-management">Admin Management</Link>
         </div>
-        <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/content-management' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -46,7 +56,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/content-management">Content Management</Link>
         </div>
-        <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/blog' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -56,7 +71,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/blog">Blog</Link>
         </div>
-        <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/contact-us' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -68,7 +88,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             Client Inquiries & Support Request
           </Link>
         </div>
-        <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/faq' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -108,7 +133,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/management">News & Announcements</Link>
         </div> */}
-        <div>
+        <div className={`${styles.nav_dropdown_link} `}>
           <Image
             width={15}
             height={15}
@@ -125,10 +150,22 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
 
           {openUserDropDown && (
             <div className={styles.dropdown_wrap}>
-              <div onClick={() => setOpenSideBar(false)}>
+              <div
+                className={`${
+                  router.pathname === '/admin/general-settings' &&
+                  styles.activeLink
+                }`}
+                onClick={() => setOpenSideBar(false)}
+              >
                 <Link href={'/admin/general-settings'}>General Settings</Link>
               </div>
-              <div onClick={() => setOpenSideBar(false)}>
+              <div
+                className={
+                  router.pathname === '/admin/general-information' &&
+                  styles.activeLink
+                }
+                onClick={() => setOpenSideBar(false)}
+              >
                 <Link href={'/admin/general-information'}>
                   General Information
                 </Link>
@@ -159,6 +196,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Link href="/admin/management">Menu System</Link>
         </div> */}
         {/* <div onClick={() => setOpenSideBar(false)}>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/white-list-user' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
           <Image
             width={15}
             height={15}
@@ -168,7 +211,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/white-list-user">White Listed User</Link>
         </div> */}
-        <div>
+        <div className={`${styles.nav_dropdown_link} `}>
           <Image
             width={15}
             height={15}
@@ -185,10 +228,20 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
 
           {openDropDown && (
             <div className={styles.dropdown_wrap}>
-              <div onClick={() => setOpenSideBar(false)}>
+              <div
+                className={
+                  router.pathname === '/admin/seed-sale' && styles.activeLink
+                }
+                onClick={() => setOpenSideBar(false)}
+              >
                 <Link href={'/admin/seed-sale'}>Seed Sale</Link>
               </div>
-              <div onClick={() => setOpenSideBar(false)}>
+              <div
+                className={
+                  router.pathname === '/admin/private-sale' && styles.activeLink
+                }
+                onClick={() => setOpenSideBar(false)}
+              >
                 <Link href={'/admin/private-sale'}>Private Sale</Link>
               </div>
             </div>
