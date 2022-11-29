@@ -6,8 +6,8 @@ export const fetchBlogData = (currentPage, more) => {
     try {
       dispatch(setBlogdataLoading(true));
       const data = await getBlogDataApi(currentPage, 6);
-      if (data.rows.length !== 0) dispatch(setBlogdata(data.rows));
-      if (more === false) dispatch(setBlogdataCount(data.count));
+      if (data.data.rows.length !== 0) dispatch(setBlogdata(data.data.rows));
+      if (more === false) dispatch(setBlogdataCount(data.data.count));
       dispatch(setBlogdataLoading(false));
     } catch (error) {
       dispatch(setBlogdataLoading(false));
