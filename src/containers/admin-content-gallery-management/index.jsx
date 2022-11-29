@@ -6,7 +6,7 @@ import GalleryDeleteDialogBox from '../../component/common/gallery-delete-dialoa
 import GalleryContentManagementTable from '../../component/ui/gallery-content-management-table';
 import styles from './galleryManagement.module.scss';
 import {
-  getGalleryForFileApi,
+  getGalleryForAdminFileApi,
   uploadGalleryApi,
   insertGalleryForFileApi,
   deleteGalleryForFileApi,
@@ -27,13 +27,20 @@ const GalleryManagement = () => {
   const [galleryList, setGalleryList] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [galleryAttachmentURL, setGalleryAttachmentURL] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
     getGalleryData();
   }, []);
 
+  useEffect(() => {
+    if (galleryAttachmentURL) {
+      setIsDisabled(false);
+    }
+  }, [galleryAttachmentURL]);
+
   const getGalleryData = async () => {
-    const res = await getGalleryForFileApi();
+    const res = await getGalleryForAdminFileApi();
     if (res.success) {
       setGalleryList(res.data.rows);
       setLoading(false);
@@ -62,6 +69,7 @@ const GalleryManagement = () => {
     setDeleteDialog(false);
     setDeleteItemId('');
     setIsGalleryAttachment('');
+    setIsDisabled(true);
   };
   const getGalleryUrl = async (e) => {
     let attachment = e.target.files[0];
@@ -72,6 +80,7 @@ const GalleryManagement = () => {
 
     if (fileResponse.success) {
       setGalleryAttachment(fileResponse.data.fileName);
+      setIsDisabled(false);
     } else {
       toast.error(fileResponse.message, {
         position: 'top-right',
@@ -123,12 +132,14 @@ const GalleryManagement = () => {
               draggable: true,
               progress: undefined,
             });
+            setIsShow(false);
             setFiles('video');
             setGalleryAttachment('');
-            setIsShow(false);
-            getGalleryData();
             setGalleryAttachmentURL('');
+            setDeleteDialog(false);
+            setDeleteItemId('');
             setIsGalleryAttachment('');
+            setIsDisabled(true);
           } else {
             toast.error(res.message, {
               position: 'top-right',
@@ -235,6 +246,7 @@ const GalleryManagement = () => {
         galleryAttachmentURL={galleryAttachmentURL}
         setGalleryAttachmentURL={setGalleryAttachmentURL}
         getFile={getFile}
+        isDisabled={isDisabled}
       />
       <ToastContainer />
     </main>

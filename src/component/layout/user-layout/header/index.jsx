@@ -169,9 +169,6 @@ const Header = () => {
                 <Link href={'/games'}>Games</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                Merch
-              </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/gallery'}>Gallery</Link>
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>

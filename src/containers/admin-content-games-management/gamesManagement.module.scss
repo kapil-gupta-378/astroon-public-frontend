@@ -1,0 +1,66 @@
+.content_management_wrap {
+  padding: 3% 3% 11% 3%;
+  .top_bar {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 30px;
+    justify-content: end;
+    .top_bar_left {
+      width: 50%;
+      display: flex;
+      align-items: center;
+    }
+    .top_bar_right {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 30px;
+      .filter_wrap {
+        width: 25%;
+      }
+    }
+  }
+}
+
+// Responsive breakpoints
+@media only screen and (max-width: 1199px) {
+} /* 1024 */
+@media only screen and (max-width: 1023px) {
+} /* 980 */
+@media only screen and (max-width: 979px) {
+} /* 768 */
+@media only screen and (max-width: 767px) {
+} /* 650 */
+@media only screen and (max-width: 649px) {
+} /* 480 */
+@media only screen and (max-width: 479px) {
+  .content_management_wrap {
+    .top_bar {
+      flex-direction: column;
+      gap: 30px;
+      padding: 20px;
+      .top_bar_left {
+        width: 100%;
+      }
+      .top_bar_right {
+        width: 100%;
+        .filter_wrap {
+          width: 45%;
+        }
+      }
+    }
+  }
+} /* 375 */
+@media only screen and (max-width: 374px) {
+  .content_management_wrap {
+    .top_bar {
+      flex-direction: column;
+      .top_bar_left {
+      }
+      .top_bar_right {
+        width: 100%;
+      }
+    }
+  }
+} /* 320 */
