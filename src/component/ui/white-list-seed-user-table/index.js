@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import React from 'react';
-import styles from './whiteListUserTable.module.scss';
+import styles from './whiteListSeedUserTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
 
-const WhiteListUserTable = ({ data, handleDeleteItem }) => {
+const WhiteListSeedUserTable = ({ data, handleDeleteItem }) => {
   return (
     <div id={'table_scroll'} className={styles.table_wrap}>
       <div className={styles.scroll_wrap}>
@@ -16,7 +16,7 @@ const WhiteListUserTable = ({ data, handleDeleteItem }) => {
             </tr>
           </thead>
           <tbody>
-            {data?.map((item, idx) => {
+            {data?.rows?.map((item, idx) => {
               return (
                 <tr key={item.id}>
                   <th scope="row">{idx + 1}</th>
@@ -61,4 +61,4 @@ const WhiteListUserTable = ({ data, handleDeleteItem }) => {
   );
 };
 
-export default WhiteListUserTable;
+export default WhiteListSeedUserTable;

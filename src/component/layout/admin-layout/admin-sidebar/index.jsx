@@ -7,6 +7,7 @@ import logoIcon from '../../../../../public/assets/images/Logo.png';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const [openDropDown, setOpenDropDown] = useState(false);
+  const [openUserDropDown, setOpenUserDropDown] = useState(false);
   return (
     <aside
       className={`${styles.admin_sidebar_wrap} ${
@@ -117,12 +118,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <a
             className={styles.dropdown_btn}
-            onClick={() => setOpenDropDown((value) => !value)}
+            onClick={() => setOpenUserDropDown((value) => !value)}
           >
             Settings
           </a>
 
-          {openDropDown && (
+          {openUserDropDown && (
             <div className={styles.dropdown_wrap}>
               <div onClick={() => setOpenSideBar(false)}>
                 <Link href={'/admin/general-settings'}>General Settings</Link>
@@ -157,7 +158,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/management">Menu System</Link>
         </div> */}
-        <div onClick={() => setOpenSideBar(false)}>
+        {/* <div onClick={() => setOpenSideBar(false)}>
           <Image
             width={15}
             height={15}
@@ -166,6 +167,32 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             alt="nav_image"
           />
           <Link href="/admin/white-list-user">White Listed User</Link>
+        </div> */}
+        <div>
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <a
+            className={styles.dropdown_btn}
+            onClick={() => setOpenDropDown((value) => !value)}
+          >
+            White Listed User
+          </a>
+
+          {openDropDown && (
+            <div className={styles.dropdown_wrap}>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/seed-sale'}>Seed Sale</Link>
+              </div>
+              <div onClick={() => setOpenSideBar(false)}>
+                <Link href={'/admin/private-sale'}>Private Sale</Link>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </aside>
