@@ -62,7 +62,7 @@ const AdminBlogTable = () => {
 
   const fetchMoreData = async () => {
     const res = await getBlogDataApi(pageNumber, pageLimit);
-    setAdminBlogData((value) => [...value, ...res.rows]);
+    setAdminBlogData((value) => [...value, ...res.data.rows]);
     setBlogLoading(false);
     setAdminBlogCount((value) => {
       return value - 6;
@@ -293,7 +293,6 @@ const AdminBlogTable = () => {
     <main className={styles.blog_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
-          
           <SearchBar
             inputValue={searchBlog}
             typeValue={handleSearchBlogTitle}

@@ -13,17 +13,15 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
         openSideBar && styles.openSideBar
       }`}
     >
-      <Link href={'/'}>
-        <h3 className={styles.logo_wrap}>
-          <Image
-            src={logoIcon}
-            height={100}
-            width={150}
-            layout="fixed"
-            alt="logo"
-          />
-        </h3>
-      </Link>
+      <h3 className={styles.logo_wrap}>
+        <Image
+          src={logoIcon}
+          height={100}
+          width={150}
+          layout="fixed"
+          alt="logo"
+        />
+      </h3>
       <div className={styles.navigation_wrap}>
         <div onClick={() => setOpenSideBar(false)}>
           <Image
