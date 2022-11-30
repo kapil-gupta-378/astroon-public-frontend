@@ -24,7 +24,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { getWalletAstTokenBalance } from '../../../../../services/web3/walletMothods';
+import {
+  connectWallet,
+  getWalletAstTokenBalance,
+} from '../../../../../services/web3/walletMothods';
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
@@ -48,32 +51,19 @@ const Header = () => {
     dispatch(fetchUserDataAction());
   }, []);
 
-  const connectWallet = async () => {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      const { web3 } = await getWeb3Provider();
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      const networkId = await web3.eth.net.getId();
-      if (envNetworkId !== networkId) {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: envNetworkIdInHex }],
-        });
-      }
-      varifieSignature(accounts[0], networkId);
-    } else {
-      toast.error('Please download metamask extention', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      window.location.href =
-        process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
+  const userConnectWalletHandler = async () => {
+    try {
+      const adminWalletData = await connectWallet(
+        envNetworkId,
+        envNetworkIdInHex,
+      );
+
+      varifieSignature(
+        adminWalletData.walletAddress,
+        adminWalletData.netwrokID,
+      );
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -210,7 +200,7 @@ const Header = () => {
             <span>Metamask</span>
           </div>
           <button
-            onClick={connectWallet}
+            onClick={userConnectWalletHandler}
             className={styles.wallet_connect_modal_btn}
           >
             {'Wallet Connect'}
