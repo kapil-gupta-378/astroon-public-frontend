@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const router = useRouter();
-  const [openDropDown, setOpenDropDown] = useState(false);
+  // const [openDropDown, setOpenDropDown] = useState(false);
   const [openUserDropDown, setOpenUserDropDown] = useState(false);
   return (
     <aside
@@ -211,7 +211,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/white-list-user">White Listed User</Link>
         </div> */}
-        <div className={`${styles.nav_dropdown_link} `}>
+        {/* <div className={`${styles.nav_dropdown_link} `}>
           <Image
             width={15}
             height={15}
@@ -246,7 +246,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
               </div>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </aside>
   );

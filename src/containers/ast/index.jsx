@@ -145,6 +145,7 @@ const AST = () => {
           });
         }
       } catch (error) {
+        console.error(error);
         dispatch(fetchTokenDataAction());
         dispatch(setGlobalLoading(false));
       }
