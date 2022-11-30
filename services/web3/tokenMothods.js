@@ -19,7 +19,7 @@ export const buyToken = async (
   if (privateSale) {
     const merkleData = await getMerkleDataApi();
     tokenTransition = await AstTokenContract.methods
-      .preSaleBuy(merkleData.proofs ? merkleData.proofs : null)
+      .preSaleBuy(merkleData.proof ? merkleData.proof : null)
       .send({
         from: walletAddress,
         value: TokenRateInEthForBuyCount,
