@@ -6,7 +6,7 @@ import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg'
 import logout from '../../../../../public/assets/images/logout.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
-import logoIcon from '../../../../../public/assets/images/Logo.png';
+import WebsiteLogo from '../../../common/website-logo';
 import { getCurrentLoginAdminData } from '../../../../../services/api/admin';
 import { connectWallet } from '../../../../../services/web3/walletMothods';
 import { useDispatch, useSelector } from 'react-redux';
@@ -101,14 +101,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
       <div className={styles.header_nav_wrap}>
         <div className={styles.header_left}>
           <div className={styles.logo_wrap}>
-            <Image
-              src={logoIcon}
-              width={100}
-              layout="fixed"
-              height={60}
-              alt="logo"
-              priority
-            />
+            <WebsiteLogo />
           </div>
           <h3>Welcome Back</h3>
           <p>{`Hello ${dataState.firstName}, ${greetingForAdmin()}`}</p>

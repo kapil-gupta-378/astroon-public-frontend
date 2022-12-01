@@ -10,6 +10,7 @@ import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
 import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
 import { getGeneralInformationApi } from '../../../../../services/api/general-information/general-information';
+import { toast, ToastContainer } from 'react-toastify';
 
 const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -20,8 +21,20 @@ const Footer = () => {
   }, []);
 
   const fetchComponentData = async () => {
-    const data = await getGeneralInformationApi();
-    setData(data.data);
+    const res = await getGeneralInformationApi();
+    setData(res.data);
+    if (res.success) {
+    } else {
+      toast.error(res.message, {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
   return (
     <div className={styles.footer_wrap}>
@@ -45,7 +58,7 @@ const Footer = () => {
           >
             <Image src={privacyIcon} width={18} height={18} alt="contact" />
           </a>
-          <a target={'_blank'} href={`${data.facebookUrl}`} rel="noreferrer">
+          <a target={'_blank'} href={`${data.openseaUrl}`} rel="noreferrer">
             <Image src={opensea} width={18} height={18} alt="opensea" />
           </a>
           <a target={'_blank'} href={data.discordUrl} rel="noreferrer">
@@ -54,7 +67,7 @@ const Footer = () => {
           <a target={'_blank'} href={data.twitterUrl} rel="noreferrer">
             <Image src={twitter} width={18} height={18} alt="twitter" />
           </a>
-          <a target={'_blank'} href={data.twitterUrl} rel="noreferrer">
+          <a target={'_blank'} href={data.instagramUrl} rel="noreferrer">
             <Image src={insta} width={18} height={18} alt="insta" />
           </a>
           <a target={'_blank'} href={data.emailLink} rel="noreferrer">
@@ -63,6 +76,7 @@ const Footer = () => {
         </div>
       </div>
       <ContactUs show={modalShow} onHide={() => setModalShow(false)} />
+      <ToastContainer />
     </div>
   );
 };
