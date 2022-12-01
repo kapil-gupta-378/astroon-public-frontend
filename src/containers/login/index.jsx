@@ -6,8 +6,8 @@ import loginUpRightImage from '../../../public/assets/images/login-page-icon.png
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { toast } from 'react-toastify';
-import logoIcon from '../../../public/assets/images/Logo.png';
 import { loginUserApi } from '../../../services/api/admin';
+import WebsiteLogo from '../../component/common/website-logo';
 import { useDispatch } from 'react-redux';
 import { setAdminToken } from '../../redux/admin/adminSlice';
 
@@ -82,13 +82,7 @@ const Login = () => {
           <div className={styles.login_wrap}>
             <div className={styles.left_wrap}>
               <div className={styles.heading_log_wrap}>
-                <Image
-                  src={logoIcon}
-                  width={150}
-                  layout="fixed"
-                  height={100}
-                  alt="logo"
-                />
+                <WebsiteLogo />
                 <h1>Login</h1>
               </div>
               <div className={styles.form_wrap}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import style from './joinyoutubechannel.module.scss';
 
 const JoinYoutubeChannel = () => {
@@ -13,7 +14,11 @@ const JoinYoutubeChannel = () => {
             tristique consectetur{' '}
           </p>
           <div className="text-center">
-            <button className={style.join_now_btn}>Join Now</button>
+            <Link href="https://www.youtube.com/">
+              <a target="_blank">
+                <button className={style.join_now_btn}>Join Now</button>
+              </a>
+            </Link>
           </div>
         </div>
       </div>

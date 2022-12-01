@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import logoIcon from '../../../../../public/assets/images/Logo.png';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
+import WebsiteLogo from '../../../common/website-logo';
 import {
   getNonceApi,
   varivarifieSignatureApi,
@@ -120,13 +120,14 @@ const Header = () => {
         <Container>
           <Navbar.Brand>
             <Link href={'/'}>
-              <Image
+              {/* <Image
                 src={logoIcon}
                 height={100}
                 width={150}
                 layout="fixed"
                 alt="logo"
-              />
+              /> */}
+              <WebsiteLogo />
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle

@@ -3,8 +3,8 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './adminSidebar.module.scss';
 import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
-import logoIcon from '../../../../../public/assets/images/Logo.png';
 import { useRouter } from 'next/router';
+import WebsiteLogo from '../../../common/website-logo';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const router = useRouter();
@@ -17,13 +17,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
       }`}
     >
       <h3 className={styles.logo_wrap}>
-        <Image
-          src={logoIcon}
-          height={100}
-          width={150}
-          layout="fixed"
-          alt="logo"
-        />
+        <WebsiteLogo />
       </h3>
       <div className={styles.navigation_wrap}>
         <div
