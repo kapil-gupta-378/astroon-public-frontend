@@ -8,7 +8,7 @@ import {
   deleteBlogDataApi,
   blogDataOperationApi,
 } from '../../../services/api/blog/blog';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import DialogBox from '../../component/common/dialoag-box';
 import { createAdminAuditApi } from '../../../services/api/admin';
 import Button from '../../component/common/button';
@@ -48,15 +48,7 @@ const AdminBlogTable = () => {
       setBlogLoading(false);
       setAdminBlogCount(res.data.count);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
 
@@ -98,48 +90,16 @@ const AdminBlogTable = () => {
           getBlogData();
           setIsDialog(false);
           setAdminComments('');
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         // throw error;
       }
     } else {
-      toast.error('Please Add Comments', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Add Comments');
     }
   };
 
@@ -158,27 +118,11 @@ const AdminBlogTable = () => {
         setBlogLoading(false);
       } else {
         setBlogLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setBlogLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
@@ -194,27 +138,11 @@ const AdminBlogTable = () => {
         setAdminBlogCount(res.data.count);
       } else {
         setBlogLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setBlogLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
@@ -248,40 +176,16 @@ const AdminBlogTable = () => {
         } else {
           setIsFilter(false);
           setBlogLoading(false);
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         setIsFilter(false);
         setBlogLoading(false);
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         // throw error;
       }
     } else {
-      toast.error('Please Fill Both Date', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill Both Date');
     }
   };
 
@@ -338,7 +242,6 @@ const AdminBlogTable = () => {
         leftBlogButtonHandler={cancelBlogFilter}
         rightBlogButtonHandler={handleBlogFilter}
       />
-      <ToastContainer />
     </main>
   );
 };

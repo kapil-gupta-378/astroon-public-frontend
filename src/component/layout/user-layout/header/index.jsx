@@ -7,7 +7,7 @@ import Button from '../../../common/button';
 import { useEffect } from 'react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
-import { Container, Nav, Navbar, ToastContainer } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import logoIcon from '../../../../../public/assets/images/Logo.png';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 import {
@@ -25,6 +25,7 @@ import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethod
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import {
+  addWalletEventListener,
   connectWallet,
   getWalletAstTokenBalance,
 } from '../../../../../services/web3/walletMothods';
@@ -40,16 +41,15 @@ const Header = () => {
   const { isUserConnected } = useSelector((state) => state.walletReducer);
 
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', function () {});
-      window.ethereum.on('networkChanged', async () => {
-        window.location.reload();
-      });
-    }
-    dispatch(fetchCurrencyData());
+    addWalletEventListener(disconnectWallet, disconnectWallet);
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
   }, []);
+
+  function disconnectWallet() {
+    dispatch(setIsUserConnected(false));
+    dispatch(setToken(''));
+  }
 
   const userConnectWalletHandler = async () => {
     try {
@@ -92,21 +92,13 @@ const Header = () => {
           dispatch(setWalletAddress(address));
           dispatch(setBalance(walletBalance));
           setwalletConnectDialog(false);
-          toast.success('Wallet Connected', {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success('Wallet Connected');
           route.push(`/user-profile/${address}`);
         }
       }
     } catch (error) {
       setwalletConnectDialog(false);
-      return error;
+      console.error(error);
     }
   };
 
@@ -207,7 +199,6 @@ const Header = () => {
           </button>
         </div>
       </DialogBox>
-      <ToastContainer />
     </div>
   );
 };

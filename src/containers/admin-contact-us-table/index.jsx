@@ -8,7 +8,7 @@ import {
   getcontactUsDataDetailsApi,
   replyByUserApi,
 } from '../../../services/api/contactUs';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ContactUsDialogBox from '../../component/common/contact-us-dialog-box';
 import ReplyDialogBox from '../../component/common/reply-dialoag-box';
 
@@ -39,15 +39,7 @@ const ContactUsTable = () => {
       setContactUsLoading(false);
       setAdminContactUsCount(res.data.count);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
 
@@ -69,27 +61,11 @@ const ContactUsTable = () => {
         setIsDialogShow(true);
       } else {
         setContactUsLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setContactUsLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
@@ -111,27 +87,11 @@ const ContactUsTable = () => {
         setAdminContactUsCount(res.data.count);
       } else {
         setContactUsLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setContactUsLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
@@ -156,15 +116,7 @@ const ContactUsTable = () => {
         };
         const res = await replyByUserApi(data);
         if (res.success) {
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
           setTimeout(() => {
             setIsDialogShow(false);
             setIsReplyDialogShow(false);
@@ -172,40 +124,16 @@ const ContactUsTable = () => {
           }, 2000);
         } else {
           setContactUsLoading(false);
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         setContactUsLoading(false);
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         // throw error;
       }
     } else {
       setContactUsLoading(false);
-      toast.error('Fill The Reply Field', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Fill The Reply Field');
     }
   };
 
@@ -244,7 +172,6 @@ const ContactUsTable = () => {
         reply={reply}
         setReply={setReply}
       />
-      <ToastContainer />
     </main>
   );
 };

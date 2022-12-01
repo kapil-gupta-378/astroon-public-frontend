@@ -13,7 +13,7 @@ import TextInput from '../../component/common/text-input';
 import defaltProfileImage from '../../../public/assets/images/Dummy_Image.svg';
 import Button from '../../component/common/button';
 import FormSelect from '../../component/common/form-select';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 const rollSelectOptions = [
   { value: 'admin', label: 'Admin' },
   { value: 'subadmin', label: 'Sub Admin' },
@@ -109,15 +109,7 @@ const ProfileEdit = () => {
         router.back();
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
     }
   };
 
@@ -223,7 +215,6 @@ const ProfileEdit = () => {
           </div>
         </>
       )}
-      <ToastContainer />
     </main>
   );
 };

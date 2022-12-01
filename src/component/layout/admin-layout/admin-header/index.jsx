@@ -69,25 +69,9 @@ const AdminHeader = ({ setOpenSideBar }) => {
         dispatch(setAdminWalletAddress(adminWalletData.walletAddress));
         dispatch(setIsNeworkId(adminWalletData.netwrokID));
         dispatch(setIsConnected(true));
-        toast.success('Wallet Connected', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success('Wallet Connected');
       } else {
-        toast.error('Please Connect Through Admin Wallet', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Connect Through Admin Wallet');
       }
     } catch (error) {}
   };

@@ -5,7 +5,7 @@ import styles from './login.module.scss';
 import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import logoIcon from '../../../public/assets/images/Logo.png';
 import { loginUserApi } from '../../../services/api/admin';
 
@@ -82,15 +82,7 @@ const Login = () => {
         // throw error;
       }
     } else {
-      toast.error('Please Fill All Feilds', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Feilds');
     }
   }
   const redirectToForgot = () => {
@@ -169,7 +161,6 @@ const Login = () => {
             <div className={styles.right_wrap}>
               <Image src={loginUpRightImage} layout="responsive" alt="login" />
             </div>
-            <ToastContainer />
           </div>
         </form>
       ) : (

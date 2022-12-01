@@ -6,7 +6,7 @@ import styles from './addFAQ.module.scss';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import inputStyles from '../../component/common/text-input/textInput.module.scss';
 
 const AddFAQ = () => {
@@ -28,48 +28,16 @@ const AddFAQ = () => {
           setTitle('');
           setOrdering('');
           setDescription('');
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
           router.back();
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error?.response?.data?.message);
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
   return (
@@ -131,7 +99,6 @@ const AddFAQ = () => {
           </div>
         </div>
       </>
-      <ToastContainer />
     </main>
   );
 };

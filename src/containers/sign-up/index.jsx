@@ -5,7 +5,7 @@ import styles from './signUp.module.scss';
 import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { createUserApi } from '../../../services/api/admin';
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -81,15 +81,7 @@ const SignUp = () => {
         // throw error;
       }
     } else {
-      toast.error('Please Fill All Feilds', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Feilds');
     }
   };
   return (
@@ -174,7 +166,6 @@ const SignUp = () => {
       <div className={styles.right_wrap}>
         <Image src={signUpRightImage} layout="responsive" alt="sign-up" />
       </div>
-      <ToastContainer />
     </div>
   );
 };

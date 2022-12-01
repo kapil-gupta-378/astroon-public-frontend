@@ -4,7 +4,7 @@ import styles from './forgotpassword.module.scss';
 import loginUpRightImage from '../../../public/assets/images/forgot-password-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import logoIcon from '../../../public/assets/images/Logo.png';
 import { forgotPasswordUserApi } from '../../../services/api/admin';
 
@@ -79,15 +79,7 @@ const ForgotPassword = () => {
         });
       }
     } else {
-      toast.error('Please Fill Email Feild', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill Email Feild');
     }
   };
   return (
@@ -130,7 +122,6 @@ const ForgotPassword = () => {
       <div className={styles.right_wrap}>
         <Image src={loginUpRightImage} layout="responsive" alt="login" />
       </div>
-      <ToastContainer />
     </div>
   );
 };

@@ -16,7 +16,7 @@ import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { buyToken } from '../../../services/web3/tokenMothods';
@@ -83,82 +83,46 @@ const AST = () => {
   };
 
   const buyTokenHandler = async () => {
-    if (isUserConnected) {
-      try {
-        if (tokenData.isPrivateSale || tokenData.isPublicSale) {
-          let tokenTransaction;
-          if (tokenData.isPrivateSale) {
-            if (userData.whiteListedUser) {
-              dispatch(setGlobalLoading(true));
-              tokenTransaction = await buyToken(
-                sliderValue,
-                tokenData.rate,
-                walletAddress,
-                tokenData.isPrivateSale,
-              );
-            } else {
-              toast.error('Currently token are availble for private user', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }
-          } else {
-            dispatch(setGlobalLoading(true));
-            tokenTransaction = await buyToken(
-              sliderValue,
-              tokenData.rate,
-              walletAddress,
-              tokenData.isPrivateSale,
-            );
-          }
-
-          if (tokenTransaction.status) {
-            toast.success('Token Transfered Successfully', {
-              position: 'top-right',
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
-            setShowBuyTokenModal(false);
-            dispatch(setGlobalLoading(false));
-            dispatch(fetchTokenDataAction());
-            const walletBalance = await getWalletAstTokenBalance(walletAddress);
-            dispatch(setBalance(walletBalance));
-          }
-        } else {
-          toast.error('Sale is not live', {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      } catch (error) {
-        console.error(error);
-        dispatch(fetchTokenDataAction());
-        dispatch(setGlobalLoading(false));
+    try {
+      if (!isUserConnected) {
+        // throw Error when user not connected to website
+        throw new Error('Please connect your wallet');
       }
-    } else {
-      toast.error('Please connect your wallet', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (!tokenData.isPrivateSale && !tokenData.isPublicSale) {
+        // throw Error when sale is not on
+        throw new Error('Sale is not live');
+      }
+
+      let tokenTransaction;
+      // checking which sale is on
+      if (tokenData.isPrivateSale) {
+        if (!userData.whiteListedUser) {
+          // throw Error when user is not white list user
+          throw new Error('Currently token are availble for private user');
+        }
+      }
+      // invoking token buy funtion if no error
+      dispatch(setGlobalLoading(true));
+      tokenTransaction = await buyToken(
+        sliderValue,
+        tokenData.rate,
+        walletAddress,
+        tokenData.isPrivateSale,
+      );
+
+      if (tokenTransaction.status) {
+        toast.success('Token Transfered Successfully');
+        setShowBuyTokenModal(false);
+        dispatch(setGlobalLoading(false));
+        dispatch(fetchTokenDataAction());
+        const walletBalance = await getWalletAstTokenBalance(walletAddress);
+        dispatch(setBalance(walletBalance));
+      }
+    } catch (error) {
+      console.error(error);
+      dispatch(fetchTokenDataAction());
+      dispatch(setGlobalLoading(false));
+      toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
 
@@ -251,7 +215,6 @@ const AST = () => {
         selectedQuantity={sliderValue}
         handleFunction={buyTokenHandler}
       />
-      <ToastContainer />
     </section>
   );
 };

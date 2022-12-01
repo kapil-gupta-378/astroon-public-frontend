@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRef } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
 import styles from './whiteListUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -90,15 +90,7 @@ const WhiteListUser = () => {
     try {
       parseCSVFile(e, afterCsvFileparse);
     } catch (error) {
-      toast.error(error, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error);
     }
   };
 
@@ -135,7 +127,6 @@ const WhiteListUser = () => {
       <div className={styles.submit_btn_wrap}>
         <Button onClick={createWhiteListUser}>Submit</Button>
       </div>
-      <ToastContainer />
     </main>
   );
 };
