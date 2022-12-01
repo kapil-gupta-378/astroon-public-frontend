@@ -1,4 +1,4 @@
-import { convertWeiToEther } from './currencyMethods';
+import { convertWeiToEther } from '../../src/utils/currencyMethods';
 import { getContractInstance, getWeb3Provider } from './web3ProviderMethods';
 
 export const getWalletAstTokenBalance = async (wallet_address) => {

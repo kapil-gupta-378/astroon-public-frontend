@@ -9,7 +9,7 @@ export const fetchWhiteListSeedUserDataAction = () => {
     try {
       dispatch(setWhiteListSeedUserDataLoading(true));
       const data = await getSeedWhiteListAddressApi();
-      dispatch(setWhiteListSeedUserData(data));
+      dispatch(setWhiteListSeedUserData(data.rows));
       dispatch(setWhiteListSeedUserDataLoading(false));
     } catch (error) {
       dispatch(setWhiteListSeedUserData([]));
