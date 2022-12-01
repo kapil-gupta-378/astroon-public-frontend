@@ -26,6 +26,7 @@ import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 import {
   addWalletEventListener,
+  checkWalletConnection,
   connectWallet,
   getWalletAstTokenBalance,
 } from '../../../../../services/web3/walletMothods';
@@ -44,6 +45,11 @@ const Header = () => {
     addWalletEventListener(disconnectWallet, disconnectWallet);
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
+    checkWalletConnection((isConnected) => {
+      if (!isConnected) {
+        disconnectWallet();
+      }
+    });
   }, []);
 
   function disconnectWallet() {

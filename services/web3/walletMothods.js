@@ -41,3 +41,10 @@ export function addWalletEventListener(accountCallback, networkCallback) {
     });
   }
 }
+
+export async function checkWalletConnection(callbackFuntion) {
+  const { web3 } = await getWeb3Provider();
+  const isConnected = await web3.eth.getAccounts();
+  const value = isConnected.length === 0 ? false : true;
+  callbackFuntion(value);
+}
