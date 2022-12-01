@@ -37,25 +37,9 @@ const SignUp = () => {
         const res = await createUserApi(data);
         if (res.success) {
           setRegisterBtn('Registered');
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         toast.error(error.response.data.message, {
@@ -68,15 +52,7 @@ const SignUp = () => {
           progress: undefined,
         });
         if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
         // throw error;
       }

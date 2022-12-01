@@ -7,6 +7,7 @@ const initialState = {
   isConnected: false,
   walletAddress: '',
   networkId: null,
+  adminToken: '',
 };
 
 export const adminSlice = createSlice({
@@ -40,6 +41,9 @@ export const adminSlice = createSlice({
       state.networkId = '';
       state.walletAddress = '';
     },
+    setAdminToken: (state, payload) => {
+      state.adminToken = payload;
+    },
   },
 });
 
@@ -52,6 +56,7 @@ export const {
   setIsNeworkId,
   setIsConnected,
   disconnectAdmin,
+  setAdminToken,
 } = adminSlice.actions;
 
 export default adminSlice.reducer;

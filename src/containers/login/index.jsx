@@ -8,11 +8,14 @@ import Button from '../../component/common/button';
 import { toast } from 'react-toastify';
 import logoIcon from '../../../public/assets/images/Logo.png';
 import { loginUserApi } from '../../../services/api/admin';
+import { useDispatch } from 'react-redux';
+import { setAdminToken } from '../../redux/admin/adminSlice';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const dispatch = useDispatch();
   const rememberMe = localStorage.getItem('rememberMe');
   const adminToken = localStorage.getItem('adminToken');
   const [isLogin, setIsLogin] = useState(false);
@@ -38,25 +41,10 @@ const Login = () => {
         if (res.success) {
           router.push('/admin/admin-management');
           localStorage.setItem('adminToken', res.data.token);
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          dispatch(setAdminToken(res.data.token));
+          toast.success(res.message);
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         toast.error(error.response.data.message, {
@@ -69,15 +57,7 @@ const Login = () => {
           progress: undefined,
         });
         if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
         // throw error;
       }

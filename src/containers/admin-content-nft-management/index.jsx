@@ -103,15 +103,7 @@ const NFTManagement = () => {
             });
           }
         } catch (error) {
-          toast.error(error.response.data.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message);
           // throw error;
         }
       } else {

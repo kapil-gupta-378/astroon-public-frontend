@@ -24,9 +24,8 @@ const AdminListTable = () => {
     { value: 'admin', label: 'Admin' },
     { value: 'subadmin', label: 'Sub Admin' },
   ];
-  const { adminListData, adminLoading, adminListCount } = useSelector(
-    (state) => state.adminReducer,
-  );
+  const { adminListData, adminLoading, adminListCount, adminToken } =
+    useSelector((state) => state.adminReducer);
   useEffect(() => {
     const paramsObj = {
       page: pageNumber,
@@ -35,7 +34,7 @@ const AdminListTable = () => {
     };
     dispatch(fetchAdminListData(paramsObj));
     setPageNumber((value) => value + 1);
-  }, []);
+  }, [adminToken]);
 
   useEffect(() => {
     const paramsObj = {

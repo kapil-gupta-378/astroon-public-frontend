@@ -22,7 +22,9 @@ const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const AdminHeader = ({ setOpenSideBar }) => {
   const [dataState, setdataState] = useState({});
-  const { isConnected } = useSelector((state) => state.adminReducer);
+  const { isConnected, adminToken } = useSelector(
+    (state) => state.adminReducer,
+  );
   const router = useRouter();
   const dispatch = useDispatch();
   const Logout = () => {
@@ -32,7 +34,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
 
   useEffect(() => {
     loadInitialData();
-  }, []);
+  }, [adminToken]);
 
   const loadInitialData = async () => {
     const response = await getCurrentLoginAdminData();
@@ -95,7 +97,9 @@ const AdminHeader = ({ setOpenSideBar }) => {
             />
           </div>
           <h3>Welcome Back</h3>
-          <p>{`Hello ${dataState.firstName}, ${greetingForAdmin()}`}</p>
+          <p>{`Hello ${
+            dataState.firstName ? dataState.firstName : ''
+          }, ${greetingForAdmin()}`}</p>
         </div>
 
         <div className={styles.header_right}>
