@@ -19,7 +19,7 @@ const Login = () => {
 
   useEffect(() => {
     if (rememberMe && adminToken) {
-      router.push('admin/admin-management');
+      router.push('admin/dashboard');
       setIsLogin(false);
     } else {
       setIsLogin(true);
@@ -36,7 +36,7 @@ const Login = () => {
       try {
         const res = await loginUserApi(data);
         if (res.success) {
-          router.push('/admin/admin-management');
+          router.push('/admin/dashboard');
           localStorage.setItem('adminToken', res.data.token);
           toast.success(res.message, {
             position: 'top-right',
