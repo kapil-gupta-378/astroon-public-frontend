@@ -2,7 +2,15 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import styles from './adminSidebar.module.scss';
-import sidebarLinkIcon from '../../../../../public/assets/images/sidebar-link-icon.svg';
+import dashboardIcon from '../../../../../public/assets/images/dashboard.svg';
+import adminManagementIcon from '../../../../../public/assets/images/admin_management.svg';
+import contentManagementIcon from '../../../../../public/assets/images/content_management.svg';
+import blogIcon from '../../../../../public/assets/images/blog.svg';
+import clientEnquirySupportIcon from '../../../../../public/assets/images/clients_enquiry_support.svg';
+import faqIcon from '../../../../../public/assets/images/faq.svg';
+import settingsIcon from '../../../../../public/assets/images/settings.svg';
+// import whiteListedUserIcon from '../../../../../public/assets/images/white_listed_user.svg';
+
 import { useRouter } from 'next/router';
 import WebsiteLogo from '../../../common/website-logo';
 
@@ -22,6 +30,21 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
       <div className={styles.navigation_wrap}>
         <div
           className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/dashboard' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
+          <Image
+            width={15}
+            height={15}
+            src={dashboardIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/dashboard">Dashboard</Link>
+        </div>
+        <div
+          className={`${styles.nav_link_div} ${
             router.pathname === '/admin/admin-management' && styles.activeLink
           }`}
           onClick={() => setOpenSideBar(false)}
@@ -29,7 +52,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={adminManagementIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -44,7 +67,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={contentManagementIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -59,7 +82,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={blogIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -74,7 +97,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={clientEnquirySupportIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -91,7 +114,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={faqIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -131,7 +154,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={settingsIcon}
             layout="fixed"
             alt="nav_image"
           />
@@ -209,7 +232,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={whiteListedUserIcon}
             layout="fixed"
             alt="nav_image"
           />
