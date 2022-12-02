@@ -10,7 +10,7 @@ import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
 import Image from 'next/image';
 import ContactUs from '../../../common/contact-us';
 import { getGeneralInformationApi } from '../../../../../services/api/general-information/general-information';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
@@ -76,7 +76,6 @@ const Footer = () => {
         </div>
       </div>
       <ContactUs show={modalShow} onHide={() => setModalShow(false)} />
-      <ToastContainer />
     </div>
   );
 };

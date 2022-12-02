@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getGeneralSettingsApi } from '../../../../services/api/general-settings';
 import logoIcon from '../../../../public/assets/images/Logo.png';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const WebsiteLogo = () => {
   const [data, setData] = useState({});
@@ -36,7 +36,6 @@ const WebsiteLogo = () => {
         layout="fixed"
         alt="logo"
       />
-      <ToastContainer />
     </>
   );
 };

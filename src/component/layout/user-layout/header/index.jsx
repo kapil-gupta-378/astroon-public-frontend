@@ -92,7 +92,8 @@ const Header = () => {
 
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
-          localStorage.setItem('userToken', responseSignature.data.token);
+          localStorage.setItem('token', responseSignature.data.token);
+          localStorage.setItem('role', 'user');
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));

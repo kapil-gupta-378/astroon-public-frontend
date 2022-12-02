@@ -299,9 +299,10 @@ const Profile = () => {
               <h3 className={styles.section_headeing}>My NFT’s</h3>
               {userData.assets.length !== 0 ? (
                 <div className={styles.nft_list}>
-                  {userData.assets.map((nftData, idx) => (
-                    <NFTCard nftData={nftData} key={idx} />
-                  ))}
+                  {userData.assets &&
+                    userData.assets.map((nftData, idx) => (
+                      <NFTCard nftData={nftData} key={idx} />
+                    ))}
                 </div>
               ) : (
                 <div className={styles.data_not_found}>

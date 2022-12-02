@@ -4,7 +4,7 @@ import AdminHeader from './admin-header';
 import AdminSidebar from './admin-sidebar';
 import styles from './adminLayout.module.scss';
 const AdminLayout = ({ children }) => {
-  let adminToken = localStorage.getItem('adminToken');
+  let adminToken = localStorage.getItem('token');
   const [openSideBar, setOpenSideBar] = useState(false);
 
   useEffect(() => {

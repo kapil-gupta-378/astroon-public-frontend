@@ -17,11 +17,13 @@ const Login = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const rememberMe = localStorage.getItem('rememberMe');
-  const adminToken = localStorage.getItem('adminToken');
+  const adminToken = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (rememberMe && adminToken) {
+    if (rememberMe && adminToken && role === 'admin') {
       router.push('admin/admin-management');
       setIsLogin(false);
     } else {
@@ -40,7 +42,8 @@ const Login = () => {
         const res = await loginUserApi(data);
         if (res.success) {
           router.push('/admin/admin-management');
-          localStorage.setItem('adminToken', res.data.token);
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('role', 'admin');
           dispatch(setAdminToken(res.data.token));
           toast.success(res.message);
         } else {
