@@ -72,11 +72,10 @@ export const parseCSVFile = async (e, csvDataCallBack) => {
     // loads, we parse it and set the data.
     reader.onload = async ({ target }) => {
       let newCsvFileData = [];
-      const csv = Papa.parse(target.result, { header: true });
+      const csv = Papa.parse(target.result);
       const parsedData = csv?.data;
       for (let i = 0; i < parsedData.length; i++) {
-        const columns = Object.keys(parsedData[i]);
-        newCsvFileData.push(...columns);
+        newCsvFileData.push(...parsedData[i]);
       }
       csvDataCallBack(newCsvFileData);
     };

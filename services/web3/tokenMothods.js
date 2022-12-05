@@ -9,7 +9,6 @@ export const buyToken = async (
   privateSale,
 ) => {
   const AstTokenContract = await getContractInstance();
-
   const TokenRateInEthForBuyCount = convertEtherToWei(
     buyingQuality * Number(OneTokenPrice),
   );

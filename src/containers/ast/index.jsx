@@ -23,6 +23,7 @@ import { buyToken } from '../../../services/web3/tokenMothods';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
+import SaleDetailCard from '../../component/common/sale-detail-card';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -43,7 +44,9 @@ const AST = () => {
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData } = useSelector((state) => state.tokenReducer);
+  const { tokenData, saleTypeDetails } = useSelector(
+    (state) => state.tokenReducer,
+  );
   const { userData } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
@@ -105,7 +108,7 @@ const AST = () => {
       dispatch(setGlobalLoading(true));
       tokenTransaction = await buyToken(
         sliderValue,
-        tokenData.rate,
+        tokenData.rate.rate,
         walletAddress,
         tokenData.isPrivateSale,
       );
@@ -158,6 +161,11 @@ const AST = () => {
           viverra volutpat ornare Vulputate mauris, aliquet vitae, vitae. Turpis
           integer vestibulum nun
         </p>
+      </div>
+      <div className={styles.Sale_card_wrap}>
+        {saleTypeDetails.map((item, idx) => {
+          return <SaleDetailCard data={item} key={idx} />;
+        })}
       </div>
       <div className={styles.chart_wrap}>
         <div className={styles.chart}>

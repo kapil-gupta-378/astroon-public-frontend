@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchWhiteListUserDataAction } from '../../redux/white-list-user/whiteListAction';
 import { setWhiteListUserData } from '../../redux/white-list-user/whiteListSlice';
 import WhiteListUserTable from '../../component/ui/white-list-user-table';
-import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
 import { postWhiteListAddressApi } from '../../../services/api/markle';
 import {
   createNewDataForWhiteListTable,
@@ -19,7 +18,6 @@ const WhiteListUser = () => {
     (state) => state.whiteListUserReducer,
   );
 
-  const { walletAddress } = useSelector((state) => state.walletReducer);
   const dispatch = useDispatch();
 
   const csvFileInputRef = useRef();
@@ -32,6 +30,7 @@ const WhiteListUser = () => {
     csvFileInputRef.current.click();
   };
 
+  // funtion for delete address from array
   const deleteAddressFromWhiteListArray = (address) => {
     const filterArray = whiteListUserData.filter(
       (item) => item.walletAddress !== address,
@@ -39,13 +38,14 @@ const WhiteListUser = () => {
     dispatch(setWhiteListUserData(filterArray));
   };
 
+  // funtion for reset table data with old user
   const resetTableData = () => {
     dispatch(fetchWhiteListUserDataAction());
   };
 
+  // for create new whitelist user
   const createWhiteListUser = async () => {
     try {
-      const web3 = await getContractInstance();
       let newArray = [];
 
       for (let i = 0; i < whiteListUserData.length; i++) {
@@ -58,25 +58,16 @@ const WhiteListUser = () => {
 
       try {
         const response = await postWhiteListAddressApi(data);
-        if (response) {
-          try {
-            const contraactResponse = await web3.methods
-              .setMerkleRoot(response)
-              .send({ from: walletAddress });
-            if (contraactResponse.status) {
-              toast.success('WhiteList User Created Successfully', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }
-          } catch (error) {
-            return error;
-          }
+        if (response.success) {
+          toast.success('WhiteList User Created Successfully', {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       } catch (error) {
         return error;
@@ -86,15 +77,19 @@ const WhiteListUser = () => {
     }
   };
 
+  // for handling csv file by UI
   const csvFileInputOnchange = async (e) => {
     try {
+      // user global funtion for parsing csv file
       parseCSVFile(e, afterCsvFileparse);
     } catch (error) {
       toast.error(error);
     }
   };
 
+  // creating new data with old user data and checking invalid address
   const afterCsvFileparse = (csvFileData) => {
+    //  function for checking invalid address
     const newAddressArrayForWhiteListTable = createNewDataForWhiteListTable(
       csvFileData,
       whiteListUserData,
