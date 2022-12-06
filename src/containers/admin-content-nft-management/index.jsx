@@ -46,15 +46,7 @@ const NFTManagement = () => {
     try {
       const res = await deleteNFTDataApi(deleteItemId);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         setDeleteItemId('');
         getNFTFinalData();
         setDeleteDialog(false);
@@ -107,15 +99,7 @@ const NFTManagement = () => {
           // throw error;
         }
       } else {
-        toast.error('Please enter valid URL', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please enter valid URL');
       }
     } else {
       toast.error('Please enter opensea URL');
@@ -130,30 +114,14 @@ const NFTManagement = () => {
       };
       const res = await insertNFTDataApi(data);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         setIsShow(false);
         setNftFormShow(false);
         setOpenseaLink('');
         setNFTData(res.data);
         getNFTFinalData();
       } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       toast.error(error.response.data.message);

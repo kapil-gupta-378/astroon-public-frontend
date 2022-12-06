@@ -31,15 +31,7 @@ const UpdateFAQ = () => {
         setOrdering(res.data.ordering);
         setDescription(res.data.description);
       } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -62,15 +54,7 @@ const UpdateFAQ = () => {
           toast.error(res.message);
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error?.response?.data?.message);
       }
     } else {
       toast.error('Please Fill All Fields');

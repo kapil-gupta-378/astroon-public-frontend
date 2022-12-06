@@ -61,15 +61,7 @@ const AdminFAQTable = () => {
         setAdminFAQCount(res.data.count);
       } else {
         setAdminLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setAdminLoading(false);
@@ -89,15 +81,7 @@ const AdminFAQTable = () => {
     try {
       const res = await deleteFaqDataApi(id);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         setDeleteDialog(false);
         getFaqDataApi(1, 6);
         setDeleteItemId('');
@@ -122,15 +106,7 @@ const AdminFAQTable = () => {
         setAdminLoading(false);
       } else {
         setAdminLoading(false);
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       setAdminLoading(false);
