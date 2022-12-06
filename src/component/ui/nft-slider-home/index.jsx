@@ -1,39 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './nftSlider.module.scss';
-import cardImage1 from '../../../../public/assets/images/nftimag.svg';
-import cardImage2 from '../../../../public/assets/images/nft2.svg';
-import cardImage3 from '../../../../public/assets/images/nft3.svg';
-import cardImage4 from '../../../../public/assets/images/nft4.svg';
-import cardImage5 from '../../../../public/assets/images/nft5.svg';
+import { getNFTDataApi } from '../../../../services/api/content-management/nft-management';
+import { toast } from 'react-toastify';
 import Slider from 'react-slick';
 import CollectionCard from '../../common/collection-card';
-const nftCollectionData = [
-  { imglink: cardImage1, id: 1 },
-  { imglink: cardImage2, id: 2 },
-  { imglink: cardImage3, id: 3 },
-  { imglink: cardImage4, id: 4 },
-  { imglink: cardImage5, id: 5 },
-  { imglink: cardImage1, id: 1 },
-  { imglink: cardImage2, id: 2 },
-  { imglink: cardImage3, id: 3 },
-  { imglink: cardImage4, id: 4 },
-  { imglink: cardImage5, id: 5 },
-  { imglink: cardImage1, id: 1 },
-  { imglink: cardImage2, id: 2 },
-  { imglink: cardImage3, id: 3 },
-  { imglink: cardImage4, id: 4 },
-  { imglink: cardImage5, id: 5 },
-  { imglink: cardImage1, id: 1 },
-  { imglink: cardImage2, id: 2 },
-  { imglink: cardImage3, id: 3 },
-  { imglink: cardImage4, id: 4 },
-  { imglink: cardImage5, id: 5 },
-  { imglink: cardImage1, id: 1 },
-  { imglink: cardImage2, id: 2 },
-  { imglink: cardImage3, id: 3 },
-  { imglink: cardImage4, id: 4 },
-  { imglink: cardImage5, id: 5 },
-];
 const NftSlider = () => {
   const settings = {
     dots: false,
@@ -45,19 +15,58 @@ const NftSlider = () => {
     autoplaySpeed: 2000,
     cssEase: 'linear',
   };
+
+  const [getNFTData, setNFTData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getNFTFinalData();
+  }, []);
+
+  const getNFTFinalData = async () => {
+    const res = await getNFTDataApi();
+    if (res.success) {
+      setNFTData(res.data.rows);
+      setIsLoading(false);
+    } else {
+      toast.error(res.message);
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className={styles.nft_slider_home}>
-      <Slider {...settings}>
-        {nftCollectionData.map((nft) => {
-          return <CollectionCard key={nft.id} nftdata={nft} />;
-        })}
-      </Slider>
-      <Slider {...settings}>
-        {nftCollectionData.map((nft) => {
-          return <CollectionCard key={nft.id} nftdata={nft} />;
-        })}
-      </Slider>
-    </div>
+    <>
+      {!isLoading ? (
+        <div className={styles.nft_slider_home}>
+          <Slider {...settings}>
+            {getNFTData.map((nft) => {
+              return (
+                <CollectionCard
+                  key={nft.id}
+                  nftdata={nft.nft.image_thumbnail_url}
+                />
+              );
+            })}
+          </Slider>
+          <Slider {...settings}>
+            {getNFTData.map((nft) => {
+              return (
+                <CollectionCard
+                  key={nft.id}
+                  nftdata={nft.nft.image_thumbnail_url}
+                />
+              );
+            })}
+          </Slider>
+        </div>
+      ) : (
+        <div className={styles.spinner_wrap}>
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only"></span>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

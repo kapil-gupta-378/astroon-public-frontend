@@ -12,6 +12,13 @@ import NFTDialogBox from '../../component/common/nft-dialog-box';
 import NFTContentManagementTable from '../../component/ui/nft-content-management-table';
 import styles from './nftManagement.module.scss';
 
+const categorySelectOptions = [
+  { value: 'Art', label: 'Art' },
+  { value: 'Jwellery', label: 'Jwellery' },
+  { value: 'Sneakers', label: 'Sneakers' },
+  { value: 'Watches', label: 'Watches' },
+];
+
 const NFTManagement = () => {
   const [deleteItemId, setDeleteItemId] = useState('');
   const [deleteDialog, setDeleteDialog] = useState(false);
@@ -19,6 +26,7 @@ const NFTManagement = () => {
   const [nftFormShow, setNftFormShow] = useState(false);
   const [openseaLink, setOpenseaLink] = useState('');
   const [getNFTData, setNFTData] = useState('');
+  const [category, setCategory] = useState();
   const [nftListData, setNFTListData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -66,6 +74,7 @@ const NFTManagement = () => {
         setDeleteItemId('');
         getNFTFinalData();
         setDeleteDialog(false);
+        setCategory('');
       }
     } catch (error) {
       toast.error(error.response.data.message, {
@@ -89,6 +98,7 @@ const NFTManagement = () => {
     setNFTData('');
     setDeleteItemId('');
     setDeleteDialog(false);
+    setCategory('');
   };
 
   const handleOpenseaLink = async () => {
@@ -155,14 +165,43 @@ const NFTManagement = () => {
   };
 
   const handleNFTData = async () => {
-    try {
-      let data = {
-        url: openseaLink,
-        nft: getNFTData,
-      };
-      const res = await insertNFTDataApi(data);
-      if (res.success) {
-        toast.success(res.message, {
+    if (openseaLink && getNFTData && category) {
+      try {
+        let data = {
+          url: openseaLink,
+          nft: getNFTData,
+          category: category,
+        };
+        const res = await insertNFTDataApi(data);
+        if (res.success) {
+          toast.success(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setIsShow(false);
+          setNftFormShow(false);
+          setOpenseaLink('');
+          setNFTData(res.data);
+          getNFTFinalData();
+          setCategory('');
+        } else {
+          toast.error(res.message, {
+            position: 'top-right',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      } catch (error) {
+        toast.error(error.response.data.message, {
           position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
@@ -171,33 +210,10 @@ const NFTManagement = () => {
           draggable: true,
           progress: undefined,
         });
-        setIsShow(false);
-        setNftFormShow(false);
-        setOpenseaLink('');
-        setNFTData(res.data);
-        getNFTFinalData();
-      } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        // throw error;
       }
-    } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      // throw error;
+    } else {
+      toast.error('Please Fill All The Fields');
     }
   };
   return (
@@ -233,6 +249,8 @@ const NFTManagement = () => {
         showNFT={nftFormShow}
         inputValue={openseaLink}
         onChangeInput={(value) => setOpenseaLink(value)}
+        categorySelectOptions={categorySelectOptions}
+        setCategory={setCategory}
         handleSubmit={handleNFTData}
       />
       <ToastContainer />
