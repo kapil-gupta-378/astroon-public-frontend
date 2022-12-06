@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ReactPlayer from 'react-player';
 import styles from './gallery.module.scss';
 import HeadingBackground from '../../component/common/heading-background';
@@ -90,15 +90,7 @@ const Gallery = () => {
       setGalleryList(arr3);
       setLoading(false);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
   return (
@@ -119,7 +111,6 @@ const Gallery = () => {
           </div>
         </>
       )}
-      <ToastContainer />
     </div>
   );
 };

@@ -8,3 +8,11 @@ export const getTokenDataApi = async (data) => {
   });
   return xhr.data.data;
 };
+
+export const getTokenSaleData = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}seed-sale`,
+  });
+  return xhr.data.data;
+};

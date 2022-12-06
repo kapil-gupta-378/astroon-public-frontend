@@ -1,0 +1,14 @@
+.sale_page_wrap {
+  padding: 3%;
+
+  .form_wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    .input_wrap {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+    }
+  }
+}

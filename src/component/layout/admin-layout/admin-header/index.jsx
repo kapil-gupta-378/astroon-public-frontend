@@ -22,17 +22,20 @@ const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const AdminHeader = ({ setOpenSideBar }) => {
   const [dataState, setdataState] = useState({});
-  const { isConnected } = useSelector((state) => state.adminReducer);
+  const { isConnected, adminToken } = useSelector(
+    (state) => state.adminReducer,
+  );
   const router = useRouter();
   const dispatch = useDispatch();
   const Logout = () => {
-    localStorage.removeItem('adminToken');
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
     router.push('/login');
   };
 
   useEffect(() => {
     loadInitialData();
-  }, []);
+  }, [adminToken]);
 
   const loadInitialData = async () => {
     const response = await getCurrentLoginAdminData();
@@ -69,25 +72,9 @@ const AdminHeader = ({ setOpenSideBar }) => {
         dispatch(setAdminWalletAddress(adminWalletData.walletAddress));
         dispatch(setIsNeworkId(adminWalletData.netwrokID));
         dispatch(setIsConnected(true));
-        toast.success('Wallet Connected', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success('Wallet Connected');
       } else {
-        toast.error('Please Connect Through Admin Wallet', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Connect Through Admin Wallet');
       }
     } catch (error) {}
   };
@@ -104,7 +91,9 @@ const AdminHeader = ({ setOpenSideBar }) => {
             <WebsiteLogo />
           </div>
           <h3>Welcome Back</h3>
-          <p>{`Hello ${dataState.firstName}, ${greetingForAdmin()}`}</p>
+          <p>{`Hello ${
+            dataState.firstName ? dataState.firstName : ''
+          }, ${greetingForAdmin()}`}</p>
         </div>
 
         <div className={styles.header_right}>

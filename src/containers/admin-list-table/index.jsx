@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { adminAuditApi, deleteAdminApi } from '../../../services/api/admin';
 import Button from '../../component/common/button';
 import DialogBox from '../../component/common/dialoag-box';
@@ -24,9 +24,8 @@ const AdminListTable = () => {
     { value: 'admin', label: 'Admin' },
     { value: 'subadmin', label: 'Sub Admin' },
   ];
-  const { adminListData, adminLoading, adminListCount } = useSelector(
-    (state) => state.adminReducer,
-  );
+  const { adminListData, adminLoading, adminListCount, adminToken } =
+    useSelector((state) => state.adminReducer);
   useEffect(() => {
     const paramsObj = {
       page: pageNumber,
@@ -35,7 +34,7 @@ const AdminListTable = () => {
     };
     dispatch(fetchAdminListData(paramsObj));
     setPageNumber((value) => value + 1);
-  }, []);
+  }, [adminToken]);
 
   useEffect(() => {
     const paramsObj = {
@@ -106,15 +105,7 @@ const AdminListTable = () => {
         dispatch(fetchAdminListData(paramsObj));
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       setDeleteDialog(false);
     }
   };
@@ -156,7 +147,7 @@ const AdminListTable = () => {
           onClickUserName={gotoProfile}
         />
       </section>
-      <ToastContainer />
+
       <DialogBox
         mainHading="You’re about to delete this account"
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"

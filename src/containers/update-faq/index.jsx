@@ -9,7 +9,7 @@ import styles from './updateFAQ.module.scss';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import inputStyles from '../../component/common/text-input/textInput.module.scss';
 
 const UpdateFAQ = () => {
@@ -42,15 +42,7 @@ const UpdateFAQ = () => {
         });
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -65,25 +57,9 @@ const UpdateFAQ = () => {
         const res = await updateFaqDataApi(id, data);
         if (res.success) {
           getFaqData(id);
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         toast.error(error?.response?.data?.message, {
@@ -97,15 +73,7 @@ const UpdateFAQ = () => {
         });
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
   return (
@@ -174,7 +142,6 @@ const UpdateFAQ = () => {
           </div>
         </div>
       </>
-      <ToastContainer />
     </main>
   );
 };

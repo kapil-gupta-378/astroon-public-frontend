@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import { changeEthToUsd } from '../api/currency';
+import { changeEthToUsd } from '../../services/api/currency';
 
 export const convertWeiToEther = (weiValue) => {
   const convertValue = Web3.utils.fromWei(weiValue.toString(), 'ether');

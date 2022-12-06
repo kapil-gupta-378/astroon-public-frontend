@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import TextInput from '../../component/common/text-input';
 import FileInput from '../../component/common/file-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
   getGeneralInformationApi,
   updateGeneralInformationApi,
@@ -150,7 +150,6 @@ const GeneralInformation = () => {
       <section className={styles.footer_wrap}>
         <Button onClick={updateSettingsData}>Submit</Button>
       </section>
-      <ToastContainer />
     </main>
   );
 };

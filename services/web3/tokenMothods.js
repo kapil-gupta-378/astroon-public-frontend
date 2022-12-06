@@ -1,5 +1,5 @@
+import { convertEtherToWei } from '../../src/utils/currencyMethods';
 import { getMerkleDataApi } from '../api/markle';
-import { convertEtherToWei } from './currencyMethods';
 import { getContractInstance } from './web3ProviderMethods';
 
 export const buyToken = async (
@@ -9,7 +9,6 @@ export const buyToken = async (
   privateSale,
 ) => {
   const AstTokenContract = await getContractInstance();
-
   const TokenRateInEthForBuyCount = convertEtherToWei(
     buyingQuality * Number(OneTokenPrice),
   );

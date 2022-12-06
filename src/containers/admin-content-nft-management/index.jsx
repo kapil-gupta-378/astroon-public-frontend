@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import {
   validateOpenseaURLApi,
   insertNFTDataApi,
@@ -40,15 +40,7 @@ const NFTManagement = () => {
       setNFTListData(res.data.rows);
       setIsLoading(false);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
       setIsLoading(false);
     }
   };
@@ -77,15 +69,7 @@ const NFTManagement = () => {
         setCategory('');
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       setDeleteItemId('');
       setDeleteDialog(false);
     }
@@ -129,15 +113,7 @@ const NFTManagement = () => {
             });
           }
         } catch (error) {
-          toast.error(error.response.data.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message);
           // throw error;
         }
       } else {
@@ -152,15 +128,7 @@ const NFTManagement = () => {
         });
       }
     } else {
-      toast.error('Please enter opensea URL', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please enter opensea URL');
     }
   };
 
@@ -201,15 +169,7 @@ const NFTManagement = () => {
           });
         }
       } catch (error) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         // throw error;
       }
     } else {
@@ -253,7 +213,6 @@ const NFTManagement = () => {
         setCategory={setCategory}
         handleSubmit={handleNFTData}
       />
-      <ToastContainer />
     </main>
   );
 };

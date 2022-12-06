@@ -7,7 +7,7 @@ import Button from '../../../common/button';
 import { useEffect } from 'react';
 import DialogBox from '../../../common/dialoag-box';
 import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
-import { Container, Nav, Navbar, ToastContainer } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 import WebsiteLogo from '../../../common/website-logo';
 import {
@@ -24,7 +24,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { getWalletAstTokenBalance } from '../../../../../services/web3/walletMothods';
+import {
+  addWalletEventListener,
+  checkWalletConnection,
+  connectWallet,
+  getWalletAstTokenBalance,
+} from '../../../../../services/web3/walletMothods';
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
@@ -37,43 +42,34 @@ const Header = () => {
   const { isUserConnected } = useSelector((state) => state.walletReducer);
 
   useEffect(() => {
-    if (window.ethereum) {
-      window.ethereum.on('accountsChanged', function () {});
-      window.ethereum.on('networkChanged', async () => {
-        window.location.reload();
-      });
-    }
-    dispatch(fetchCurrencyData());
+    addWalletEventListener(disconnectWallet, disconnectWallet);
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
+    checkWalletConnection((isConnected) => {
+      if (!isConnected) {
+        disconnectWallet();
+      }
+    });
   }, []);
 
-  const connectWallet = async () => {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      const { web3 } = await getWeb3Provider();
-      const accounts = await window.ethereum.request({
-        method: 'eth_requestAccounts',
-      });
-      const networkId = await web3.eth.net.getId();
-      if (envNetworkId !== networkId) {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: envNetworkIdInHex }],
-        });
-      }
-      varifieSignature(accounts[0], networkId);
-    } else {
-      toast.error('Please download metamask extention', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      window.location.href =
-        process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;
+  function disconnectWallet() {
+    dispatch(setIsUserConnected(false));
+    dispatch(setToken(''));
+  }
+
+  const userConnectWalletHandler = async () => {
+    try {
+      const adminWalletData = await connectWallet(
+        envNetworkId,
+        envNetworkIdInHex,
+      );
+
+      varifieSignature(
+        adminWalletData.walletAddress,
+        adminWalletData.netwrokID,
+      );
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -96,27 +92,20 @@ const Header = () => {
 
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
-          localStorage.setItem('userToken', responseSignature.data.token);
+          localStorage.setItem('token', responseSignature.data.token);
+          localStorage.setItem('role', 'user');
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));
           dispatch(setBalance(walletBalance));
           setwalletConnectDialog(false);
-          toast.success('Wallet Connected', {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success('Wallet Connected');
           route.push(`/user-profile/${address}`);
         }
       }
     } catch (error) {
       setwalletConnectDialog(false);
-      return error;
+      console.error(error);
     }
   };
 
@@ -211,14 +200,13 @@ const Header = () => {
             <span>Metamask</span>
           </div>
           <button
-            onClick={connectWallet}
+            onClick={userConnectWalletHandler}
             className={styles.wallet_connect_modal_btn}
           >
             {'Wallet Connect'}
           </button>
         </div>
       </DialogBox>
-      <ToastContainer />
     </div>
   );
 };

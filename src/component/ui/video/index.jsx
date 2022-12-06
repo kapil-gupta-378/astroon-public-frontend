@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import style from './video.module.scss';
 import { getVideosForPagesApi } from '../../../../services/api/content-management/video-management';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import ReactPlayer from 'react-player';
 
 const Video = () => {
@@ -110,7 +110,6 @@ const Video = () => {
             </div>
           </div>
         )}
-        <ToastContainer />
       </div>
     </>
   );

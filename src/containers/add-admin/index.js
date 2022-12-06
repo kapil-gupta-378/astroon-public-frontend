@@ -11,7 +11,7 @@ import TextInput from '../../component/common/text-input';
 import defaltProfileImage from '../../../public/assets/images/Dummy_Image.svg';
 import Button from '../../component/common/button';
 import FormSelect from '../../component/common/form-select';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 const rollSelectOptions = [
   { value: 'admin', label: 'Admin' },
   { value: 'subadmin', label: 'Sub Admin' },
@@ -64,38 +64,14 @@ const AddAdmin = () => {
     try {
       const res = await createAdminAccountApi(data);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         router.back();
       } else {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
       }
     } catch (error) {
       if (error.response) {
-        toast.error(error?.response?.data?.message[0].errorDetail.isNotEmpty, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error?.response?.data?.message[0].errorDetail.isNotEmpty);
       }
     }
   }
@@ -206,7 +182,6 @@ const AddAdmin = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </main>
   );
 };

@@ -5,21 +5,26 @@ import styles from './login.module.scss';
 import loginUpRightImage from '../../../public/assets/images/login-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { loginUserApi } from '../../../services/api/admin';
 import WebsiteLogo from '../../component/common/website-logo';
+import { useDispatch } from 'react-redux';
+import { setAdminToken } from '../../redux/admin/adminSlice';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const dispatch = useDispatch();
   const rememberMe = localStorage.getItem('rememberMe');
-  const adminToken = localStorage.getItem('adminToken');
+  const adminToken = localStorage.getItem('token');
+  const role = localStorage.getItem('role');
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
-    if (rememberMe && adminToken) {
-      router.push('admin/dashboard');
+    if (rememberMe && adminToken && role === 'admin') {
+      router.push('admin/admin-management');
       setIsLogin(false);
     } else {
       setIsLogin(true);
@@ -36,27 +41,13 @@ const Login = () => {
       try {
         const res = await loginUserApi(data);
         if (res.success) {
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('role', 'admin');
+          dispatch(setAdminToken(res.data.token));
+          toast.success(res.message);
           router.push('/admin/dashboard');
-          localStorage.setItem('adminToken', res.data.token);
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         toast.error(error.response.data.message, {
@@ -69,28 +60,12 @@ const Login = () => {
           progress: undefined,
         });
         if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
         // throw error;
       }
     } else {
-      toast.error('Please Fill All Feilds', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Feilds');
     }
   }
   const redirectToForgot = () => {
@@ -163,7 +138,6 @@ const Login = () => {
             <div className={styles.right_wrap}>
               <Image src={loginUpRightImage} layout="responsive" alt="login" />
             </div>
-            <ToastContainer />
           </div>
         </form>
       ) : (

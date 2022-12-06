@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import {
   getGeneralSettingsApi,
@@ -164,7 +164,6 @@ const GeneralSettings = () => {
           <Button type="submit">Submit</Button>
         </section>
       </form>
-      <ToastContainer />
     </main>
   );
 };

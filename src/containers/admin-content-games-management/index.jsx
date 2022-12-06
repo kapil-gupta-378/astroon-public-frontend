@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
 import GamesDialogBox from '../../component/common/games-dialog-box';
 import GamesContentManagementTable from '../../component/ui/games-content-management-table';
@@ -29,15 +29,7 @@ const GamesManagement = () => {
       setUrl(res.data);
       setLoading(false);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
 
@@ -137,15 +129,7 @@ const GamesManagement = () => {
         }
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
 
@@ -175,7 +159,6 @@ const GamesManagement = () => {
         setAppStoreURL={setAppStoreURL}
         isUpdateBTN={isUpdateBTN}
       />
-      <ToastContainer />
     </main>
   );
 };

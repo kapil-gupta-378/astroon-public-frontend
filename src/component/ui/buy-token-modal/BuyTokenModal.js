@@ -46,12 +46,14 @@ const BuyTokenModal = ({
                   placement={'auto'}
                   overlay={
                     <Tooltip>
-                      <strong>{tokenData.rate * selectedQuantity}</strong>
+                      <strong>
+                        {tokenData?.rate?.rate * selectedQuantity}
+                      </strong>
                     </Tooltip>
                   }
                 >
                   <h2 className={styles.statics_data}>
-                    {(tokenData.rate * selectedQuantity)
+                    {(tokenData?.rate?.rate * selectedQuantity)
                       .toString()
                       .substring(0, 6)}
                     ETH

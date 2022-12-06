@@ -1,4 +1,4 @@
-import { convertEtherToUSD } from '../../../services/web3/currencyMethods';
+import { convertEtherToUSD } from '../../utils/currencyMethods';
 import { setEthPriceInUsd } from './currencySlice';
 
 export const fetchCurrencyData = () => {

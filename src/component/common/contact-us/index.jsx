@@ -9,7 +9,7 @@ import {
   insertContactUsFileApi,
   insertContactUsDetailApi,
 } from '../../../../services/api/contactUs';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import { useRouter } from 'next/router';
 
@@ -36,26 +36,11 @@ const ContactUs = (props) => {
         });
         setReason(options);
       } else {
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      if (error?.response?.data?.message)
+        toast.error(error.response.data.message);
     }
   };
 
@@ -93,74 +78,26 @@ const ContactUs = (props) => {
             setSubject('');
             setDescription('');
             setAttachment('');
-            toast.success(res.message, {
-              position: 'top-right',
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+            toast.success(res.message);
             props.onHide();
             router.push('/thank-you');
           } else {
-            toast.error(res.message, {
-              position: 'top-right',
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-            });
+            toast.error(res.message);
           }
         } else {
-          toast.error(fileResponse.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(fileResponse.message);
         }
       } catch (error) {
         if (error.response) {
-          toast.error(error.response.data.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message);
         }
 
         if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
 
@@ -320,7 +257,6 @@ const ContactUs = (props) => {
               </div>
             </div>
           </div>
-          <ToastContainer />
         </div>
       </Modal.Body>
     </Modal>
