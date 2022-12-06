@@ -91,7 +91,7 @@ const Profile = () => {
       dispatch(setGlobalLoading(true));
       tokenTransaction = await buyToken(
         sliderValue,
-        tokenData.rate,
+        tokenData.rate.rate,
         walletAddress,
         tokenData.isPrivateSale,
       );
