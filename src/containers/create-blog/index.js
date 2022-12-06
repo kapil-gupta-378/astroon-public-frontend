@@ -9,7 +9,7 @@ import {
   createBlogApi,
   uploadBlogBannerImageToServer,
 } from '../../../services/api/blog/blog';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const CreateBlog = () => {
@@ -103,15 +103,7 @@ const CreateBlog = () => {
         router.back();
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error?.response?.data?.message);
     }
   };
   return (
@@ -215,7 +207,6 @@ const CreateBlog = () => {
           <Button onClick={createBlog}>Submit</Button>
         </div>
       </section>
-      <ToastContainer />
     </main>
   );
 };

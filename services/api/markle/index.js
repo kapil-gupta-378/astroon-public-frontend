@@ -21,7 +21,7 @@ export const postWhiteListAddressApi = async (data) => {
     url: `${APP_URL}whitelist-user/create`,
     data: data,
   });
-  return xhr.data.data;
+  return xhr.data;
 };
 
 export const getMerkleSeedDataApi = async () => {

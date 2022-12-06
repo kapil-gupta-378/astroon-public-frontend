@@ -4,18 +4,19 @@ import AdminHeader from './admin-header';
 import AdminSidebar from './admin-sidebar';
 import styles from './adminLayout.module.scss';
 const AdminLayout = ({ children }) => {
-  let adminToken = localStorage.getItem('adminToken');
+  let adminToken = localStorage.getItem('token');
+  let role = localStorage.getItem('role');
   const [openSideBar, setOpenSideBar] = useState(false);
 
   useEffect(() => {
-    if (!adminToken) {
+    if (!adminToken || role === 'user') {
       Router.push('/login');
     }
   }, []);
 
   return (
     <>
-      {adminToken ? (
+      {role === 'admin' ? (
         <div className={styles.admin_layout_wrap}>
           <div
             className={`${styles.left_wrap} ${

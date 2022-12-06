@@ -5,7 +5,7 @@ import styles from './signUp.module.scss';
 import signUpRightImage from '../../../public/assets/images/sign-up-page-icon.png';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { createUserApi } from '../../../services/api/admin';
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -37,25 +37,9 @@ const SignUp = () => {
         const res = await createUserApi(data);
         if (res.success) {
           setRegisterBtn('Registered');
-          toast.success(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.success(res.message);
         } else {
-          toast.error(res.message, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(res.message);
         }
       } catch (error) {
         toast.error(error.response.data.message, {
@@ -68,28 +52,12 @@ const SignUp = () => {
           progress: undefined,
         });
         if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail, {
-            position: 'top-right',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
         // throw error;
       }
     } else {
-      toast.error('Please Fill All Feilds', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Feilds');
     }
   };
   return (
@@ -174,7 +142,6 @@ const SignUp = () => {
       <div className={styles.right_wrap}>
         <Image src={signUpRightImage} layout="responsive" alt="sign-up" />
       </div>
-      <ToastContainer />
     </div>
   );
 };

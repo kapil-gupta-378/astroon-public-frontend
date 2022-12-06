@@ -5,7 +5,6 @@ import { fetchAdminApi } from '../../../services/api/admin';
 import styles from './viewProfile.module.scss';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import defaltProfileImage from '../../../public/assets/images/Dummy_Image.svg';
-import { ToastContainer } from 'react-toastify';
 import Button from '../../component/common/button';
 
 const ViewProfile = () => {
@@ -113,7 +112,6 @@ const ViewProfile = () => {
           </div>
         </>
       )}
-      <ToastContainer />
     </main>
   );
 };

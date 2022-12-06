@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
 import FAQDialogBox from '../../component/common/faq-dialoag-box';
 import FAQTable from '../../component/common/faq-table';
@@ -37,15 +37,7 @@ const AdminFAQTable = () => {
       setAdminLoading(false);
       setAdminFAQCount(res.count);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
 
@@ -81,15 +73,7 @@ const AdminFAQTable = () => {
       }
     } catch (error) {
       setAdminLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
@@ -119,15 +103,7 @@ const AdminFAQTable = () => {
         setDeleteItemId('');
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       setDeleteDialog(false);
     }
   };
@@ -158,25 +134,15 @@ const AdminFAQTable = () => {
       }
     } catch (error) {
       setAdminLoading(false);
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       // throw error;
     }
   };
 
-  
   return (
     <main className={styles.admin_List_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
-          
           <SearchBar
             inputValue={searchKeyWord}
             typeValue={handleSearchFAQTitle}
@@ -200,7 +166,7 @@ const AdminFAQTable = () => {
           isSort={isSort}
         />
       </section>
-      <ToastContainer />
+
       <FAQDialogBox
         mainHading="You’re about to delete this FAQ"
         content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"

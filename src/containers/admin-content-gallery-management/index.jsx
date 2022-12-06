@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
 import GalleryDialogBox from '../../component/common/gallery-dialog-box';
 import GalleryDeleteDialogBox from '../../component/common/gallery-delete-dialoag-box';
@@ -45,15 +45,7 @@ const GalleryManagement = () => {
       setGalleryList(res.data.rows);
       setLoading(false);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
   const handleDeleteDialog = (id) => {
@@ -82,15 +74,7 @@ const GalleryManagement = () => {
       setGalleryAttachment(fileResponse.data.fileName);
       setIsDisabled(false);
     } else {
-      toast.error(fileResponse.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(fileResponse.message);
     }
   };
   const handleFile = async () => {
@@ -166,15 +150,7 @@ const GalleryManagement = () => {
         }
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
 
@@ -196,15 +172,7 @@ const GalleryManagement = () => {
         setDeleteDialog(false);
       }
     } catch (error) {
-      toast.error(error.response.data.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(error.response.data.message);
       setDeleteItemId('');
       setDeleteDialog(false);
     }
@@ -248,7 +216,6 @@ const GalleryManagement = () => {
         getFile={getFile}
         isDisabled={isDisabled}
       />
-      <ToastContainer />
     </main>
   );
 };

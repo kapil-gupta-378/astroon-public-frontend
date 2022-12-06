@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
 import VideoDialogBox from '../../component/common/video-dialog-box';
 import UpdateVideoDialogBox from '../../component/common/update-video-dialog-box';
@@ -48,15 +48,7 @@ const VideoManagement = () => {
       setVideoList(res.data);
       setLoasing(false);
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
   const handleUpdateDialog = (data) => {
@@ -94,15 +86,7 @@ const VideoManagement = () => {
       setVideoAttachment(fileResponse.data.fileName);
       setIsDisabled(false);
     } else {
-      toast.error(fileResponse.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(fileResponse.message);
     }
   };
   const handleVideo = async () => {
@@ -179,15 +163,7 @@ const VideoManagement = () => {
         }
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
 
@@ -276,15 +252,7 @@ const VideoManagement = () => {
         });
       }
     } else {
-      toast.error('Please Fill All Fields', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error('Please Fill All Fields');
     }
   };
   return (
@@ -326,7 +294,6 @@ const VideoManagement = () => {
         setVideoAttachmentURL={setVideoUpdateAttachmentURL}
         getPage={getPage}
       />
-      <ToastContainer />
     </main>
   );
 };

@@ -1,6 +1,6 @@
-import { convertWeiToEther } from './currencyMethods';
+import { convertWeiToEther } from '../../src/utils/currencyMethods';
 import { getContractInstance, getWeb3Provider } from './web3ProviderMethods';
-
+const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 export const getWalletAstTokenBalance = async (wallet_address) => {
   const AstTokenContract = await getContractInstance(true);
   const response = await AstTokenContract.methods
@@ -30,3 +30,21 @@ export const connectWallet = async (envNetworkId, envNetworkIdInHex) => {
     throw new Error('Wallet app not found');
   }
 };
+
+export function addWalletEventListener(accountCallback, networkCallback) {
+  if (window.ethereum) {
+    window.ethereum.on('accountsChanged', function () {
+      accountCallback();
+    });
+    window.ethereum.on('networkChanged', async (networkId) => {
+      if (envNetworkId !== networkId) networkCallback();
+    });
+  }
+}
+
+export async function checkWalletConnection(callbackFuntion) {
+  const { web3 } = await getWeb3Provider();
+  const isConnected = await web3.eth.getAccounts();
+  const value = isConnected.length === 0 ? false : true;
+  callbackFuntion(value);
+}

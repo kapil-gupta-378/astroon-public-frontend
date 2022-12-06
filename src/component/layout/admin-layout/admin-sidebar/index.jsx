@@ -9,14 +9,14 @@ import blogIcon from '../../../../../public/assets/images/blog.svg';
 import clientEnquirySupportIcon from '../../../../../public/assets/images/clients_enquiry_support.svg';
 import faqIcon from '../../../../../public/assets/images/faq.svg';
 import settingsIcon from '../../../../../public/assets/images/settings.svg';
-// import whiteListedUserIcon from '../../../../../public/assets/images/white_listed_user.svg';
+import whiteListedUserIcon from '../../../../../public/assets/images/white_listed_user.svg';
 
 import { useRouter } from 'next/router';
 import WebsiteLogo from '../../../common/website-logo';
 
 const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
   const router = useRouter();
-  // const [openDropDown, setOpenDropDown] = useState(false);
+  const [openDropDown, setOpenDropDown] = useState(false);
   const [openUserDropDown, setOpenUserDropDown] = useState(false);
   return (
     <aside
@@ -228,7 +228,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/white-list-user">White Listed User</Link>
         </div> */}
-        {/* <div className={`${styles.nav_dropdown_link} `}>
+        <div className={`${styles.nav_dropdown_link} `}>
           <Image
             width={15}
             height={15}
@@ -263,6 +263,22 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
               </div>
             </div>
           )}
+        </div>
+
+        {/* <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/sale-controls' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
+          <Image
+            width={15}
+            height={15}
+            src={sidebarLinkIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/sale-controls">Sale Controls</Link>
         </div> */}
       </div>
     </aside>

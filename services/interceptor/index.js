@@ -1,16 +1,11 @@
 import axios from 'axios';
 
-export const requestInterceptor = (route) => {
+export const requestInterceptor = () => {
   axios.interceptors.request.use(
     function (config) {
       // Do something before request is sent
-      const userToken = localStorage.getItem('userToken');
-      const adminToken = localStorage.getItem('adminToken');
-      if (userToken || adminToken || route) {
-        config.headers.common.Authorization = `Bearer ${
-          route.pathname.substring(0, 6) === '/admin' ? adminToken : userToken
-        }`;
-      }
+      const token = localStorage.getItem('token');
+      config.headers.common.Authorization = `Bearer ${token}`;
       return config;
     },
     function (error) {

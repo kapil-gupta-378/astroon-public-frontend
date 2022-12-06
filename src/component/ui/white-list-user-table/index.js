@@ -15,46 +15,59 @@ const WhiteListUserTable = ({ data, handleDeleteItem }) => {
               <th scope="col">Type</th>
             </tr>
           </thead>
-          <tbody>
-            {data?.map((item, idx) => {
-              return (
-                <tr key={item.id}>
-                  <th scope="row">{idx + 1}</th>
-                  <td
-                    style={{
-                      color: `${
-                        item.isValid === undefined
-                          ? ''
-                          : item.isValid === false && 'red'
-                      }`,
-                    }}
-                  >
-                    {item.walletAddress}
-                  </td>
-                  <td>{item.merkleRoot ? 'Old' : 'New'}</td>
-                  <td>
-                    {item.isValid === undefined
-                      ? 'Valid'
-                      : item.isValid === false
-                      ? 'Invalid'
-                      : 'Valid'}
-                  </td>
-                  <td
-                    onClick={() => handleDeleteItem(item.walletAddress)}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    <Image
-                      src={deleteIcon}
-                      width={15}
-                      height={15}
-                      layout="fixed"
-                      alt="delte-icon"
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
+          {data.length !== 0 ? (
+            <tbody>
+              {data?.map((item, idx) => {
+                return (
+                  <tr key={item.id}>
+                    <th scope="row">{idx + 1}</th>
+                    <td
+                      style={{
+                        color: `${
+                          item.isValid === undefined
+                            ? ''
+                            : item.isValid === false && 'red'
+                        }`,
+                      }}
+                    >
+                      {item.walletAddress}
+                    </td>
+                    <td>{item.merkleRoot ? 'Old' : 'New'}</td>
+                    <td>
+                      {item.isValid === undefined
+                        ? 'Valid'
+                        : item.isValid === false
+                        ? 'Invalid'
+                        : 'Valid'}
+                    </td>
+                    <td
+                      onClick={() => handleDeleteItem(item.walletAddress)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <Image
+                        src={deleteIcon}
+                        width={15}
+                        height={15}
+                        layout="fixed"
+                        alt="delte-icon"
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          ) : (
+            <div
+              style={{
+                textAlign: 'center',
+                display: 'table-caption',
+                color: 'white',
+                marginTop: '40px',
+              }}
+            >
+              Data Not Found
+            </div>
+          )}
         </table>
       </div>
     </div>

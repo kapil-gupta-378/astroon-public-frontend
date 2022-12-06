@@ -17,6 +17,7 @@ import {
 } from '../services/interceptor';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { ToastContainer } from 'react-toastify';
 const { publicRuntimeConfig } = getConfig();
 const rollbarConfig = {
   accessToken: publicRuntimeConfig.rollbarClientToken,
@@ -59,6 +60,18 @@ function MyApp({ Component, pageProps }) {
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Layout>
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+              />
               <Web3Modal config={modalConfig} />
               <Component {...pageProps} />
             </Layout>

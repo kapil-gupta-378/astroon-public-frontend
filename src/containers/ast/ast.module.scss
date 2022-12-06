@@ -29,7 +29,15 @@
     p {
       @include heading_7;
       text-align: center;
+      margin-bottom: 60px;
     }
+  }
+  .Sale_card_wrap {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
   .chart_wrap {
     display: flex;
