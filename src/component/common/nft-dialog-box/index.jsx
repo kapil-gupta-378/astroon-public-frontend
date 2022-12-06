@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import TextInput from '../text-input';
+import FormSelect from '../form-select';
 import styles from './nftDialogBox.module.scss';
 import defaultProfileImage from '../../../../public/assets/images/Dummy_Image.svg';
 
@@ -12,11 +13,14 @@ const NFTDialogBox = ({
   finalData,
   inputValue,
   onChangeInput,
+  categorySelectOptions,
+  setCategory,
   handleSubmit,
 }) => {
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
+
   return (
     <div className="dialog_box">
       {handleShow && (
@@ -96,12 +100,11 @@ const NFTDialogBox = ({
                 <div className="row">
                   <div className="col-lg-6 col-md-6 col-sm-12">
                     <div className={styles.input_wrap}>
-                      <TextInput
+                      <FormSelect
                         titleBackground={'#AF3277'}
-                        handleType={'text'}
-                        kind="fullborder"
-                        handleValue={''}
-                        title="Category"
+                        label={'Category'}
+                        options={categorySelectOptions}
+                        handleChange={(value) => setCategory(value.value)}
                       />
                     </div>
                   </div>
