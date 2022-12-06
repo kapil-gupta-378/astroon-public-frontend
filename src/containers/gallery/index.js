@@ -5,6 +5,7 @@ import ReactPlayer from 'react-player';
 import styles from './gallery.module.scss';
 import HeadingBackground from '../../component/common/heading-background';
 import { getGalleryForUserFileApi } from '../../../services/api/content-management/gallery-management';
+import galleryImage from '../../../public/assets/images/galleryImage.png';
 
 const Gallery = () => {
   const [galleryList, setGalleryList] = useState([]);
@@ -37,13 +38,13 @@ const Gallery = () => {
                   <ReactPlayer
                     width="100%"
                     height="100%"
-                    url={data.url}
+                    url={data.url ? data.url : '/assets/videos/videos.mp4'}
                     controls={true}
                   />
                 ) : (
                   <Image
                     loader={ImageLoader}
-                    src={data.url}
+                    src={data.url ? data.url : galleryImage}
                     width="465px"
                     height="599px"
                     alt="gallery image"

@@ -41,11 +41,11 @@ const Login = () => {
       try {
         const res = await loginUserApi(data);
         if (res.success) {
-          router.push('/admin/admin-management');
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', 'admin');
           dispatch(setAdminToken(res.data.token));
           toast.success(res.message);
+          router.push('/admin/dashboard');
         } else {
           toast.error(res.message);
         }
