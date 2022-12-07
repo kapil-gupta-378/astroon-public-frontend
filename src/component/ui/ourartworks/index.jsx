@@ -1,12 +1,15 @@
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
-import React from 'react';
-import NFTCard from '../../common/nft-card';
 import styles from './ourartworks.module.scss';
 import cardBackIcon from '../../../../public/assets/images/forword_icon.svg';
 import backwordEnable from '../../../../public/assets/images/backwordEnable.svg';
 import Button from '../../common/button';
 import Slider from 'react-slick';
-import { useState } from 'react';
+import OpenseNFTCard from '../../common/opensea-nft-card';
+import { getNFTDataApi } from '../../../../services/api/content-management/nft-management';
+import { toast } from 'react-toastify';
+
 const OurArtworks = () => {
   const [slider] = useState();
   const [isIndex, setIsIndex] = useState({
@@ -14,6 +17,28 @@ const OurArtworks = () => {
     next: 0,
     index: 0,
   });
+  const [getNFTData, setNFTData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    getNFTFinalData();
+  }, []);
+
+  const getNFTFinalData = async () => {
+    const res = await getNFTDataApi();
+    if (res.success) {
+      setNFTData(res.data.rows);
+      setIsLoading(false);
+    } else {
+      toast.error(res.message);
+      setIsLoading(false);
+    }
+  };
+
+  const redirectToNFT = () => {
+    router.push('/nft');
+  };
   const beforeChange = (prev, next) => {
     setIsIndex((value) => ({ ...value, prev: prev, next: next }));
   };
@@ -103,8 +128,8 @@ const OurArtworks = () => {
       <h3 className={styles.nft_card_heading}>Our Artworks</h3>
       <div className={styles.nft_cards_wrap}>
         <Slider ref={(c) => (slider = c)} {...settings}>
-          {[...Array(16).keys()].map((_, idx) => (
-            <NFTCard key={idx} />
+          {getNFTData?.map((data, idx) => (
+            <OpenseNFTCard key={idx} nftData={data} loading={isLoading} />
           ))}
         </Slider>
       </div>
@@ -122,7 +147,9 @@ const OurArtworks = () => {
             layout="fixed"
           />
         </button>
-        <Button kind="text">View More</Button>
+        <Button kind="text" onClick={redirectToNFT}>
+          View More
+        </Button>
         <button
           className={isIndex.index >= 13 ? styles.back_btn : styles.forword_btn}
           onClick={next}

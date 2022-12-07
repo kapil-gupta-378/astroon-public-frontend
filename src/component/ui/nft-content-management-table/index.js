@@ -37,8 +37,8 @@ const ContentTable = ({ data, loading, handleDeleteItem }) => {
                   <th scope="col">S.No.</th>
                   <th scope="col">NFT</th>
                   <th scope="col">NFT Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Price in Doller</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">ETH Price</th>
                   <th scope="col">Upload Date</th>
                 </tr>
               </thead>
@@ -63,8 +63,8 @@ const ContentTable = ({ data, loading, handleDeleteItem }) => {
                         />
                       </td>
                       <td>{item.nft.name}</td>
+                      <td>{item.category}</td>
                       <td>{item.nft.ether_price}</td>
-                      <td>{item.nft.dollar_price}</td>
                       <td>
                         {moment(item.createdAt.toString()).format('DD/MM/YYYY')}
                       </td>
