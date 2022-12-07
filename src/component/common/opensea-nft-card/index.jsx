@@ -10,9 +10,7 @@ const OpenseaNFTCard = ({ nftData }) => {
   return (
     <div
       key={nftData.id}
-      className={`container ${styles.nft_card_wrap} ${
-        !nftData && styles.card_height
-      }`}
+      className={` ${styles.nft_card_wrap} ${!nftData && styles.card_height}`}
     >
       <div className={styles.nft_card_img_wrap}>
         <div
