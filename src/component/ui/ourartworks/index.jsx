@@ -151,7 +151,11 @@ const OurArtworks = () => {
           View More
         </Button>
         <button
-          className={isIndex.index >= 13 ? styles.back_btn : styles.forword_btn}
+          className={
+            isIndex.index >= getNFTData.length - 3
+              ? styles.back_btn
+              : styles.forword_btn
+          }
           onClick={next}
         >
           <Image

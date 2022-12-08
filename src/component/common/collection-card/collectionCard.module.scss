@@ -4,8 +4,10 @@
   align-items: center;
   padding: 30px;
   border-radius: 30px;
-  span {
-    border-radius: 30px;
+  .nftCard {
+    span {
+      border-radius: 30px;
+    }
   }
 }
 
@@ -13,25 +15,33 @@
 @media only screen and (max-width: 1199px) {
   .nftCard_wrap {
     padding: 20px;
-    span {
-      height: 230px !important;
-      border-radius: 20px;
+    .nftCard {
+      width: 100%;
+      span {
+        width: 100% !important;
+        height: 230px !important;
+        border-radius: 20px;
+      }
     }
   }
 } /* 1024 */
 
 @media only screen and (max-width: 1023px) {
   .nftCard_wrap {
-    span {
-      height: 200px !important;
+    .nftCard {
+      span {
+        height: 200px !important;
+      }
     }
   }
 } /* 980 */
 
 @media only screen and (max-width: 979px) {
   .nftCard_wrap {
-    span {
-      height: 165px !important;
+    .nftCard {
+      span {
+        height: 165px !important;
+      }
     }
   }
 } /* 768 */
@@ -39,9 +49,11 @@
 @media only screen and (max-width: 767px) {
   .nftCard_wrap {
     padding: 15px;
-    span {
-      height: 150px !important;
-      border-radius: 15px;
+    .nftCard {
+      span {
+        height: 150px !important;
+        border-radius: 15px;
+      }
     }
   }
 } /* 650 */
@@ -49,9 +61,11 @@
 @media only screen and (max-width: 649px) {
   .nftCard_wrap {
     padding: 10px;
-    span {
-      height: 100px !important;
-      border-radius: 10px;
+    .nftCard {
+      span {
+        height: 100px !important;
+        border-radius: 10px;
+      }
     }
   }
 } /* 480 */
@@ -59,9 +73,11 @@
 @media only screen and (max-width: 479px) {
   .nftCard_wrap {
     padding: 10px;
-    span {
-      height: 80px !important;
-      border-radius: 10px;
+    .nftCard {
+      span {
+        height: 80px !important;
+        border-radius: 10px;
+      }
     }
   }
 } /* 375 */
@@ -69,9 +85,11 @@
 @media only screen and (max-width: 374px) {
   .nftCard_wrap {
     padding: 10px;
-    span {
-      height: 60px !important;
-      border-radius: 8px;
+    .nftCard {
+      span {
+        height: 60px !important;
+        border-radius: 8px;
+      }
     }
   }
 } /* 320 */
