@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './footer.module.scss';
 import twitter from '../../../../../public/assets/images/twitter.svg';
 import insta from '../../../../../public/assets/images/instagram.svg';
-import message from '../../../../../public/assets/images/message.svg';
+import telegram from '../../../../../public/assets/images/telegram.svg';
 import opensea from '../../../../../public/assets/images/opensea_icon.svg';
 import discord from '../../../../../public/assets/images/discord_icon.svg';
 import contact from '../../../../../public/assets/images/contact.svg';
@@ -70,8 +70,8 @@ const Footer = () => {
           <a target={'_blank'} href={data.instagramUrl} rel="noreferrer">
             <Image src={insta} width={18} height={18} alt="insta" />
           </a>
-          <a target={'_blank'} href={data.emailLink} rel="noreferrer">
-            <Image src={message} width={18} height={18} alt="message" />
+          <a target={'_blank'} href={data.telegramUrl} rel="noreferrer">
+            <Image src={telegram} width={18} height={18} alt="telegram" />
           </a>
         </div>
       </div>

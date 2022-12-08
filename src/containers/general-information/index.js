@@ -18,9 +18,10 @@ const GeneralInformation = () => {
   const [twitterURL, setTwitterURL] = useState('');
   const [discordURL, setDiscordURL] = useState('');
   const [youtubeURL, setYoutubeURL] = useState('');
+  const [telegramURL, setTelegramURL] = useState('');
   const [emailLink, setEmailLink] = useState();
   const [homeVideoLink, setHomeVideoLink] = useState('');
-  const [homeVideoThumbnail, setHomeVideoThumbnail] = useState('');
+  const [youtubeThumbnailImage, setYoutubeThumbnailImage] = useState('');
   const [settingsId, setSettingsId] = useState('');
 
   const route = useRouter();
@@ -35,45 +36,43 @@ const GeneralInformation = () => {
       setTwitterURL(response.data.twitterUrl);
       setDiscordURL(response.data.discordUrl);
       setYoutubeURL(response.data.youtubeUrl);
+      setTelegramURL(response.data.telegramUrl);
       setEmailLink(response.data.emailLink);
       setHomeVideoLink(response.data.youtubeVideoLink);
+      setYoutubeThumbnailImage(response.data.youtubeThumbnailImage);
       setSettingsId(response.data.id);
     }
   };
 
+  const handleFile = async (e) => {
+    let getFile = e.target.files[0];
+    let youtubeThumbnail = new FormData();
+    youtubeThumbnail.append('file', getFile);
+    const response = await uploadHomePageYoutubeThumbnailApi(youtubeThumbnail);
+    setYoutubeThumbnailImage(response.fileName);
+  };
+
   const updateSettingsData = async () => {
+    const data = {
+      facebookUrl: facebookURL,
+      twitterUrl: twitterURL,
+      discordUrl: discordURL,
+      youtubeUrl: youtubeURL,
+      telegramUrl: telegramURL,
+      emailLink: emailLink,
+      youtubeVideoLink: homeVideoLink,
+      youtubeThumbnailImage: youtubeThumbnailImage,
+    };
     try {
-      let youtubeThumbnailresponse;
-      const youtubeThumbnail = new FormData();
-      youtubeThumbnail.append('file', homeVideoThumbnail);
-      if (homeVideoThumbnail) {
-        youtubeThumbnailresponse = await uploadHomePageYoutubeThumbnailApi(
-          youtubeThumbnail,
-        );
-      }
-      const data = {
-        facebookUrl: facebookURL,
-        twitterUrl: twitterURL,
-        discordUrl: discordURL,
-        youtubeUrl: youtubeURL,
-        emailLink: emailLink,
-        youtubeVideoLink: homeVideoLink,
-        youtubeThumbnailImage: youtubeThumbnailresponse.fileName,
-      };
       const response = await updateGeneralInformationApi(settingsId, data);
       if (response.success) {
-        toast.success(response.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(response.message);
+        fetchIntialData();
+      } else {
+        toast.error(response.message);
       }
     } catch (error) {
-      return error;
+      toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
   return (
@@ -126,9 +125,17 @@ const GeneralInformation = () => {
         <div className={styles.flex_box_item}>
           <TextInput
             height={'50px'}
+            handleValue={telegramURL}
+            handleOnChange={(e) => setTelegramURL(e.target.value)}
+            title={'Telegram URL'}
+          />
+        </div>
+        <div className={styles.flex_box_item}>
+          <TextInput
+            height={'50px'}
             handleValue={emailLink}
             handleOnChange={(e) => setEmailLink(e.target.value)}
-            title={'Website Name'}
+            title={'Email Name'}
           />
         </div>
         <div className={styles.flex_box_item}>
@@ -141,7 +148,7 @@ const GeneralInformation = () => {
         </div>
         <div className={styles.flex_box_item}>
           <FileInput
-            inputOnChange={(e) => setHomeVideoThumbnail(e.target.files[0])}
+            inputOnChange={(e) => handleFile(e)}
             title={'Branding Logo'}
             titleBackground={'#05052d'}
           />
