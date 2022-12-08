@@ -30,26 +30,10 @@ const ResetPassword = () => {
     try {
       const res = await verifyResetPasswordTokenUserApi(verifyToken);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
       } else {
         router.push('/forgot-password');
-        toast.error(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(res.message);
       }
     } catch (error) {
       router.push('/forgot-password');
@@ -72,15 +56,7 @@ const ResetPassword = () => {
           toast.error(res.message);
         }
       } catch (error) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         // throw error;
       }
     } else {

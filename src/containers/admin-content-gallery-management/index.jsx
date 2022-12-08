@@ -87,15 +87,7 @@ const GalleryManagement = () => {
       } else if (galleryAttachment) {
         finalAttachment = galleryAttachment;
       } else {
-        toast.error('Please Paste Valid URL', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Paste Valid URL');
       }
       if (finalAttachment) {
         try {
@@ -158,15 +150,7 @@ const GalleryManagement = () => {
     try {
       const res = await deleteGalleryForFileApi(deleteItemId);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         setDeleteItemId('');
         getGalleryData();
         setDeleteDialog(false);

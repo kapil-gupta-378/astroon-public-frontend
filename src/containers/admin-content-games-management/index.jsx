@@ -64,15 +64,7 @@ const GamesManagement = () => {
       } else if (appResult.match(appRegex)) {
         finalAttachment = appStoreURL;
       } else {
-        toast.error('Please Enter Valid URL', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Enter Valid URL');
       }
       if (finalAttachment) {
         try {

@@ -99,15 +99,7 @@ const VideoManagement = () => {
       } else if (videoAttachment) {
         finalAttachment = videoAttachment;
       } else {
-        toast.error('Please Paste Valid URL', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Paste Valid URL');
       }
       if (finalAttachment) {
         try {
@@ -241,15 +233,7 @@ const VideoManagement = () => {
           }
         }
       } else {
-        toast.error('Please Paste Valid URL', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please Paste Valid URL');
       }
     } else {
       toast.error('Please Fill All Fields');

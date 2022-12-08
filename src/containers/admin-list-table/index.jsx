@@ -92,15 +92,7 @@ const AdminListTable = () => {
       }
       const res = await deleteAdminApi(id);
       if (res.success) {
-        toast.success(res.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(res.message);
         setDeleteDialog(false);
         dispatch(fetchAdminListData(paramsObj));
       }

@@ -50,15 +50,7 @@ const Login = () => {
           toast.error(res.message);
         }
       } catch (error) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
         if (error.response.data.statusCode === 400) {
           toast.error(error.response.data.message[0].errorDetail.isEmail);
         }
