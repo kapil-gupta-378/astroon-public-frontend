@@ -24,18 +24,21 @@ import { useRef } from 'react';
 import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
-import { buyToken } from '../../../services/web3/tokenMothods';
+import { buyToken, claimToken } from '../../../services/web3/tokenMothods';
 import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
+import ClaimTokenDialog from '../../component/common/claim-token-dialog';
 const Profile = () => {
   const { userData } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
+  const [showClaimTokenModal, setShowCliamTokenModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
+  const [claimLoading, setclaimLoading] = useState(false);
   const { tokenData } = useSelector((state) => state.tokenReducer);
   const route = useRouter();
   const dispatch = useDispatch();
@@ -97,15 +100,7 @@ const Profile = () => {
       );
 
       if (tokenTransaction.status) {
-        toast.success('Token Transfered Successfully', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
         dispatch(setGlobalLoading(false));
         dispatch(fetchTokenDataAction());
@@ -145,27 +140,11 @@ const Profile = () => {
       };
       const response = await updateUserDataApi(paramsObject);
       if (response.success) {
-        toast.success(response.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(response.message);
       }
     } catch (error) {
       if (error.response) {
-        toast.error(error.response.data.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(error.response.data.message);
       }
     }
   }
@@ -188,6 +167,24 @@ const Profile = () => {
 
   const openCoverImageInput = () => {
     coverImageInputImageRef.current.click();
+  };
+
+  const claimTokenHandler = async () => {
+    try {
+      if (!isUserConnected) {
+        // throw Error when user not connected to website
+        throw new Error('Please connect your wallet');
+      }
+      setclaimLoading(true);
+      const claimResponse = await claimToken(walletAddress);
+      if (claimResponse.success) {
+        toast.success('Token claim successfully');
+        setclaimLoading(false);
+      }
+    } catch (error) {
+      setclaimLoading(false);
+      toast.error(error.message ? error.message : error.toString().slice(7));
+    }
   };
 
   return (
@@ -290,6 +287,12 @@ const Profile = () => {
                 >
                   Buy Token
                 </div>
+                <div
+                  onClick={() => setShowCliamTokenModal(true)}
+                  className={styles.wallet_address}
+                >
+                  Claim Token
+                </div>
               </div>
             </div>
           </section>
@@ -367,6 +370,12 @@ const Profile = () => {
             modalShow={showBuyTokenModal}
             selectedQuantity={sliderValue}
             handleFunction={buyTokenHandler}
+          />
+          <ClaimTokenDialog
+            loading={claimLoading}
+            handleShow={showClaimTokenModal}
+            leftButtonHandler={() => setShowCliamTokenModal(false)}
+            rightButtonHandler={claimTokenHandler}
           />
         </main>
       ) : (

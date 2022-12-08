@@ -56,15 +56,7 @@ const GeneralSettings = () => {
       };
       const response = await updateGeneralSettingsApi(settingsId, data);
       if (response.success) {
-        toast.success(response.message, {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success(response.message);
       }
     } catch (error) {
       return error;

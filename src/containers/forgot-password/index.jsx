@@ -60,15 +60,7 @@ const ForgotPassword = () => {
           // throw error;
         }
       } else {
-        toast.error('Please enter valid email', {
-          position: 'top-right',
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error('Please enter valid email');
       }
     } else {
       toast.error('Please Fill Email Feild');

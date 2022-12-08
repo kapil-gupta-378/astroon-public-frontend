@@ -1,6 +1,6 @@
 .global_Loading_wrap {
   height: 101%;
-  width: 101%;
+  width: 100.5%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,4 +9,5 @@
   left: -1px;
   background: #0000009e;
   z-index: 999999999;
+  border-radius: 26px;
 }

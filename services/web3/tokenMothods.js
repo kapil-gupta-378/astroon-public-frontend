@@ -32,3 +32,11 @@ export const buyToken = async (
 
   return tokenTransition;
 };
+
+export const claimToken = async (walletAddress) => {
+  const AstTokenContract = await getContractInstance();
+  const tokenTransition = await AstTokenContract.methods.claim(5).send({
+    from: walletAddress,
+  });
+  return tokenTransition;
+};
