@@ -3,6 +3,7 @@ import BlogTable from '../../component/ui/blog-table';
 import SearchBar from '../../component/common/SearchBar';
 import Sort from '../../component/common/sort';
 import styles from './adminBlogTable.module.scss';
+import moment from 'moment';
 import {
   getBlogDataApi,
   deleteBlogDataApi,
@@ -31,6 +32,7 @@ const AdminBlogTable = () => {
   const [pageNumber, setPageNumber] = useState();
   const [pageLimit, setPageLimit] = useState();
   const [adminBlogCount, setAdminBlogCount] = useState('');
+  const [isShowDate, setIsShowDate] = useState(false);
 
   const route = useRouter();
 
@@ -65,6 +67,8 @@ const AdminBlogTable = () => {
   const handleCommentsPopupOpen = (blogId) => {
     setBlogId(blogId);
     setIsDialog(true);
+    setStartDate(todayDate);
+    setEndDate(todayDate);
   };
   const handleCommentsPopupClose = () => {
     setBlogId('');
@@ -104,6 +108,7 @@ const AdminBlogTable = () => {
   };
 
   const handleSorting = async (sortBy) => {
+    setIsShowDate(false);
     setAdminBlogData([]);
     setBlogLoading(true);
     if (sortBy == 'DESC') {
@@ -149,8 +154,18 @@ const AdminBlogTable = () => {
 
   const showBlogFilter = () => {
     setIsFilter(true);
+    setIsShowDate(true);
   };
   const cancelBlogFilter = () => {
+    setIsShowDate(false);
+    setIsFilter(false);
+    setStartDate(todayDate);
+    setEndDate(todayDate);
+    setIsSort(true);
+  };
+
+  const closeDateFilter = () => {
+    setIsShowDate(false);
     getBlogData();
     setIsFilter(false);
     setStartDate(todayDate);
@@ -160,6 +175,7 @@ const AdminBlogTable = () => {
   };
 
   const handleBlogFilter = async () => {
+    setIsShowDate(true);
     if (startDate && endDate) {
       setBlogLoading(true);
       try {
@@ -204,11 +220,27 @@ const AdminBlogTable = () => {
           />
         </div>
         <div className={styles.top_bar_right}>
+          {isShowDate ? (
+            <div className={styles.filter_date_wrap}>
+              <span>{`${moment(new Date(startDate)).format(
+                'DD/MM/YYYY',
+              )} - ${moment(new Date(endDate)).format('DD/MM/YYYY')}`}</span>
+              <button
+                type="button"
+                className={styles.filter_close_btn}
+                onClick={closeDateFilter}
+              >
+                ×
+              </button>
+            </div>
+          ) : (
+            <div className={styles.filter_wrap}>
+              <BlogFilter handleFilter={showBlogFilter} />
+            </div>
+          )}
+
           <div className={styles.filter_wrap}>
             <Sort handleSorting={handleSorting} isSort={isSort} />
-          </div>
-          <div className={styles.filter_wrap}>
-            <BlogFilter handleFilter={showBlogFilter} />
           </div>
           <Button onClick={gotoAddBlogPage}>Add Blog</Button>
         </div>
