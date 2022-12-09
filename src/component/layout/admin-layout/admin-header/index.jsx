@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import styles from './adminHeader.module.scss';
 import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg';
 import logout from '../../../../../public/assets/images/logout.svg';
+import walletIcon from '../../../../../public/assets/images/payment_wallets.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
 import WebsiteLogo from '../../../common/website-logo';
@@ -115,7 +116,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
                 }
               >
                 <Image
-                  src={logout}
+                  src={walletIcon}
                   layout="fixed"
                   height={15}
                   width={15}
