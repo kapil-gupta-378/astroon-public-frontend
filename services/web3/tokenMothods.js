@@ -42,12 +42,12 @@ export const claimToken = async (walletAddress, saleRound) => {
   return tokenTransition;
 };
 
-export const getCurrentTokenToBeClaimed = async (address) => {
+export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
   const AstTokenContract = await getContractInstance();
 
   let saleUserBuyResponse = {};
   if (address) {
-    saleUserBuyResponse = await getUserBuyDetails(address);
+    saleUserBuyResponse = await getUserBuyDetails(address, saleRound);
   }
   let claimResponse;
   const saleDetailsResponse = await getSaleDetails();

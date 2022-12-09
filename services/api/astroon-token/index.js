@@ -35,3 +35,12 @@ export const postTokenSaleRound = async (data) => {
 
   return xhr.data;
 };
+export const getTokenSaleRound = async (data) => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}sale-round`,
+    data: data,
+  });
+
+  return xhr.data;
+};

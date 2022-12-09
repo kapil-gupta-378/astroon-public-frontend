@@ -71,7 +71,7 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
   return setSaleDataResponse.events.SaleCreated.returnValues.saleId;
 };
 
-export const getUserBuyDetails = async (address, saleRound = 8) => {
+export const getUserBuyDetails = async (address, saleRound) => {
   const AstTokenContract = await getContractInstance();
   const saleDetailsResponse = await AstTokenContract.methods
     .userTokenMap(saleRound, address)
