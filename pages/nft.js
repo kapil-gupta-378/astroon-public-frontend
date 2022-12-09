@@ -29,6 +29,7 @@ const NFTPage = () => {
         flexWrap: 'wrap',
         padding: '40px',
         gap: '15px',
+        justifyContent: 'center',
       }}
     >
       {!isLoading ? (

@@ -14,6 +14,15 @@ export const getBlogDataApi = async (page, limit) => {
   return xhr.data;
 };
 
+export const getSingleBlogDataApi = async (id) => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}blog/${id}`,
+  });
+
+  return xhr.data;
+};
+
 export const deleteBlogDataApi = async (id) => {
   const xhr = await axios.request({
     method: 'delete',
@@ -36,6 +45,16 @@ export const createBlogApi = async (data) => {
   const xhr = await axios.request({
     method: 'post',
     url: `${APP_URL}blog`,
+    data: data,
+  });
+
+  return xhr.data;
+};
+
+export const updateBlogApi = async (data, id) => {
+  const xhr = await axios.request({
+    method: 'put',
+    url: `${APP_URL}blog/${id}`,
     data: data,
   });
 

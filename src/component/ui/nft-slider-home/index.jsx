@@ -40,22 +40,12 @@ const NftSlider = () => {
         <div className={styles.nft_slider_home}>
           <Slider {...settings}>
             {getNFTData.map((nft) => {
-              return (
-                <CollectionCard
-                  key={nft.id}
-                  nftdata={nft.nft.image_thumbnail_url}
-                />
-              );
+              return <CollectionCard key={nft.id} nftdata={nft} />;
             })}
           </Slider>
           <Slider {...settings}>
             {getNFTData.map((nft) => {
-              return (
-                <CollectionCard
-                  key={nft.id}
-                  nftdata={nft.nft.image_thumbnail_url}
-                />
-              );
+              return <CollectionCard key={nft.id} nftdata={nft} />;
             })}
           </Slider>
         </div>

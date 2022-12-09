@@ -18,10 +18,12 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    cursor: pointer;
     .nav_dropdown_link {
       &:hover {
         span {
           img {
+            cursor: pointer;
             opacity: 100%;
           }
         }
@@ -62,6 +64,7 @@
       &:hover {
         span {
           img {
+            cursor: pointer;
             opacity: 100%;
           }
         }

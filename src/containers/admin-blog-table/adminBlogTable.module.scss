@@ -5,18 +5,43 @@
     flex-direction: row;
     margin-bottom: 30px;
     .top_bar_left {
-      width: 50%;
+      width: 35%;
       display: flex;
       align-items: center;
     }
     .top_bar_right {
-      width: 50%;
+      width: 65%;
       display: flex;
       align-items: center;
       justify-content: flex-end;
       gap: 30px;
       .filter_wrap {
         width: 25%;
+      }
+      .filter_date_wrap {
+        width: 35%;
+        color: #ffffff;
+        padding: 7px;
+        font-size: 14px;
+        border: none;
+        /* border-color: hsl(0deg, 0%, 80%); */
+        background: transparent;
+        border-radius: 30px;
+        border-style: solid;
+        border-width: 1px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        text-align: center;
+        .filter_close_btn {
+          background-color: transparent;
+          color: #fff;
+          font-size: 24px;
+          padding: unset;
+          line-height: 24px;
+          border: unset;
+        }
       }
     }
   }
@@ -30,12 +55,29 @@
         width: 45%;
       }
       .top_bar_right {
-        width: 55%;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        .filter_date_wrap {
+          width: 45%;
+        }
       }
     }
   }
 } /* 1024 */
 @media only screen and (max-width: 1023px) {
+  .blog_table_wrap {
+    .top_bar {
+      .top_bar_left {
+        width: 45%;
+      }
+      .top_bar_right {
+        .filter_date_wrap {
+          width: 40%;
+        }
+      }
+    }
+  }
 } /* 980 */
 @media only screen and (max-width: 979px) {
   .blog_table_wrap {
@@ -45,6 +87,9 @@
       }
       .top_bar_right {
         width: 60%;
+        .filter_date_wrap {
+          width: 55%;
+        }
       }
     }
   }
@@ -59,6 +104,9 @@
         width: 65%;
         .filter_wrap {
           width: 43%;
+        }
+        .filter_date_wrap {
+          width: 60%;
         }
       }
     }
@@ -76,8 +124,9 @@
       }
       .top_bar_right {
         width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
+        .filter_date_wrap {
+          width: 85%;
+        }
       }
     }
   }
@@ -86,9 +135,23 @@
   .blog_table_wrap {
     .top_bar {
       .top_bar_right {
+        width: 100%;
+        .filter_date_wrap {
+          width: 100%;
+        }
       }
     }
   }
 } /* 375 */
 @media only screen and (max-width: 374px) {
+  .blog_table_wrap {
+    .top_bar {
+      .top_bar_right {
+        width: 100%;
+        .filter_date_wrap {
+          width: 80%;
+        }
+      }
+    }
+  }
 } /* 320 */

@@ -2,9 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 import styles from './blogTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
+import editIcon from '../../../../public/assets/images/Edit-table-icon.svg';
 import Image from 'next/image';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { useRouter } from 'next/router';
 const BlogTable = ({
   data,
   loading,
@@ -12,6 +14,7 @@ const BlogTable = ({
   fetchMoreData,
   dataCount,
 }) => {
+  const router = useRouter();
   return (
     <div id={'table_scroll'} className={styles.table_wrap}>
       {!loading ? (
@@ -62,6 +65,20 @@ const BlogTable = ({
                       </td>
                       <td>
                         {moment(item.createdAt.toString()).format('DD/MM/YYYY')}
+                      </td>
+                      <td
+                        style={{ cursor: 'pointer' }}
+                        onClick={() =>
+                          router.push(`/admin/update-blog/${item.id}`)
+                        }
+                      >
+                        <Image
+                          src={editIcon}
+                          width={15}
+                          height={15}
+                          layout="fixed"
+                          alt="delte-icon"
+                        />
                       </td>
                       <td style={{ cursor: 'pointer' }}>
                         <Image
