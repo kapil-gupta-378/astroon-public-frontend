@@ -15,7 +15,6 @@ import {
   varivarifieSignatureApi,
 } from '../../../../../services/api/user';
 import {
-  setBalance,
   setIsUserConnected,
   setToken,
   setWalletAddress,
@@ -28,10 +27,10 @@ import {
   addWalletEventListener,
   checkWalletConnection,
   connectWallet,
-  getWalletAstTokenBalance,
 } from '../../../../../services/web3/walletMothods';
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
+import { fetchWalletBalance } from '../../../../redux/persist/wallet/walletAction';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const Header = () => {
@@ -39,12 +38,15 @@ const Header = () => {
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
   const route = useRouter();
   const [walletConnetDialog, setwalletConnectDialog] = useState(false);
-  const { isUserConnected } = useSelector((state) => state.walletReducer);
+  const { isUserConnected, walletAddress } = useSelector(
+    (state) => state.walletReducer,
+  );
 
   useEffect(() => {
     addWalletEventListener(disconnectWallet, disconnectWallet);
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
+    if (walletAddress) dispatch(fetchWalletBalance(walletAddress));
     checkWalletConnection((isConnected) => {
       if (!isConnected) {
         disconnectWallet();
@@ -88,7 +90,6 @@ const Header = () => {
           networkId: networkId,
         };
         const responseSignature = await varivarifieSignatureApi(data);
-        const walletBalance = await getWalletAstTokenBalance(address);
 
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
@@ -97,7 +98,7 @@ const Header = () => {
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));
-          dispatch(setBalance(walletBalance));
+          dispatch(fetchWalletBalance(address));
           setwalletConnectDialog(false);
           toast.success('Wallet Connected');
           route.push(`/user-profile/${address}`);

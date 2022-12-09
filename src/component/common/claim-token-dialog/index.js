@@ -6,22 +6,24 @@ const ClaimTokenDialog = ({
   handleShow,
   leftButtonHandler,
   rightButtonHandler,
-  loading,
+  claimingNumber,
 }) => {
   return (
-    <DialogBox
-      handleShow={handleShow}
-      mainHading="Claim Token"
-      leftButtonName={'Cancel'}
-      rightButtonName={'Claim'}
-      leftButtonHandler={leftButtonHandler}
-      rightButtonHandler={rightButtonHandler}
-    >
-      <p style={{ margin: '40px 0px', fontSize: '17px' }}>
-        4 Token availble for claim
-      </p>
-      {loading && <GlobalLoading />}
-    </DialogBox>
+    <>
+      <DialogBox
+        handleShow={handleShow}
+        mainHading="Claim Token"
+        leftButtonName={'Cancel'}
+        rightButtonName={'Claim'}
+        leftButtonHandler={leftButtonHandler}
+        rightButtonHandler={rightButtonHandler}
+      >
+        <p style={{ margin: '40px 0px', fontSize: '17px' }}>
+          {claimingNumber} Token availble for claim
+        </p>
+      </DialogBox>
+      {<GlobalLoading />}
+    </>
   );
 };
 

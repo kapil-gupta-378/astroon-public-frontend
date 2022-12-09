@@ -46,3 +46,19 @@ export const postSeedWhiteListAddressApi = async (data) => {
   });
   return xhr.data.data;
 };
+
+export const getPrivateUserMerkleRootApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}whitelist-user/root`,
+  });
+  return xhr.data.data;
+};
+
+export const getSeedUserMerkleRootApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}whitelist-seed/root`,
+  });
+  return xhr.data.data;
+};

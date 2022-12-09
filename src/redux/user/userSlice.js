@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   userData: { bio: '', displayName: '', email: '', customUrl: '', assets: [] },
   userDataLoading: false,
+  claimingToken: 0,
 };
 
 export const userSlice = createSlice({
@@ -27,6 +28,9 @@ export const userSlice = createSlice({
     updateProfileImage: (state, action) => {
       state.userData.profileImage = action.payload;
     },
+    setClaimingTokenNumber: (state, action) => {
+      state.claimingToken = action.payload;
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   setUserDataLoading,
   updateCoverImage,
   updateProfileImage,
+  setClaimingTokenNumber,
 } = userSlice.actions;
 
 export default userSlice.reducer;

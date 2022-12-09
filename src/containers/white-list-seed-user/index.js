@@ -6,7 +6,6 @@ import styles from './whiteListSeedUser.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWhiteListSeedUserDataAction } from '../../redux/white-list-seed-user/whiteListSeedAction';
 import { setWhiteListSeedUserData } from '../../redux/white-list-seed-user/whiteListSeedSlice';
-import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
 import { postSeedWhiteListAddressApi } from '../../../services/api/markle';
 import {
   createNewDataForWhiteListTable,
@@ -18,8 +17,6 @@ const WhiteListSeedUser = () => {
   const { whiteListSeedUserData } = useSelector(
     (state) => state.whiteListSeedUserReducer,
   );
-
-  const { walletAddress } = useSelector((state) => state.walletReducer);
 
   const dispatch = useDispatch();
 
@@ -46,7 +43,6 @@ const WhiteListSeedUser = () => {
 
   const createWhiteListSeedUser = async () => {
     try {
-      const web3 = await getContractInstance();
       let newArray = [];
 
       for (let i = 0; i < whiteListSeedUserData.length; i++) {
@@ -57,30 +53,17 @@ const WhiteListSeedUser = () => {
         whiteListAddresses: newArray,
       };
 
-      try {
-        const response = await postSeedWhiteListAddressApi(data);
-        if (response) {
-          try {
-            const contraactResponse = await web3.methods
-              .setMerkleRoot(response)
-              .send({ from: walletAddress });
-            if (contraactResponse.status) {
-              toast.success('WhiteList User Created Successfully', {
-                position: 'top-right',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-              });
-            }
-          } catch (error) {
-            return error;
-          }
-        }
-      } catch (error) {
-        return error;
+      const response = await postSeedWhiteListAddressApi(data);
+      if (response) {
+        toast.success('WhiteList User Created Successfully', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (error) {
       return error;
@@ -102,6 +85,7 @@ const WhiteListSeedUser = () => {
     );
     dispatch(setWhiteListSeedUserData(newAddressArrayForWhiteListTable));
   };
+
   return (
     <main className={styles.white_List_table_wrap}>
       <section className={styles.top_bar}>

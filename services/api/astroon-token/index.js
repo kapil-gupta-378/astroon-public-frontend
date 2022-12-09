@@ -16,3 +16,22 @@ export const getTokenSaleData = async () => {
   });
   return xhr.data.data;
 };
+
+export const updateTokenSaleDataApi = async (saleType, data) => {
+  const xhr = await axios.request({
+    method: 'put',
+    url: `${APP_URL}seed-sale/${saleType}`,
+    data: data,
+  });
+  return xhr.data;
+};
+
+export const postTokenSaleRound = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}sale-round`,
+    data: data,
+  });
+
+  return xhr.data;
+};

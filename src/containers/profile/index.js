@@ -29,7 +29,7 @@ import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
 const Profile = () => {
-  const { userData } = useSelector((state) => state.userReducer);
+  const { userData, claimingToken } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
@@ -38,7 +38,6 @@ const Profile = () => {
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
-  const [claimLoading, setclaimLoading] = useState(false);
   const { tokenData } = useSelector((state) => state.tokenReducer);
   const route = useRouter();
   const dispatch = useDispatch();
@@ -64,7 +63,7 @@ const Profile = () => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchUserDataAction());
+    dispatch(fetchUserDataAction(walletAddress));
   };
 
   const updateState = (e) => {
@@ -171,18 +170,17 @@ const Profile = () => {
 
   const claimTokenHandler = async () => {
     try {
-      if (!isUserConnected) {
-        // throw Error when user not connected to website
-        throw new Error('Please connect your wallet');
-      }
-      setclaimLoading(true);
-      const claimResponse = await claimToken(walletAddress);
-      if (claimResponse.success) {
+      // throw Error when user not connected to website
+      if (!isUserConnected) throw new Error('Please connect your wallet');
+
+      dispatch(setGlobalLoading(true));
+      const claimResponse = await claimToken(walletAddress, 8);
+      if (claimResponse.status) {
         toast.success('Token claim successfully');
-        setclaimLoading(false);
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
-      setclaimLoading(false);
+      dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
@@ -372,10 +370,10 @@ const Profile = () => {
             handleFunction={buyTokenHandler}
           />
           <ClaimTokenDialog
-            loading={claimLoading}
             handleShow={showClaimTokenModal}
             leftButtonHandler={() => setShowCliamTokenModal(false)}
             rightButtonHandler={claimTokenHandler}
+            claimingNumber={claimingToken}
           />
         </main>
       ) : (
