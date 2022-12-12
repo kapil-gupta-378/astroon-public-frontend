@@ -2,6 +2,7 @@ import {
   getTokenDataApi,
   getTokenSaleData,
 } from '../../../services/api/astroon-token';
+import { setGlobalLoading } from '../global-loading/globalLoadingSlice';
 import {
   setPrivateSaleDetails,
   setPublicSaleDetails,
@@ -13,7 +14,7 @@ import {
 export const fetchTokenDataAction = () => {
   return async (dispatch) => {
     try {
-      dispatch(setTokenDataLoading(true));
+      dispatch(setGlobalLoading(true));
       const currentSale = await getTokenDataApi();
       dispatch(setTokendata(currentSale));
       const SaleTypeDetails = await getTokenSaleData();
@@ -32,10 +33,11 @@ export const fetchTokenDataAction = () => {
         (saleData) => saleData.saleType === 'Seed Sale',
       );
       dispatch(setSeedSaleDetails(seedSaleData));
-      dispatch(setTokenDataLoading(false));
+      dispatch(setGlobalLoading(false));
     } catch (error) {
       dispatch(setTokendata([]));
       dispatch(setTokenDataLoading(false));
+      dispatch(setGlobalLoading(false));
     }
   };
 };

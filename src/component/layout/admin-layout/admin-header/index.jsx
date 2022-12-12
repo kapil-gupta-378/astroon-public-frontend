@@ -5,6 +5,7 @@ import styles from './adminHeader.module.scss';
 import imageAvatar from '../../../../../public/assets/images/profile-avatar.svg';
 import logout from '../../../../../public/assets/images/logout.svg';
 import walletIcon from '../../../../../public/assets/images/payment_wallets.svg';
+import ethIconWhite from '../../../../../public/assets/images/ethereum-icon-white.svg';
 import Dropdown from 'react-bootstrap/Dropdown';
 import hamburgerIcon from '../../../../../public/assets/images/hamburgerIcon.svg';
 import WebsiteLogo from '../../../common/website-logo';
@@ -19,11 +20,12 @@ import {
 } from '../../../../redux/admin/adminSlice';
 import { getContractInstance } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const AdminHeader = ({ setOpenSideBar }) => {
   const [dataState, setdataState] = useState({});
-  const { isConnected, adminToken } = useSelector(
+  const { isConnected, adminToken, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
   const router = useRouter();
@@ -98,6 +100,27 @@ const AdminHeader = ({ setOpenSideBar }) => {
         </div>
 
         <div className={styles.header_right}>
+          {isConnected && (
+            <OverlayTrigger
+              placement={'auto'}
+              overlay={
+                <Tooltip>
+                  <strong>{walletAddress}</strong>
+                </Tooltip>
+              }
+            >
+              <div className={styles.wallet_address}>
+                <Image
+                  src={ethIconWhite}
+                  width={13}
+                  height={13}
+                  alt="eth"
+                  layout="fixed"
+                />
+                {`${walletAddress ? `${walletAddress.slice(0, 9)}...` : ''}`}
+              </div>
+            </OverlayTrigger>
+          )}
           <Dropdown className="profile_dropdown">
             <Dropdown.Toggle id="dropdown-autoclose-true">
               <Image

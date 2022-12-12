@@ -7,6 +7,7 @@
     flex-direction: row;
     justify-content: space-between;
     .header_left {
+      width: 50%;
       .logo_wrap {
         display: none;
         font-size: 25px;
@@ -14,7 +15,6 @@
         line-height: 22px;
         margin-bottom: 20px;
       }
-      width: 50%;
       h3 {
         @include heading_5;
       }
@@ -36,6 +36,18 @@
         align-items: center;
         justify-content: center;
         border: none;
+      }
+      .wallet_address {
+        border: 1px solid #ffffff;
+        border-radius: 268px;
+        padding: 6px 15px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+        cursor: pointer;
+        span {
+          margin-right: 6px !important;
+        }
       }
       span {
         position: relative !important;
@@ -62,7 +74,11 @@
       }
       .header_right {
         justify-content: flex-end;
-        align-items: flex-start;
+        align-items: flex-end;
+        flex-wrap: wrap-reverse;
+        .wallet_address {
+          margin-top: 7px;
+        }
         .sidebar_open_btn {
           display: inline-block;
           margin-top: 11px;
@@ -75,10 +91,10 @@
   .admin_header_wrap {
     .header_nav_wrap {
       .header_left {
-        width: 72%;
+        width: 35%;
       }
       .header_right {
-        width: 28%;
+        width: 65%;
       }
     }
   }
@@ -95,10 +111,8 @@
           margin-top: 8px;
           font-size: 20px;
         }
-        width: 72%;
       }
       .header_right {
-        width: 28%;
       }
     }
   }
