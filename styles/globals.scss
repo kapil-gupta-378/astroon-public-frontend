@@ -485,3 +485,9 @@ body {
 ::-webkit-calendar-picker-indicator {
   filter: invert(1);
 }
+
+// for loading
+.no_scroll_forLoading {
+  overflow: hidden;
+  height: 100%;
+}

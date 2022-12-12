@@ -8,16 +8,18 @@
   align-items: center;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 9987;
   background: rgba(3, 2, 35, 0.89);
   .modal_content {
     width: 37%;
     background: url('../../../../public/assets/images/dialogBackgorund.png');
     background-repeat: no-repeat;
     position: relative;
-
     border-radius: 25px;
+    object-fit: cover;
     padding: 40px 38px;
+    background-position: center;
+    background-size: 100% 100%;
     .cross_close_btn {
       position: absolute;
       right: 20px;

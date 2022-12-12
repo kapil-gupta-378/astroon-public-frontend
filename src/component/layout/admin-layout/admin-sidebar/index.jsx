@@ -265,7 +265,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           )}
         </div>
 
-        {/* <div
+        <div
           className={`${styles.nav_link_div} ${
             router.pathname === '/admin/sale-controls' && styles.activeLink
           }`}
@@ -274,12 +274,12 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={sidebarLinkIcon}
+            src={settingsIcon}
             layout="fixed"
             alt="nav_image"
           />
-          <Link href="/admin/sale-controls">Sale Controls</Link>
-        </div> */}
+          <Link href="/admin/sale-controls">Manage Sale</Link>
+        </div>
       </div>
     </aside>
   );

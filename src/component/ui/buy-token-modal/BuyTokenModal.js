@@ -3,12 +3,11 @@ import { Modal, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import styles from './buyTokenModal.module.scss';
 import 'rc-slider/assets/index.css';
 import Slider from 'rc-slider';
-import GlobalLoading from '../../common/global-loading';
-import { useSelector } from 'react-redux';
 import Image from 'next/image';
 import downArrowIcon from '../../../../public/assets/images/Arrow_down.svg';
 import upArrowIcon from '../../../../public/assets/images/Arrow_Up.svg';
 import darkDownArrowIcon from '../../../../public/assets/images/Arrow_down dark.svg';
+import GlobalLoading from '../../common/global-loading';
 const BuyTokenModal = ({
   modalShow,
   handleFunction,
@@ -18,7 +17,6 @@ const BuyTokenModal = ({
   selectedQuantity,
   tokenData,
 }) => {
-  const { globalLoading } = useSelector((state) => state.globalLoadingReducer);
   return (
     <>
       <Modal
@@ -120,8 +118,8 @@ const BuyTokenModal = ({
             </div>
           </div>
         </Modal.Body>
-        {globalLoading && <GlobalLoading />}
       </Modal>
+      <GlobalLoading />
     </>
   );
 };

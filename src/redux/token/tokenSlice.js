@@ -2,7 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   tokenData: [],
-  saleTypeDetails: [],
+  seedSale: {},
+  privateSale: {},
+  publicSale: {},
   tokenDataLoading: false,
 };
 
@@ -13,8 +15,14 @@ export const tokenSlice = createSlice({
     setTokendata: (state, action) => {
       state.tokenData = action.payload;
     },
-    setSaleTypeDetails: (state, action) => {
-      state.saleTypeDetails = action.payload;
+    setPublicSaleDetails: (state, action) => {
+      state.publicSale = action.payload;
+    },
+    setPrivateSaleDetails: (state, action) => {
+      state.privateSale = action.payload;
+    },
+    setSeedSaleDetails: (state, action) => {
+      state.seedSale = action.payload;
     },
     setTokenDataLoading: (state, action) => {
       state.tokenDataLoading = action.payload;
@@ -22,7 +30,12 @@ export const tokenSlice = createSlice({
   },
 });
 
-export const { setTokendata, setTokenDataLoading, setSaleTypeDetails } =
-  tokenSlice.actions;
+export const {
+  setTokendata,
+  setTokenDataLoading,
+  setPublicSaleDetails,
+  setPrivateSaleDetails,
+  setSeedSaleDetails,
+} = tokenSlice.actions;
 
 export default tokenSlice.reducer;

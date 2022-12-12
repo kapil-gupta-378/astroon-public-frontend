@@ -1,0 +1,10 @@
+.form_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  .input_wrap {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+  }
+}

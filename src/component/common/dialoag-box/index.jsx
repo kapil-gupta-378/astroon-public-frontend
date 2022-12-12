@@ -15,12 +15,17 @@ const DialogBox = ({
   onChangeInput,
   children,
   closeButtonHandler,
+  height,
+  width,
 }) => {
   return (
     <div className="dialog_box">
       {handleShow && (
         <div className={styles.dialogbox_wrap}>
-          <div className={styles.modal_content}>
+          <div
+            style={{ width: width, height: height }}
+            className={styles.modal_content}
+          >
             {closeButtonHandler && (
               <button
                 className={styles.cross_close_btn}
@@ -74,6 +79,11 @@ const DialogBox = ({
       )}
     </div>
   );
+};
+
+DialogBox.defaultProps = {
+  height: 'auto',
+  width: '37%',
 };
 
 export default DialogBox;

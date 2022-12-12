@@ -44,15 +44,17 @@ const AST = () => {
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData, saleTypeDetails } = useSelector(
+  const { tokenData, seedSale, privateSale, publicSale } = useSelector(
     (state) => state.tokenReducer,
   );
   const { userData } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     fetchTokenDataHandler();
   }, []);
+
   const fetchTokenDataHandler = async () => {
     dispatch(fetchTokenDataAction());
   };
@@ -87,23 +89,21 @@ const AST = () => {
 
   const buyTokenHandler = async () => {
     try {
-      if (!isUserConnected) {
-        // throw Error when user not connected to website
-        throw new Error('Please connect your wallet');
-      }
-      if (!tokenData.isPrivateSale && !tokenData.isPublicSale) {
-        // throw Error when sale is not on
+      // throw Error when user not connected to website
+      if (!isUserConnected) throw new Error('Please connect your wallet');
+
+      // throw Error when sale is not on
+      if (!tokenData.isPrivateSale && !tokenData.isPublicSale)
         throw new Error('Sale is not live');
+
+      // checking which sale is on
+      if (tokenData.isPrivateSale) {
+        // throw Error when user is not white list user
+        if (!userData.whiteListedUser)
+          throw new Error('Currently token are availble for private user');
       }
 
       let tokenTransaction;
-      // checking which sale is on
-      if (tokenData.isPrivateSale) {
-        if (!userData.whiteListedUser) {
-          // throw Error when user is not white list user
-          throw new Error('Currently token are availble for private user');
-        }
-      }
       // invoking token buy funtion if no error
       dispatch(setGlobalLoading(true));
       tokenTransaction = await buyToken(
@@ -163,9 +163,15 @@ const AST = () => {
         </p>
       </div>
       <div className={styles.Sale_card_wrap}>
-        {saleTypeDetails.map((item, idx) => {
-          return <SaleDetailCard data={item} key={idx} />;
-        })}
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard data={seedSale} key={1} />
+        </div>
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard data={privateSale} key={2} />
+        </div>
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard data={publicSale} key={3} />
+        </div>
       </div>
       <div className={styles.chart_wrap}>
         <div className={styles.chart}>
