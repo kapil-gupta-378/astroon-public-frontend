@@ -19,34 +19,47 @@
     flex-direction: column;
     gap: 30px;
     cursor: pointer;
-    .nav_dropdown_link {
-      &:hover {
+    .nav_dropdown_link_wrp {
+      .nav_dropdown_link {
         span {
           img {
-            cursor: pointer;
-            opacity: 100%;
+            opacity: 50%;
           }
         }
-
         a {
-          color: white;
+          margin-left: 10px;
+          @include heading_11;
+          font-size: 13px;
+          text-decoration: none;
+          text-align: start;
+          color: rgba(184, 184, 184, 0.9);
+          vertical-align: bottom;
+        }
+        &:hover {
+          span {
+            img {
+              cursor: pointer;
+              opacity: 100%;
+            }
+          }
+          a {
+            color: white;
+          }
         }
       }
-
-      span {
-        img {
-          opacity: 50%;
+      .dropdown_wrap {
+        a {
+          margin-left: 10px;
+          @include heading_11;
+          font-size: 13px;
+          text-decoration: none;
+          text-align: start;
+          color: rgba(184, 184, 184, 0.9);
+          vertical-align: bottom;
+          &:hover {
+            color: white;
+          }
         }
-      }
-
-      a {
-        margin-left: 10px;
-        @include heading_11;
-        font-size: 13px;
-        text-decoration: none;
-        text-align: start;
-        color: rgba(184, 184, 184, 0.9);
-        vertical-align: bottom;
       }
     }
     .activeLink {
@@ -73,19 +86,6 @@
           color: white;
         }
       }
-
-      // &:focus-within {
-      //   span {
-      //     img {
-      //       opacity: 100%;
-      //     }
-      //   }
-
-      //   a {
-      //     color: white;
-      //   }
-      // }
-
       span {
         img {
           opacity: 50%;
