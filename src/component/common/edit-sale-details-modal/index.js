@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect } from 'react';
 import DialogBox from '../dialoag-box';
 import GlobalLoading from '../global-loading';
@@ -24,7 +25,6 @@ const EditSaleDetailsModal = ({
       });
     };
   }, []);
-
   return (
     <>
       <DialogBox
@@ -51,6 +51,7 @@ const EditSaleDetailsModal = ({
               }
             />
             <TextInput
+              handleValue={value.cap}
               titleBackground={'#AF3277'}
               title={'Cap'}
               handleType={'number'}
@@ -64,9 +65,10 @@ const EditSaleDetailsModal = ({
           </div>
           <div className={styles.input_wrap}>
             <TextInput
+              handleValue={moment(value.startDate).format('YYYY-MM-DDTHH:mm')}
               titleBackground={'#AF3277'}
               title={'Start Date'}
-              handleType="date"
+              handleType="datetime-local"
               handleOnChange={(e) =>
                 setNewSaleDataHandler((prevValue) => ({
                   ...prevValue,
@@ -75,6 +77,7 @@ const EditSaleDetailsModal = ({
               }
             />
             <TextInput
+              handleValue={value.endDate}
               titleBackground={'#AF3277'}
               title={'End Date'}
               handleType="number"
@@ -88,6 +91,7 @@ const EditSaleDetailsModal = ({
           </div>
           <div className={styles.input_wrap}>
             <TextInput
+              handleValue={value.cliftingTime}
               titleBackground={'#AF3277'}
               title={'Clifting Time'}
               handleType={'number'}
@@ -99,6 +103,7 @@ const EditSaleDetailsModal = ({
               }
             />
             <TextInput
+              handleValue={value.vestingTime}
               titleBackground={'#AF3277'}
               title={'Vesting Time'}
               handleType={'number'}
@@ -112,6 +117,7 @@ const EditSaleDetailsModal = ({
           </div>
           <div className={styles.input_wrap}>
             <TextInput
+              handleValue={value.buyLimit}
               titleBackground={'#AF3277'}
               title={'Buy Limit Per User'}
               handleOnChange={(e) =>

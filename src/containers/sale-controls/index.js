@@ -81,7 +81,8 @@ const SaleControls = () => {
     }
   }
 
-  function editSaleDetailsHander(saleType) {
+  function editSaleDetailsHander(saleType, data) {
+    setNewSaleData(data);
     setNewSaleData((prevValue) => ({
       ...prevValue,
       saleType:
@@ -131,7 +132,7 @@ const SaleControls = () => {
             data={seedSale}
             saleStartHandler={() => saleStartHandler('seed')}
             editSaleDetailsHander={() =>
-              editSaleDetailsHander('seed', seedSale.id)
+              editSaleDetailsHander('seed', seedSale)
             }
             key={1}
             admin={true}
@@ -142,7 +143,7 @@ const SaleControls = () => {
             data={privateSale}
             saleStartHandler={() => saleStartHandler('private')}
             editSaleDetailsHander={() =>
-              editSaleDetailsHander('private', privateSale.id)
+              editSaleDetailsHander('private', privateSale)
             }
             key={2}
             admin={true}
@@ -154,7 +155,7 @@ const SaleControls = () => {
             key={3}
             saleStartHandler={() => saleStartHandler('public')}
             editSaleDetailsHander={() =>
-              editSaleDetailsHander('public', publicSale.id)
+              editSaleDetailsHander('public', publicSale)
             }
             admin={true}
           />
