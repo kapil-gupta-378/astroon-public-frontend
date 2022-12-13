@@ -7,11 +7,14 @@ import Roadmap from '../../component/ui/roadmap';
 import Whitepaper from '../../component/ui/whitepaper';
 import BlogRow from '../../component/ui/blog-row';
 import NftSlider from '../../component/ui/nft-slider-home';
+import LeaderBoard from '../../component/ui/leader-board';
+
 const Home = () => {
   return (
     <div className={styles.home_wrp}>
       <Banner />
       <Roadmap />
+      <LeaderBoard />
       <NftSlider />
       <Whitepaper />
       <Team />
