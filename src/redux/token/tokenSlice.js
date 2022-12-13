@@ -6,6 +6,7 @@ const initialState = {
   privateSale: {},
   publicSale: {},
   tokenDataLoading: false,
+  saleOnData: {},
 };
 
 export const tokenSlice = createSlice({
@@ -27,6 +28,9 @@ export const tokenSlice = createSlice({
     setTokenDataLoading: (state, action) => {
       state.tokenDataLoading = action.payload;
     },
+    setSaleOnData: (state, action) => {
+      state.saleOnData = action.payload;
+    },
   },
 });
 
@@ -36,6 +40,7 @@ export const {
   setPublicSaleDetails,
   setPrivateSaleDetails,
   setSeedSaleDetails,
+  setSaleOnData,
 } = tokenSlice.actions;
 
 export default tokenSlice.reducer;

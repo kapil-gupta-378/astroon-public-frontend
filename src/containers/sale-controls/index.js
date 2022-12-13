@@ -9,6 +9,7 @@ import {
 import {
   startPrivateSale,
   startPublicSale,
+  stopSale,
 } from '../../../services/web3/saleMethod';
 import EditSaleDetailsModal from '../../component/common/edit-sale-details-modal';
 import SaleDetailCard from '../../component/common/sale-detail-card';
@@ -36,9 +37,8 @@ const SaleControls = () => {
   const { isConnected, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
-  const { seedSale, privateSale, publicSale } = useSelector(
-    (state) => state.tokenReducer,
-  );
+  const { tokenData, seedSale, privateSale, publicSale, saleOnData } =
+    useSelector((state) => state.tokenReducer);
 
   async function saleStartHandler(saleType) {
     try {
@@ -46,6 +46,7 @@ const SaleControls = () => {
 
       let startSaleResponse;
       dispatch(setGlobalLoading(true));
+
       if (saleType === 'private') {
         const privateUserMerkleRoot = await getPrivateUserMerkleRootApi();
 
@@ -54,6 +55,9 @@ const SaleControls = () => {
           privateSale,
           walletAddress,
         );
+        dispatch(fetchTokenDataAction());
+        dispatch(setGlobalLoading(false));
+        toast.success('Sale Started');
         return startPrivateSale;
       }
 
@@ -65,13 +69,16 @@ const SaleControls = () => {
           seedSale,
           walletAddress,
         );
+        dispatch(fetchTokenDataAction());
+        dispatch(setGlobalLoading(false));
+        toast.success('Sale Started');
         return startPrivateSale;
       }
 
       startSaleResponse = await startPublicSale(publicSale, walletAddress);
-
       toast.success('Sale Started');
 
+      dispatch(fetchTokenDataAction());
       dispatch(setGlobalLoading(false));
       return startSaleResponse;
     } catch (error) {
@@ -124,11 +131,33 @@ const SaleControls = () => {
     }
   }
 
+  async function stopSaleHander(saleType) {
+    try {
+      if (!isConnected) throw new Error('Please Connect Your Wallet');
+
+      dispatch(setGlobalLoading(true));
+
+      const stopSaleResponse = await stopSale(saleType, walletAddress);
+      if (stopSaleResponse.status) {
+        toast.success(`${saleType} Stoped`);
+      }
+
+      dispatch(fetchTokenDataAction());
+      dispatch(setGlobalLoading(false));
+    } catch (error) {
+      dispatch(setGlobalLoading(false));
+      console.error(error);
+      toast.error(error.message ? error.message : error.toString().slice(7));
+    }
+  }
+
   return (
     <main className={styles.sale_page_wrap}>
       <div className={styles.sale_Card_wrap}>
         {seedSale && (
           <SaleDetailCard
+            isSaleOn={tokenData.isPrivateSale && saleOnData.isSeed}
+            onClickStopSale={stopSaleHander}
             data={seedSale}
             saleStartHandler={() => saleStartHandler('seed')}
             editSaleDetailsHander={() =>
@@ -140,6 +169,8 @@ const SaleControls = () => {
         )}
         {privateSale && (
           <SaleDetailCard
+            isSaleOn={tokenData.isPrivateSale && saleOnData.isPrivate}
+            onClickStopSale={stopSaleHander}
             data={privateSale}
             saleStartHandler={() => saleStartHandler('private')}
             editSaleDetailsHander={() =>
@@ -151,6 +182,8 @@ const SaleControls = () => {
         )}
         {publicSale && (
           <SaleDetailCard
+            isSaleOn={tokenData.isPublicSale}
+            onClickStopSale={stopSaleHander}
             data={publicSale}
             key={3}
             saleStartHandler={() => saleStartHandler('public')}

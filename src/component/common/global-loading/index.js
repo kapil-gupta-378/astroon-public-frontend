@@ -9,7 +9,6 @@ const GlobalLoading = () => {
 
   const setLoading = async () => {
     if (globalLoading) {
-      window.scrollTo(0, 0);
       document.body.classList.add('no_scroll_forLoading');
     } else {
       document.body.classList.remove('no_scroll_forLoading');
