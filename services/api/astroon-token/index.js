@@ -26,7 +26,7 @@ export const updateTokenSaleDataApi = async (saleType, data) => {
   return xhr.data;
 };
 
-export const postTokenSaleRound = async (data) => {
+export const postTokenSaleRoundApi = async (data) => {
   const xhr = await axios.request({
     method: 'post',
     url: `${APP_URL}sale-round`,
@@ -40,6 +40,24 @@ export const getTokenSaleRound = async (data) => {
     method: 'get',
     url: `${APP_URL}sale-round`,
     data: data,
+  });
+
+  return xhr.data;
+};
+
+export const postSaleOnStatusApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}sale-on`,
+    data: data,
+  });
+
+  return xhr.data;
+};
+export const getSaleOnStatusApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}sale-on`,
   });
 
   return xhr.data;

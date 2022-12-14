@@ -8,3 +8,11 @@
     gap: 30px;
   }
 }
+
+@media only screen and (max-width: 479px) {
+  .form_wrap {
+    .input_wrap {
+      flex-direction: column;
+    }
+  }
+} /* 375 */
