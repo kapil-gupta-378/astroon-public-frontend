@@ -32,12 +32,12 @@ const EditSaleDetailsModal = ({
         onHide={modalClosehandler}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered
+        centered={true}
         className={'edit_sale_details_modal'}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeVariant={'white'} closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Modal heading
+            Edit Sale Details
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -136,7 +136,7 @@ const EditSaleDetailsModal = ({
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Close</Button>
+          <Button kind={'white_btn'}>Update</Button>
         </Modal.Footer>
       </Modal>
 
