@@ -10,6 +10,7 @@ const EditSaleDetailsModal = ({
   modalClosehandler,
   value,
   setNewSaleDataHandler,
+  rightButtonHandler,
 }) => {
   useEffect(() => {
     return () => {
@@ -136,7 +137,9 @@ const EditSaleDetailsModal = ({
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button kind={'white_btn'}>Update</Button>
+          <Button onClick={rightButtonHandler} kind={'white_btn'}>
+            Update
+          </Button>
         </Modal.Footer>
       </Modal>
 
