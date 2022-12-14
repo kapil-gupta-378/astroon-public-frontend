@@ -3,6 +3,8 @@ import Link from 'next/link';
 import styles from './blogTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
 import editIcon from '../../../../public/assets/images/Edit-table-icon.svg';
+import asenIcon from '../../../../public/assets/images/asen.svg';
+import desIcon from '../../../../public/assets/images/des.svg';
 import Image from 'next/image';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -13,6 +15,8 @@ const BlogTable = ({
   handlePopup,
   fetchMoreData,
   dataCount,
+  handleSorting,
+  isSort,
 }) => {
   const router = useRouter();
   return (
@@ -49,7 +53,20 @@ const BlogTable = ({
                   <th scope="col">S.No.</th>
                   <th scope="col">Username</th>
                   <th scope="col">Blog Title</th>
-                  <th scope="col">Upload Date</th>
+                  <th
+                    scope="col"
+                    onClick={() => handleSorting(isSort ? 'ASC' : 'DESC')}
+                    className={styles.sorting}
+                  >
+                    <Image
+                      src={isSort ? desIcon : asenIcon}
+                      width={15}
+                      height={15}
+                      layout="fixed"
+                      alt="sort-icon"
+                    />
+                    Created Date
+                  </th>
                 </tr>
               </thead>
               <tbody>

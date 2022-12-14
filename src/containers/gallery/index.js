@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import ReactPlayer from 'react-player';
 import styles from './gallery.module.scss';
 import HeadingBackground from '../../component/common/heading-background';
-import { getGalleryForUserFileApi } from '../../../services/api/content-management/gallery-management';
+import { getGalleryUserDataApi } from '../../../services/api/content-management/gallery-management';
 import galleryImage from '../../../public/assets/images/galleryImage.png';
 
 const Gallery = () => {
@@ -62,7 +62,7 @@ const Gallery = () => {
   };
 
   const getGalleryData = async () => {
-    const res = await getGalleryForUserFileApi();
+    const res = await getGalleryUserDataApi();
     if (res.success) {
       let video = res.data.rows.filter((obj) => obj.fileType == 'video');
       let image = res.data.rows.filter((obj) => obj.fileType == 'image');

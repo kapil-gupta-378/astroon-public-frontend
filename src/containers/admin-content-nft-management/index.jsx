@@ -5,10 +5,12 @@ import {
   insertNFTDataApi,
   getNFTDataApi,
   deleteNFTDataApi,
+  nftOperationDataApi,
 } from '../../../services/api/content-management/nft-management';
 import Button from '../../component/common/button';
 import NFTDeleteDialogBox from '../../component/common/nft-delete-dialoag-box';
 import NFTDialogBox from '../../component/common/nft-dialog-box';
+import SearchBar from '../../component/common/SearchBar';
 import NFTContentManagementTable from '../../component/ui/nft-content-management-table';
 import styles from './nftManagement.module.scss';
 
@@ -29,20 +31,39 @@ const NFTManagement = () => {
   const [category, setCategory] = useState();
   const [nftListData, setNFTListData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [isSort, setIsSort] = useState(true);
+  const [searchKeyWord, setSearchKeyWord] = useState();
+  const [adminNFTCount, setAdminNFTCount] = useState('');
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
 
   useEffect(() => {
-    getNFTFinalData();
+    setPageLimit(6);
+    setPageNumber(1);
+    getNFTFinalData(1, 6);
+    setPageNumber((value) => value + 1);
   }, []);
 
-  const getNFTFinalData = async () => {
-    const res = await getNFTDataApi();
+  const getNFTFinalData = async (pageNo, pageLim) => {
+    const res = await getNFTDataApi(pageNo, pageLim);
     if (res.success) {
       setNFTListData(res.data.rows);
+      setAdminNFTCount(res.data.count);
       setIsLoading(false);
     } else {
       toast.error(res.message);
       setIsLoading(false);
     }
+  };
+
+  const fetchMoreData = async () => {
+    const res = await getNFTDataApi(pageNumber, pageLimit);
+    setNFTListData((value) => [...value, ...res.data.rows]);
+    setIsLoading(false);
+    setAdminNFTCount((value) => {
+      return value - 6;
+    });
+    setPageNumber((value) => value + 1);
   };
 
   const handleDeleteDialog = (id) => {
@@ -56,7 +77,7 @@ const NFTManagement = () => {
       if (res.success) {
         toast.success(res.message);
         setDeleteItemId('');
-        getNFTFinalData();
+        getNFTFinalData(1, 6);
         setDeleteDialog(false);
         setCategory('');
       }
@@ -75,6 +96,49 @@ const NFTManagement = () => {
     setDeleteItemId('');
     setDeleteDialog(false);
     setCategory('');
+  };
+
+  const handleSearchNFT = async (e) => {
+    try {
+      const searchNFT = e.target.value;
+      setSearchKeyWord(searchNFT);
+      const res = await nftOperationDataApi(`search=${searchNFT}`);
+      if (res.success) {
+        setNFTListData(res.data.rows);
+        setIsLoading(false);
+        setAdminNFTCount(res.data.count);
+      } else {
+        setIsLoading(false);
+        toast.error(res.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+      // throw error;
+    }
+  };
+
+  const handleSorting = async (sortBy) => {
+    setIsLoading(true);
+    if (sortBy == 'DESC') {
+      setIsSort(true);
+    } else {
+      setIsSort(false);
+    }
+    try {
+      const res = await nftOperationDataApi(`sortBy=${sortBy}`);
+      if (res.success) {
+        setNFTListData(res.data.rows);
+        setIsLoading(false);
+      } else {
+        setIsLoading(false);
+        toast.error(res.message);
+      }
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.response.data.message);
+      // throw error;
+    }
   };
 
   const handleOpenseaLink = async () => {
@@ -147,6 +211,9 @@ const NFTManagement = () => {
   return (
     <main className={styles.content_management_wrap}>
       <section className={styles.top_bar}>
+        <div className={styles.top_bar_left}>
+          <SearchBar inputValue={searchKeyWord} typeValue={handleSearchNFT} />
+        </div>
         <div className={styles.top_bar_right}>
           <div className={''}>
             <Button onClick={() => setIsShow(true)}>Add NFT</Button>
@@ -158,6 +225,10 @@ const NFTManagement = () => {
           data={nftListData}
           loading={isLoading}
           handleDeleteItem={handleDeleteDialog}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminNFTCount}
+          handleSorting={handleSorting}
+          isSort={isSort}
         />
       </section>
       <NFTDeleteDialogBox
