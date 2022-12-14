@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
 import styles from './galleryContentManagementTable.module.scss';
 import deleteIcon from '../../../../public/assets/images/delete-table-icon.svg';
+import desIcon from '../../../../public/assets/images/des.svg';
+import asenIcon from '../../../../public/assets/images/asen.svg';
 import Image from 'next/image';
 import moment from 'moment';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from '../../common/button';
 import Player from '../../common/gallery-popup';
 
-const GalleryContentManagementTable = ({ data, loading, handleDeleteItem }) => {
+const GalleryContentManagementTable = ({
+  data,
+  loading,
+  handleDeleteItem,
+  fetchMoreData,
+  dataCount,
+  handleSorting,
+  isSort,
+}) => {
   const [show, setShow] = useState(false);
   const [showURL, setShowURL] = useState(false);
   const [fileType, setFileType] = useState(false);
@@ -24,8 +34,14 @@ const GalleryContentManagementTable = ({ data, loading, handleDeleteItem }) => {
         <InfiniteScroll
           scrollableTarget={'table_scroll'}
           dataLength={data.length} //This is important field to render the next data
+          next={() => fetchMoreData()}
+          hasMore={dataCount > 6}
           loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
-          endMessage={''}
+          endMessage={
+            <p style={{ textAlign: 'center' }}>
+              <b>No more data available</b>
+            </p>
+          }
           // below props only if you need pull down functionality
           refreshFunction={() => false}
           pullDownToRefresh
@@ -46,7 +62,20 @@ const GalleryContentManagementTable = ({ data, loading, handleDeleteItem }) => {
                   <th scope="col">S.No.</th>
                   <th scope="col">File Type</th>
                   <th scope="col">File Name</th>
-                  <th scope="col">Upload Date</th>
+                  <th
+                    scope="col"
+                    onClick={() => handleSorting(isSort ? 'ASC' : 'DESC')}
+                    className={styles.sorting}
+                  >
+                    <Image
+                      src={isSort ? desIcon : asenIcon}
+                      width={15}
+                      height={15}
+                      layout="fixed"
+                      alt="sort-icon"
+                    />
+                    Created Date
+                  </th>
                 </tr>
               </thead>
 
