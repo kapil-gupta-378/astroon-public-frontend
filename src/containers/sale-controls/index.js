@@ -198,7 +198,7 @@ const SaleControls = () => {
         value={newSaleData}
         handleShow={showEditModal}
         setNewSaleDataHandler={setNewSaleData}
-        leftButtonHandler={hideSaleEditModalHandler}
+        modalClosehandler={hideSaleEditModalHandler}
         rightButtonHandler={() => updateSaleData()}
         loading={false}
       />
