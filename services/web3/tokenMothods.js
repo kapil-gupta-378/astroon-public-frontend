@@ -1,5 +1,5 @@
 import { convertEtherToWei } from '../../src/utils/currencyMethods';
-import { getMerkleDataApi } from '../api/markle';
+import { getMerkleDataApi, getMerkleSeedDataApi } from '../api/markle';
 import { getSaleDetails, getUserBuyDetails } from './saleMethod';
 import { getContractInstance } from './web3ProviderMethods';
 
@@ -7,17 +7,24 @@ export const buyToken = async (
   buyingQuality,
   OneTokenPrice,
   walletAddress,
-  privateSale,
+  tokenData,
 ) => {
   const AstTokenContract = await getContractInstance();
   const TokenRateInEthForBuyCount = convertEtherToWei(
-    buyingQuality * Number(OneTokenPrice),
+    Math.round(
+      parseFloat(buyingQuality * Number(OneTokenPrice)) * Math.pow(10, 10),
+    ) / Math.pow(10, 10),
   );
 
   let tokenTransition;
 
-  if (privateSale) {
-    const merkleData = await getMerkleDataApi();
+  if (tokenData) {
+    let merkleData;
+    if (tokenData.saleData.isSeed) {
+      merkleData = await getMerkleSeedDataApi();
+    } else {
+      merkleData = await getMerkleDataApi();
+    }
     tokenTransition = await AstTokenContract.methods
       .preSaleBuy(merkleData.proof ? merkleData.proof : null)
       .send({
