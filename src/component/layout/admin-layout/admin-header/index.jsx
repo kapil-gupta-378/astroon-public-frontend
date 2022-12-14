@@ -45,21 +45,6 @@ const AdminHeader = ({ setOpenSideBar }) => {
     setdataState(response.data);
   };
 
-  const greetingForAdmin = () => {
-    let greeting;
-    const date = new Date();
-    const hour = date.getHours();
-
-    if (hour < 12) {
-      greeting = 'Good morning !';
-    } else if (hour < 17) {
-      greeting = 'Good afternoon !';
-    } else {
-      greeting = 'Good evening !';
-    }
-    return greeting;
-  };
-
   const adminConnectWalletHandler = async () => {
     try {
       const adminWalletData = await connectWallet(
@@ -94,9 +79,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
             <WebsiteLogo />
           </div>
           <h3>Welcome Back</h3>
-          <p>{`Hello ${
-            dataState.firstName ? dataState.firstName : ''
-          }, ${greetingForAdmin()}`}</p>
+          <p>{`Hello ${dataState.firstName ? dataState.firstName : ''}`}</p>
         </div>
 
         <div className={styles.header_right}>

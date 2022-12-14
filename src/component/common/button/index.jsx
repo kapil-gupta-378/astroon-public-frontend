@@ -37,6 +37,8 @@ const Button = ({ children, kind, ...rest }) => {
               ? styles.normal_btn
               : kind === 'wallet-connect'
               ? styles.wallet_connect_btn
+              : kind === 'white_btn'
+              ? styles.white_btn
               : styles.link
           } }`}
           {...rest}
@@ -49,7 +51,13 @@ const Button = ({ children, kind, ...rest }) => {
 };
 
 Button.propTypes = {
-  kind: PropTypes.oneOf(['text', 'link', 'download', 'wallet-connect']),
+  kind: PropTypes.oneOf([
+    'text',
+    'link',
+    'download',
+    'wallet-connect',
+    'white_btn',
+  ]),
 };
 
 Button.defaultProps = {

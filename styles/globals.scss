@@ -186,7 +186,20 @@ body {
 }
 
 /* contactUs modal css */
+.modal-backdrop.show {
+  opacity: 0.7;
+}
 .contact_form_modal {
+  .modal-content {
+    background-image: url('../public/assets/images/request-pop-up-back.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% 100%;
+    background-color: transparent;
+  }
+  .modal-header {
+    border-bottom: unset;
+  }
   .modal-body {
     flex: 0;
     padding: 0 !important;

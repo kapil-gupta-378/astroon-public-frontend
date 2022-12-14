@@ -5,7 +5,10 @@ import styles from './adminSidebar.module.scss';
 import dashboardIcon from '../../../../../public/assets/images/dashboard.svg';
 import adminManagementIcon from '../../../../../public/assets/images/admin_management.svg';
 import contentManagementIcon from '../../../../../public/assets/images/content_management.svg';
+import walletManagementIcon from '../../../../../public/assets/images/wallet_management.svg';
 import blogIcon from '../../../../../public/assets/images/blog.svg';
+import leaderboardIcon from '../../../../../public/assets/images/leader_board.svg';
+import saleManagementIcon from '../../../../../public/assets/images/sale_management.svg';
 import clientEnquirySupportIcon from '../../../../../public/assets/images/clients_enquiry_support.svg';
 import faqIcon from '../../../../../public/assets/images/faq.svg';
 import settingsIcon from '../../../../../public/assets/images/settings.svg';
@@ -60,7 +63,30 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
         </div>
         <div
           className={`${styles.nav_link_div} ${
-            router.pathname === '/admin/content-management' && styles.activeLink
+            router.pathname === '/admin/wallet-management' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
+          <Image
+            width={15}
+            height={15}
+            src={walletManagementIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/wallet-management">Wallet Management</Link>
+        </div>
+        <div
+          className={`${styles.nav_link_div} ${
+            (router.pathname === '/admin/content-management' ||
+              router.pathname === '/admin/content-management/nft-management' ||
+              router.pathname ===
+                '/admin/content-management/video-management' ||
+              router.pathname ===
+                '/admin/content-management/games-management' ||
+              router.pathname ===
+                '/admin/content-management/gallery-management') &&
+            styles.activeLink
           }`}
           onClick={() => setOpenSideBar(false)}
         >
@@ -120,50 +146,28 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           />
           <Link href="/admin/faq">FAQ</Link>
         </div>
-        {/* <div>
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/management">Category Management</Link>
-        </div> */}
-        {/* <div>
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/management">CMS Page Management</Link>
-        </div> */}
-        {/* <div>
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/management">News & Announcements</Link>
-        </div> */}
-        <div className={`${styles.nav_dropdown_link} `}>
-          <Image
-            width={15}
-            height={15}
-            src={settingsIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <a
-            className={styles.dropdown_btn}
-            onClick={() => setOpenUserDropDown((value) => !value)}
+        <div className={`${styles.nav_dropdown_link_wrp} `}>
+          <div
+            className={`${styles.nav_dropdown_link} ${
+              (router.pathname === '/admin/general-settings' ||
+                router.pathname === '/admin/general-information') &&
+              styles.activeLink
+            } `}
           >
-            Settings
-          </a>
+            <Image
+              width={15}
+              height={15}
+              src={settingsIcon}
+              layout="fixed"
+              alt="nav_image"
+            />
+            <a
+              className={styles.dropdown_btn}
+              onClick={() => setOpenUserDropDown((value) => !value)}
+            >
+              Settings
+            </a>
+          </div>
 
           {openUserDropDown && (
             <div className={styles.dropdown_wrap}>
@@ -190,58 +194,28 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             </div>
           )}
         </div>
-        {/* <div>
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/management">
-            Client Inquiries & Support Request
-          </Link>
-        </div>
-        <div>
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/management">Menu System</Link>
-        </div> */}
-        {/* <div onClick={() => setOpenSideBar(false)}>
-        <div
-          className={`${styles.nav_link_div} ${
-            router.pathname === '/admin/white-list-user' && styles.activeLink
-          }`}
-          onClick={() => setOpenSideBar(false)}
-        >
-          <Image
-            width={15}
-            height={15}
-            src={sidebarLinkIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <Link href="/admin/white-list-user">White Listed User</Link>
-        </div> */}
-        <div className={`${styles.nav_dropdown_link} `}>
-          <Image
-            width={15}
-            height={15}
-            src={whiteListedUserIcon}
-            layout="fixed"
-            alt="nav_image"
-          />
-          <a
-            className={styles.dropdown_btn}
-            onClick={() => setOpenDropDown((value) => !value)}
+        <div className={`${styles.nav_dropdown_link_wrp} `}>
+          <div
+            className={`${styles.nav_dropdown_link} ${
+              (router.pathname === '/admin/seed-sale' ||
+                router.pathname === '/admin/private-sale') &&
+              styles.activeLink
+            } `}
           >
-            White Listed User
-          </a>
+            <Image
+              width={15}
+              height={15}
+              src={whiteListedUserIcon}
+              layout="fixed"
+              alt="nav_image"
+            />
+            <a
+              className={styles.dropdown_btn}
+              onClick={() => setOpenDropDown((value) => !value)}
+            >
+              White Listed User
+            </a>
+          </div>
 
           {openDropDown && (
             <div className={styles.dropdown_wrap}>
@@ -264,6 +238,21 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
             </div>
           )}
         </div>
+        <div
+          className={`${styles.nav_link_div} ${
+            router.pathname === '/admin/leader-board' && styles.activeLink
+          }`}
+          onClick={() => setOpenSideBar(false)}
+        >
+          <Image
+            width={15}
+            height={15}
+            src={leaderboardIcon}
+            layout="fixed"
+            alt="nav_image"
+          />
+          <Link href="/admin/leader-board">Leaderboard</Link>
+        </div>
 
         <div
           className={`${styles.nav_link_div} ${
@@ -274,7 +263,7 @@ const AdminSidebar = ({ openSideBar, setOpenSideBar }) => {
           <Image
             width={15}
             height={15}
-            src={settingsIcon}
+            src={saleManagementIcon}
             layout="fixed"
             alt="nav_image"
           />
