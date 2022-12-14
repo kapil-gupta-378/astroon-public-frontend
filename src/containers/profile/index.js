@@ -97,7 +97,7 @@ const Profile = () => {
         sliderValue,
         tokenData.rate.rate,
         walletAddress,
-        tokenData.isPrivateSale,
+        tokenData,
       );
 
       if (tokenTransaction.status) {
