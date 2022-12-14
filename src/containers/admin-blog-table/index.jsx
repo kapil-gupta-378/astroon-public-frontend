@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BlogTable from '../../component/ui/blog-table';
 import SearchBar from '../../component/common/SearchBar';
-import Sort from '../../component/common/sort';
 import styles from './adminBlogTable.module.scss';
 import moment from 'moment';
 import {
@@ -238,10 +237,6 @@ const AdminBlogTable = () => {
               <BlogFilter handleFilter={showBlogFilter} />
             </div>
           )}
-
-          <div className={styles.filter_wrap}>
-            <Sort handleSorting={handleSorting} isSort={isSort} />
-          </div>
           <Button onClick={gotoAddBlogPage}>Add Blog</Button>
         </div>
       </section>
@@ -252,6 +247,8 @@ const AdminBlogTable = () => {
           handlePopup={handleCommentsPopupOpen}
           fetchMoreData={fetchMoreData}
           dataCount={adminBlogCount}
+          handleSorting={handleSorting}
+          isSort={isSort}
         />
       </section>
       <DialogBox

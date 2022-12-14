@@ -53,37 +53,20 @@ const FAQTable = ({
                   <th scope="col">S.No.</th>
                   <th scope="col">Title</th>
                   <th scope="col">Description</th>
-                  {isSort ? (
-                    <th
-                      scope="col"
-                      onClick={() => handleSorting('ASC')}
-                      className={styles.sorting}
-                    >
-                      <Image
-                        src={desIcon}
-                        width={15}
-                        height={15}
-                        layout="fixed"
-                        alt="sort-icon"
-                      />
-                      Ordering
-                    </th>
-                  ) : (
-                    <th
-                      scope="col"
-                      onClick={() => handleSorting('DESC')}
-                      className={styles.sorting}
-                    >
-                      <Image
-                        src={asenIcon}
-                        width={15}
-                        height={15}
-                        layout="fixed"
-                        alt="sort-icon"
-                      />
-                      Ordering
-                    </th>
-                  )}
+                  <th
+                    scope="col"
+                    onClick={() => handleSorting(isSort ? 'ASC' : 'DESC')}
+                    className={styles.sorting}
+                  >
+                    <Image
+                      src={isSort ? desIcon : asenIcon}
+                      width={15}
+                      height={15}
+                      layout="fixed"
+                      alt="sort-icon"
+                    />
+                    Ordering
+                  </th>
                 </tr>
               </thead>
               <tbody>
