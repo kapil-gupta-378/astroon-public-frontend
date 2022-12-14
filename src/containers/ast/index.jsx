@@ -44,9 +44,8 @@ const AST = () => {
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData, seedSale, privateSale, publicSale } = useSelector(
-    (state) => state.tokenReducer,
-  );
+  const { tokenData, seedSale, privateSale, publicSale, saleOnData } =
+    useSelector((state) => state.tokenReducer);
   const { userData } = useSelector((state) => state.userReducer);
 
   const dispatch = useDispatch();
@@ -96,11 +95,13 @@ const AST = () => {
       if (!tokenData.isPrivateSale && !tokenData.isPublicSale)
         throw new Error('Sale is not live');
 
-      // checking which sale is on
+      // checking private sale is on
       if (tokenData.isPrivateSale) {
         // throw Error when user is not white list user
-        if (!userData.whiteListedUser)
+        if (saleOnData.isPrivate && !userData.whiteListedUser)
           throw new Error('Currently token are availble for private user');
+        if (saleOnData.isSeed && !userData.seedUser)
+          throw new Error('Currently token are availble for seed user');
       }
 
       let tokenTransaction;

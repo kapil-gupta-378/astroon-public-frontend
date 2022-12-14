@@ -38,7 +38,7 @@ const Profile = () => {
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData } = useSelector((state) => state.tokenReducer);
+  const { tokenData, saleOnData } = useSelector((state) => state.tokenReducer);
   const route = useRouter();
   const dispatch = useDispatch();
   const { address } = route.query;
@@ -84,10 +84,12 @@ const Profile = () => {
       let tokenTransaction;
       // checking which sale is on
       if (tokenData.isPrivateSale) {
-        if (!userData.whiteListedUser) {
-          // throw Error when user is not white list user
+        // throw Error when user is not white list user
+
+        if (saleOnData.isPrivate && !userData.whiteListedUser)
           throw new Error('Currently token are availble for private user');
-        }
+        if (saleOnData.isSeed && !userData.seedUser)
+          throw new Error('Currently token are availble for seed user');
       }
       // invoking token buy funtion if no error
       dispatch(setGlobalLoading(true));

@@ -1,23 +1,45 @@
 import moment from 'moment';
 import { convertEtherToWei } from '../../src/utils/currencyMethods';
-import { postTokenSaleRound } from '../api/astroon-token';
+import {
+  postSaleOnStatusApi,
+  postTokenSaleRoundApi,
+} from '../api/astroon-token';
 import { getContractInstance } from './web3ProviderMethods';
 
+// private sale and seed will start by this function by changing sale data and merkle root
 export const startPrivateSale = async (
   privateUserMerkleRoot,
   saleData,
   adminWalletAddress,
 ) => {
   const AstTokenContract = await getContractInstance();
+  const data = {
+    isPublic: false,
+    isPrivate: saleData.saleType === 'Private Sale' ? true : false,
+    isSeed: saleData.saleType === 'Seed Sale' ? true : false,
+  };
+  // setting merkle root for sale
   const merkleResponse = await setMerkleRoot(
     privateUserMerkleRoot.merkleRoot,
     adminWalletAddress,
   );
+
+  // setting sale pricing data and other info for sale
   const setSaleDataResponse = await setSaleData(saleData, adminWalletAddress);
+
+  // start (toggling) sale
   const startPrivateSaleResponse = await AstTokenContract.methods
     .togglePresale()
     .send({ from: adminWalletAddress });
-  return [merkleResponse, setSaleDataResponse, startPrivateSaleResponse];
+
+  // updating sale status in backend
+  const updateResponse = postSaleOnStatusApi(data);
+  return [
+    merkleResponse,
+    setSaleDataResponse,
+    startPrivateSaleResponse,
+    updateResponse,
+  ];
 };
 
 export const startPublicSale = async (saleData, adminWalletAddress) => {
@@ -26,7 +48,15 @@ export const startPublicSale = async (saleData, adminWalletAddress) => {
   const startPrivateSaleResponse = await AstTokenContract.methods
     .togglePublicSale()
     .send({ from: adminWalletAddress });
-  return [startPrivateSaleResponse, setSaleDataResponse];
+
+  const data = {
+    isPublic: true,
+    isPrivate: false,
+    isSeed: false,
+  };
+  // updating sale status in backend
+  const updateResponse = postSaleOnStatusApi(data);
+  return [startPrivateSaleResponse, setSaleDataResponse, updateResponse];
 };
 
 export const setMerkleRoot = async (merkleRoot, adminWalletAddress) => {
@@ -66,7 +96,7 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
       setSaleDataResponse.events.SaleCreated.returnValues.saleId,
     ),
   };
-  await postTokenSaleRound(data);
+  await postTokenSaleRoundApi(data);
 
   return setSaleDataResponse.events.SaleCreated.returnValues.saleId;
 };
@@ -84,4 +114,32 @@ export const getSaleDetails = async (saleRound = 8) => {
     .salesDetailMap(saleRound)
     .call();
   return saleDetailsResponse;
+};
+
+export const stopSale = async (saleType, adminWalletAddress) => {
+  const AstTokenContract = await getContractInstance();
+  const data = {
+    isPublic: saleType === 'Public Sale' ? false : undefined,
+    isPrivate: saleType === 'Private Sale' ? false : undefined,
+    isSeed: saleType === 'Seed Sale' ? false : undefined,
+  };
+  let stopSaleResponse;
+  if (saleType === 'Private Sale' || saleType === 'Seed Sale') {
+    stopSaleResponse = await AstTokenContract.methods
+      .togglePresale()
+      .send({ from: adminWalletAddress });
+    if (!stopSaleResponse.status) throw new Error(stopSaleResponse.error);
+    await postSaleOnStatusApi(data);
+    return stopSaleResponse;
+  }
+  if (saleType === 'Public Sale') {
+    stopSaleResponse = await AstTokenContract.methods
+      .togglePublicSale()
+      .send({ from: adminWalletAddress });
+    if (!stopSaleResponse.status) throw new Error(stopSaleResponse.error);
+    await postSaleOnStatusApi(data);
+    return stopSaleResponse;
+  }
+
+  throw new Error('Please Select Sale Type');
 };
