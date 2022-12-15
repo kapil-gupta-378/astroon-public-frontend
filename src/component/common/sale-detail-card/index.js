@@ -8,6 +8,8 @@ const SaleDetailCard = ({
   saleStartHandler,
   editSaleDetailsHander,
   admin,
+  isSaleOn,
+  onClickStopSale,
 }) => {
   return (
     <div className={styles.sale_detail_card_wrap}>
@@ -47,7 +49,11 @@ const SaleDetailCard = ({
 
       {admin && (
         <div className={styles.footer_wrap}>
-          <Button onClick={saleStartHandler}>Start</Button>
+          <Button
+            onClick={() =>
+              isSaleOn ? onClickStopSale(data.saleType) : saleStartHandler()
+            }
+          >{`${isSaleOn ? 'Stop' : 'Start'} `}</Button>
           <Button onClick={editSaleDetailsHander}>Edit</Button>
         </div>
       )}

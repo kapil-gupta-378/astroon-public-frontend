@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
+import FilterBy from '../../component/common/FilterBy';
 import GalleryDialogBox from '../../component/common/gallery-dialog-box';
 import GalleryDeleteDialogBox from '../../component/common/gallery-delete-dialoag-box';
 import GalleryContentManagementTable from '../../component/ui/gallery-content-management-table';
 import styles from './galleryManagement.module.scss';
 import {
-  getGalleryForAdminFileApi,
+  getGalleryAdminDataApi,
   uploadGalleryApi,
-  insertGalleryForFileApi,
-  deleteGalleryForFileApi,
+  insertGalleryDataApi,
+  deleteGalleryDataApi,
+  galleryOperationDataApi,
 } from '../../../services/api/content-management/gallery-management';
 
 const pageSelectOptions = [
@@ -28,10 +30,39 @@ const GalleryManagement = () => {
   const [isLoading, setLoading] = useState(true);
   const [galleryAttachmentURL, setGalleryAttachmentURL] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [getFileType, setFileType] = useState('');
+  const [isSort, setIsSort] = useState(true);
+  const [adminGalleryCount, setAdminGalleryCount] = useState('');
+  const [pageNumber, setPageNumber] = useState();
+  const [pageLimit, setPageLimit] = useState();
 
   useEffect(() => {
-    getGalleryData();
+    setPageLimit(6);
+    setPageNumber(1);
+    getGalleryData(1, 6);
+    setPageNumber((value) => value + 1);
   }, []);
+
+  const getGalleryData = async (pageNo, pageLim) => {
+    const res = await getGalleryAdminDataApi(pageNo, pageLim);
+    if (res.success) {
+      setGalleryList(res.data.rows);
+      setAdminGalleryCount(res.data.count);
+      setLoading(false);
+    } else {
+      toast.error(res.message);
+    }
+  };
+
+  const fetchMoreData = async () => {
+    const res = await getGalleryAdminDataApi(pageNumber, pageLimit);
+    setGalleryList((value) => [...value, ...res.data.rows]);
+    setLoading(false);
+    setAdminGalleryCount((value) => {
+      return value - 6;
+    });
+    setPageNumber((value) => value + 1);
+  };
 
   useEffect(() => {
     if (galleryAttachmentURL) {
@@ -39,8 +70,14 @@ const GalleryManagement = () => {
     }
   }, [galleryAttachmentURL]);
 
-  const getGalleryData = async () => {
-    const res = await getGalleryForAdminFileApi();
+  useEffect(() => {
+    if (getFileType) {
+      filterGalleryData(getFileType);
+    }
+  }, [getFileType]);
+
+  const filterGalleryData = async (file) => {
+    const res = await galleryOperationDataApi(`fileType=${file}`);
     if (res.success) {
       setGalleryList(res.data.rows);
       setLoading(false);
@@ -48,6 +85,30 @@ const GalleryManagement = () => {
       toast.error(res.message);
     }
   };
+
+  const handleSorting = async (sortBy) => {
+    setLoading(true);
+    if (sortBy == 'DESC') {
+      setIsSort(true);
+    } else {
+      setIsSort(false);
+    }
+    try {
+      const res = await galleryOperationDataApi(`sortBy=${sortBy}`);
+      if (res.success) {
+        setGalleryList(res.data.rows);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        toast.error(res.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+      // throw error;
+    }
+  };
+
   const handleDeleteDialog = (id) => {
     setDeleteItemId(id);
     setDeleteDialog(true);
@@ -62,6 +123,7 @@ const GalleryManagement = () => {
     setDeleteItemId('');
     setIsGalleryAttachment('');
     setIsDisabled(true);
+    setFileType();
   };
   const getGalleryUrl = async (e) => {
     let attachment = e.target.files[0];
@@ -97,7 +159,7 @@ const GalleryManagement = () => {
               : galleryAttachment,
             fileType: getFile,
           };
-          const res = await insertGalleryForFileApi(data);
+          const res = await insertGalleryDataApi(data);
           if (res.success) {
             toast.success(res.message, {
               position: 'top-right',
@@ -116,6 +178,7 @@ const GalleryManagement = () => {
             setDeleteItemId('');
             setIsGalleryAttachment('');
             setIsDisabled(true);
+            setFileType('');
           } else {
             toast.error(res.message, {
               position: 'top-right',
@@ -148,11 +211,11 @@ const GalleryManagement = () => {
 
   const handleDeleteGallery = async () => {
     try {
-      const res = await deleteGalleryForFileApi(deleteItemId);
+      const res = await deleteGalleryDataApi(deleteItemId);
       if (res.success) {
         toast.success(res.message);
         setDeleteItemId('');
-        getGalleryData();
+        getGalleryData(1, 6);
         setDeleteDialog(false);
       }
     } catch (error) {
@@ -166,6 +229,12 @@ const GalleryManagement = () => {
     <main className={styles.content_management_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_right}>
+          <div className={styles.filter_wrap}>
+            <FilterBy
+              options={pageSelectOptions}
+              handleChange={(value) => setFileType(value.value)}
+            />
+          </div>
           <div className={''}>
             <Button onClick={() => setIsShow(true)}>Add Gallery</Button>
           </div>
@@ -176,6 +245,10 @@ const GalleryManagement = () => {
           data={galleryList}
           handleDeleteItem={handleDeleteDialog}
           loading={isLoading}
+          fetchMoreData={fetchMoreData}
+          dataCount={adminGalleryCount}
+          handleSorting={handleSorting}
+          isSort={isSort}
         />
       </section>
       <GalleryDeleteDialogBox

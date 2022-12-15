@@ -23,3 +23,11 @@ export const updateVideosForPagesApi = async (id, data) => {
   const xhr = await axios.put(`${APP_URL}video-management/${id}`, data);
   return xhr.data;
 };
+
+export const videosOperationDataApi = async (operation) => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}video-management?${operation}`,
+  });
+  return xhr.data;
+};

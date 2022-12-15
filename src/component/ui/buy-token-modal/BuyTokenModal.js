@@ -45,7 +45,10 @@ const BuyTokenModal = ({
                   overlay={
                     <Tooltip>
                       <strong>
-                        {tokenData?.rate?.rate * selectedQuantity}
+                        {Math.round(
+                          parseFloat(tokenData?.rate?.rate * selectedQuantity) *
+                            Math.pow(10, 10),
+                        ) / Math.pow(10, 10)}
                       </strong>
                     </Tooltip>
                   }
@@ -98,7 +101,7 @@ const BuyTokenModal = ({
             <div className={styles.slider_wrap}>
               <Slider
                 min={1}
-                max={tokenData.tokensAvailable}
+                max={tokenData?.rate?.thresHold}
                 step={1}
                 value={sliderValue}
                 onChange={sliderOnChange}
