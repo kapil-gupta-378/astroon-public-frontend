@@ -45,7 +45,10 @@ const BuyTokenModal = ({
                   overlay={
                     <Tooltip>
                       <strong>
-                        {tokenData?.rate?.rate * selectedQuantity}
+                        {Math.round(
+                          parseFloat(tokenData?.rate?.rate * selectedQuantity) *
+                            Math.pow(10, 10),
+                        ) / Math.pow(10, 10)}
                       </strong>
                     </Tooltip>
                   }
