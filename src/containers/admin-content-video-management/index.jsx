@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Button from '../../component/common/button';
+import FilterBy from '../../component/common/FilterBy';
 import VideoDialogBox from '../../component/common/video-dialog-box';
 import UpdateVideoDialogBox from '../../component/common/update-video-dialog-box';
 import VideoContentManagementTable from '../../component/ui/video-content-management-table';
@@ -10,9 +11,16 @@ import {
   uploadVideosApi,
   insertVideosForPagesApi,
   updateVideosForPagesApi,
+  videosOperationDataApi,
 } from '../../../services/api/content-management/video-management';
 
 const pageSelectOptions = [
+  { value: 'animation', label: 'Animation' },
+  { value: 'app', label: 'App' },
+  { value: 'games', label: 'Games' },
+];
+
+const videosSelectOptions = [
   { value: 'animation', label: 'Animation' },
   { value: 'app', label: 'App' },
   { value: 'games', label: 'Games' },
@@ -27,14 +35,26 @@ const VideoManagement = () => {
   const [isVideoAttachment, setIsVideoAttachment] = useState('');
   const [getUpdatePage, setUpdatePages] = useState();
   const [videoList, setVideoList] = useState([]);
-  const [isLoading, setLoasing] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [videoAttachmentURL, setVideoAttachmentURL] = useState('');
   const [videoUpdateAttachmentURL, setVideoUpdateAttachmentURL] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
+  const [getFileType, setFileType] = useState('');
+  const [isSort, setIsSort] = useState(true);
 
   useEffect(() => {
     getVideosData();
   }, []);
+
+  const getVideosData = async () => {
+    const res = await getVideosForPagesApi();
+    if (res.success) {
+      setVideoList(res.data);
+      setLoading(false);
+    } else {
+      toast.error(res.message);
+    }
+  };
 
   useEffect(() => {
     if (videoAttachmentURL) {
@@ -42,15 +62,22 @@ const VideoManagement = () => {
     }
   }, [videoAttachmentURL]);
 
-  const getVideosData = async () => {
-    const res = await getVideosForPagesApi();
+  useEffect(() => {
+    if (getFileType) {
+      filterVideoData(getFileType);
+    }
+  }, [getFileType]);
+
+  const filterVideoData = async (file) => {
+    const res = await videosOperationDataApi(`videoType=${file}`);
     if (res.success) {
       setVideoList(res.data);
-      setLoasing(false);
+      setLoading(false);
     } else {
       toast.error(res.message);
     }
   };
+
   const handleUpdateDialog = (data) => {
     setUpdatePages(data.videoType);
     setPages({
@@ -171,6 +198,30 @@ const VideoManagement = () => {
     setVideoAttachmentURL('');
     setIsVideoAttachment('');
   };
+
+  const handleSorting = async (sortBy) => {
+    setLoading(true);
+    if (sortBy == 'DESC') {
+      setIsSort(true);
+    } else {
+      setIsSort(false);
+    }
+    try {
+      const res = await videosOperationDataApi(`sortBy=${sortBy}`);
+      if (res.success) {
+        setVideoList(res.data);
+        setLoading(false);
+      } else {
+        setLoading(false);
+        toast.error(res.message);
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.response.data.message);
+      // throw error;
+    }
+  };
+
   const handleUpdateVideo = async () => {
     if (getUpdatePage && videoUpdateAttachmentURL) {
       let valid =
@@ -243,6 +294,12 @@ const VideoManagement = () => {
     <main className={styles.content_management_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_right}>
+          <div className={styles.filter_wrap}>
+            <FilterBy
+              options={videosSelectOptions}
+              handleChange={(value) => setFileType(value.value)}
+            />
+          </div>
           <div className={''}>
             <Button onClick={() => setIsShow(true)}>Add Video</Button>
           </div>
@@ -253,6 +310,8 @@ const VideoManagement = () => {
           data={videoList}
           handleUpdateItem={handleUpdateDialog}
           loading={isLoading}
+          handleSorting={handleSorting}
+          isSort={isSort}
         />
       </section>
       <VideoDialogBox
