@@ -43,6 +43,7 @@ const ContactTable = ({
                   <th scope="col">Email</th>
                   <th scope="col">Username</th>
                   <th scope="col">Reason for Contact</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Subject</th>
                 </tr>
               </thead>
@@ -54,6 +55,7 @@ const ContactTable = ({
                       <td>{item.email}</td>
                       <td>{item.username}</td>
                       <td>{item.reasonForContact}</td>
+                      <td>{item.status}</td>
                       <td>
                         <button
                           className={styles.view_btn}
