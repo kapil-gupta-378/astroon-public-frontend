@@ -11,7 +11,6 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import Button from '../../component/common/button';
 import styles from './ast.module.scss';
 import HowStep from '../../component/common/how-step';
 import HeadingBackground from '../../component/common/heading-background';
@@ -165,13 +164,28 @@ const AST = () => {
       </div>
       <div className={styles.Sale_card_wrap}>
         <div style={{ width: '350px' }}>
-          <SaleDetailCard data={seedSale} key={1} />
+          <SaleDetailCard
+            data={seedSale}
+            key={1}
+            isSaleOn={saleOnData.isSeed && tokenData.isPrivateSale}
+            buyTokenHandler={() => setShowBuyTokenModal(true)}
+          />
         </div>
         <div style={{ width: '350px' }}>
-          <SaleDetailCard data={privateSale} key={2} />
+          <SaleDetailCard
+            data={privateSale}
+            key={2}
+            isSaleOn={saleOnData.isPrivate && tokenData.isPrivateSale}
+            buyTokenHandler={() => setShowBuyTokenModal(true)}
+          />
         </div>
         <div style={{ width: '350px' }}>
-          <SaleDetailCard data={publicSale} key={3} />
+          <SaleDetailCard
+            data={publicSale}
+            key={3}
+            isSaleOn={saleOnData.isPublic && tokenData.isPublicSale}
+            buyTokenHandler={() => setShowBuyTokenModal(true)}
+          />
         </div>
       </div>
       <div className={styles.chart_wrap}>
@@ -190,9 +204,6 @@ const AST = () => {
               />
             </LineChart>
           </ResponsiveContainer>
-        </div>
-        <div className={styles.btn_wrap}>
-          <Button onClick={() => setShowBuyTokenModal(true)}>Buy $AST</Button>
         </div>
       </div>
 

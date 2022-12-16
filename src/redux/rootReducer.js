@@ -11,6 +11,7 @@ import tokenReducer from './token/tokenSlice';
 import currencyReducer from './currency/currencySlice';
 import whiteListUserReducer from './white-list-user/whiteListSlice';
 import whiteListSeedUserReducer from './white-list-seed-user/whiteListSeedSlice';
+import addressListReducer from './wallet-list/walletListSlice';
 
 export const rootReducer = combineReducers({
   homeReducer,
@@ -25,4 +26,5 @@ export const rootReducer = combineReducers({
   currencyReducer,
   whiteListUserReducer,
   whiteListSeedUserReducer,
+  addressListReducer,
 });

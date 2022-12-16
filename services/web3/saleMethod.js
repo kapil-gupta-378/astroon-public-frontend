@@ -1,9 +1,6 @@
 import moment from 'moment';
 import { convertEtherToWei } from '../../src/utils/currencyMethods';
-import {
-  postSaleOnStatusApi,
-  postTokenSaleRoundApi,
-} from '../api/astroon-token';
+import { postSaleOnStatusApi } from '../api/astroon-token';
 import { getContractInstance } from './web3ProviderMethods';
 
 // private sale and seed will start by this function by changing sale data and merkle root
@@ -13,11 +10,7 @@ export const startPrivateSale = async (
   adminWalletAddress,
 ) => {
   const AstTokenContract = await getContractInstance();
-  const data = {
-    isPublic: false,
-    isPrivate: saleData.saleType === 'Private Sale' ? true : false,
-    isSeed: saleData.saleType === 'Seed Sale' ? true : false,
-  };
+
   // setting merkle root for sale
   const merkleResponse = await setMerkleRoot(
     privateUserMerkleRoot.merkleRoot,
@@ -33,6 +26,14 @@ export const startPrivateSale = async (
     .send({ from: adminWalletAddress });
 
   // updating sale status in backend
+  const data = {
+    isPublic: false,
+    isPrivate: saleData.saleType === 'Private Sale' ? true : false,
+    isSeed: saleData.saleType === 'Seed Sale' ? true : false,
+    saleRound: Number(
+      setSaleDataResponse.events.SaleCreated.returnValues.saleId,
+    ),
+  };
   const updateResponse = postSaleOnStatusApi(data);
   return [
     merkleResponse,
@@ -53,6 +54,9 @@ export const startPublicSale = async (saleData, adminWalletAddress) => {
     isPublic: true,
     isPrivate: false,
     isSeed: false,
+    saleRound: Number(
+      setSaleDataResponse.events.SaleCreated.returnValues.saleId,
+    ),
   };
   // updating sale status in backend
   const updateResponse = postSaleOnStatusApi(data);
@@ -91,12 +95,6 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
     .send({ from: adminWalletAddress });
 
   if (!setSaleDataResponse.status) throw new Error(setSaleDataResponse.error);
-  let data = {
-    saleRound: Number(
-      setSaleDataResponse.events.SaleCreated.returnValues.saleId,
-    ),
-  };
-  await postTokenSaleRoundApi(data);
 
   return setSaleDataResponse.events.SaleCreated.returnValues.saleId;
 };
@@ -108,7 +106,7 @@ export const getUserBuyDetails = async (address, saleRound) => {
     .call();
   return saleDetailsResponse;
 };
-export const getSaleDetails = async (saleRound = 8) => {
+export const getSaleDetails = async (saleRound) => {
   const AstTokenContract = await getContractInstance();
   const saleDetailsResponse = await AstTokenContract.methods
     .salesDetailMap(saleRound)

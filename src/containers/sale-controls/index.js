@@ -118,7 +118,6 @@ const SaleControls = () => {
 
   async function updateSaleData() {
     try {
-      if (!isConnected) throw new Error('Please Connect Your Wallet');
       const updateResponse = await updateTokenSaleDataApi(
         newSaleData.saleType,
         newSaleData,

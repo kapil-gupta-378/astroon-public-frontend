@@ -1,4 +1,3 @@
-import { getTokenSaleRound } from '../../../services/api/astroon-token';
 import { getUserDataApi } from '../../../services/api/user';
 import { getCurrentTokenToBeClaimed } from '../../../services/web3/tokenMothods';
 import { convertWeiToEther } from '../../utils/currencyMethods';
@@ -7,16 +6,15 @@ import {
   setUserData,
   setUserDataLoading,
 } from './userSlice';
-export const fetchUserDataAction = (walletAddress) => {
+export const fetchUserDataAction = (walletAddress, lastSaleRound) => {
   return async (dispatch) => {
     try {
       dispatch(setUserDataLoading(true));
       const data = await getUserDataApi();
       if (walletAddress) {
-        const lastSaleRound = await getTokenSaleRound();
         const tokenData = await getCurrentTokenToBeClaimed(
           walletAddress,
-          lastSaleRound.data.saleRound,
+          lastSaleRound,
         );
         const tokenDataInEth = convertWeiToEther(tokenData);
         dispatch(setClaimingTokenNumber(tokenDataInEth));

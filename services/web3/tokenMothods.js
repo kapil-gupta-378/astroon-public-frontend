@@ -57,7 +57,9 @@ export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
     saleUserBuyResponse = await getUserBuyDetails(address, saleRound);
   }
   let claimResponse;
-  const saleDetailsResponse = await getSaleDetails();
+  const saleDetailsResponse = await getSaleDetails(
+    saleUserBuyResponse.saleRound,
+  );
   if (
     saleUserBuyResponse.tokens &&
     saleDetailsResponse.vesting &&

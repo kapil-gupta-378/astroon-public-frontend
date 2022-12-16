@@ -12,6 +12,9 @@ $fontsize: 12px;
   color: white;
   padding: 11px 37px;
   cursor: pointer;
+  &:disabled {
+    background: gray;
+  }
 }
 .white_btn {
   background: white;
