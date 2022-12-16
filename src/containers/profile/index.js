@@ -63,7 +63,7 @@ const Profile = () => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchUserDataAction(walletAddress));
+    dispatch(fetchUserDataAction(walletAddress, tokenData.saleData.saleRound));
   };
 
   const updateState = (e) => {

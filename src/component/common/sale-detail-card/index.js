@@ -10,9 +10,14 @@ const SaleDetailCard = ({
   admin,
   isSaleOn,
   onClickStopSale,
+  buyTokenHandler,
 }) => {
   return (
-    <div className={styles.sale_detail_card_wrap}>
+    <div
+      className={`${styles.sale_detail_card_wrap} ${
+        isSaleOn ? styles.border_red : ''
+      } `}
+    >
       <h3 className={styles.sale_heading}>{data.saleType}</h3>
       <div className={styles.row_border}>
         <p className={styles.heading}>Token Price:</p>
@@ -21,7 +26,7 @@ const SaleDetailCard = ({
       <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>
         <p className={styles.value}>
-          {moment(data.startDate).format(' Do MMMM YYYY')}
+          {moment(data.startDate).format('DD/MM/YYYY h:mma')}
         </p>
       </div>
       <div className={styles.row_border}>
@@ -47,16 +52,22 @@ const SaleDetailCard = ({
         <p className={styles.value}>{data.buyLimit}</p>
       </div>
 
-      {admin && (
-        <div className={styles.footer_wrap}>
-          <Button
-            onClick={() =>
-              isSaleOn ? onClickStopSale(data.saleType) : saleStartHandler()
-            }
-          >{`${isSaleOn ? 'Stop' : 'Start'} `}</Button>
-          <Button onClick={editSaleDetailsHander}>Edit</Button>
-        </div>
-      )}
+      <div className={styles.footer_wrap}>
+        {admin ? (
+          <>
+            <Button
+              onClick={() =>
+                isSaleOn ? onClickStopSale(data.saleType) : saleStartHandler()
+              }
+            >{`${isSaleOn ? 'Stop' : 'Start'} `}</Button>
+            <Button onClick={editSaleDetailsHander}>Edit</Button>
+          </>
+        ) : (
+          <Button disabled={!isSaleOn} onClick={buyTokenHandler}>
+            {'Buy $AST'}
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
