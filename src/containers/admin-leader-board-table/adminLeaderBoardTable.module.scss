@@ -1,4 +1,4 @@
-.contact_us_table_wrap {
+.admin_List_table_wrap {
   padding: 3% 3% 11% 3%;
   .top_bar {
     display: flex;
@@ -7,88 +7,100 @@
     .top_bar_left {
       width: 65%;
       display: flex;
-      justify-content: flex-start;
       align-items: center;
+      justify-content: flex-start;
     }
     .top_bar_right {
       width: 35%;
       display: flex;
       align-items: center;
+      justify-content: flex-end;
+      gap: 30px;
+      .add_btn_wrap {
+        display: flex;
+        justify-content: end;
+      }
       .filter_wrap {
         width: 30%;
+      }
+      .add_btn_wrap {
+        width: 70%;
       }
     }
   }
 }
 
+// Responsive breakpoints
 @media only screen and (max-width: 1199px) {
-  .contact_us_table_wrap {
+  .admin_List_table_wrap {
     .top_bar {
-      .top_bar_left {
-        width: 55%;
-      }
       .top_bar_right {
-        width: 45%;
+        .add_btn_wrap {
+          width: 52%;
+        }
       }
     }
   }
 } /* 1024 */
 @media only screen and (max-width: 1023px) {
-  .contact_us_table_wrap {
+  .admin_List_table_wrap {
     .top_bar {
-      .top_bar_left {
-        width: 55%;
-      }
       .top_bar_right {
-        width: 45%;
+        .add_btn_wrap {
+          width: 41%;
+        }
       }
     }
   }
 } /* 980 */
 @media only screen and (max-width: 979px) {
-  .contact_us_table_wrap {
+  .admin_List_table_wrap {
     .top_bar {
-      .top_bar_left {
-        width: 46%;
-      }
       .top_bar_right {
-        width: 54%;
+        .add_btn_wrap {
+          width: 52%;
+        }
       }
     }
   }
 } /* 768 */
 @media only screen and (max-width: 767px) {
-  .contact_us_table_wrap {
+  .admin_List_table_wrap {
     .top_bar {
-      .top_bar_left {
-        width: 30%;
-      }
       .top_bar_right {
-        width: 70%;
+        .add_btn_wrap {
+          width: 62%;
+        }
       }
     }
   }
 } /* 650 */
 @media only screen and (max-width: 649px) {
-  .contact_us_table_wrap {
+  .admin_List_table_wrap {
     .top_bar {
-      flex-direction: column;
-      padding: 10px;
-      gap: 30px;
-      .top_bar_left {
-        width: 100%;
-      }
+      padding: 20px;
       .top_bar_right {
-        width: 100%;
-        justify-content: flex-start;
         .add_btn_wrap {
-          width: 66%;
+          width: 100%;
         }
       }
     }
   }
 } /* 480 */
 @media only screen and (max-width: 479px) {
+  .admin_List_table_wrap {
+    .top_bar {
+      flex-direction: column;
+      padding: 20px;
+      gap: 30px;
+      .top_bar_right {
+        width: 100%;
+        .add_btn_wrap {
+          width: 100%;
+        }
+      }
+    }
+  }
 } /* 375 */
 @media only screen and (max-width: 374px) {
 } /* 320 */

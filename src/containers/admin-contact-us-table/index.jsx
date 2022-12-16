@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ContactTable from '../../component/ui/contact-us-table';
 import SearchBar from '../../component/common/SearchBar';
+import FilterBy from '../../component/common/FilterBy';
 import styles from './adminContactUsTable.module.scss';
 import {
   getContactUsDataApi,
@@ -11,6 +12,11 @@ import {
 import { toast } from 'react-toastify';
 import ContactUsDialogBox from '../../component/common/contact-us-dialog-box';
 import ReplyDialogBox from '../../component/common/reply-dialoag-box';
+
+const statusSelectOptions = [
+  { value: 'pending', label: 'Pending' },
+  { value: 'replied', label: 'Replied' },
+];
 
 const ContactUsTable = () => {
   const [adminContactUsData, setContactUsData] = useState([]);
@@ -24,6 +30,7 @@ const ContactUsTable = () => {
   const [pageNumber, setPageNumber] = useState();
   const [pageLimit, setPageLimit] = useState();
   const [adminContactUsCount, setAdminContactUsCount] = useState('');
+  const [getFileType, setFileType] = useState('');
 
   useEffect(() => {
     setPageLimit(6);
@@ -32,9 +39,25 @@ const ContactUsTable = () => {
     setPageNumber((value) => value + 1);
   }, []);
 
+  useEffect(() => {
+    if (getFileType) {
+      filterContactUsData(getFileType);
+    }
+  }, [getFileType]);
+
+  const filterContactUsData = async (file) => {
+    const res = await contactUsDataOperationApi(`status=${file}`);
+    if (res.success) {
+      setContactUsData(res.data.rows);
+      setContactUsLoading(false);
+    } else {
+      toast.error(res.message);
+    }
+  };
+
   const getContactUsData = async (pageNo, pageLim) => {
     const res = await getContactUsDataApi(pageNo, pageLim);
-    if (res) {
+    if (res.success) {
       setContactUsData(res.data.rows);
       setContactUsLoading(false);
       setAdminContactUsCount(res.data.count);
@@ -138,7 +161,7 @@ const ContactUsTable = () => {
   };
 
   return (
-    <main className={styles.blog_table_wrap}>
+    <main className={styles.contact_us_table_wrap}>
       <section className={styles.top_bar}>
         <div className={styles.top_bar_left}>
           <SearchBar
@@ -146,6 +169,14 @@ const ContactUsTable = () => {
             typeValue={handleContactUsSearch}
             // onChangeInputHandler={handleContactUsSearch}
           />
+        </div>
+        <div className={styles.top_bar_right}>
+          <div className={styles.filter_wrap}>
+            <FilterBy
+              options={statusSelectOptions}
+              handleChange={(value) => setFileType(value.value)}
+            />
+          </div>
         </div>
       </section>
       <section className={styles.list_table_wrap}>
