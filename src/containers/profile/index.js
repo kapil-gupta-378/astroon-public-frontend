@@ -281,12 +281,16 @@ const Profile = () => {
                     {`${address ? `${address.slice(0, 9)}...` : ''}`}
                   </div>
                 </OverlayTrigger>
-                <div
-                  onClick={() => setShowBuyTokenModal(true)}
-                  className={styles.wallet_address}
-                >
-                  Buy Token
-                </div>
+                {(saleOnData.isPrivate ||
+                  saleOnData.isSeed ||
+                  saleOnData.isPublic) && (
+                  <div
+                    onClick={() => setShowBuyTokenModal(true)}
+                    className={styles.wallet_address}
+                  >
+                    Buy Token
+                  </div>
+                )}
                 <div
                   onClick={() => setShowCliamTokenModal(true)}
                   className={styles.wallet_address}
