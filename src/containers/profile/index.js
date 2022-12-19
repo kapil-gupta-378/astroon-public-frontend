@@ -45,8 +45,8 @@ const Profile = () => {
   const imageInputImageRef = useRef();
   const coverImageInputImageRef = useRef();
   useEffect(() => {
-    fetchUserData();
     fetchTokenData();
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -63,11 +63,11 @@ const Profile = () => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchUserDataAction(walletAddress, tokenData.saleData.saleRound));
+    dispatch(fetchUserDataAction(walletAddress));
   };
 
   const updateState = (e) => {
-    dispatch(updateUserData(e));
+    dispatch(updateUserData({ name: e.target.name, value: e.target.value }));
   };
 
   const buyTokenHandler = async () => {
@@ -281,12 +281,16 @@ const Profile = () => {
                     {`${address ? `${address.slice(0, 9)}...` : ''}`}
                   </div>
                 </OverlayTrigger>
-                <div
-                  onClick={() => setShowBuyTokenModal(true)}
-                  className={styles.wallet_address}
-                >
-                  Buy Token
-                </div>
+                {(saleOnData.isPrivate ||
+                  saleOnData.isSeed ||
+                  saleOnData.isPublic) && (
+                  <div
+                    onClick={() => setShowBuyTokenModal(true)}
+                    className={styles.wallet_address}
+                  >
+                    Buy Token
+                  </div>
+                )}
                 <div
                   onClick={() => setShowCliamTokenModal(true)}
                   className={styles.wallet_address}

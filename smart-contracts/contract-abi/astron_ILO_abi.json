@@ -262,7 +262,9 @@
       { "internalType": "uint256", "name": "cliff", "type": "uint256" },
       { "internalType": "uint256", "name": "vesting", "type": "uint256" },
       { "internalType": "uint256", "name": "thresHold", "type": "uint256" },
-      { "internalType": "uint256", "name": "raisedIn", "type": "uint256" }
+      { "internalType": "uint256", "name": "raisedIn", "type": "uint256" },
+      { "internalType": "uint256", "name": "tokenSold", "type": "uint256" },
+      { "internalType": "uint256", "name": "minBound", "type": "uint256" }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -278,13 +280,23 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "_newValue", "type": "uint256" }
+    ],
+    "name": "set_initialTokens",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "_rate", "type": "uint256" },
       { "internalType": "uint256", "name": "_cap", "type": "uint256" },
       { "internalType": "uint256", "name": "_start", "type": "uint256" },
       { "internalType": "uint256", "name": "_ddays", "type": "uint256" },
       { "internalType": "uint256", "name": "_thresHold", "type": "uint256" },
       { "internalType": "uint256", "name": "_cliff", "type": "uint256" },
-      { "internalType": "uint256", "name": "_vesting", "type": "uint256" }
+      { "internalType": "uint256", "name": "_vesting", "type": "uint256" },
+      { "internalType": "uint256", "name": "_minBound", "type": "uint256" }
     ],
     "name": "startTokenSale",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
