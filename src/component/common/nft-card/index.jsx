@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useRef, useState, useEffect } from 'react';
 import styles from './nftcard.module.scss';
 import cardback from '../../../../public/assets/images/card_back.svg';
-
+import image_not_found_image from '../../../../public/assets/images/image_not_found.png';
 const NFTCard = ({ nftData }) => {
   const myRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -50,7 +50,11 @@ const NFTCard = ({ nftData }) => {
           {nftData && (
             <Image
               loader={ImageLoader}
-              src={nftData.image_thumbnail_url}
+              src={
+                nftData.image_thumbnail_url
+                  ? nftData.image_thumbnail_url
+                  : image_not_found_image
+              }
               alt="img"
               layout="fill"
               priority

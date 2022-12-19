@@ -67,7 +67,7 @@ const Profile = () => {
   };
 
   const updateState = (e) => {
-    dispatch(updateUserData(e));
+    dispatch(updateUserData({ name: e.target.name, value: e.target.value }));
   };
 
   const buyTokenHandler = async () => {

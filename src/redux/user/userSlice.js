@@ -16,7 +16,7 @@ export const userSlice = createSlice({
     updateUserData: (state, action) => {
       state.userData = {
         ...state.userData,
-        [action.payload.target.name]: action.payload.target.value,
+        [action.payload.name]: action.payload.value,
       };
     },
     setUserDataLoading: (state, action) => {
