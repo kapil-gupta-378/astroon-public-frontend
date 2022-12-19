@@ -45,8 +45,8 @@ const Profile = () => {
   const imageInputImageRef = useRef();
   const coverImageInputImageRef = useRef();
   useEffect(() => {
-    fetchUserData();
     fetchTokenData();
+    fetchUserData();
   }, []);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Profile = () => {
     return `${src}`;
   };
   const fetchUserData = () => {
-    dispatch(fetchUserDataAction(walletAddress, tokenData.saleData.saleRound));
+    dispatch(fetchUserDataAction(walletAddress));
   };
 
   const updateState = (e) => {
