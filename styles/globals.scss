@@ -538,3 +538,39 @@ body {
     }
   }
 }
+
+// css for claim modal
+
+.claim_token_modal {
+  padding: 0 !important;
+  .modal-content {
+    background: url('../public/assets/images/dialogBackgorund.png');
+    background-repeat: no-repeat;
+    border-radius: 25px;
+    object-fit: cover;
+    background-position: center;
+    background-size: 110% 100%;
+    padding: 2% 0%;
+    .modal-header {
+      display: unset;
+      border-bottom: unset;
+      .modal-title {
+        @include heading_12;
+      }
+      .btn-close {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        font-size: 10px;
+        color: #fff;
+      }
+    }
+    .modal-body {
+      padding: 0px;
+    }
+    .modal-footer {
+      border: none;
+      justify-content: center;
+    }
+  }
+}
