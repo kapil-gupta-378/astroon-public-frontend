@@ -89,6 +89,10 @@ const AST = () => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
+      if (sliderValue < Number(tokenData?.rate?.minBound))
+        throw new Error(
+          `You can not buy token less than ${tokenData?.rate?.minBound}`,
+        );
 
       // throw Error when sale is not on
       if (!tokenData.isPrivateSale && !tokenData.isPublicSale)

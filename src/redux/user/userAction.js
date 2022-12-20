@@ -20,10 +20,10 @@ export const fetchUserDataAction = (walletAddress) => {
           walletAddress,
           saleRound,
         );
+
         const tokenDataInEth = convertWeiToEther(tokenData);
         dispatch(setClaimingTokenNumber(tokenDataInEth));
       }
-
       dispatch(setUserData(data.data));
       dispatch(setUserDataLoading(false));
     } catch (error) {

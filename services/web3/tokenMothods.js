@@ -43,6 +43,7 @@ export const buyToken = async (
 
 export const claimToken = async (walletAddress, saleRound) => {
   const AstTokenContract = await getContractInstance();
+
   const tokenTransition = await AstTokenContract.methods.claim(saleRound).send({
     from: walletAddress,
   });
@@ -53,17 +54,21 @@ export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
   const AstTokenContract = await getContractInstance();
 
   let saleUserBuyResponse = {};
-  if (address) {
+
+  if ((address, saleRound)) {
     saleUserBuyResponse = await getUserBuyDetails(address, saleRound);
   }
-  let claimResponse;
+
+  let claimResponse = 0;
   const saleDetailsResponse = await getSaleDetails(
     saleUserBuyResponse.saleRound,
   );
+
   if (
     saleUserBuyResponse.tokens &&
     saleDetailsResponse.vesting &&
-    saleUserBuyResponse.lastClaimed
+    saleUserBuyResponse.lastClaimed &&
+    saleUserBuyResponse.tokens === 0
   ) {
     claimResponse = await AstTokenContract.methods
       .calculateReleaseToken(
@@ -75,4 +80,10 @@ export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
   }
 
   return claimResponse;
+};
+
+export const getRemainingToken = async () => {
+  const AstTokenContract = await getContractInstance();
+  const remainingToken = AstTokenContract.methods.initialTokens().call();
+  return remainingToken;
 };

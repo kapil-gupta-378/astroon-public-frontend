@@ -28,6 +28,9 @@ const SaleControls = () => {
     startDate: '',
     tokenPrice: '',
     vestingTime: '',
+    noOfToken: '',
+    minBuy: '',
+    maxLimit: '',
   });
   const dispatch = useDispatch();
   useEffect(() => {
@@ -112,15 +115,46 @@ const SaleControls = () => {
       startDate: '',
       tokenPrice: '',
       vestingTime: '',
+      noOfToken: '',
+      minBuy: '',
+      maxLimit: '',
     });
     setShowEditModal(false);
   }
 
   async function updateSaleData() {
+    const data = {
+      saleType: newSaleData.saleType,
+      buyLimit: Number(newSaleData.buyLimit),
+      cap: Number(newSaleData.cap),
+      cliftingTime: Number(newSaleData.cliftingTime),
+      endDate: Number(newSaleData.endDate),
+      startDate: newSaleData.startDate.toString(),
+      tokenPrice: newSaleData.tokenPrice,
+      vestingTime: Number(newSaleData.vestingTime),
+      noOfToken: Number(newSaleData.noOfToken),
+      minBuy: Number(newSaleData.minBuy),
+      maxLimit: Number(newSaleData.maxLimit),
+    };
+
     try {
+      if (
+        !newSaleData.saleType ||
+        !newSaleData.buyLimit ||
+        !newSaleData.cap ||
+        !newSaleData.cliftingTime ||
+        !newSaleData.endDate ||
+        !newSaleData.tokenPrice ||
+        !newSaleData.vestingTime ||
+        !newSaleData.noOfToken ||
+        !newSaleData.minBuy ||
+        !newSaleData.maxLimit
+      )
+        throw new Error('Please Fill All Field');
+
       const updateResponse = await updateTokenSaleDataApi(
         newSaleData.saleType,
-        newSaleData,
+        data,
       );
       if (updateResponse.success) toast.success('Data Updated');
       dispatch(fetchTokenDataAction());

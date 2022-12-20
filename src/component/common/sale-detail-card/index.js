@@ -24,9 +24,13 @@ const SaleDetailCard = ({
         <p className={styles.value}>{data.tokenPrice}</p>
       </div>
       <div className={styles.row_border}>
+        <p className={styles.heading}>Number Of Token:</p>
+        <p className={styles.value}>{data.noOfToken}</p>
+      </div>
+      <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>
         <p className={styles.value}>
-          {moment(data.startDate).format('DD/MM/YYYY h:mma')}
+          {moment(data.startDate).utc().format('DD/MM/YYYY h:mma')}
         </p>
       </div>
       <div className={styles.row_border}>
@@ -48,8 +52,12 @@ const SaleDetailCard = ({
       </div>
 
       <div className={styles.row_border}>
-        <p className={styles.heading}>Limit Per User:</p>
-        <p className={styles.value}>{data.buyLimit}</p>
+        <p className={styles.heading}>Maximum buy:</p>
+        <p className={styles.value}>{data.maxLimit}</p>
+      </div>
+      <div className={styles.row_border}>
+        <p className={styles.heading}>Manimum buy:</p>
+        <p className={styles.value}>{data.minBuy}</p>
       </div>
 
       <div className={styles.footer_wrap}>
