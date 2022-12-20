@@ -41,7 +41,7 @@ const WebsiteLogo = () => {
         onClick={() =>
           router.pathname.includes('/admin')
             ? router.push('/admin/dashboard')
-            : router.pathname.slice(0, 6) === '/login'
+            : router.pathname.includes('/login')
             ? router.push('/login')
             : router.push('/')
         }
