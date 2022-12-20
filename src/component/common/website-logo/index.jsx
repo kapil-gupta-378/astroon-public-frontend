@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 const WebsiteLogo = () => {
   const [data, setData] = useState({});
   const router = useRouter();
-  const isToken = localStorage.getItem('token');
 
   useEffect(() => {
     fetchComponentData();
@@ -39,7 +38,13 @@ const WebsiteLogo = () => {
         width={150}
         layout="fixed"
         alt="logo"
-        onClick={() => router.push(isToken ? '/admin/dashboard' : '/')}
+        onClick={() =>
+          router.pathname.includes('/admin')
+            ? router.push('/admin/dashboard')
+            : router.pathname.slice(0, 6) === '/login'
+            ? router.push('/login')
+            : router.push('/')
+        }
       />
     </>
   );
