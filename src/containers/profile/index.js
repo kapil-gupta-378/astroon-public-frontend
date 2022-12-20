@@ -28,6 +28,7 @@ import { buyToken, claimToken } from '../../../services/web3/tokenMothods';
 import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
+import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
 const Profile = () => {
   const { userData, claimingToken } = useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
@@ -105,6 +106,17 @@ const Profile = () => {
       );
 
       if (tokenTransaction.status) {
+        const data = {
+          walletAddress: walletAddress,
+          saleRound: tokenData.saleData.saleRound,
+          buyToken: sliderValue,
+          saleType: tokenData.saleData.isSeed
+            ? 'Seed sale'
+            : tokenData.saleData.isPrivate
+            ? 'Private sale'
+            : 'Public sale',
+        };
+        await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
         dispatch(setGlobalLoading(false));

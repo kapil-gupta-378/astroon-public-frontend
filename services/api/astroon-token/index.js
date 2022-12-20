@@ -53,3 +53,13 @@ export const getSaleOnStatusApi = async () => {
 
   return xhr.data;
 };
+
+export const postTokenBuyTransaction = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}token-transaction-history`,
+    data: data,
+  });
+
+  return xhr.data;
+};

@@ -69,6 +69,7 @@ const EditSaleDetailsModal = ({
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
                     noOfToken: e.target.value,
+                    cap: removeZero(value.tokenPrice * e.target.value),
                   }))
                 }
               />
@@ -79,12 +80,6 @@ const EditSaleDetailsModal = ({
               titleBackground={'#AF3277'}
               title={'Cap In Eth'}
               handleType={'number'}
-              handleOnChange={(e) =>
-                setNewSaleDataHandler((prevValue) => ({
-                  ...prevValue,
-                  cap: e.target.value,
-                }))
-              }
             />
             <div className={styles.input_wrap}>
               <TextInput
