@@ -79,9 +79,9 @@ const TokenBuyHistory = ({
                             <td>{item.saleType}</td>
                             <td>{item.buyToken}</td>
                             <td>
-                              {moment(item.createdAt)
-                                .utc()
-                                .format('DD/MM/YYYY h:mma')}
+                              {moment(item.createdAt).format(
+                                'DD/MM/YYYY h:mma',
+                              )}
                             </td>
                           </tr>
                         );

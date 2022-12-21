@@ -82,9 +82,9 @@ const ClaimTokenDialog = ({
                             <td>{item.saleType}</td>
                             <td>{item.totalBuyToken}</td>
                             <td>
-                              {moment(item.createdAt)
-                                .utc()
-                                .format('DD/MM/YYYY h:mma')}
+                              {moment(item.createdAt).format(
+                                'DD/MM/YYYY h:mma',
+                              )}
                             </td>
                             <td>{item.remainingClaim}</td>
                             {item.remainingClaim !== 0 && (

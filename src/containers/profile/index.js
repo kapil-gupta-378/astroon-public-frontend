@@ -30,6 +30,7 @@ import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
 import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
 import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
+import moment from 'moment';
 const Profile = () => {
   const { userData, claimingToken, tokenBuyHistory } = useSelector(
     (state) => state.userReducer,
@@ -107,6 +108,7 @@ const Profile = () => {
         walletAddress,
         tokenData,
       );
+      const currentDate = moment().format('');
 
       if (tokenTransaction.status) {
         const data = {
@@ -118,6 +120,7 @@ const Profile = () => {
             : tokenData.saleData.isPrivate
             ? 'Private sale'
             : 'Public sale',
+          purchaseDate: currentDate,
         };
         await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');

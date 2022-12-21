@@ -24,6 +24,7 @@ import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import SaleDetailCard from '../../component/common/sale-detail-card';
 import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
+import moment from 'moment/moment';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -84,7 +85,6 @@ const AST = () => {
       </text>
     );
   };
-
   const buyTokenHandler = async () => {
     try {
       // throw Error when user not connected to website
@@ -116,7 +116,7 @@ const AST = () => {
         walletAddress,
         tokenData,
       );
-
+      const currentDate = moment().format('');
       if (tokenTransaction.status) {
         const data = {
           walletAddress: walletAddress,
@@ -127,6 +127,7 @@ const AST = () => {
             : tokenData.saleData.isPrivate
             ? 'Private sale'
             : 'Public sale',
+          purchaseDate: currentDate,
         };
         await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
