@@ -2,13 +2,11 @@ import moment from 'moment';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import Button from '../button';
-import GlobalLoading from '../global-loading';
-import styles from './claimTokendialog.module.scss';
-const ClaimTokenDialog = ({
+import GlobalLoading from '../../common/global-loading';
+import styles from './tokenBuyHistory.module.scss';
+const TokenBuyHistory = ({
   handleShow,
   leftButtonHandler,
-  claimHandler,
   fetchMoreData,
   loading,
   dataCount,
@@ -26,7 +24,7 @@ const ClaimTokenDialog = ({
       >
         <Modal.Header closeVariant={'white'} closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Claim Token
+            Transition History
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -70,7 +68,6 @@ const ClaimTokenDialog = ({
                         <th scope="col">Sale type</th>
                         <th scope="col">Token</th>
                         <th scope="col">Purchase time</th>
-                        <th scope="col">Available claim</th>
                       </tr>
                     </thead>
 
@@ -80,24 +77,12 @@ const ClaimTokenDialog = ({
                           <tr key={item.id}>
                             <th scope="row">{idx + 1}</th>
                             <td>{item.saleType}</td>
-                            <td>{item.totalBuyToken}</td>
+                            <td>{item.buyToken}</td>
                             <td>
                               {moment(item.createdAt)
                                 .utc()
                                 .format('DD/MM/YYYY h:mma')}
                             </td>
-                            <td>{item.remainingClaim}</td>
-                            {item.remainingClaim !== 0 && (
-                              <td>
-                                <Button
-                                  onClick={() =>
-                                    claimHandler(item.saleType.saleRound)
-                                  }
-                                >
-                                  Claim
-                                </Button>
-                              </td>
-                            )}
                           </tr>
                         );
                       })}
@@ -120,4 +105,4 @@ const ClaimTokenDialog = ({
   );
 };
 
-export default ClaimTokenDialog;
+export default TokenBuyHistory;

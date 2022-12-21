@@ -29,12 +29,16 @@ import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
 import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
+import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 const Profile = () => {
-  const { userData, claimingToken } = useSelector((state) => state.userReducer);
+  const { userData, claimingToken, tokenBuyHistory } = useSelector(
+    (state) => state.userReducer,
+  );
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
   const [showClaimTokenModal, setShowCliamTokenModal] = useState(false);
+  const [historyModal, setHistoryModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
@@ -70,7 +74,6 @@ const Profile = () => {
   const updateState = (e) => {
     dispatch(updateUserData({ name: e.target.name, value: e.target.value }));
   };
-
   const buyTokenHandler = async () => {
     try {
       if (!isUserConnected) {
@@ -186,15 +189,17 @@ const Profile = () => {
     coverImageInputImageRef.current.click();
   };
 
-  const claimTokenHandler = async () => {
+  const claimTokenHandler = async (saleRound) => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
 
       dispatch(setGlobalLoading(true));
-      const claimResponse = await claimToken(walletAddress, 8);
+      const claimResponse = await claimToken(walletAddress, saleRound);
       if (claimResponse.status) {
         toast.success('Token claim successfully');
+        fetchTokenData();
+        fetchUserData();
         dispatch(setGlobalLoading(false));
       }
     } catch (error) {
@@ -297,22 +302,32 @@ const Profile = () => {
                     {`${address ? `${address.slice(0, 9)}...` : ''}`}
                   </div>
                 </OverlayTrigger>
-                {(saleOnData.isPrivate ||
-                  saleOnData.isSeed ||
-                  saleOnData.isPublic) && (
-                  <div
-                    onClick={() => setShowBuyTokenModal(true)}
-                    className={styles.wallet_address}
-                  >
-                    Buy Token
-                  </div>
+                {route.pathname === '/user-profile/[address]' && (
+                  <>
+                    {(saleOnData.isPrivate ||
+                      saleOnData.isSeed ||
+                      saleOnData.isPublic) && (
+                      <div
+                        onClick={() => setShowBuyTokenModal(true)}
+                        className={styles.wallet_address}
+                      >
+                        Buy Token
+                      </div>
+                    )}
+                    <div
+                      onClick={() => setShowCliamTokenModal(true)}
+                      className={styles.wallet_address}
+                    >
+                      Claim Token
+                    </div>
+                    <div
+                      onClick={() => setHistoryModal(true)}
+                      className={styles.wallet_address}
+                    >
+                      Transition History
+                    </div>
+                  </>
                 )}
-                <div
-                  onClick={() => setShowCliamTokenModal(true)}
-                  className={styles.wallet_address}
-                >
-                  Claim Token
-                </div>
               </div>
             </div>
           </section>
@@ -392,9 +407,17 @@ const Profile = () => {
             handleFunction={buyTokenHandler}
           />
           <ClaimTokenDialog
+            data={claimingToken}
             handleShow={showClaimTokenModal}
             leftButtonHandler={() => setShowCliamTokenModal(false)}
-            rightButtonHandler={claimTokenHandler}
+            claimHandler={claimTokenHandler}
+            claimingNumber={claimingToken}
+          />
+          <TokenBuyHistory
+            data={tokenBuyHistory}
+            handleShow={historyModal}
+            leftButtonHandler={() => setHistoryModal(false)}
+            claimHandler={claimTokenHandler}
             claimingNumber={claimingToken}
           />
         </main>

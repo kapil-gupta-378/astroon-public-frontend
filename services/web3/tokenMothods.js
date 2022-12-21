@@ -51,19 +51,17 @@ export const claimToken = async (walletAddress, saleRound) => {
 };
 
 export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
+  let claimResponse = 0;
   const AstTokenContract = await getContractInstance();
-
   let saleUserBuyResponse = {};
 
   if ((address, saleRound)) {
     saleUserBuyResponse = await getUserBuyDetails(address, saleRound);
   }
 
-  let claimResponse = 0;
   const saleDetailsResponse = await getSaleDetails(
     saleUserBuyResponse.saleRound,
   );
-
   if (
     saleUserBuyResponse.tokens &&
     saleDetailsResponse.vesting &&
@@ -78,7 +76,6 @@ export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
       )
       .call({ from: address });
   }
-
   return claimResponse;
 };
 
