@@ -26,13 +26,12 @@ export const startPrivateSale = async (
     .send({ from: adminWalletAddress });
 
   // updating sale status in backend
+
   const data = {
     isPublic: false,
     isPrivate: saleData.saleType === 'Private Sale' ? true : false,
     isSeed: saleData.saleType === 'Seed Sale' ? true : false,
-    saleRound: Number(
-      setSaleDataResponse.events.SaleCreated.returnValues.saleId,
-    ),
+    saleRound: Number(setSaleDataResponse),
   };
   const updateResponse = postSaleOnStatusApi(data);
   return [
@@ -76,11 +75,19 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
   const AstTokenContract = await getContractInstance();
   const tokenRateInWai = convertEtherToWei(saleData.tokenPrice);
   const capInWei = convertEtherToWei(saleData.cap);
-  const startDate = moment(saleData.endDate).format('X');
+  const startDate = moment(saleData.startDate).format('X');
   const endDays = Number(saleData.endDate);
-  const thresHold = convertEtherToWei(saleData.buyLimit);
+  const thresHold = convertEtherToWei(saleData.maxLimit);
   const cliftingTime = Number(saleData.cliftingTime);
   const vestingTime = Number(saleData.vestingTime);
+  const initialTokenValue = Math.round(
+    Number(saleData.cap) / Number(saleData.tokenPrice),
+  );
+  const minBuy = Number(saleData.minBuy);
+
+  await AstTokenContract.methods
+    .set_initialTokens(initialTokenValue)
+    .send({ from: adminWalletAddress });
 
   const setSaleDataResponse = await AstTokenContract.methods
     .startTokenSale(
@@ -91,6 +98,7 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
       thresHold,
       cliftingTime,
       vestingTime,
+      minBuy,
     )
     .send({ from: adminWalletAddress });
 

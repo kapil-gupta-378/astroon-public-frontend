@@ -102,6 +102,7 @@ const NFTCard = ({ nftData }) => {
                 height={15}
                 layout="fixed"
                 alt="art"
+                priority
               />
             </div>
 

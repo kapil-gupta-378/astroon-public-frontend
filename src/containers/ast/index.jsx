@@ -23,6 +23,8 @@ import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import SaleDetailCard from '../../component/common/sale-detail-card';
+import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
+import moment from 'moment/moment';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -46,7 +48,6 @@ const AST = () => {
   const { tokenData, seedSale, privateSale, publicSale, saleOnData } =
     useSelector((state) => state.tokenReducer);
   const { userData } = useSelector((state) => state.userReducer);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -84,11 +85,14 @@ const AST = () => {
       </text>
     );
   };
-
   const buyTokenHandler = async () => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
+      if (sliderValue < Number(tokenData?.rate?.minBound))
+        throw new Error(
+          `You can not buy less than ${tokenData?.rate?.minBound} token`,
+        );
 
       // throw Error when sale is not on
       if (!tokenData.isPrivateSale && !tokenData.isPublicSale)
@@ -110,10 +114,22 @@ const AST = () => {
         sliderValue,
         tokenData.rate.rate,
         walletAddress,
-        tokenData.isPrivateSale,
+        tokenData,
       );
-
+      const currentDate = moment().format('');
       if (tokenTransaction.status) {
+        const data = {
+          walletAddress: walletAddress,
+          saleRound: tokenData.saleData.saleRound,
+          buyToken: sliderValue,
+          saleType: tokenData.saleData.isSeed
+            ? 'Seed sale'
+            : tokenData.saleData.isPrivate
+            ? 'Private sale'
+            : 'Public sale',
+          purchaseDate: currentDate,
+        };
+        await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
         dispatch(setGlobalLoading(false));

@@ -3,7 +3,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   userData: { bio: '', displayName: '', email: '', customUrl: '', assets: [] },
   userDataLoading: false,
-  claimingToken: 0,
+  claimingToken: [],
+  tokenBuyHistory: [],
 };
 
 export const userSlice = createSlice({
@@ -31,6 +32,9 @@ export const userSlice = createSlice({
     setClaimingTokenNumber: (state, action) => {
       state.claimingToken = action.payload;
     },
+    setBuyTokenHistory: (state, action) => {
+      state.tokenBuyHistory = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   updateCoverImage,
   updateProfileImage,
   setClaimingTokenNumber,
+  setBuyTokenHistory,
 } = userSlice.actions;
 
 export default userSlice.reducer;

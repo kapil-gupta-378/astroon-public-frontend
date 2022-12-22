@@ -10,7 +10,6 @@ import {
   setSaleOnData,
   setSeedSaleDetails,
   setTokendata,
-  setTokenDataLoading,
 } from './tokenSlice';
 
 export const fetchTokenDataAction = () => {
@@ -43,11 +42,10 @@ export const fetchTokenDataAction = () => {
       //fetching which sale is on data
       const saleOnData = await getSaleOnStatusApi();
       dispatch(setSaleOnData(saleOnData.data));
-
       dispatch(setGlobalLoading(false));
     } catch (error) {
+      console.error(error);
       dispatch(setTokendata([]));
-      dispatch(setTokenDataLoading(false));
       dispatch(setGlobalLoading(false));
     }
   };

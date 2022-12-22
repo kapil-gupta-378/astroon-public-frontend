@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
+import { removeZero } from '../../../utils/calculation';
 import Button from '../button';
 import GlobalLoading from '../global-loading';
 import TextInput from '../text-input';
@@ -23,6 +24,9 @@ const EditSaleDetailsModal = ({
         startDate: '',
         tokenPrice: '',
         vestingTime: '',
+        noOfToken: '',
+        minBuy: '',
+        maxLimit: '',
       });
     };
   }, []);
@@ -57,18 +61,26 @@ const EditSaleDetailsModal = ({
                 }
               />
               <TextInput
-                handleValue={value.cap}
+                handleValue={value.noOfToken}
                 titleBackground={'#AF3277'}
-                title={'Cap'}
+                title={'Number oF Token'}
                 handleType={'number'}
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
-                    cap: Number(e.target.value),
+                    noOfToken: e.target.value,
+                    cap: removeZero(value.tokenPrice * e.target.value),
                   }))
                 }
               />
             </div>
+            <TextInput
+              readOnly={true}
+              handleValue={removeZero(value.tokenPrice * value.noOfToken)}
+              titleBackground={'#AF3277'}
+              title={'Cap In Eth'}
+              handleType={'number'}
+            />
             <div className={styles.input_wrap}>
               <TextInput
                 handleValue={moment(value.startDate).format('YYYY-MM-DDTHH:mm')}
@@ -85,12 +97,12 @@ const EditSaleDetailsModal = ({
               <TextInput
                 handleValue={value.endDate}
                 titleBackground={'#AF3277'}
-                title={'End Date'}
+                title={'End In (Days)'}
                 handleType="number"
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
-                    endDate: Number(e.target.value),
+                    endDate: e.target.value,
                   }))
                 }
               />
@@ -104,7 +116,7 @@ const EditSaleDetailsModal = ({
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
-                    cliftingTime: Number(e.target.value),
+                    cliftingTime: e.target.value,
                   }))
                 }
               />
@@ -116,20 +128,33 @@ const EditSaleDetailsModal = ({
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
-                    vestingTime: Number(e.target.value),
+                    vestingTime: e.target.value,
                   }))
                 }
               />
             </div>
             <div className={styles.input_wrap}>
               <TextInput
-                handleValue={value.buyLimit}
+                handleValue={value.minBuy}
                 titleBackground={'#AF3277'}
-                title={'Buy Limit Per User'}
+                title={'Minimum Buy Limit Per User'}
+                handleType={'number'}
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({
                     ...prevValue,
-                    buyLimit: Number(e.target.value),
+                    minBuy: e.target.value,
+                  }))
+                }
+              />
+              <TextInput
+                handleValue={value.maxLimit}
+                titleBackground={'#AF3277'}
+                title={'Maximum Buy Limit Per User'}
+                handleType={'number'}
+                handleOnChange={(e) =>
+                  setNewSaleDataHandler((prevValue) => ({
+                    ...prevValue,
+                    maxLimit: e.target.value,
                   }))
                 }
               />
