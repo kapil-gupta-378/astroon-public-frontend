@@ -30,8 +30,8 @@ export const fetchUserDataAction = () => {
           ) {
           }
           const tokenData = await getCurrentTokenToBeClaimed(
-            buyHistory.data[0].walletAddress,
-            buyHistory.data[0].saleRound,
+            buyHistory.data[i].walletAddress,
+            buyHistory.data[i].saleRound,
           );
           // converting to wei to eth
           const tokenDataInEth = convertWeiToEther(tokenData);

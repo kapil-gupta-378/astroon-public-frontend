@@ -3,6 +3,7 @@ import {
   getTokenDataApi,
   getTokenSaleData,
 } from '../../../services/api/astroon-token';
+import { checkSaleRoundIsOn } from '../../../services/web3/saleMethod';
 import { setGlobalLoading } from '../global-loading/globalLoadingSlice';
 import {
   setPrivateSaleDetails,
@@ -41,6 +42,10 @@ export const fetchTokenDataAction = () => {
 
       //fetching which sale is on data
       const saleOnData = await getSaleOnStatusApi();
+
+      // checking is any sale is on
+
+      await checkSaleRoundIsOn(currentSale.saleData.saleRound);
       dispatch(setSaleOnData(saleOnData.data));
       dispatch(setGlobalLoading(false));
     } catch (error) {

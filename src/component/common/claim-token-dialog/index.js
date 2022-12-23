@@ -90,9 +90,7 @@ const ClaimTokenDialog = ({
                             {item.remainingClaim !== 0 && (
                               <td>
                                 <Button
-                                  onClick={() =>
-                                    claimHandler(item.saleType.saleRound)
-                                  }
+                                  onClick={() => claimHandler(item.saleRound)}
                                 >
                                   Claim
                                 </Button>

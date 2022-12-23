@@ -196,7 +196,6 @@ const Profile = () => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
-
       dispatch(setGlobalLoading(true));
       const claimResponse = await claimToken(walletAddress, saleRound);
       if (claimResponse.status) {
@@ -420,7 +419,6 @@ const Profile = () => {
             data={tokenBuyHistory}
             handleShow={historyModal}
             leftButtonHandler={() => setHistoryModal(false)}
-            claimHandler={claimTokenHandler}
             claimingNumber={claimingToken}
           />
         </main>
