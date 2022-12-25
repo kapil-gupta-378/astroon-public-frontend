@@ -75,7 +75,11 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
   const AstTokenContract = await getContractInstance();
   const tokenRateInWai = convertEtherToWei(saleData.tokenPrice);
   const capInWei = convertEtherToWei(saleData.cap);
-  const startDate = moment(saleData.startDate).unix();
+
+  const startDate = moment(saleData.startDate.replace('.000Z', ''))
+    .local()
+    .format('X');
+
   const endDays = Number(saleData.endDate);
   const thresHold = convertEtherToWei(saleData.maxLimit);
   const cliftingTime = Number(saleData.cliftingTime);
@@ -84,7 +88,6 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
     Number(saleData.cap) / Number(saleData.tokenPrice),
   );
   const minBuy = Number(saleData.minBuy);
-
   await AstTokenContract.methods
     .set_initialTokens(initialTokenValue)
     .send({ from: adminWalletAddress });

@@ -44,7 +44,9 @@ const Profile = () => {
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData, saleOnData } = useSelector((state) => state.tokenReducer);
+  const { tokenData, saleOnData, saleRoundOn } = useSelector(
+    (state) => state.tokenReducer,
+  );
   const route = useRouter();
   const dispatch = useDispatch();
   const { address } = route.query;
@@ -308,14 +310,15 @@ const Profile = () => {
                   <>
                     {(saleOnData.isPrivate ||
                       saleOnData.isSeed ||
-                      saleOnData.isPublic) && (
-                      <div
-                        onClick={() => setShowBuyTokenModal(true)}
-                        className={styles.wallet_address}
-                      >
-                        Buy Token
-                      </div>
-                    )}
+                      saleOnData.isPublic) &&
+                      saleRoundOn && (
+                        <div
+                          onClick={() => setShowBuyTokenModal(true)}
+                          className={styles.wallet_address}
+                        >
+                          Buy Token
+                        </div>
+                      )}
                     <div
                       onClick={() => setShowCliamTokenModal(true)}
                       className={styles.wallet_address}

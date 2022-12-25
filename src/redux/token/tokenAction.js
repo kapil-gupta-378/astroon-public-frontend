@@ -9,6 +9,7 @@ import {
   setPrivateSaleDetails,
   setPublicSaleDetails,
   setSaleOnData,
+  setSaleRoundOn,
   setSeedSaleDetails,
   setTokendata,
 } from './tokenSlice';
@@ -45,7 +46,9 @@ export const fetchTokenDataAction = () => {
 
       // checking is any sale is on
 
-      await checkSaleRoundIsOn(currentSale.saleData.saleRound);
+      const isSaleOn = await checkSaleRoundIsOn(currentSale.saleData.saleRound);
+      dispatch(setSaleRoundOn(isSaleOn));
+
       dispatch(setSaleOnData(saleOnData.data));
       dispatch(setGlobalLoading(false));
     } catch (error) {

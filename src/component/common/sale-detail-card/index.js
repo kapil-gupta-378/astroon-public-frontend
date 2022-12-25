@@ -11,11 +11,12 @@ const SaleDetailCard = ({
   isSaleOn,
   onClickStopSale,
   buyTokenHandler,
+  saleRoundOn,
 }) => {
   return (
     <div
       className={`${styles.sale_detail_card_wrap} ${
-        isSaleOn ? styles.border_red : ''
+        isSaleOn && saleRoundOn ? styles.border_red : ''
       } `}
     >
       <h3 className={styles.sale_heading}>{data.saleType}</h3>
@@ -71,7 +72,7 @@ const SaleDetailCard = ({
             <Button onClick={editSaleDetailsHander}>Edit</Button>
           </>
         ) : (
-          <Button disabled={!isSaleOn} onClick={buyTokenHandler}>
+          <Button disabled={!isSaleOn && saleRoundOn} onClick={buyTokenHandler}>
             {'Buy $AST'}
           </Button>
         )}
