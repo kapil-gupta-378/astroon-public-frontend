@@ -162,20 +162,13 @@ const AST = () => {
       <div className={styles.description_wrap}>
         <h3>Meet $AST – Astroon Token</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet feugiat
-          nunc ornare adipiscing aenean ipsum pretium eu arcu. Aenean aliquam
-          integer interdum facilisi fusce. Sed lacus mi dolor, feugiat.
-          Pellentesque aenean ultricies facilisis gravida malesuada bibendum.
+          Th!s adventure !s not only for ASTRO and ROON, but for all of us! $AST
+          !s a ut!l!ty token for the commun!ty that helps our astronauts get
+          !nto space.
           <br /> <br />
-          Diam, aliquam sit dolor faucibus in pellentesque aliquam. Morbi
-          pellentesque Vulputate mauris, aliquet vitae, vitae. Turpis integer
-          vestibulum nunc, id dictum et. Velit bibendum nulla non est. Elementum
-          leo ultrices consequat ut sed eget magna. Gravida vitae viverra
-          volutpat ornare <br /> <br /> Vulputate mauris, aliquet vitae, vitae.
-          Turpis integer vestibulum nunc, id dictum et. Velit bibendum nulla non
-          est. Elementum leo ultrices consequat ut sed eget magna. Gravida vitae
-          viverra volutpat ornare Vulputate mauris, aliquet vitae, vitae. Turpis
-          integer vestibulum nun
+          Our ut!l!ty token des!gned to have a l!m!ted supply of 25,000,000
+          un!ts. You can take your place !n the ASTROON ecosystem w!th $AST.
+          <br /> <br />
         </p>
       </div>
       <div className={styles.Sale_card_wrap}>
