@@ -50,16 +50,6 @@ export const fetchUserDataAction = () => {
       dispatch(setUserDataLoading(false));
     } catch (error) {
       console.error(error);
-      dispatch(
-        setUserData({
-          bio: '',
-          displayName: '',
-          email: '',
-          customUrl: '',
-          assets: [],
-        }),
-      );
-
       dispatch(setUserDataLoading(false));
     }
   };
