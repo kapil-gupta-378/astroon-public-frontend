@@ -31,7 +31,7 @@ const SaleDetailCard = ({
       <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>
         <p className={styles.value}>
-          {moment(data.startDate).utc().format('DD/MM/YYYY h:mma')}
+          {moment(data.startDate).format('DD/MM/YYYY h:mma')}
         </p>
       </div>
       <div className={styles.row_border}>
