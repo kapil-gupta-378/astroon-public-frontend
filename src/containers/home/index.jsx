@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <div className={styles.home_wrp}>
       <Banner />
-      <Roadmap />
       <LeaderBoard />
       <NftSlider />
       <Whitepaper />
+      <Roadmap />
       <Team />
       <FAQ />
       <BlogRow />
