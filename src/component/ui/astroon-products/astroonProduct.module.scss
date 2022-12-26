@@ -1,0 +1,13 @@
+@import '../../../../styles/typography.module';
+.astroon_products_wrap {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 200px;
+  height: 500px;
+  .astroon_products_heading {
+    @include heading_2;
+    text-align: center;
+    font-family: 'Roboto Slab';
+    margin-bottom: 45px;
+  }
+}
