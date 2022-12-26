@@ -8,11 +8,13 @@ import Whitepaper from '../../component/ui/whitepaper';
 // import BlogRow from '../../component/ui/blog-row';
 import NftSlider from '../../component/ui/nft-slider-home';
 import LeaderBoard from '../../component/ui/leader-board';
+import AstroonHistory from '../../component/ui/astroon-history';
 
 const Home = () => {
   return (
     <div className={styles.home_wrp}>
       <Banner />
+      <AstroonHistory />
       <LeaderBoard />
       <NftSlider />
       <Whitepaper />
