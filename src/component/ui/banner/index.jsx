@@ -8,11 +8,11 @@ function Banner() {
         <div className={style.home_details}>
           <h1>To the Moon</h1>
           <h4>
-            The extraord!nary adventure of ASTRO and ROON, who love each other
+            The extraordinary adventure of ASTRO and ROON, who love each other
             very much, to the moon.
           </h4>
           <p>
-            Jo!n the ASTROON commun!ty and be a part of th!s challeng!ng and fun
+            Join the ASTROON community and be a part of this challenging and fun
             story. 2.
           </p>
         </div>

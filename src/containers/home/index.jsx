@@ -12,6 +12,7 @@ import AstroonHistory from '../../component/ui/astroon-history';
 import AstroonProduct from '../../component/ui/astroon-products';
 import AstroonAnimation from '../../component/ui/astroon-animation';
 import AstroonToken from '../../component/ui/astroon-token';
+import AstroonNFT from '../../component/ui/astroon-nft';
 
 const Home = () => {
   return (
@@ -20,11 +21,12 @@ const Home = () => {
       <AstroonHistory />
       <AstroonProduct />
       {/* <LeaderBoard /> */}
-      <NftSlider />
       <Whitepaper />
       <Roadmap />
       <AstroonAnimation />
       <AstroonToken />
+      <AstroonNFT />
+      <NftSlider />
       <Team />
       <FAQ />
       {/* <BlogRow /> */}
