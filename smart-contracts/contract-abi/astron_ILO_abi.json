@@ -372,7 +372,8 @@
       { "internalType": "uint256", "name": "tokens", "type": "uint256" },
       { "internalType": "uint256", "name": "claimed", "type": "uint256" },
       { "internalType": "uint256", "name": "lastClaimed", "type": "uint256" },
-      { "internalType": "uint256", "name": "createdOn", "type": "uint256" }
+      { "internalType": "uint256", "name": "createdOn", "type": "uint256" },
+      { "internalType": "uint256", "name": "userCliff", "type": "uint256" }
     ],
     "stateMutability": "view",
     "type": "function"
