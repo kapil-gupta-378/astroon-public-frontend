@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 75px;
+  margin-bottom: 200px;
 }
 .home_page {
   height: auto;
@@ -13,6 +13,7 @@
   align-items: center;
   .home_details {
     width: 50%;
+    margin: 5% 0%;
     .home_wallet_btn {
       background: linear-gradient(141.07deg, #faff00 -6.88%, #fe19c1 50.39%);
       border-radius: 268px;
