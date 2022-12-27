@@ -11,6 +11,7 @@ import NftSlider from '../../component/ui/nft-slider-home';
 import AstroonHistory from '../../component/ui/astroon-history';
 import AstroonProduct from '../../component/ui/astroon-products';
 import AstroonAnimation from '../../component/ui/astroon-animation';
+import AstroonToken from '../../component/ui/astroon-token';
 
 const Home = () => {
   return (
@@ -23,6 +24,7 @@ const Home = () => {
       <Whitepaper />
       <Roadmap />
       <AstroonAnimation />
+      <AstroonToken />
       <Team />
       <FAQ />
       {/* <BlogRow /> */}
