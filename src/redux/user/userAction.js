@@ -23,7 +23,7 @@ export const fetchUserDataAction = () => {
       const buyHistory = await getClaimHistory();
       const currentSale = await getTokenDataApi();
       if (buyHistory.data.length !== 0) {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < buyHistory.data.length; i++) {
           // fetching token than can be claim for user
           if (
             buyHistory.data[i].walletAddress &&
