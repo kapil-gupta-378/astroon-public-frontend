@@ -72,7 +72,12 @@ const SaleDetailCard = ({
             <Button onClick={editSaleDetailsHander}>Edit</Button>
           </>
         ) : (
-          <Button disabled={!isSaleOn && saleRoundOn} onClick={buyTokenHandler}>
+          <Button
+            disabled={
+              isSaleOn === true ? (saleRoundOn === true ? false : true) : true
+            }
+            onClick={buyTokenHandler}
+          >
             {'Buy $AST'}
           </Button>
         )}
