@@ -39,6 +39,8 @@ const Profile = () => {
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
   const [showClaimTokenModal, setShowCliamTokenModal] = useState(false);
+  const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
+
   const [historyModal, setHistoryModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
@@ -64,6 +66,19 @@ const Profile = () => {
     }
   }, [isUserConnected]);
 
+  useEffect(() => {
+    if (tokenData?.saleData?.saleRound && claimingToken) {
+      const obj = claimingToken.find((item) => {
+        return item.saleRound == tokenData?.saleData?.saleRound;
+      });
+
+      if (obj === undefined) {
+        setCurrentSaleLastBuy(0);
+      } else {
+        setCurrentSaleLastBuy(obj.totalBuyToken);
+      }
+    }
+  }, [tokenData, claimingToken]);
   const fetchTokenData = async () => {
     dispatch(fetchTokenDataAction());
   };
@@ -410,6 +425,7 @@ const Profile = () => {
             modalShow={showBuyTokenModal}
             selectedQuantity={sliderValue}
             handleFunction={buyTokenHandler}
+            lastBuy={currentSaleLastBuy}
           />
           <ClaimTokenDialog
             data={claimingToken}
@@ -423,6 +439,7 @@ const Profile = () => {
             handleShow={historyModal}
             leftButtonHandler={() => setHistoryModal(false)}
             claimingNumber={claimingToken}
+            lastBuy={currentSaleLastBuy}
           />
         </main>
       ) : (

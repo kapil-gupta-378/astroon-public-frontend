@@ -16,6 +16,7 @@ const BuyTokenModal = ({
   sliderOnChange,
   selectedQuantity,
   tokenData,
+  lastBuy = 0,
 }) => {
   return (
     <>
@@ -101,7 +102,7 @@ const BuyTokenModal = ({
             <div className={styles.slider_wrap}>
               <Slider
                 min={Number(tokenData?.rate?.minBound)}
-                max={tokenData?.rate?.thresHold}
+                max={Number(tokenData?.rate?.thresHold) - lastBuy}
                 step={1}
                 value={sliderValue}
                 onChange={sliderOnChange}
