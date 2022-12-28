@@ -21,6 +21,7 @@
       position: relative;
     }
     .right_wrap {
+      width: 40%;
       p {
         font-family: 'Rubik';
         font-style: normal;
@@ -50,7 +51,38 @@
           }
         }
       }
-      width: 40%;
     }
   }
 }
+
+@media only screen and (max-width: 1023px) {
+  .astroon_token_wrap {
+    .astroon_token_heading {
+    }
+    .content_wrap {
+      flex-direction: column;
+
+      .left_wrap {
+        width: 60%;
+      }
+      .right_wrap {
+        width: 100%;
+
+        p {
+          text-align: center;
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          .point_heading {
+          }
+          ol {
+            li {
+            }
+          }
+        }
+      }
+    }
+  }
+} /* 980 */
