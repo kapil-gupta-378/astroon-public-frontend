@@ -77,22 +77,20 @@ const ClaimTokenDialog = ({
                     <tbody>
                       {data.map((item, idx) => {
                         return (
-                          <tr key={item.id}>
+                          <tr key={idx}>
                             <th scope="row">{idx + 1}</th>
                             <td>{item.saleType}</td>
                             <td>{item.totalBuyToken}</td>
                             <td>
-                              {moment(item.createdAt).format(
+                              {moment(item.updatedAt).format(
                                 'DD/MM/YYYY h:mma',
                               )}
                             </td>
                             <td>{item.remainingClaim}</td>
-                            {item.remainingClaim !== 0 && (
+                            {item.remainingClaim > 0 && (
                               <td>
                                 <Button
-                                  onClick={() =>
-                                    claimHandler(item.saleType.saleRound)
-                                  }
+                                  onClick={() => claimHandler(item.saleRound)}
                                 >
                                   Claim
                                 </Button>

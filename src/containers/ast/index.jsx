@@ -45,8 +45,14 @@ const AST = () => {
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData, seedSale, privateSale, publicSale, saleOnData } =
-    useSelector((state) => state.tokenReducer);
+  const {
+    tokenData,
+    seedSale,
+    privateSale,
+    publicSale,
+    saleOnData,
+    saleRoundOn,
+  } = useSelector((state) => state.tokenReducer);
   const { userData } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
@@ -185,6 +191,7 @@ const AST = () => {
             key={1}
             isSaleOn={saleOnData.isSeed && tokenData.isPrivateSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
+            saleRoundOn={saleRoundOn}
           />
         </div>
         <div style={{ width: '350px' }}>
@@ -193,6 +200,7 @@ const AST = () => {
             key={2}
             isSaleOn={saleOnData.isPrivate && tokenData.isPrivateSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
+            saleRoundOn={saleRoundOn}
           />
         </div>
         <div style={{ width: '350px' }}>
@@ -201,6 +209,7 @@ const AST = () => {
             key={3}
             isSaleOn={saleOnData.isPublic && tokenData.isPublicSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
+            saleRoundOn={saleRoundOn}
           />
         </div>
       </div>

@@ -24,6 +24,7 @@ const CollectionCard = ({ nftdata }) => {
             layout="fixed"
             alt="nft-img"
             priority
+            unoptimized
           />
         </a>
       </Link>

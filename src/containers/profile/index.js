@@ -44,7 +44,9 @@ const Profile = () => {
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
-  const { tokenData, saleOnData } = useSelector((state) => state.tokenReducer);
+  const { tokenData, saleOnData, saleRoundOn } = useSelector(
+    (state) => state.tokenReducer,
+  );
   const route = useRouter();
   const dispatch = useDispatch();
   const { address } = route.query;
@@ -196,7 +198,6 @@ const Profile = () => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
-
       dispatch(setGlobalLoading(true));
       const claimResponse = await claimToken(walletAddress, saleRound);
       if (claimResponse.status) {
@@ -309,14 +310,15 @@ const Profile = () => {
                   <>
                     {(saleOnData.isPrivate ||
                       saleOnData.isSeed ||
-                      saleOnData.isPublic) && (
-                      <div
-                        onClick={() => setShowBuyTokenModal(true)}
-                        className={styles.wallet_address}
-                      >
-                        Buy Token
-                      </div>
-                    )}
+                      saleOnData.isPublic) &&
+                      saleRoundOn && (
+                        <div
+                          onClick={() => setShowBuyTokenModal(true)}
+                          className={styles.wallet_address}
+                        >
+                          Buy Token
+                        </div>
+                      )}
                     <div
                       onClick={() => setShowCliamTokenModal(true)}
                       className={styles.wallet_address}
@@ -420,7 +422,6 @@ const Profile = () => {
             data={tokenBuyHistory}
             handleShow={historyModal}
             leftButtonHandler={() => setHistoryModal(false)}
-            claimHandler={claimTokenHandler}
             claimingNumber={claimingToken}
           />
         </main>

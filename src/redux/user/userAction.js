@@ -1,6 +1,7 @@
 import {
   getClaimHistory,
   getTokenBuyTransaction,
+  getTokenDataApi,
 } from '../../../services/api/astroon-token';
 import { getUserDataApi } from '../../../services/api/user';
 import { getCurrentTokenToBeClaimed } from '../../../services/web3/tokenMothods';
@@ -18,11 +19,11 @@ export const fetchUserDataAction = () => {
       // fetching user meta data
       const data = await getUserDataApi();
       dispatch(setUserData(data.data));
-
       //  feching  token buy history for remaining claim
       const buyHistory = await getClaimHistory();
+      const currentSale = await getTokenDataApi();
       if (buyHistory.data.length !== 0) {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < buyHistory.data.length; i++) {
           // fetching token than can be claim for user
           if (
             buyHistory.data[i].walletAddress &&
@@ -30,10 +31,11 @@ export const fetchUserDataAction = () => {
           ) {
           }
           const tokenData = await getCurrentTokenToBeClaimed(
-            buyHistory.data[0].walletAddress,
-            buyHistory.data[0].saleRound,
+            buyHistory.data[i].walletAddress,
+            buyHistory.data[i].saleRound,
+            currentSale.saleData.saleRound,
           );
-          // converting to wei to eth
+          //converting to wei to eth
           const tokenDataInEth = convertWeiToEther(tokenData);
           buyHistory.data[i].remainingClaim = tokenDataInEth;
         }
@@ -48,16 +50,6 @@ export const fetchUserDataAction = () => {
       dispatch(setUserDataLoading(false));
     } catch (error) {
       console.error(error);
-      dispatch(
-        setUserData({
-          bio: '',
-          displayName: '',
-          email: '',
-          customUrl: '',
-          assets: [],
-        }),
-      );
-
       dispatch(setUserDataLoading(false));
     }
   };

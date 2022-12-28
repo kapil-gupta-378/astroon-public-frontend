@@ -40,8 +40,14 @@ const SaleControls = () => {
   const { isConnected, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
-  const { tokenData, seedSale, privateSale, publicSale, saleOnData } =
-    useSelector((state) => state.tokenReducer);
+  const {
+    tokenData,
+    seedSale,
+    privateSale,
+    publicSale,
+    saleOnData,
+    saleRoundOn,
+  } = useSelector((state) => state.tokenReducer);
 
   async function saleStartHandler(saleType) {
     try {
@@ -198,6 +204,7 @@ const SaleControls = () => {
             }
             key={1}
             admin={true}
+            saleRoundOn={saleRoundOn}
           />
         )}
         {privateSale && (
@@ -211,6 +218,7 @@ const SaleControls = () => {
             }
             key={2}
             admin={true}
+            saleRoundOn={saleRoundOn}
           />
         )}
         {publicSale && (
@@ -224,6 +232,7 @@ const SaleControls = () => {
               editSaleDetailsHander('public', publicSale)
             }
             admin={true}
+            saleRoundOn={saleRoundOn}
           />
         )}
       </div>

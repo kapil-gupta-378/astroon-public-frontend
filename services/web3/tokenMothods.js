@@ -1,6 +1,5 @@
 import { convertEtherToWei } from '../../src/utils/currencyMethods';
 import { getMerkleDataApi, getMerkleSeedDataApi } from '../api/markle';
-import { getSaleDetails, getUserBuyDetails } from './saleMethod';
 import { getContractInstance } from './web3ProviderMethods';
 
 export const buyToken = async (
@@ -50,33 +49,24 @@ export const claimToken = async (walletAddress, saleRound) => {
   return tokenTransition;
 };
 
-export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
-  let claimResponse = 0;
-  const AstTokenContract = await getContractInstance();
-  let saleUserBuyResponse = {};
-
-  if ((address, saleRound)) {
-    saleUserBuyResponse = await getUserBuyDetails(address, saleRound);
+export const getCurrentTokenToBeClaimed = async (
+  address,
+  saleRound,
+  currentSaleRound,
+) => {
+  try {
+    let claimResponse = 0;
+    const AstTokenContract = await getContractInstance();
+    if (saleRound <= currentSaleRound) {
+      claimResponse = await AstTokenContract.methods
+        .getReward(saleRound, address)
+        .call();
+    }
+    return claimResponse;
+  } catch (error) {
+    console.error(error);
+    return 0;
   }
-
-  const saleDetailsResponse = await getSaleDetails(
-    saleUserBuyResponse.saleRound,
-  );
-  if (
-    saleUserBuyResponse.tokens &&
-    saleDetailsResponse.vesting &&
-    saleUserBuyResponse.lastClaimed &&
-    saleUserBuyResponse.tokens === 0
-  ) {
-    claimResponse = await AstTokenContract.methods
-      .calculateReleaseToken(
-        saleUserBuyResponse.tokens,
-        saleDetailsResponse.vesting,
-        saleUserBuyResponse.lastClaimed,
-      )
-      .call({ from: address });
-  }
-  return claimResponse;
 };
 
 export const getRemainingToken = async () => {
