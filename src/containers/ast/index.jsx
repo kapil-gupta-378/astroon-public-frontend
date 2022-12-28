@@ -42,9 +42,11 @@ const pieChartData = [
 const AST = () => {
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
+  const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
   const { walletAddress, isUserConnected } = useSelector(
     (state) => state.walletReducer,
   );
+
   const {
     tokenData,
     seedSale,
@@ -53,12 +55,26 @@ const AST = () => {
     saleOnData,
     saleRoundOn,
   } = useSelector((state) => state.tokenReducer);
-  const { userData } = useSelector((state) => state.userReducer);
+  const { userData, claimingToken } = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchTokenDataHandler();
   }, []);
+
+  useEffect(() => {
+    if (tokenData?.saleData?.saleRound && claimingToken) {
+      const obj = claimingToken.find((item) => {
+        return item.saleRound == tokenData?.saleData?.saleRound;
+      });
+
+      if (obj === undefined) {
+        setCurrentSaleLastBuy(0);
+      } else {
+        setCurrentSaleLastBuy(obj.totalBuyToken);
+      }
+    }
+  }, [tokenData, claimingToken]);
 
   const fetchTokenDataHandler = async () => {
     dispatch(fetchTokenDataAction());
@@ -265,6 +281,7 @@ const AST = () => {
         modalShow={showBuyTokenModal}
         selectedQuantity={sliderValue}
         handleFunction={buyTokenHandler}
+        lastBuy={currentSaleLastBuy}
       />
     </section>
   );
