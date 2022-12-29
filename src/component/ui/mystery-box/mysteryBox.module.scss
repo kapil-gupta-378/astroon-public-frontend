@@ -1,0 +1,54 @@
+@import '../../../../styles/typography.module';
+.mysteryBox_wrap {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .heading {
+    @include heading_2;
+    margin-bottom: 35px;
+  }
+  .image_wrap {
+    width: 50%;
+    margin-bottom: 35px;
+  }
+  .select_wrap {
+    margin-bottom: 35px;
+    width: 100%;
+  }
+  .pricing {
+    margin-bottom: 35px;
+    h4 {
+      @include heading_3;
+      font-family: 'Roboto Slab';
+      font-weight: 800;
+      color: #faff00;
+      text-align: center;
+
+      span {
+        @include heading_12;
+        margin-left: 15px;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 979px) {
+  .mysteryBox_wrap {
+    width: 49%;
+  }
+} /* 768 */
+
+@media only screen and (max-width: 649px) {
+  .mysteryBox_wrap {
+    width: 80%;
+  }
+} /* 480 */
+
+@media only screen and (max-width: 479px) {
+  .mysteryBox_wrap {
+    width: 100%;
+  }
+} /* 375 */

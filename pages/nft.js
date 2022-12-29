@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { getNFTDataApi } from '../services/api/content-management/nft-management';
 import { toast } from 'react-toastify';
-import OpenseaNFTCard from '../src/component/common/opensea-nft-card';
+// import OpenseaNFTCard from '../src/component/common/opensea-nft-card';
+import MysteryBox from '../src/component/ui/mystery-box';
 
 const NFTPage = () => {
-  const [getNFTData, setNFTData] = useState([]);
+  const [, setNFTData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const NFTPage = () => {
   return (
     <div
       style={{
+        minHeight: '100vh',
         display: 'flex',
         flexWrap: 'wrap',
         padding: '40px',
@@ -33,9 +35,7 @@ const NFTPage = () => {
       }}
     >
       {!isLoading ? (
-        getNFTData?.map((data, idx) => (
-          <OpenseaNFTCard key={idx} nftData={data} />
-        ))
+        <MysteryBox />
       ) : (
         <div
           style={{
