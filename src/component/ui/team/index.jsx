@@ -14,7 +14,6 @@ const Team = () => {
     index: 0,
   });
 
-
   const beforeChange = (prev, next) => {
     setIsIndex((value) => ({ ...value, prev: prev, next: next }));
   };
