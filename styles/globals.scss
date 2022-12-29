@@ -468,6 +468,14 @@ body {
   }
 }
 
+@media only screen and (max-width: 1023px) {
+  .buy_token_modal_ast_page_bootstrap {
+    .modal-dialog {
+      max-width: 805px;
+    }
+  }
+} /* 980 */
+
 // video-popup css
 .video_popup {
   .modal-dialog {
