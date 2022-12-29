@@ -42,9 +42,28 @@
 
       .left_wrap {
         width: 100%;
+        text-align: center;
       }
       .right_wrap {
       }
     }
   }
 } /* 980 */
+
+@media only screen and (max-width: 479px) {
+  .astroon_history_wrap {
+    .astroon_history_heading {
+      margin-bottom: 8px;
+    }
+    .content_wrap {
+      flex-direction: column;
+
+      .left_wrap {
+        width: 100%;
+      }
+      .right_wrap {
+        width: 60%;
+      }
+    }
+  }
+} /* 375 */

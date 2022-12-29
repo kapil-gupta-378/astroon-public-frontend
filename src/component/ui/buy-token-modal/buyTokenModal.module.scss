@@ -50,8 +50,16 @@
     }
   }
 }
-
-@media only screen and (max-width: 479px) {
+@media only screen and (max-width: 767px) {
+  .inner_wrap {
+    .statics {
+      .statics_data {
+        font-size: 30px;
+      }
+    }
+  }
+} /* 650 */
+@media only screen and (max-width: 649px) {
   .inner_wrap {
     .statics {
       flex-direction: column;
@@ -60,3 +68,11 @@
 } /* 375 */
 @media only screen and (max-width: 374px) {
 } /* 320 */
+
+@media only screen and (max-width: 479px) {
+  .inner_wrap {
+    .statics {
+      flex-direction: column;
+    }
+  }
+} /* 375 */

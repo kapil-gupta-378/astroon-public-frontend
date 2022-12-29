@@ -59,16 +59,27 @@
       .left_wrap {
         width: 100%;
         p {
+          text-align: center;
         }
         div {
+          display: flex;
+          justify-content: center;
           ol {
             li {
             }
           }
         }
       }
-      .right_wrap {
-      }
     }
   }
 } /* 980 */
+
+@media only screen and (max-width: 479px) {
+  .astroon_animation_wrap {
+    .content_wrap {
+      .right_wrap {
+        width: 80%;
+      }
+    }
+  }
+} /* 375 */
