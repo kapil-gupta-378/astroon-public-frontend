@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import styles from './mysteryBox.module.scss';
 import mesteryBoxImage from '../../../../public/assets/images/mystery-box-image.png';
+import comingSoonImage from '../../../../public/assets/images/coming_soon.svg';
 import Button from '../../common/button';
 import FormSelect from '../../../component/common/form-select/';
 import { useDispatch, useSelector } from 'react-redux';
@@ -144,24 +145,39 @@ const MysteryBox = () => {
           alt={'mystery-box'}
         />
       </div>
-      <div className={styles.pricing}>
-        <h4>
-          {convertWeiToEther(nftSaleData.cost ? nftSaleData.cost : 0)}
-          <span>{usdPrice}</span>
-        </h4>
-      </div>
-      <div className={styles.select_wrap}>
-        <FormSelect
-          selectedOption={selectedQuantity}
-          label={'Quantity'}
-          options={quantitySelectOptions}
-          titleBackground={'rgb(11 11 50)'}
-          handleChange={(value) => setSelectedQuantity(value)}
-        />
-      </div>
-      <Button disabled={!isSaleOn} onClick={buyMysteryBox}>
-        Buy Now
-      </Button>
+      {isSaleOn ? (
+        <>
+          <div className={styles.pricing}>
+            <h4>
+              {convertWeiToEther(nftSaleData.cost ? nftSaleData.cost : 0)}
+              <span>{usdPrice}</span>
+            </h4>
+          </div>
+          <div className={styles.select_wrap}>
+            <FormSelect
+              selectedOption={selectedQuantity}
+              label={'Quantity'}
+              options={quantitySelectOptions}
+              titleBackground={'rgb(11 11 50)'}
+              handleChange={(value) => setSelectedQuantity(value)}
+            />
+          </div>
+          <Button disabled={!isSaleOn} onClick={buyMysteryBox}>
+            Buy Now
+          </Button>
+        </>
+      ) : (
+        <>
+          <div className={styles.coming_soon_wrap}>
+            <Image
+              src={comingSoonImage}
+              alt="coming soon"
+              layout="responsive"
+            />
+          </div>
+        </>
+      )}
+
       {<GlobalLoading />}
     </div>
   );
