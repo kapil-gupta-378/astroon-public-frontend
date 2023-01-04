@@ -10,6 +10,7 @@ import { loginUserApi } from '../../../services/api/admin';
 import WebsiteLogo from '../../component/common/website-logo';
 import { useDispatch } from 'react-redux';
 import { setAdminToken } from '../../redux/admin/adminSlice';
+import { setIsUserConnected } from '../../redux/persist/wallet/walletSlice';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -41,6 +42,7 @@ const Login = () => {
       try {
         const res = await loginUserApi(data);
         if (res.success) {
+          dispatch(setIsUserConnected(false));
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('role', 'admin');
           dispatch(setAdminToken(res.data.token));
