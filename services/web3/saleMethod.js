@@ -9,7 +9,7 @@ export const startPrivateSale = async (
   saleData,
   adminWalletAddress,
 ) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
 
   // setting merkle root for sale
   const merkleResponse = await setMerkleRoot(
@@ -43,7 +43,7 @@ export const startPrivateSale = async (
 };
 
 export const startPublicSale = async (saleData, adminWalletAddress) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const setSaleDataResponse = await setSaleData(saleData, adminWalletAddress);
   const startPrivateSaleResponse = await AstTokenContract.methods
     .togglePublicSale()
@@ -63,7 +63,7 @@ export const startPublicSale = async (saleData, adminWalletAddress) => {
 };
 
 export const setMerkleRoot = async (merkleRoot, adminWalletAddress) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const merkleResponse = await AstTokenContract.methods
     .setMerkleRoot(merkleRoot)
     .send({ from: adminWalletAddress });
@@ -72,7 +72,7 @@ export const setMerkleRoot = async (merkleRoot, adminWalletAddress) => {
 };
 
 export const setSaleData = async (saleData, adminWalletAddress) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const tokenRateInWai = convertEtherToWei(saleData.tokenPrice);
   const capInWei = convertEtherToWei(saleData.cap);
 
@@ -111,14 +111,14 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
 };
 
 export const getUserBuyDetails = async (address, saleRound) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const saleDetailsResponse = await AstTokenContract.methods
     .userTokenMap(saleRound, address)
     .call();
   return saleDetailsResponse;
 };
 export const getSaleDetails = async (saleRound) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const saleDetailsResponse = await AstTokenContract.methods
     .salesDetailMap(saleRound)
     .call();
@@ -126,7 +126,7 @@ export const getSaleDetails = async (saleRound) => {
 };
 
 export const stopSale = async (saleType, adminWalletAddress) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const data = {
     isPublic: saleType === 'Public Sale' ? false : undefined,
     isPrivate: saleType === 'Private Sale' ? false : undefined,
@@ -154,7 +154,7 @@ export const stopSale = async (saleType, adminWalletAddress) => {
 };
 
 export const checkSaleRoundIsOn = async (saleRound) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const isAnySaleOn = await AstTokenContract.methods.isActive(saleRound).call();
   return isAnySaleOn;
 };

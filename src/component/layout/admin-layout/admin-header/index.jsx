@@ -51,7 +51,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
         envNetworkId,
         envNetworkIdInHex,
       );
-      const AstTokenContract = await getContractInstance();
+      const AstTokenContract = await getContractInstance('ILO CONTRACT');
       const ownerWalletAddress = await AstTokenContract.methods.owner().call();
       if (
         adminWalletData.walletAddress.toLowerCase() ===

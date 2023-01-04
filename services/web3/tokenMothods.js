@@ -8,7 +8,7 @@ export const buyToken = async (
   walletAddress,
   tokenData,
 ) => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const TokenRateInEthForBuyCount = convertEtherToWei(
     Math.round(
       parseFloat(buyingQuality * Number(OneTokenPrice)) * Math.pow(10, 10),
@@ -41,8 +41,7 @@ export const buyToken = async (
 };
 
 export const claimToken = async (walletAddress, saleRound) => {
-  const AstTokenContract = await getContractInstance();
-
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const tokenTransition = await AstTokenContract.methods.claim(saleRound).send({
     from: walletAddress,
   });
@@ -56,7 +55,7 @@ export const getCurrentTokenToBeClaimed = async (
 ) => {
   try {
     let claimResponse = 0;
-    const AstTokenContract = await getContractInstance();
+    const AstTokenContract = await getContractInstance('ILO CONTRACT');
     if (saleRound <= currentSaleRound) {
       claimResponse = await AstTokenContract.methods
         .getReward(saleRound, address)
@@ -70,7 +69,7 @@ export const getCurrentTokenToBeClaimed = async (
 };
 
 export const getRemainingToken = async () => {
-  const AstTokenContract = await getContractInstance();
+  const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const remainingToken = AstTokenContract.methods.initialTokens().call();
   return remainingToken;
 };
