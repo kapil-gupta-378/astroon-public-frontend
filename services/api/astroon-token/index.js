@@ -80,3 +80,13 @@ export const getTokenBuyTransaction = async () => {
 
   return xhr.data;
 };
+
+export const postTokenClaimTransaction = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}token-transaction-history/claim`,
+    data: data,
+  });
+
+  return xhr.data;
+};

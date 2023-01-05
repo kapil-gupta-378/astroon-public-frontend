@@ -19,7 +19,7 @@ const ClaimTokenDialog = ({
       <Modal
         show={handleShow}
         onHide={leftButtonHandler}
-        size="lg"
+        size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered={true}
         className={'claim_token_modal'}
@@ -71,6 +71,7 @@ const ClaimTokenDialog = ({
                         <th scope="col">Token</th>
                         <th scope="col">Purchase time</th>
                         <th scope="col">Available claim</th>
+                        <th scope="col">Token claimed</th>
                       </tr>
                     </thead>
 
@@ -87,10 +88,16 @@ const ClaimTokenDialog = ({
                               )}
                             </td>
                             <td>{item.remainingClaim}</td>
+                            <td>{item.claimToken}</td>
                             {item.remainingClaim > 0 && (
                               <td>
                                 <Button
-                                  onClick={() => claimHandler(item.saleRound)}
+                                  onClick={() =>
+                                    claimHandler(
+                                      item.remainingClaim,
+                                      item.saleRound,
+                                    )
+                                  }
                                 >
                                   Claim
                                 </Button>
