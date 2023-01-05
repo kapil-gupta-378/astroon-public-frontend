@@ -38,7 +38,9 @@ const MysteryBox = () => {
     (state) => state.walletReducer,
   );
 
-  const { nftSaleData } = useSelector((state) => state.nftSaleReducer);
+  const { nftSaleData, nftSaleLoading } = useSelector(
+    (state) => state.nftSaleReducer,
+  );
 
   const quantitySelectOptions = [
     { value: 1, label: '1' },
@@ -136,49 +138,67 @@ const MysteryBox = () => {
   };
 
   return (
-    <div className={styles.mysteryBox_wrap}>
-      <h3 className={styles.heading}>NFT Pre-Sale</h3>
-      <div className={styles.image_wrap}>
-        <Image
-          src={mesteryBoxImage}
-          layout={'responsive'}
-          alt={'mystery-box'}
-        />
-      </div>
-      {isSaleOn ? (
-        <>
-          <div className={styles.pricing}>
-            <h4>
-              {convertWeiToEther(nftSaleData.cost ? nftSaleData.cost : 0)}
-              <span>{usdPrice}</span>
-            </h4>
-          </div>
-          <div className={styles.select_wrap}>
-            <FormSelect
-              selectedOption={selectedQuantity}
-              label={'Quantity'}
-              options={quantitySelectOptions}
-              titleBackground={'rgb(11 11 50)'}
-              handleChange={(value) => setSelectedQuantity(value)}
-            />
-          </div>
-          <Button disabled={!isSaleOn} onClick={buyMysteryBox}>
-            Buy Now
-          </Button>
-        </>
-      ) : (
-        <>
-          <div className={styles.coming_soon_wrap}>
+    <div className={styles.main_wrap}>
+      {!nftSaleLoading ? (
+        <div className={styles.mysteryBox_wrap}>
+          <h3 className={styles.heading}>NFT Pre-Sale</h3>
+          <div className={styles.image_wrap}>
             <Image
-              src={comingSoonImage}
-              alt="coming soon"
-              layout="responsive"
+              src={mesteryBoxImage}
+              layout={'responsive'}
+              alt={'mystery-box'}
             />
           </div>
-        </>
-      )}
+          {isSaleOn ? (
+            <>
+              <div className={styles.pricing}>
+                <h4>
+                  {convertWeiToEther(nftSaleData.cost ? nftSaleData.cost : 0)}
+                  <span>{usdPrice}</span>
+                </h4>
+              </div>
+              <div className={styles.select_wrap}>
+                <FormSelect
+                  selectedOption={selectedQuantity}
+                  label={'Quantity'}
+                  options={quantitySelectOptions}
+                  titleBackground={'rgb(11 11 50)'}
+                  handleChange={(value) => setSelectedQuantity(value)}
+                />
+              </div>
+              <Button disabled={!isSaleOn} onClick={buyMysteryBox}>
+                Buy Now
+              </Button>
+            </>
+          ) : (
+            <>
+              <div className={styles.coming_soon_wrap}>
+                <Image
+                  src={comingSoonImage}
+                  alt="coming soon"
+                  layout="responsive"
+                />
+              </div>
+            </>
+          )}
 
-      {<GlobalLoading />}
+          {<GlobalLoading />}
+        </div>
+      ) : (
+        <div
+          style={{
+            width: '100%',
+            height: '60vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <div className="spinner-border text-primary" role="status">
+            <span className="sr-only"></span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

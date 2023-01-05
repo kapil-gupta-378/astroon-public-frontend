@@ -6,7 +6,7 @@ import MysteryBox from '../src/component/ui/mystery-box';
 
 const NFTPage = () => {
   const [, setNFTData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
 
   useEffect(() => {
     getNFTFinalData();
@@ -34,23 +34,7 @@ const NFTPage = () => {
         justifyContent: 'center',
       }}
     >
-      {!isLoading ? (
-        <MysteryBox />
-      ) : (
-        <div
-          style={{
-            width: '100%',
-            height: '60vh',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}
-        >
-          <div className="spinner-border text-primary" role="status">
-            <span className="sr-only"></span>
-          </div>
-        </div>
-      )}
+      <MysteryBox />
     </div>
   );
 };
