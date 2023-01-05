@@ -13,6 +13,7 @@ import {
 } from '../../../services/web3/saleMethod';
 import EditSaleDetailsModal from '../../component/common/edit-sale-details-modal';
 import SaleDetailCard from '../../component/common/sale-detail-card';
+import MysteryBoxSale from '../../component/ui/mystery-box-sale';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import styles from './saleControls.module.scss';
@@ -235,6 +236,8 @@ const SaleControls = () => {
             saleRoundOn={saleRoundOn}
           />
         )}
+
+        <MysteryBoxSale />
       </div>
       <EditSaleDetailsModal
         value={newSaleData}
