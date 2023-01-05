@@ -146,10 +146,11 @@ const Profile = () => {
         await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
-        dispatch(setGlobalLoading(false));
-        dispatch(fetchTokenDataAction());
+        fetchTokenData();
+        fetchUserData();
         const walletBalance = await getWalletAstTokenBalance(walletAddress);
         dispatch(setBalance(walletBalance));
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
       console.error(error);
