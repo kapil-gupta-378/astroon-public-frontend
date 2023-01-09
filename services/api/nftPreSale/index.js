@@ -20,3 +20,37 @@ export const portNFTPurchaseData = async (data) => {
   });
   return xhr.data;
 };
+
+export const portNFTSaleDataApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}nft-sale`,
+    data: data,
+  });
+  return xhr.data;
+};
+export const updateNFTSaleDataApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'put',
+    url: `${APP_URL}nft-sale/1`,
+    data: data,
+  });
+  return xhr.data;
+};
+
+export const getNFTSaleDataApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-sale/1`,
+  });
+  return xhr.data;
+};
+
+export const postNftPreSaleCsvApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}nft-purchase/metaData`,
+    data: data,
+  });
+  return xhr.data;
+};

@@ -10,7 +10,6 @@ import { fetchNftPreSaleData } from '../../../redux/nft-sale/nftSaleAction';
 import {
   convertEtherToUSD,
   convertEtherToWei,
-  convertWeiToEther,
 } from '../../../utils/currencyMethods';
 import { getEligibilityNftPreSale } from '../../../utils/calculation';
 import { getWalletAstTokenBalance } from '../../../../services/web3/walletMothods';
@@ -61,6 +60,7 @@ const MysteryBox = () => {
 
   const isSaleOnCheck = async () => {
     const result = await isNftPreSaleIsActive(0);
+
     setIsSaleOn(result);
   };
 
@@ -99,8 +99,7 @@ const MysteryBox = () => {
 
       // calculating inputs for buy methods
       let buyValue =
-        selectedQuantity.value *
-        convertWeiToEther(+nftSaleData.cost + +nftSaleData.mintCost);
+        selectedQuantity.value * (+nftSaleData.cost + +nftSaleData.mintCost);
 
       buyValue = convertEtherToWei(buyValue);
 
@@ -130,9 +129,7 @@ const MysteryBox = () => {
 
   const fetchUSDRate = async () => {
     if (nftSaleData.cost) {
-      const price = await convertEtherToUSD(
-        convertWeiToEther(nftSaleData.cost),
-      );
+      const price = await convertEtherToUSD(nftSaleData.cost);
       setUsdPrice(price);
     }
   };
@@ -153,7 +150,7 @@ const MysteryBox = () => {
             <>
               <div className={styles.pricing}>
                 <h4>
-                  {convertWeiToEther(nftSaleData.cost ? nftSaleData.cost : 0)}
+                  {nftSaleData.cost ? nftSaleData.cost : 0}
                   <span>{usdPrice}</span>
                 </h4>
               </div>

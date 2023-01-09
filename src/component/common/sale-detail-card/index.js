@@ -57,7 +57,7 @@ const SaleDetailCard = ({
         <p className={styles.value}>{data.maxLimit}</p>
       </div>
       <div className={styles.row_border}>
-        <p className={styles.heading}>Manimum buy:</p>
+        <p className={styles.heading}>Minimum buy:</p>
         <p className={styles.value}>{data.minBuy}</p>
       </div>
 
