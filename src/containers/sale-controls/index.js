@@ -252,6 +252,7 @@ const SaleControls = () => {
   const handleStartMysterBoxSale = async () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
+      dispatch(setGlobalLoading(false));
 
       //  fetching data from server for latest data
       const data = await getNFTSaleDataApi();
@@ -260,8 +261,10 @@ const SaleControls = () => {
       if (saleStartResponse.status) {
         checkIsNftSaleOn();
         toast.success('Sale Started');
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
