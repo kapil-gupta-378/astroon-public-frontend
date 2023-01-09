@@ -28,9 +28,13 @@ import { buyToken, claimToken } from '../../../services/web3/tokenMothods';
 import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
 import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
-import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
+import {
+  postTokenBuyTransaction,
+  postTokenClaimTransaction,
+} from '../../../services/api/astroon-token';
 import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 import moment from 'moment';
+import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
 const Profile = () => {
   const { userData, claimingToken, tokenBuyHistory } = useSelector(
     (state) => state.userReducer,
@@ -148,11 +152,11 @@ const Profile = () => {
         await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
-        dispatch(fetchUserDataAction());
-        dispatch(fetchTokenDataAction());
-        dispatch(setGlobalLoading(false));
+        fetchTokenData();
+        fetchUserData();
         const walletBalance = await getWalletAstTokenBalance(walletAddress);
         dispatch(setBalance(walletBalance));
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
       console.error(error);
@@ -216,7 +220,7 @@ const Profile = () => {
     coverImageInputImageRef.current.click();
   };
 
-  const claimTokenHandler = async (saleRound) => {
+  const claimTokenHandler = async (remainingClaim, saleRound) => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
@@ -224,8 +228,17 @@ const Profile = () => {
       const claimResponse = await claimToken(walletAddress, saleRound);
       if (claimResponse.status) {
         toast.success('Token claim successfully');
+        const currentTime = moment().toString();
+        const paramsData = {
+          walletAddress: walletAddress,
+          saleRound: saleRound,
+          claimedToken: remainingClaim,
+          claimedDate: currentTime,
+        };
+        await postTokenClaimTransaction(paramsData);
         fetchTokenData();
         fetchUserData();
+        dispatch(fetchWalletBalance(walletAddress));
         dispatch(setGlobalLoading(false));
       }
     } catch (error) {
