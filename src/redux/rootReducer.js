@@ -12,6 +12,7 @@ import currencyReducer from './currency/currencySlice';
 import whiteListUserReducer from './white-list-user/whiteListSlice';
 import whiteListSeedUserReducer from './white-list-seed-user/whiteListSeedSlice';
 import addressListReducer from './wallet-list/walletListSlice';
+import nftSaleReducer from './nft-sale/nftSaleSlice';
 
 export const rootReducer = combineReducers({
   homeReducer,
@@ -27,4 +28,5 @@ export const rootReducer = combineReducers({
   whiteListUserReducer,
   whiteListSeedUserReducer,
   addressListReducer,
+  nftSaleReducer,
 });

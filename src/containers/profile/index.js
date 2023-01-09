@@ -102,10 +102,16 @@ const Profile = () => {
         // throw Error when user not connected to website
         throw new Error('Please connect your wallet');
       }
-      if (sliderValue < Number(tokenData?.rate?.minBound))
+
+      // throw Error when user buying amount less than limit
+      if (
+        sliderValue < Number(tokenData?.rate?.minBound) &&
+        currentSaleLastBuy < Number(tokenData?.rate?.minBound)
+      )
         throw new Error(
           `You can not buy token less than ${tokenData?.rate?.minBound}`,
         );
+
       if (!tokenData.isPrivateSale && !tokenData.isPublicSale) {
         // throw Error when sale is not on
         throw new Error('Sale is not live');

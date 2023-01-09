@@ -101,7 +101,13 @@ const BuyTokenModal = ({
             </div>
             <div className={styles.slider_wrap}>
               <Slider
-                min={Number(tokenData?.rate?.minBound)}
+                min={Number(
+                  lastBuy <= 0
+                    ? tokenData?.rate?.minBound
+                    : lastBuy <= tokenData?.rate?.minBound
+                    ? tokenData?.rate?.minBound - lastBuy
+                    : 1,
+                )}
                 max={Number(tokenData?.rate?.thresHold) - lastBuy}
                 step={1}
                 value={sliderValue}

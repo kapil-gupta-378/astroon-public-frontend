@@ -25,6 +25,7 @@ import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import SaleDetailCard from '../../component/common/sale-detail-card';
 import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
 import moment from 'moment/moment';
+import { fetchUserDataAction } from '../../redux/user/userAction';
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -111,7 +112,11 @@ const AST = () => {
     try {
       // throw Error when user not connected to website
       if (!isUserConnected) throw new Error('Please connect your wallet');
-      if (sliderValue < Number(tokenData?.rate?.minBound))
+
+      if (
+        sliderValue < Number(tokenData?.rate?.minBound) &&
+        currentSaleLastBuy < Number(tokenData?.rate?.minBound)
+      )
         throw new Error(
           `You can not buy less than ${tokenData?.rate?.minBound} token`,
         );
@@ -154,8 +159,10 @@ const AST = () => {
         await postTokenBuyTransaction(data);
         toast.success('Token Transfered Successfully');
         setShowBuyTokenModal(false);
-        dispatch(setGlobalLoading(false));
         dispatch(fetchTokenDataAction());
+        dispatch(fetchUserDataAction());
+        dispatch(setGlobalLoading(false));
+        setSliderValue(1);
         const walletBalance = await getWalletAstTokenBalance(walletAddress);
         dispatch(setBalance(walletBalance));
       }
