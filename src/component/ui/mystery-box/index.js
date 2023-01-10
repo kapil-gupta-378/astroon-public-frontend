@@ -70,12 +70,11 @@ const MysteryBox = () => {
 
     const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(walletAddress);
     let eligibilityResult = getEligibilityNftPreSale(walletBalance);
-
     // calculating current buy nft eligibity for user by  max buy number minus last buy number
     eligibilityResult =
-      eligibilityResult - lastMysteryBoxPurChase < 0
+      eligibilityResult - lastMysteryBoxPurChase.count < 0
         ? 0
-        : eligibilityResult - lastMysteryBoxPurChase;
+        : eligibilityResult - lastMysteryBoxPurChase.count;
 
     let arr = [];
 
@@ -140,6 +139,9 @@ const MysteryBox = () => {
         const postData = {
           walletAddress: walletAddress,
           quantity: selectedQuantity.value,
+          price: Number(nftSaleData.cost),
+          saleType: 'nftPre',
+          tokenId: Number(buyResult.events.Transfer.returnValues.tokenId),
         };
 
         // posting data to backend if contract methods return status true
