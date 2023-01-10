@@ -66,9 +66,9 @@
       },
       {
         "indexed": false,
-        "internalType": "enum ASTNftSale.SALETYPE",
+        "internalType": "uint256",
         "name": "saleId",
-        "type": "uint8"
+        "type": "uint256"
       }
     ],
     "name": "BoughtNFT",
@@ -124,9 +124,9 @@
     "inputs": [
       {
         "indexed": false,
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "saletType",
-        "type": "uint8"
+        "internalType": "uint256",
+        "name": "saleId",
+        "type": "uint256"
       }
     ],
     "name": "SaleStart",
@@ -171,14 +171,8 @@
     "type": "event"
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
-    "name": "SaleInfoMap",
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "SaleDetailMap",
     "outputs": [
       { "internalType": "uint256", "name": "cost", "type": "uint256" },
       { "internalType": "uint256", "name": "mintCost", "type": "uint256" },
@@ -257,21 +251,6 @@
   {
     "inputs": [
       {
-        "internalType": "enum ASTNftSale.CATEGORY[]",
-        "name": "_category",
-        "type": "uint8[]"
-      },
-      { "internalType": "string[]", "name": "_tokenURI", "type": "string[]" },
-      { "internalType": "uint256", "name": "nftQty", "type": "uint256" }
-    ],
-    "name": "buyPublicSale",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
         "internalType": "enum ASTNftSale.CATEGORY",
         "name": "nftType",
         "type": "uint8"
@@ -338,13 +317,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "saleType",
-        "type": "uint8"
-      }
-    ],
+    "inputs": [],
     "name": "isActive",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
@@ -368,6 +341,20 @@
     "name": "lastPurchasedAt",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "enum ASTNftSale.CATEGORY[]",
+        "name": "_category",
+        "type": "uint8[]"
+      },
+      { "internalType": "string[]", "name": "_tokenURI", "type": "string[]" }
+    ],
+    "name": "minting",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -505,11 +492,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "saleType",
-        "type": "uint8"
-      },
+      { "internalType": "uint256", "name": "_saleId", "type": "uint256" },
       { "internalType": "uint256", "name": "_newCost", "type": "uint256" }
     ],
     "name": "setCost",
@@ -537,11 +520,7 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "saleType",
-        "type": "uint8"
-      },
+      { "internalType": "uint256", "name": "_saleId", "type": "uint256" },
       { "internalType": "uint256", "name": "_newMintCost", "type": "uint256" }
     ],
     "name": "setMintCost",
@@ -560,25 +539,14 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "saleType",
-        "type": "uint8"
-      },
       { "internalType": "uint256", "name": "_cost", "type": "uint256" },
       { "internalType": "uint256", "name": "_mintCost", "type": "uint256" },
       { "internalType": "uint256", "name": "_maxSupply", "type": "uint256" },
       { "internalType": "uint256", "name": "_startTime", "type": "uint256" },
       { "internalType": "uint256", "name": "_endTime", "type": "uint256" }
     ],
-    "name": "startSale",
-    "outputs": [
-      {
-        "internalType": "enum ASTNftSale.SALETYPE",
-        "name": "",
-        "type": "uint8"
-      }
-    ],
+    "name": "startPreSale",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "nonpayable",
     "type": "function"
   },
@@ -680,7 +648,7 @@
         "name": "_category",
         "type": "uint8[]"
       },
-      { "internalType": "uint256", "name": "_id", "type": "uint256" }
+      { "internalType": "uint256[]", "name": "_id", "type": "uint256[]" }
     ],
     "name": "updateCategory",
     "outputs": [],

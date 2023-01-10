@@ -10,12 +10,12 @@ export const getNftPreSaleData = async () => {
   return saleData;
 };
 
-export const isNftPreSaleIsActive = async (value) => {
+export const isNftPreSaleIsActive = async () => {
   const AstMysteryBoxContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
   );
 
-  const result = await AstMysteryBoxContract.methods.isActive(value).call();
+  const result = await AstMysteryBoxContract.methods.isActive().call();
   return result;
 };
 
@@ -46,7 +46,6 @@ export const startSale = async (data, address) => {
   const AstMysteryBoxContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
   );
-  const saleType = '0';
   const cost = convertEtherToWei(data.cost);
   const mintCost = convertEtherToWei(data.mintCost);
   const maxSupply = data.maxSupply;
@@ -55,7 +54,7 @@ export const startSale = async (data, address) => {
     .format('X');
   const endTime = moment(data.endTime.replace('.000Z', '')).local().format('X');
   const response = await AstMysteryBoxContract.methods
-    .startSale(saleType, cost, mintCost, maxSupply, startTime, endTime)
+    .startPreSale(cost, mintCost, maxSupply, startTime, endTime)
     .send({
       from: address,
     });
@@ -64,7 +63,6 @@ export const startSale = async (data, address) => {
 };
 
 // funtion for reveal mystery box data of nft after sale end
-
 export const revealMysteryBoxData = async (address) => {
   const AstMysteryBoxContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
