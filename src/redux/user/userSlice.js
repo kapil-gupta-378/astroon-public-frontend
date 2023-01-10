@@ -5,6 +5,7 @@ const initialState = {
   userDataLoading: false,
   claimingToken: [],
   tokenBuyHistory: [],
+  nftBuyHistory: [],
 };
 
 export const userSlice = createSlice({
@@ -35,6 +36,9 @@ export const userSlice = createSlice({
     setBuyTokenHistory: (state, action) => {
       state.tokenBuyHistory = action.payload;
     },
+    setBuyNftHistory: (state, action) => {
+      state.nftBuyHistory = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   updateProfileImage,
   setClaimingTokenNumber,
   setBuyTokenHistory,
+  setBuyNftHistory,
 } = userSlice.actions;
 
 export default userSlice.reducer;

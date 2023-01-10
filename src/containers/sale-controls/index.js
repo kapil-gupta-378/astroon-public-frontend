@@ -223,7 +223,7 @@ const SaleControls = () => {
   };
 
   const checkIsNftSaleOn = async () => {
-    const isSaleOn = await isNftPreSaleIsActive(0);
+    const isSaleOn = await isNftPreSaleIsActive();
     setIsNftSaleOnState(isSaleOn);
   };
 
@@ -248,11 +248,10 @@ const SaleControls = () => {
   }
 
   // function for starting mystery box sale buy conntact (presale contraact method - startSale())
-
   const handleStartMysterBoxSale = async () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
-      dispatch(setGlobalLoading(false));
+      dispatch(setGlobalLoading(true));
 
       //  fetching data from server for latest data
       const data = await getNFTSaleDataApi();

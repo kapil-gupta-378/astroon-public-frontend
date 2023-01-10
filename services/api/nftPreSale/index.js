@@ -4,12 +4,12 @@ const APP_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export const getNFTPurchaseDataApi = async (address) => {
   const xhr = await axios.request({
     method: 'get',
-    url: `${APP_URL}nft-purchase/count`,
+    url: `${APP_URL}nft-purchase/history`,
     params: {
       walletAddress: address,
     },
   });
-  return xhr.data.data.quantity;
+  return xhr.data.data;
 };
 
 export const portNFTPurchaseData = async (data) => {

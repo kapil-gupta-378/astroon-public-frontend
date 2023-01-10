@@ -35,12 +35,24 @@
         font-weight: 800;
         color: #faff00;
         text-align: center;
+      }
+      h5 {
+        @include heading_12;
+        margin-left: 15px;
+        font-weight: 400;
+      }
+    }
+    .eligibility_heading {
+      @include heading_5;
+      margin-top: 25px;
+      font-weight: 500;
+      color: #fe19c1;
+      animation: blinker 1s linear infinite;
+    }
 
-        span {
-          @include heading_12;
-          margin-left: 15px;
-          font-weight: 400;
-        }
+    @keyframes blinker {
+      50% {
+        opacity: 0;
       }
     }
   }

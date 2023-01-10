@@ -35,10 +35,10 @@ import {
 import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 import moment from 'moment';
 import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
+import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 const Profile = () => {
-  const { userData, claimingToken, tokenBuyHistory } = useSelector(
-    (state) => state.userReducer,
-  );
+  const { userData, claimingToken, tokenBuyHistory, nftBuyHistory } =
+    useSelector((state) => state.userReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
@@ -46,6 +46,7 @@ const Profile = () => {
   const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
 
   const [historyModal, setHistoryModal] = useState(false);
+  const [nftHistoryModal, setNftHistoryModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
@@ -199,12 +200,14 @@ const Profile = () => {
       }
     }
   }
+
   const updateProfileImageState = (e) => {
     if (e.target.files[0]) {
       setUploadProfileImage(true);
       dispatch(updateProfileImage(e.target.files[0]));
     }
   };
+
   const updateCoverImageState = (e) => {
     if (e.target.files[0]) {
       setUploadCoverImage(true);
@@ -366,12 +369,17 @@ const Profile = () => {
                     >
                       Transition History
                     </div>
+                    <div
+                      onClick={() => setNftHistoryModal(true)}
+                      className={styles.wallet_address}
+                    >
+                      NFT History
+                    </div>
                   </>
                 )}
               </div>
             </div>
           </section>
-
           {route.pathname === '/user-profile/[address]' && (
             <section className={styles.user_nft_wrapper}>
               <h3 className={styles.section_headeing}>My NFT’s</h3>
@@ -436,7 +444,6 @@ const Profile = () => {
               </section>
             </form>
           )}
-
           <BuyTokenModal
             tokenData={tokenData}
             sliderOnChange={setSliderValue}
@@ -460,6 +467,11 @@ const Profile = () => {
             leftButtonHandler={() => setHistoryModal(false)}
             claimingNumber={claimingToken}
             lastBuy={currentSaleLastBuy}
+          />
+          <MysteryBoxBuyHistory
+            data={nftBuyHistory}
+            handleShow={nftHistoryModal}
+            leftButtonHandler={() => setNftHistoryModal(false)}
           />
         </main>
       ) : (

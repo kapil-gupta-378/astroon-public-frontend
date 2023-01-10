@@ -50,7 +50,7 @@ const EditMysteryBoxSaleDataModal = ({
               <TextInput
                 handleValue={value.cost}
                 titleBackground={'#AF3277'}
-                title={'Token Price'}
+                title={'NFT Price'}
                 handleType={'number'}
                 handleOnChange={(e) =>
                   setNewSaleDataHandler((prevValue) => ({

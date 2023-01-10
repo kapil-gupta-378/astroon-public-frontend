@@ -3,16 +3,18 @@ import {
   getTokenBuyTransaction,
   getTokenDataApi,
 } from '../../../services/api/astroon-token';
+import { getNFTPurchaseDataApi } from '../../../services/api/nftPreSale';
 import { getUserDataApi } from '../../../services/api/user';
 import { getCurrentTokenToBeClaimed } from '../../../services/web3/tokenMothods';
 import { convertWeiToEther } from '../../utils/currencyMethods';
 import {
+  setBuyNftHistory,
   setBuyTokenHistory,
   setClaimingTokenNumber,
   setUserData,
   setUserDataLoading,
 } from './userSlice';
-export const fetchUserDataAction = () => {
+export const fetchUserDataAction = (walletAddress) => {
   return async (dispatch) => {
     try {
       dispatch(setUserDataLoading(true));
@@ -46,6 +48,13 @@ export const fetchUserDataAction = () => {
       //  fetching buy history
       const tokenBuyHistory = await getTokenBuyTransaction();
       dispatch(setBuyTokenHistory(tokenBuyHistory.data.rows));
+
+      if (walletAddress) {
+        const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(
+          walletAddress,
+        );
+        dispatch(setBuyNftHistory(lastMysteryBoxPurChase.data));
+      }
 
       dispatch(setUserDataLoading(false));
     } catch (error) {
