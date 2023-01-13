@@ -205,7 +205,9 @@ const MysteryBox = () => {
               <h3 className={styles.eligibility_heading}>
                 {mysteryBoxEligibility > 0
                   ? `You are eligible for ${mysteryBoxEligibility} mystery box`
-                  : 'You have exceeded your buying limit.'}
+                  : isUserConnected
+                  ? 'You have exceeded your buying limit.'
+                  : 'Connect Your Wallet'}
               </h3>
             </>
           ) : (

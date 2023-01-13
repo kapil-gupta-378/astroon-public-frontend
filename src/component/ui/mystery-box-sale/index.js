@@ -73,7 +73,7 @@ const MysteryBoxSale = ({
         {admin && <Button onClick={openCsvFileInput}>Upload Data</Button>}
         {admin && (
           <Button disabled={isRevealed} onClick={revealHandler}>
-            {isRevealed ? 'Reveal NFT' : 'NFT Revealed'}
+            {isRevealed ? 'NFT Revealed' : 'Reveal NFT'}
           </Button>
         )}
       </div>
