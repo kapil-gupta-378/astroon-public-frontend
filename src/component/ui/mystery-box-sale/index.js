@@ -14,6 +14,7 @@ const MysteryBoxSale = ({
   buyTokenHandler,
   saleRoundOn,
   revealHandler,
+  isRevealed,
 }) => {
   const csvInputRef = useRef();
   const openCsvFileInput = () => {
@@ -70,7 +71,11 @@ const MysteryBoxSale = ({
           </Button>
         )}
         {admin && <Button onClick={openCsvFileInput}>Upload Data</Button>}
-        {admin && <Button onClick={revealHandler}>Reveal Box</Button>}
+        {admin && (
+          <Button disabled={isRevealed} onClick={revealHandler}>
+            {isRevealed ? 'Reveal NFT' : 'NFT Revealed'}
+          </Button>
+        )}
       </div>
       <input
         className={styles.mysteryBoxCsvFile}
