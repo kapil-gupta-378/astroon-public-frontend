@@ -12,7 +12,11 @@
       height: 250px;
       border-radius: 20px;
       margin-bottom: 60px;
-
+      span {
+        [data-testid='cover_image'] {
+          object-fit: cover;
+        }
+      }
       .profile_image {
         position: absolute;
         bottom: -19%;
