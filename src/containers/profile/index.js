@@ -36,9 +36,12 @@ import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 import moment from 'moment';
 import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
 import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
+import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 const Profile = () => {
   const { userData, claimingToken, tokenBuyHistory, nftBuyHistory } =
     useSelector((state) => state.userReducer);
+
+  const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
@@ -62,6 +65,7 @@ const Profile = () => {
   useEffect(() => {
     fetchTokenData();
     fetchUserData();
+    dispatch(fetchNftPreSaleData());
   }, []);
 
   useEffect(() => {
@@ -72,6 +76,7 @@ const Profile = () => {
   }, [isUserConnected]);
 
   useEffect(() => {
+    // finding data of last buy for user in AST token last sale and setting it into state (setCurrentSaleLastBuy)
     if (tokenData?.saleData?.saleRound && claimingToken) {
       const obj = claimingToken.find((item) => {
         return item.saleRound == tokenData?.saleData?.saleRound;
@@ -84,12 +89,15 @@ const Profile = () => {
       }
     }
   }, [tokenData, claimingToken]);
+
   const fetchTokenData = async () => {
     dispatch(fetchTokenDataAction());
   };
+
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
+
   const fetchUserData = () => {
     dispatch(fetchUserDataAction(walletAddress));
   };
@@ -97,6 +105,7 @@ const Profile = () => {
   const updateState = (e) => {
     dispatch(updateUserData({ name: e.target.name, value: e.target.value }));
   };
+
   const buyTokenHandler = async () => {
     try {
       if (!isUserConnected) {
@@ -193,6 +202,7 @@ const Profile = () => {
       const response = await updateUserDataApi(paramsObject);
       if (response.success) {
         toast.success(response.message);
+        route.push(`/user-profile/${address}`);
       }
     } catch (error) {
       if (error.response) {
@@ -209,9 +219,37 @@ const Profile = () => {
   };
 
   const updateCoverImageState = (e) => {
-    if (e.target.files[0]) {
-      setUploadCoverImage(true);
-      dispatch(updateCoverImage(e.target.files[0]));
+    try {
+      var _URL = window.URL || window.webkitURL;
+      if (e.target.files[0]) {
+        const ev = e.currentTarget.files;
+        if (ev) {
+          if (ev.length === 0) {
+            return;
+          }
+
+          var img = document.createElement('img');
+
+          img.onload = function () {
+            try {
+              if (img.width >= 820 && img.height >= 240) {
+                setUploadCoverImage(true);
+                dispatch(updateCoverImage(e.target.files[0]));
+              } else {
+                throw new Error('Image width and height should be 820X20');
+              }
+            } catch (error) {
+              toast.error(
+                error.message ? error.message : error.toString().slice(7),
+              );
+            }
+          };
+
+          img.src = URL.createObjectURL(e.target.files[0]);
+        }
+      }
+    } catch (error) {
+      toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
 
@@ -472,6 +510,7 @@ const Profile = () => {
             data={nftBuyHistory}
             handleShow={nftHistoryModal}
             leftButtonHandler={() => setNftHistoryModal(false)}
+            reveal={isNftSaleRevealed}
           />
         </main>
       ) : (

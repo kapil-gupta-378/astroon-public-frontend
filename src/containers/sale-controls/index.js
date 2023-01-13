@@ -14,6 +14,7 @@ import {
 import {
   isNftPreSaleIsActive,
   revealMysteryBoxData,
+  setBaseUri,
   startSale,
 } from '../../../services/web3/nftPreSale';
 import {
@@ -67,7 +68,9 @@ const SaleControls = () => {
   const { isConnected, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
-  const { nftSaleData } = useSelector((state) => state.nftSaleReducer);
+  const { nftSaleData, isNftSaleRevealed } = useSelector(
+    (state) => state.nftSaleReducer,
+  );
   const {
     tokenData,
     seedSale,
@@ -279,13 +282,24 @@ const SaleControls = () => {
   };
 
   // funtion for handle csv uploaded by input csv
+  // uploading csv file to server and then uploading uri to contract
   const uploadCsvHandler = async (e) => {
     try {
-      const formData = new FormData();
-      formData.append('file', e.target.files[0]);
-      const response = await postNftPreSaleCsvApi(formData);
-      if (response.success) toast.success('Data uploaded');
+      if (!isConnected) throw new Error('Please Connect Your Wallet');
+      dispatch(setGlobalLoading(true));
+      if (e.target.files[0]) {
+        const formData = new FormData();
+        formData.append('file', e.target.files[0]);
+        const response = await postNftPreSaleCsvApi(formData);
+
+        if (response.success) {
+          const uriResponse = await setBaseUri(response.data, walletAddress);
+          if (uriResponse.status) toast.success('Data uploaded');
+        }
+        dispatch(setGlobalLoading(false));
+      }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
@@ -345,6 +359,7 @@ const SaleControls = () => {
           isSaleOn={isNftSaleOnState}
           revealHandler={handleRevealMysteryBox}
           uploadCsvHandler={uploadCsvHandler}
+          isRevealed={isNftSaleRevealed}
         />
       </div>
       <EditSaleDetailsModal

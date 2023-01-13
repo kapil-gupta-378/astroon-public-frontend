@@ -74,3 +74,25 @@ export const revealMysteryBoxData = async (address) => {
 
   return response;
 };
+
+export const setBaseUri = async (uri, address) => {
+  const AstMysteryBoxContract = await getContractInstance(
+    'NFT PRESALE CONTRACT',
+  );
+
+  const response = AstMysteryBoxContract.methods
+    .setBaseURI(uri)
+    .send({ from: address });
+
+  return response;
+};
+
+export const isNftReaveled = async () => {
+  const AstMysteryBoxContract = await getContractInstance(
+    'NFT PRESALE CONTRACT',
+  );
+
+  const response = AstMysteryBoxContract.methods.revealed().call();
+
+  return response;
+};
