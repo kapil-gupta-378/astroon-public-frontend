@@ -1,6 +1,5 @@
 import moment from 'moment';
 import React from 'react';
-import { useRef } from 'react';
 import Button from '../../common/button';
 import styles from './mysteryBoxSale.module.scss';
 
@@ -16,8 +15,8 @@ const MysteryBoxSale = ({
   revealHandler,
   isRevealed,
   saleContractData,
+  csvInputRef,
 }) => {
-  const csvInputRef = useRef();
   const openCsvFileInput = () => {
     csvInputRef.current.click();
   };

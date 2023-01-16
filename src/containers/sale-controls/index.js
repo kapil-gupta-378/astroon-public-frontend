@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { updateTokenSaleDataApi } from '../../../services/api/astroon-token';
@@ -7,6 +8,7 @@ import {
   getSeedUserMerkleRootApi,
 } from '../../../services/api/markle';
 import {
+  getNFTCategoryData,
   getNFTSaleDataApi,
   postNftPreSaleCsvApi,
   updateNFTSaleDataApi,
@@ -15,6 +17,7 @@ import {
   isNftPreSaleIsActive,
   revealMysteryBoxData,
   setBaseUri,
+  setCategoryToContract,
   startSale,
 } from '../../../services/web3/nftPreSale';
 import {
@@ -36,6 +39,7 @@ const SaleControls = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [isNftSaleOnState, setIsNftSaleOnState] = useState(false);
   const [showEditMysteryBoxModal, setShowEditMysteryBoxModal] = useState(false);
+  const csvInputRef = useRef();
   const [newSaleData, setNewSaleData] = useState({
     saleType: '',
     buyLimit: '',
@@ -275,9 +279,23 @@ const SaleControls = () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
       dispatch(setGlobalLoading(true));
+      const categoryData = await getNFTCategoryData();
+      let contractResponse;
+      if (categoryData.data.categoriesId && categoryData.data.tokenIds) {
+        // setting data for upcoming reward on pre sale nft by sending
+        // token id and category
+        contractResponse = await setCategoryToContract(
+          categoryData.data.categoriesId,
+          categoryData.data.tokenIds,
+          walletAddress,
+        );
+      }
 
-      const response = await revealMysteryBoxData(walletAddress);
-      if (response.status) throw new Error('Mystery box reveal successfully');
+      // revealing mystery box if reward category was set successfuly
+      if (contractResponse.status)
+        var response = await revealMysteryBoxData(walletAddress);
+
+      if (response.status) toast.success('Mystery box reveal successfully');
       dispatch(setGlobalLoading(false));
     } catch (error) {
       dispatch(setGlobalLoading(false));
@@ -303,6 +321,7 @@ const SaleControls = () => {
         dispatch(setGlobalLoading(false));
       }
     } catch (error) {
+      csvInputRef.current.value = null;
       dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
@@ -365,6 +384,7 @@ const SaleControls = () => {
           uploadCsvHandler={uploadCsvHandler}
           isRevealed={isNftSaleRevealed}
           saleContractData={saleContractData}
+          csvInputRef={csvInputRef}
         />
       </div>
       <EditSaleDetailsModal
