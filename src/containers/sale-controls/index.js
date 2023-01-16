@@ -274,9 +274,13 @@ const SaleControls = () => {
   const handleRevealMysteryBox = async () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
+      dispatch(setGlobalLoading(true));
+
       const response = await revealMysteryBoxData(walletAddress);
       if (response.status) throw new Error('Mystery box reveal successfully');
+      dispatch(setGlobalLoading(false));
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
