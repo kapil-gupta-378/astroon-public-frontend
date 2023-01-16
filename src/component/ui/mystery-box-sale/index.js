@@ -1,6 +1,5 @@
 import moment from 'moment';
 import React from 'react';
-import { useRef } from 'react';
 import Button from '../../common/button';
 import styles from './mysteryBoxSale.module.scss';
 
@@ -15,8 +14,9 @@ const MysteryBoxSale = ({
   saleRoundOn,
   revealHandler,
   isRevealed,
+  saleContractData,
+  csvInputRef,
 }) => {
-  const csvInputRef = useRef();
   const openCsvFileInput = () => {
     csvInputRef.current.click();
   };
@@ -39,6 +39,14 @@ const MysteryBoxSale = ({
         <p className={styles.heading}>Max supply:</p>
         <p className={styles.value}>{data.maxSupply}</p>
       </div>
+      {admin && (
+        <div className={styles.row_border}>
+          <p className={styles.heading}>NFT Sold:</p>
+          <p className={styles.value}>
+            {data.maxSupply - saleContractData.remainingSupply}
+          </p>
+        </div>
+      )}
       <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>
         <p className={styles.value}>

@@ -447,7 +447,7 @@ const Profile = () => {
                   handleOnChange={(e) => updateState(e)}
                   titleBackground={'rgb(15 15 45)'}
                 />
-                <TextInput
+                {/* <TextInput
                   handleName={'customUrl'}
                   title={'Custom URL'}
                   placeHolder="astroon.abc/enter your custom url"
@@ -455,7 +455,7 @@ const Profile = () => {
                   handleValue={userData.customUrl}
                   handleOnChange={(e) => updateState(e)}
                   titleBackground={'rgb(14 16 44)'}
-                />
+                /> */}
                 <TextInput
                   handleName={'email'}
                   handleType={'email'}

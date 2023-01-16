@@ -6,7 +6,7 @@ export const getNftPreSaleData = async () => {
   const AstMysteryBoxContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
   );
-  const saleData = await AstMysteryBoxContract.methods.SaleInfoMap(0).call();
+  const saleData = await AstMysteryBoxContract.methods.SaleDetailMap(1).call();
   return saleData;
 };
 
@@ -94,5 +94,16 @@ export const isNftReaveled = async () => {
 
   const response = AstMysteryBoxContract.methods.revealed().call();
 
+  return response;
+};
+
+export const setCategoryToContract = async (category, id, address) => {
+  const AstMysteryBoxContract = await getContractInstance(
+    'NFT PRESALE CONTRACT',
+  );
+
+  const response = AstMysteryBoxContract.methods
+    .updateCategory(category, id)
+    .send({ from: address });
   return response;
 };

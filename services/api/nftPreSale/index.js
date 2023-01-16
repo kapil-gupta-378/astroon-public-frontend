@@ -45,6 +45,13 @@ export const getNFTSaleDataApi = async () => {
   });
   return xhr.data;
 };
+export const getNFTCategoryData = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-purchase/category/tokenId`,
+  });
+  return xhr.data;
+};
 
 export const postNftPreSaleCsvApi = async (data) => {
   const xhr = await axios.request({

@@ -89,9 +89,10 @@ const ClaimTokenDialog = ({
                             </td>
                             <td>{item.remainingClaim}</td>
                             <td>{item.claimToken}</td>
-                            {item.remainingClaim > 0 && (
+                            {
                               <td>
                                 <Button
+                                  disabled={item.remainingClaim === 0}
                                   onClick={() =>
                                     claimHandler(
                                       item.remainingClaim,
@@ -99,10 +100,12 @@ const ClaimTokenDialog = ({
                                     )
                                   }
                                 >
-                                  Claim
+                                  {item.remainingClaim === 0
+                                    ? 'Claimed'
+                                    : 'Claim'}
                                 </Button>
                               </td>
-                            )}
+                            }
                           </tr>
                         );
                       })}
