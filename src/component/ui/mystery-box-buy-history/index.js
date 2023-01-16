@@ -2,12 +2,9 @@ import moment from 'moment';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
-// import Button from '../../common/button';
 import GlobalLoading from '../../common/global-loading';
 import styles from './MysteryBoxBuyHistory.module.scss';
-// const OPENSEA_NFT_BASE_URL = process.env.NEXT_PUBLIC_OPENSEA_NFT_BASE_URL;
-// const AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS =
-//   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
+
 const MysteryBoxBuyHistory = ({
   handleShow,
   leftButtonHandler,
@@ -19,13 +16,6 @@ const MysteryBoxBuyHistory = ({
   ],
   reveal,
 }) => {
-  // function openLink(tokenId) {
-  //   window.open(
-  //     `${OPENSEA_NFT_BASE_URL}${AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS}/${tokenId}`,
-  //     '_blank',
-  //   );
-  // }
-
   return (
     <>
       <Modal
@@ -99,11 +89,6 @@ const MysteryBoxBuyHistory = ({
                               )}
                             </td>
                             <td>{reveal ? 'Revealed' : 'Not reveal'}</td>
-                            {/* <td>
-                              <Button onClick={() => openLink(item.tokenId)}>
-                                View on opensea
-                              </Button>
-                            </td> */}
                           </tr>
                         );
                       })}
