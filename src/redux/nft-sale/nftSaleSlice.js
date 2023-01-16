@@ -4,6 +4,7 @@ const initialState = {
   nftSaleData: [],
   nftSaleLoading: false,
   isNftSaleRevealed: false,
+  saleContractData: [],
 };
 
 export const nftSaleSlice = createSlice({
@@ -19,10 +20,17 @@ export const nftSaleSlice = createSlice({
     setIsNftSaleRevealed: (state, action) => {
       state.isNftSaleRevealed = action.payload;
     },
+    setSaleContractData: (state, action) => {
+      state.saleContractData = action.payload;
+    },
   },
 });
 
-export const { setNftSaledata, setNftSaledataLoading, setIsNftSaleRevealed } =
-  nftSaleSlice.actions;
+export const {
+  setNftSaledata,
+  setNftSaledataLoading,
+  setIsNftSaleRevealed,
+  setSaleContractData,
+} = nftSaleSlice.actions;
 
 export default nftSaleSlice.reducer;

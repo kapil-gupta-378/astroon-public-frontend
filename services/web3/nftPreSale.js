@@ -6,7 +6,7 @@ export const getNftPreSaleData = async () => {
   const AstMysteryBoxContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
   );
-  const saleData = await AstMysteryBoxContract.methods.SaleInfoMap(0).call();
+  const saleData = await AstMysteryBoxContract.methods.SaleDetailMap(1).call();
   return saleData;
 };
 

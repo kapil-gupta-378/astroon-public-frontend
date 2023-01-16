@@ -68,7 +68,7 @@ const SaleControls = () => {
   const { isConnected, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
-  const { nftSaleData, isNftSaleRevealed } = useSelector(
+  const { nftSaleData, isNftSaleRevealed, saleContractData } = useSelector(
     (state) => state.nftSaleReducer,
   );
   const {
@@ -364,6 +364,7 @@ const SaleControls = () => {
           revealHandler={handleRevealMysteryBox}
           uploadCsvHandler={uploadCsvHandler}
           isRevealed={isNftSaleRevealed}
+          saleContractData={saleContractData}
         />
       </div>
       <EditSaleDetailsModal

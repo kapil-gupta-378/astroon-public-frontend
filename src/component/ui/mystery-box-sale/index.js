@@ -15,6 +15,7 @@ const MysteryBoxSale = ({
   saleRoundOn,
   revealHandler,
   isRevealed,
+  saleContractData,
 }) => {
   const csvInputRef = useRef();
   const openCsvFileInput = () => {
@@ -39,6 +40,14 @@ const MysteryBoxSale = ({
         <p className={styles.heading}>Max supply:</p>
         <p className={styles.value}>{data.maxSupply}</p>
       </div>
+      {admin && (
+        <div className={styles.row_border}>
+          <p className={styles.heading}>NFT Sold:</p>
+          <p className={styles.value}>
+            {data.maxSupply - saleContractData.remainingSupply}
+          </p>
+        </div>
+      )}
       <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>
         <p className={styles.value}>
