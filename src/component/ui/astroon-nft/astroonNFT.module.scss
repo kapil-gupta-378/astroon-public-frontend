@@ -50,37 +50,37 @@
       }
     }
     .right_wrap {
-      width: 40%;
+      position: relative;
+      width: 28%;
+      height: 390px;
     }
   }
 }
 
 @media only screen and (max-width: 1023px) {
   .astroon_NFT_wrap {
-    .astroon_NFT_heading {
-    }
     .content_wrap {
       flex-direction: column-reverse;
 
       .left_wrap {
         width: 100%;
-        p {
-        }
-        div {
-          .point_heading {
-          }
-          ol {
-            li {
-            }
-          }
-        }
       }
       .right_wrap {
-        width: 60%;
+        width: 45%;
       }
     }
   }
 } /* 980 */
+
+@media only screen and (max-width: 767px) {
+  .astroon_NFT_wrap {
+    .content_wrap {
+      .right_wrap {
+        width: 61%;
+      }
+    }
+  }
+} /* 650 */
 
 @media only screen and (max-width: 479px) {
   .astroon_NFT_wrap {
@@ -96,7 +96,19 @@
       }
       .right_wrap {
         width: 80%;
+        height: 353px;
       }
     }
   }
 } /* 375 */
+
+@media only screen and (max-width: 374px) {
+  .astroon_NFT_wrap {
+    .content_wrap {
+      .right_wrap {
+        width: 80%;
+        height: 300px;
+      }
+    }
+  }
+} /* 320 */
