@@ -114,7 +114,7 @@ const MysteryBox = () => {
           `You can not buy more than ${eligibilityResult} mystery box`,
         );
 
-      // throw error if user select more eligibility quantity
+      // throw error if user select more than  eligibile quantity
       if (selectedQuantity.value > eligibilityResult - lastMysteryBoxPurChase)
         throw new Error(
           `You can not buy more than ${
@@ -135,13 +135,25 @@ const MysteryBox = () => {
         walletAddress,
       );
 
+      // creating array of nft token id puchesed by user for creating transition history
+      // emmiting value fron contract output
+      let tokenIds = [];
+
+      if (Array.isArray(buyResult.events.Transfer)) {
+        tokenIds = buyResult.events.Transfer.map(
+          (value) => value.returnValues.tokenId,
+        );
+      } else {
+        tokenIds.push(Number(buyResult.events.Transfer.returnValues.tokenId));
+      }
+
       if (buyResult.status) {
         const postData = {
           walletAddress: walletAddress,
           quantity: selectedQuantity.value,
           price: Number(nftSaleData.cost),
           saleType: 'nftPre',
-          tokenId: Number(buyResult.events.Transfer.returnValues.tokenId),
+          tokenId: tokenIds,
         };
 
         // posting data to backend if contract methods return status true
@@ -180,7 +192,7 @@ const MysteryBox = () => {
               alt={'mystery-box'}
             />
           </div>
-          {isSaleOn ? (
+          {!isSaleOn ? (
             <>
               <div className={styles.pricing}>
                 <h4>{`${nftSaleData.cost ? nftSaleData.cost : 0} ETH`}</h4>
