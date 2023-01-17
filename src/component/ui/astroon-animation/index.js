@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './astroonAnimation.module.scss';
-import animationImage from '../../../../public/assets/images/gaming_re_cma2.svg';
+import animationImage from '../../../../public/assets/images/animation_image4.svg';
 const AstroonAnimation = () => {
   return (
     <div className={`container ${styles.astroon_animation_wrap}`}>

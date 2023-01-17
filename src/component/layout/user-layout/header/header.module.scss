@@ -1,6 +1,7 @@
 $fontsize: 12px;
 @import '../../../../../styles/typography.module';
 .header_wrapper {
+  padding: 20px 0px;
   .wallet_connect_modal {
     display: flex;
     flex-direction: column;

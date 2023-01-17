@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './astroonNFT.module.scss';
-import NFTImage from '../../../../public/assets/images/nft-dummy.svg';
+import NFTImage from '../../../../public/assets/images/NFT.png';
 const AstroonNFT = () => {
   return (
     <div className={`container ${styles.astroon_NFT_wrap}`}>
@@ -29,7 +29,7 @@ const AstroonNFT = () => {
         </div>
 
         <div className={styles.right_wrap}>
-          <Image src={NFTImage} layout="responsive" alt="NFTimage" />
+          <Image src={NFTImage} layout="fill" alt="NFTimage" />
         </div>
       </div>
     </div>
