@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './astroonToken.module.scss';
-import tokenImage from '../../../../public/assets/images/coin-astroon.jpg';
+import tokenImage from '../../../../public/assets/images/Varlık 1.png';
 const AstroonToken = () => {
   return (
     <div className={`container ${styles.astroon_token_wrap}`}>
