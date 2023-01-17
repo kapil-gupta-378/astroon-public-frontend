@@ -3,10 +3,11 @@
   margin: 0 0;
   width: 88%;
   margin: 0 auto;
-  margin-bottom: 269px;
+  // margin-bottom: 269px;
   .roadmap_heading {
     h3 {
       @include heading_2;
+      margin-bottom: 59px;
     }
   }
 
@@ -117,9 +118,7 @@
   .roadmap_wrapper {
     .roadmap_image {
       width: 78%;
-      .roadmap_desktop {
-        display: none !important;
-      }
+
       .roadmap_mobile {
         display: block !important;
         text-align: center;
@@ -154,9 +153,7 @@
   .roadmap_wrapper {
     .roadmap_image {
       width: 78%;
-      .roadmap_desktop {
-        display: none !important;
-      }
+
       .roadmap_mobile {
         display: block !important;
         text-align: center;
@@ -191,9 +188,7 @@
   .roadmap_wrapper {
     .roadmap_image {
       width: 78%;
-      .roadmap_desktop {
-        display: none !important;
-      }
+
       .roadmap_mobile {
         display: block !important;
         text-align: center;
@@ -226,11 +221,13 @@
 
 @media screen and (max-width: 479px) {
   .roadmap_wrapper {
+    width: 100%;
+    .roadmap_container {
+      padding: 0px !important;
+    }
     .roadmap_image {
-      width: 78%;
-      .roadmap_desktop {
-        display: none !important;
-      }
+      width: 100%;
+
       .roadmap_mobile {
         display: block !important;
         text-align: center;
@@ -275,10 +272,6 @@
 @media screen and (max-width: 374px) {
   .roadmap_wrapper {
     .roadmap_image {
-      width: 78%;
-      .roadmap_desktop {
-        display: none !important;
-      }
       .roadmap_mobile {
         display: block !important;
         text-align: center;
