@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
 import {
@@ -11,7 +12,9 @@ import {
 } from '../../../services/api/general-settings';
 import Button from '../../component/common/button';
 import FileInput from '../../component/common/file-input';
+import GlobalLoading from '../../component/common/global-loading';
 import TextInput from '../../component/common/text-input';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import styles from './generalSettings.module.scss';
 
 const GeneralSettings = () => {
@@ -25,6 +28,8 @@ const GeneralSettings = () => {
   const [brandingWebsite, setBrandingWebsite] = useState('');
   const [settingsId, setSettingsId] = useState('');
   const route = useRouter();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     fetchIntialData();
   }, []);
@@ -42,8 +47,9 @@ const GeneralSettings = () => {
 
   const updateSettingsData = async (e) => {
     e.preventDefault();
-
     try {
+      dispatch(setGlobalLoading(true));
+
       const { brandingLogoResponse, websiteLogoResponse } =
         await uploadImagetoServer();
       const data = {
@@ -58,7 +64,9 @@ const GeneralSettings = () => {
       if (response.success) {
         toast.success(response.message);
       }
+      dispatch(setGlobalLoading(false));
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       return error;
     }
   };
@@ -79,11 +87,11 @@ const GeneralSettings = () => {
       }
 
       return {
-        brandingLogoResponse: brandingLogoResponse.fileName,
-        websiteLogoResponse: websiteLogoResponse.fileName,
+        brandingLogoResponse: brandingLogoResponse?.fileName,
+        websiteLogoResponse: websiteLogoResponse?.fileName,
       };
     } catch (error) {
-      return error;
+      console.error(error);
     }
   }
 
@@ -156,6 +164,7 @@ const GeneralSettings = () => {
           <Button type="submit">Submit</Button>
         </section>
       </form>
+      <GlobalLoading />
     </main>
   );
 };

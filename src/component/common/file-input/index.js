@@ -17,7 +17,9 @@ const FileInput = ({ title, titleBackground, inputOnChange }) => {
       <label style={{ background: titleBackground }}>{title}</label>
       <input onChange={uploadFile} ref={inputRef} type="file" />
       <span>{fileName}</span>
-      <button onClick={openInput}>Upload</button>
+      <button type="button" onClick={openInput}>
+        Upload
+      </button>
     </div>
   );
 };
