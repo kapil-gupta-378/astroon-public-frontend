@@ -10,7 +10,7 @@ export default function Custom404() {
       }}
     >
       <h1 style={{ color: 'white', textAlign: 'center' }}>
-        Thanku for contact-us
+        Thank You For Contact Us
       </h1>
     </div>
   );
