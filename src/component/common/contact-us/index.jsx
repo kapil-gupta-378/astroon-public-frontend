@@ -48,58 +48,52 @@ const ContactUs = (props) => {
     setAttachment(e.target.files[0]);
   };
 
-  const submitContactDetails = async () => {
-    if (
-      email &&
-      username &&
-      reasonForContact &&
-      subject &&
-      description &&
-      attachment
-    ) {
-      try {
-        const fileBody = new FormData();
-        fileBody.append('file', attachment);
-        const fileResponse = await insertContactUsFileApi(fileBody);
+  async function submitContactDetails(e) {
+    e.preventDefault();
+    try {
+      if (
+        !email &&
+        !username &&
+        !reasonForContact &&
+        !subject &&
+        !description &&
+        !attachment
+      )
+        throw new Error('Please all all fields');
 
-        if (fileResponse.success) {
-          let data = {
-            email: email,
-            username: username,
-            reasonForContact: reasonForContact,
-            subject: subject,
-            description: description,
-            attachments: fileResponse.data.fileName,
-          };
-          const res = await insertContactUsDetailApi(data);
-          if (res.success) {
-            setEmail('');
-            setUsername('');
-            setSubject('');
-            setDescription('');
-            setAttachment('');
-            toast.success(res.message);
-            props.onHide();
-            router.push('/thank-you');
-          } else {
-            toast.error(res.message);
-          }
-        } else {
-          toast.error(fileResponse.message);
-        }
-      } catch (error) {
-        if (error.response) {
-          toast.error(error.response.data.message);
-        }
+      if (username.length > 10)
+        throw new Error('Username can not be more than 10 charactors');
 
-        if (error.response.data.statusCode === 400) {
-          toast.error(error.response.data.message[0].errorDetail.isEmail);
+      const fileBody = new FormData();
+      fileBody.append('file', attachment);
+      const fileResponse = await insertContactUsFileApi(fileBody);
+
+      if (fileResponse.success) {
+        let data = {
+          email: email,
+          username: username,
+          reasonForContact: reasonForContact,
+          subject: subject,
+          description: description,
+          attachments: fileResponse.data.fileName,
+        };
+
+        const res = await insertContactUsDetailApi(data);
+        if (res.success) {
+          setEmail('');
+          setUsername('');
+          setSubject('');
+          setDescription('');
+          setAttachment('');
+          toast.success('Contact form submitted successfully');
+          props.onHide();
+          router.push('/thank-you');
         }
       }
-    } else {
-      toast.error('Please Fill All Fields');
+    } catch (error) {
+      toast.error(error.message ? error.message : error.toString().slice(7));
     }
-  };
+  }
 
   return (
     <Modal
@@ -120,9 +114,10 @@ const ContactUs = (props) => {
               <h3>Submit a Request</h3>
             </div>
           </div>
-          <div className={styles.input_wrap}>
+          <form onSubmit={submitContactDetails} className={styles.input_wrap}>
             <TextInput
               titleBackground={'#ae2e6f'}
+              isRequired={true}
               title={'Email Address'}
               handleType={'email'}
               kind="fullborder"
@@ -134,6 +129,7 @@ const ContactUs = (props) => {
             <TextInput
               titleBackground={'#ae2e6f'}
               title={'Username'}
+              isRequired={true}
               handleType={'text'}
               kind="fullborder"
               placeHolder="Enter your username"
@@ -149,6 +145,7 @@ const ContactUs = (props) => {
             />
 
             <TextInput
+              isRequired={true}
               titleBackground={'#ae2e6f'}
               title={'Subject'}
               handleType={'text'}
@@ -158,6 +155,7 @@ const ContactUs = (props) => {
               handleOnChange={(e) => setSubject(e.target.value)}
             />
             <TextInput
+              isRequired={true}
               titleBackground={'#ae2e6f'}
               title={'Description'}
               handleType={'textarea'}
@@ -241,11 +239,11 @@ const ContactUs = (props) => {
               </div>
             </div>
             <div className={styles.dialog_footer}>
-              <Button kind={'white_btn'} onClick={submitContactDetails}>
+              <Button kind={'white_btn'} type="submit">
                 Submit a request
               </Button>
             </div>
-          </div>
+          </form>
         </div>
       </Modal.Body>
     </Modal>

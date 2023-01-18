@@ -69,6 +69,16 @@
         }
       }
     }
+
+    .category_wrap {
+      margin-left: 15px;
+      @include heading_11;
+      text-align: left;
+      span {
+        @include heading_12;
+        margin-left: 5px;
+      }
+    }
     .opensea_btn {
       background: linear-gradient(#0d0e31 0 0) padding-box,
         linear-gradient(to right, #faff00, #fe19c1) border-box;
