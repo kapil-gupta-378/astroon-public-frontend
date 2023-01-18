@@ -14,10 +14,14 @@ import { toast } from 'react-toastify';
 
 const Footer = () => {
   const [modalShow, setModalShow] = useState(false);
+  const [year, setYear] = useState(null);
   const [data, setData] = useState({});
 
   useEffect(() => {
+    const date = new Date();
+    let year = date.getFullYear();
     fetchComponentData();
+    setYear(year);
   }, []);
 
   const fetchComponentData = async () => {
@@ -39,7 +43,9 @@ const Footer = () => {
   return (
     <div className={styles.footer_wrap}>
       <div className={`row container ${styles.container}`}>
-        <span className="col-6 col-md-7 col-sm-7">&#169; 2022 Astroon NFT</span>
+        <span className="col-6 col-md-7 col-sm-7">
+          &#169;{`${year} Astroon NFT`}
+        </span>
         <div
           className={`col-6 col-md-4 col-sm-5 ${styles.footer_social_media}`}
         >

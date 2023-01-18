@@ -15,8 +15,6 @@ const AstroonProduct = () => {
     { title: 'Animation' },
     { title: 'Token' },
     { title: 'NFT' },
-    { title: 'App' },
-    { title: 'Game' },
     { title: 'Game' },
   ];
 

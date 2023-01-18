@@ -8,13 +8,13 @@
     @include heading_2;
     text-align: center;
     font-family: 'Roboto Slab';
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
   .products_content_wrap {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 40px;
+    gap: 55px;
     justify-content: center;
     align-items: center;
     .card_wrap {
@@ -22,8 +22,8 @@
       background-repeat: no-repeat;
       background-position: center center;
       background-size: 100% 100%;
-      height: 200px;
-      width: 200px;
+      height: 250px;
+      width: 250px;
       display: flex;
       align-items: center;
       justify-content: center;
