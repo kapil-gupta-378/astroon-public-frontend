@@ -117,10 +117,12 @@ const NFTCard = ({ nftData }) => {
             View on Opensea
           </a>
         </div>
-        <h6 className={styles.category_wrap}>
-          {'Category  '}
-          <span>{nftData?.traits[1].value}</span>
-        </h6>
+        {nftData?.traits[1]?.value && (
+          <h6 className={styles.category_wrap}>
+            {'Category  '}
+            <span>{nftData?.traits[1]?.value}</span>
+          </h6>
+        )}
         <div className={styles.nft_card_price}>
           <h5>0.207 ETH</h5>
           <p>$281.21</p>
