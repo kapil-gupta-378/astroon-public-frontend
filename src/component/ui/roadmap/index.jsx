@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './roadmap.module.scss';
 // import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 // import RoadmapMobileImage from '../../../../public/assets/images/roadmap_desktop.svg';
 import RoadmapImageNew from '../../../../public/assets/images/Astroon Roadmap_Final.svg';
+import ZoomView from '../ZoomView';
+import popUpImage1 from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.28.PNG';
 
 const Roadmap = () => {
+  const [showPreView, setShowPreView] = useState({
+    youtube: false,
+    loading: false,
+    box: false,
+    cafe: false,
+    moon: false,
+    nft: false,
+    art: false,
+    game: false,
+    base: false,
+  });
+
+  const handlePreviewClose = () => {
+    setShowPreView(() => ({
+      youtube: false,
+      loading: false,
+      box: false,
+      cafe: false,
+      moon: false,
+      nft: false,
+      art: false,
+      game: false,
+      base: false,
+    }));
+  };
   return (
     <>
       <div className={`${styles.roadmap_wrapper}`}>
@@ -53,6 +80,49 @@ const Roadmap = () => {
                 Praesent tristique .
               </p>
             </div> */}
+            <div
+              onMouseEnter={() =>
+                setShowPreView({
+                  youtube: true,
+                  loading: false,
+                  box: false,
+                  cafe: false,
+                  moon: false,
+                  nft: false,
+                  art: false,
+                  game: false,
+                  base: false,
+                })
+              }
+              className={styles.youtube_PopUp}
+            ></div>
+            <ZoomView
+              show={showPreView.youtube}
+              handleClose={handlePreviewClose}
+              imageData={popUpImage1}
+            />
+            <div
+              onMouseEnter={() =>
+                setShowPreView({
+                  youtube: false,
+                  loading: true,
+                  box: false,
+                  cafe: false,
+                  moon: false,
+                  nft: false,
+                  art: false,
+                  game: false,
+                  base: false,
+                })
+              }
+              className={styles.loading_PopUp}
+            ></div>
+
+            <ZoomView
+              show={showPreView.loading}
+              handleClose={handlePreviewClose}
+              imageData={popUpImage1}
+            />
           </div>
         </div>
       </div>
