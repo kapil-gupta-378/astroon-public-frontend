@@ -25,9 +25,10 @@
       align-items: center;
       position: absolute;
       top: 0;
-      left: 76px;
-      width: 400px;
+      left: 170px;
+      width: 300px;
       height: 200px;
+      cursor: pointer;
     }
 
     .loading_PopUp {
@@ -39,6 +40,85 @@
       right: 129px;
       width: 208px;
       height: 133px;
+      cursor: pointer;
+    }
+    .box_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 359px;
+      right: 541px;
+      width: 178px;
+      height: 133px;
+      cursor: pointer;
+    }
+    .cafe_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 590px;
+      right: 292px;
+      width: 221px;
+      height: 133px;
+      cursor: pointer;
+    }
+    .moon_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 862px;
+      right: 361px;
+      width: 221px;
+      height: 133px;
+      cursor: pointer;
+    }
+    .nft_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 1164px;
+      right: 567px;
+      width: 221px;
+      height: 133px;
+      cursor: pointer;
+    }
+
+    .art_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 1182px;
+      right: 59px;
+      width: 221px;
+      height: 176px;
+      cursor: pointer;
+    }
+    .game_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 1375px;
+      right: 588px;
+      width: 221px;
+      height: 176px;
+      cursor: pointer;
+    }
+    .base_PopUp {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 1670px;
+      right: 320px;
+      width: 306px;
+      cursor: pointer;
+      height: 268px;
     }
 
     // .roadmap_text {
@@ -78,30 +158,224 @@
   }
 }
 
+@media screen and (max-width: 1920px) {
+  .roadmap_wrapper {
+    .roadmap_image {
+      .youtube_PopUp {
+        top: 80px;
+        left: 332px;
+        width: 300px;
+        height: 200px;
+      }
+
+      .loading_PopUp {
+        top: 265px;
+        right: 279px;
+        width: 194px;
+        height: 199px;
+      }
+      .box_PopUp {
+        top: 542px;
+        right: 861px;
+      }
+      .cafe_PopUp {
+        top: 827px;
+        right: 385px;
+        width: 400px;
+        height: 300px;
+      }
+      .moon_PopUp {
+        top: 1238px;
+        right: 550px;
+        width: 413px;
+        height: 332px;
+      }
+      .nft_PopUp {
+        top: 1753px;
+        right: 880px;
+        width: 248px;
+        height: 200px;
+      }
+
+      .art_PopUp {
+        top: 1722px;
+        right: 145px;
+        height: 400px;
+        width: 312px;
+      }
+      .game_PopUp {
+        top: 2085px;
+        right: 900px;
+        width: 267px;
+        height: 231px;
+      }
+      .base_PopUp {
+        top: 2511px;
+        right: 542px;
+        width: 350px;
+        cursor: pointer;
+        height: 400px;
+      }
+    }
+  }
+} /* 1024 */
+@media screen and (max-width: 1366px) {
+  .roadmap_wrapper {
+    .roadmap_image {
+      .youtube_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 170px;
+        width: 300px;
+        height: 200px;
+        cursor: pointer;
+      }
+
+      .loading_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 182px;
+        right: 129px;
+        width: 208px;
+        height: 133px;
+        cursor: pointer;
+      }
+      .box_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 359px;
+        right: 541px;
+        width: 178px;
+        height: 133px;
+        cursor: pointer;
+      }
+      .cafe_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 590px;
+        right: 292px;
+        width: 221px;
+        height: 133px;
+        cursor: pointer;
+      }
+      .moon_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 862px;
+        right: 361px;
+        width: 221px;
+        height: 133px;
+        cursor: pointer;
+      }
+      .nft_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 1164px;
+        right: 567px;
+        width: 221px;
+        height: 133px;
+        cursor: pointer;
+      }
+
+      .art_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 1182px;
+        right: 59px;
+        width: 221px;
+        height: 176px;
+        cursor: pointer;
+      }
+      .game_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 1375px;
+        right: 588px;
+        width: 221px;
+        height: 176px;
+        cursor: pointer;
+      }
+      .base_PopUp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 1670px;
+        right: 320px;
+        width: 306px;
+        cursor: pointer;
+        height: 268px;
+      }
+    }
+  }
+} /* 1024 */
 @media screen and (max-width: 1199px) {
   .roadmap_wrapper {
     .roadmap_image {
-      .roadmap_text {
-        width: 35%;
-        &:nth-child(3) {
-          top: 100px;
-          left: 15px;
-        }
+      .youtube_PopUp {
+        width: 185px;
+        height: 158px;
+      }
 
-        &:nth-child(4) {
-          top: 300px;
-          left: 605px;
-        }
+      .loading_PopUp {
+        top: 141px;
+        right: 129px;
+        width: 137px;
+      }
+      .box_PopUp {
+        top: 275px;
+        right: 420px;
+      }
+      .cafe_PopUp {
+        top: 454px;
+        right: 197px;
+        width: 194px;
+      }
+      .moon_PopUp {
+        top: 671px;
+        right: 262px;
+        width: 210px;
+      }
+      .nft_PopUp {
+        top: 913px;
+        right: 428px;
+        width: 191px;
+      }
 
-        &:nth-child(5) {
-          top: 250px;
-          left: -106px;
-        }
-
-        &:nth-child(6) {
-          bottom: -115px;
-          left: 0px;
-        }
+      .art_PopUp {
+        top: 901px;
+        right: 21px;
+        width: 216px;
+      }
+      .game_PopUp {
+        top: 1101px;
+        right: 442px;
+        width: 152px;
+        height: 138px;
+      }
+      .base_PopUp {
+        top: 1324px;
+        right: 320px;
+        width: 194px;
+        cursor: pointer;
+        height: 197px;
       }
     }
   }
@@ -111,26 +385,6 @@
   .roadmap_wrapper {
     .roadmap_image {
       .roadmap_text {
-        width: 35%;
-        &:nth-child(3) {
-          top: 105px;
-          left: 15px;
-        }
-
-        &:nth-child(4) {
-          top: 280px;
-          left: 580px;
-        }
-
-        &:nth-child(5) {
-          top: 240px;
-          left: -106px;
-        }
-
-        &:nth-child(6) {
-          bottom: -110px;
-          left: 0px;
-        }
       }
     }
   }
@@ -139,33 +393,59 @@
 @media only screen and (max-width: 979px) {
   .roadmap_wrapper {
     .roadmap_image {
-      width: 78%;
-
-      .roadmap_mobile {
-        display: block !important;
-        text-align: center;
+      .youtube_PopUp {
+        width: 170px;
+        height: 112px;
+        left: 98px;
       }
-      .roadmap_text {
-        width: 42%;
-        &:nth-child(3) {
-          top: 100px;
-          left: 293px;
-        }
 
-        &:nth-child(4) {
-          top: 423px;
-          left: 293px;
-        }
+      .loading_PopUp {
+        top: 96px;
+        right: 89px;
+        width: 108px;
+        height: 103px;
+      }
+      .box_PopUp {
+        top: 177px;
+        right: 296px;
+        width: 126px;
+      }
+      .cafe_PopUp {
+        top: 338px;
+        right: 157px;
+        width: 126px;
+        height: 85px;
+      }
+      .moon_PopUp {
+        top: 498px;
+        right: 209px;
+        width: 132px;
+        height: 115px;
+      }
+      .nft_PopUp {
+        top: 676px;
+        right: 326px;
+        width: 134px;
+        height: 100px;
+      }
 
-        &:nth-child(5) {
-          top: 515px;
-          left: 40px;
-        }
-
-        &:nth-child(6) {
-          bottom: -120px;
-          left: 230px;
-        }
+      .art_PopUp {
+        top: 669px;
+        right: 21px;
+        width: 140px;
+        height: 137px;
+      }
+      .game_PopUp {
+        top: 835px;
+        right: 319px;
+        width: 87px;
+        height: 79px;
+      }
+      .base_PopUp {
+        top: 983px;
+        right: 224px;
+        width: 152px;
+        height: 138px;
       }
     }
   }
@@ -174,33 +454,55 @@
 @media screen and (max-width: 767px) {
   .roadmap_wrapper {
     .roadmap_image {
-      width: 78%;
-
-      .roadmap_mobile {
-        display: block !important;
-        text-align: center;
+      .youtube_PopUp {
+        top: 30px;
+        right: 36px;
+        width: 108px;
+        height: 103px;
       }
-      .roadmap_text {
-        width: 42%;
-        &:nth-child(3) {
-          top: 105px;
-          left: 245px;
-        }
 
-        &:nth-child(4) {
-          top: 420px;
-          left: 245px;
-        }
+      .loading_PopUp {
+        top: 96px;
+        right: 89px;
+        width: 108px;
+        height: 103px;
+      }
+      .box_PopUp {
+        top: 177px;
+        right: 263px;
+        width: 126px;
+        height: 75px;
+      }
+      .cafe_PopUp {
+        top: 279px;
+        right: 142px;
+      }
+      .moon_PopUp {
+        top: 415px;
+        right: 168px;
+      }
+      .nft_PopUp {
+        top: 571px;
+        right: 278px;
+      }
 
-        &:nth-child(5) {
-          top: 510px;
-          left: 5px;
-        }
-
-        &:nth-child(6) {
-          bottom: -120px;
-          left: 190px;
-        }
+      .art_PopUp {
+        top: 559px;
+        right: 21px;
+        width: 140px;
+        height: 137px;
+      }
+      .game_PopUp {
+        top: 697px;
+        right: 275px;
+        width: 87px;
+        height: 79px;
+      }
+      .base_PopUp {
+        top: 841px;
+        right: 202px;
+        width: 106px;
+        height: 138px;
       }
     }
   }
@@ -209,33 +511,61 @@
 @media screen and (max-width: 649px) {
   .roadmap_wrapper {
     .roadmap_image {
-      width: 78%;
-
-      .roadmap_mobile {
-        display: block !important;
-        text-align: center;
+      .youtube_PopUp {
+        top: 16px;
+        left: 58px;
+        width: 94px;
+        height: 55px;
       }
-      .roadmap_text {
-        width: 42%;
-        &:nth-child(3) {
-          top: 50px;
-          left: 190px;
-        }
 
-        &:nth-child(4) {
-          top: 330px;
-          left: 195px;
-        }
+      .loading_PopUp {
+        top: 47px;
+        right: 53px;
+        width: 79px;
+        height: 72px;
+      }
+      .box_PopUp {
+        top: 117px;
+        right: 193px;
+        width: 74px;
+        height: 69px;
+      }
+      .cafe_PopUp {
+        top: 202px;
+        right: 84px;
+        height: 76px;
+        width: 80px;
+      }
+      .moon_PopUp {
+        top: 301px;
+        right: 127px;
+        height: 59px;
+        width: 85px;
+      }
+      .nft_PopUp {
+        top: 413px;
+        right: 185px;
+        height: 50px;
+        width: 91px;
+      }
 
-        &:nth-child(5) {
-          top: 400px;
-          left: -20px;
-        }
-
-        &:nth-child(6) {
-          bottom: -140px;
-          left: 130px;
-        }
+      .art_PopUp {
+        top: 392px;
+        right: 2px;
+        width: 94px;
+        height: 104px;
+      }
+      .game_PopUp {
+        top: 494px;
+        right: 203px;
+        width: 87px;
+        height: 79px;
+      }
+      .base_PopUp {
+        top: 615px;
+        right: 107px;
+        width: 106px;
+        height: 81px;
       }
     }
   }
@@ -250,42 +580,61 @@
     .roadmap_image {
       width: 100%;
 
-      .roadmap_mobile {
-        display: block !important;
-        text-align: center;
+      .youtube_PopUp {
+        top: 16px;
+        left: 93px;
+        width: 94px;
+        height: 55px;
       }
-      .roadmap_text {
-        width: 70%;
-        p {
-          font-family: 'Rubik', sans-serif;
-          &:nth-child(1) {
-            font-size: 13px;
-            line-height: 0px;
-          }
 
-          &:nth-child(2) {
-            font-size: 10px;
-          }
-        }
-        &:nth-child(3) {
-          top: 70px;
-          left: 137px;
-        }
+      .loading_PopUp {
+        top: 47px;
+        right: 53px;
+        width: 79px;
+        height: 72px;
+      }
+      .box_PopUp {
+        top: 117px;
+        right: 193px;
+        width: 74px;
+        height: 69px;
+      }
+      .cafe_PopUp {
+        top: 202px;
+        right: 84px;
+        height: 76px;
+        width: 80px;
+      }
+      .moon_PopUp {
+        top: 339px;
+        right: 143px;
+        height: 59px;
+        width: 85px;
+      }
+      .nft_PopUp {
+        top: 469px;
+        right: 220px;
+        height: 50px;
+        width: 91px;
+      }
 
-        &:nth-child(4) {
-          top: 265px;
-          left: 137px;
-        }
-
-        &:nth-child(5) {
-          top: 320px;
-          left: -45px;
-        }
-
-        &:nth-child(6) {
-          bottom: -85px;
-          left: 105px;
-        }
+      .art_PopUp {
+        top: 439px;
+        right: 19px;
+        width: 94px;
+        height: 104px;
+      }
+      .game_PopUp {
+        top: 546px;
+        right: 228px;
+        width: 76px;
+        height: 72px;
+      }
+      .base_PopUp {
+        top: 671px;
+        right: 107px;
+        width: 106px;
+        height: 81px;
       }
     }
   }
@@ -298,38 +647,62 @@
         display: block !important;
         text-align: center;
       }
-      .roadmap_text {
-        width: 65%;
-        p {
-          font-family: 'Rubik', sans-serif;
-          &:nth-child(1) {
-            font-size: 10px;
-            line-height: 0px;
-          }
 
-          &:nth-child(2) {
-            font-size: 8px;
-          }
-        }
-        &:nth-child(3) {
-          top: 50px;
-          left: 115px;
-        }
+      .youtube_PopUp {
+        top: 16px;
+        left: 93px;
+        width: 94px;
+        height: 55px;
+      }
 
-        &:nth-child(4) {
-          top: 220px;
-          left: 120px;
-        }
+      .loading_PopUp {
+        top: 47px;
+        right: 53px;
+        width: 79px;
+        height: 72px;
+      }
+      .box_PopUp {
+        top: 117px;
+        right: 193px;
+        width: 74px;
+        height: 69px;
+      }
+      .cafe_PopUp {
+        top: 202px;
+        right: 84px;
+        height: 76px;
+        width: 80px;
+      }
+      .moon_PopUp {
+        top: 295px;
+        right: 113px;
+        height: 59px;
+        width: 85px;
+      }
+      .nft_PopUp {
+        top: 403px;
+        right: 196px;
+        height: 50px;
+        width: 64px;
+      }
 
-        &:nth-child(5) {
-          top: 265px;
-          left: -30px;
-        }
-
-        &:nth-child(6) {
-          bottom: -75px;
-          left: 90px;
-        }
+      .art_PopUp {
+        top: 384px;
+        right: 19px;
+        width: 94px;
+        height: 104px;
+      }
+      .game_PopUp {
+        top: 475px;
+        right: 188px;
+        width: 76px;
+        height: 58px;
+      }
+      .base_PopUp {
+        top: 570px;
+        right: 107px;
+        width: 106px;
+        height: 81px;
       }
     }
   }

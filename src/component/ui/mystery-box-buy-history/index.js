@@ -28,7 +28,7 @@ const MysteryBoxBuyHistory = ({
       >
         <Modal.Header closeVariant={'white'} closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Transition History
+            Transaction History
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>

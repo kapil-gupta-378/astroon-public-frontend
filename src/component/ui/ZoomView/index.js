@@ -8,11 +8,13 @@ const ZoomView = ({ imageData, show, handleClose }) => {
     <Modal
       show={show}
       size="lg"
+      onHide={handleClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      scrollable={false}
     >
       <div onMouseLeave={handleClose}>
-        <Modal.Body>
+        <Modal.Body scrollable={false}>
           <div className={styles.zoom_view_wrap}>
             <div className={styles.image_wrap}>
               <Image src={imageData} alt="image" layout="responsive" />
