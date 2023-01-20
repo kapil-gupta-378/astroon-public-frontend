@@ -103,7 +103,7 @@ const AstroonProduct = () => {
   };
 
   return (
-    <div className={styles.astroon_products_wrap}>
+    <div className={`container ${styles.astroon_products_wrap}`}>
       <h3 className={styles.astroon_products_heading}>ASTROON Product</h3>
       <div className={styles.products_content_wrap}>
         {data.map((data, idx) => {

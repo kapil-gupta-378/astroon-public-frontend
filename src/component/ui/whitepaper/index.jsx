@@ -6,7 +6,7 @@ import image_not_found_image from '../../../../public/assets/images/gallery_mana
 
 function Whitepaper() {
   return (
-    <div className={style.whitepaper_wrp}>
+    <div className={`container  ${style.whitepaper_wrp}`}>
       <div className={`${style.whitepaper_content} container-fluid`}>
         <h3>Whitepaper</h3>
         <div className={style.whitepaper_data}>

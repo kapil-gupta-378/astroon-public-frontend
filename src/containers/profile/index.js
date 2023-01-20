@@ -389,7 +389,7 @@ const Profile = () => {
                       saleOnData.isPublic) &&
                       saleRoundOn && (
                         <div
-                          onClick={() => setShowBuyTokenModal(true)}
+                          onClick={() => route.push('/ast')}
                           className={styles.wallet_address}
                         >
                           Buy Token
@@ -405,7 +405,7 @@ const Profile = () => {
                       onClick={() => setHistoryModal(true)}
                       className={styles.wallet_address}
                     >
-                      Transition History
+                      Transaction History
                     </div>
                     <div
                       onClick={() => setNftHistoryModal(true)}

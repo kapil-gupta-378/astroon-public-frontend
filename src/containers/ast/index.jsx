@@ -77,6 +77,11 @@ const AST = () => {
     }
   }, [tokenData, claimingToken]);
 
+  //   useEffect(() => {
+  // if(tokenData &&  currentSaleLastBuy >= )
+
+  //   }, [currentSaleLastBuy, tokenData]);
+
   const fetchTokenDataHandler = async () => {
     dispatch(fetchTokenDataAction());
   };

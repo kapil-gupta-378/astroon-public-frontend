@@ -71,6 +71,10 @@ const AdminHeader = ({ setOpenSideBar }) => {
     dispatch(disconnectAdmin());
   };
 
+  const ImageLoader = ({ src }) => {
+    return `${src}`;
+  };
+
   return (
     <div className={styles.admin_header_wrap}>
       <div className={styles.header_nav_wrap}>
@@ -94,6 +98,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
             >
               <div className={styles.wallet_address}>
                 <Image
+                  loader={ImageLoader}
                   src={ethIconWhite}
                   width={13}
                   height={13}
@@ -107,7 +112,9 @@ const AdminHeader = ({ setOpenSideBar }) => {
           <Dropdown className="profile_dropdown">
             <Dropdown.Toggle id="dropdown-autoclose-true">
               <Image
-                src={imageAvatar}
+                src={
+                  dataState.profileImage ? dataState.profileImage : imageAvatar
+                }
                 layout="fill"
                 alt="profile_image"
                 priority
