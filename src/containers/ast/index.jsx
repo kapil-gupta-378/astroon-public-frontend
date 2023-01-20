@@ -64,6 +64,14 @@ const AST = () => {
   }, []);
 
   useEffect(() => {
+    setSliderValue(
+      currentSaleLastBuy >= Number(tokenData?.rate?.minBound)
+        ? 1
+        : Number(tokenData?.rate?.minBound),
+    );
+  }, [currentSaleLastBuy, tokenData]);
+
+  useEffect(() => {
     if (tokenData?.saleData?.saleRound && claimingToken) {
       const obj = claimingToken.find((item) => {
         return item.saleRound == tokenData?.saleData?.saleRound;
@@ -76,11 +84,6 @@ const AST = () => {
       }
     }
   }, [tokenData, claimingToken]);
-
-  //   useEffect(() => {
-  // if(tokenData &&  currentSaleLastBuy >= )
-
-  //   }, [currentSaleLastBuy, tokenData]);
 
   const fetchTokenDataHandler = async () => {
     dispatch(fetchTokenDataAction());
@@ -181,7 +184,11 @@ const AST = () => {
 
   const closeModal = () => {
     setShowBuyTokenModal(false);
-    setSliderValue(1);
+    setSliderValue(
+      currentSaleLastBuy >= Number(tokenData?.rate?.minBound)
+        ? 1
+        : Number(tokenData?.rate?.minBound),
+    );
   };
 
   return (

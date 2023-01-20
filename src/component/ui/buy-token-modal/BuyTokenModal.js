@@ -106,7 +106,7 @@ const BuyTokenModal = ({
                     ? tokenData?.rate?.minBound
                     : lastBuy <= tokenData?.rate?.minBound
                     ? tokenData?.rate?.minBound - lastBuy
-                    : 1,
+                    : 10,
                 )}
                 max={Number(tokenData?.rate?.thresHold) - lastBuy}
                 step={1}
