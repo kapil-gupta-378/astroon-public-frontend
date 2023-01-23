@@ -62,10 +62,9 @@ const MysteryBoxSale = ({
       <div className={styles.footer_wrap}>
         {admin ? (
           <>
-            <Button
-              disabled={isSaleOn}
-              onClick={() => (isSaleOn ? false : saleStartHandler())}
-            >{`${isSaleOn ? 'Sale is on' : 'Start'} `}</Button>
+            <Button disabled={isSaleOn} onClick={saleStartHandler}>{`${
+              isSaleOn ? 'Sale is on' : 'Start'
+            } `}</Button>
             <Button onClick={editSaleDetailsHander}>Edit</Button>
           </>
         ) : (
