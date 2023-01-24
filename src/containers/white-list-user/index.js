@@ -19,6 +19,7 @@ import DialogBox from '../../component/common/dialoag-box';
 import GlobalLoading from '../../component/common/global-loading';
 import { setMerkleRoot } from '../../../services/web3/saleMethod';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 
 const WhiteListUser = () => {
   const [showMerkleUpdateModal, setShowMerkleUpdateModal] = useState(false);
@@ -37,6 +38,7 @@ const WhiteListUser = () => {
 
   useEffect(() => {
     dispatch(fetchWhiteListUserDataAction());
+    dispatch(fetchTokenDataAction());
   }, []);
 
   const openCsvFileInput = () => {
@@ -88,7 +90,7 @@ const WhiteListUser = () => {
   const csvFileInputOnchange = async (e) => {
     try {
       // user global funtion for parsing csv file
-      parseCSVFile(e, afterCsvFileparse);
+      parseCSVFile(e, afterCsvFileparse, toast);
     } catch (error) {
       toast.error(error);
     }

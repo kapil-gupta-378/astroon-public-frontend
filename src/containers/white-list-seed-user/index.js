@@ -19,6 +19,7 @@ import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice'
 import { setMerkleRoot } from '../../../services/web3/saleMethod';
 import GlobalLoading from '../../component/common/global-loading';
 import DialogBox from '../../component/common/dialoag-box';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 
 const WhiteListSeedUser = () => {
   const [showMerkleUpdateModal, setShowMerkleUpdateModal] = useState(false);
@@ -36,6 +37,7 @@ const WhiteListSeedUser = () => {
 
   useEffect(() => {
     dispatch(fetchWhiteListSeedUserDataAction());
+    dispatch(fetchTokenDataAction());
   }, []);
 
   const openCsvFileInput = () => {
@@ -83,7 +85,7 @@ const WhiteListSeedUser = () => {
 
   const csvFileInputOnchange = async (e) => {
     try {
-      parseCSVFile(e, afterCsvFileparse);
+      parseCSVFile(e, afterCsvFileparse, toast);
     } catch (error) {
       toast.error(error);
     }
@@ -161,7 +163,7 @@ const WhiteListSeedUser = () => {
         rightButtonHandler={rightButtonHandler}
       >
         <p style={{ margin: '40px 0px', fontSize: '17px' }}>
-          Do you want to update uploaded address(s) in currently running seed
+          Do you want to update uploaded addresses in currently running seed
           sale?
         </p>
       </DialogBox>
