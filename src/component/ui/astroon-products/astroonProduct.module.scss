@@ -16,16 +16,58 @@
     gap: 55px;
     justify-content: center;
     align-items: center;
-    .card_wrap {
-      background: url('../../../../public/assets/images/nft_management.svg');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 100% 100%;
-      height: 250px;
-      width: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .card_wrap_Animation {
+      .image_Animation {
+        background: url('../../../../public/assets/images/ANIMATION1.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_Token {
+      .image_Animation {
+        background: url('../../../../public/assets/images/2TOKEN.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_NFT {
+      .image_Animation {
+        background: url('../../../../public/assets/images/NFT3.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_Game {
+      .image_Animation {
+        background: url('../../../../public/assets/images/GAME4.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
       h3 {
         @include heading_9;
         margin: 0px;
@@ -39,16 +81,57 @@
     gap: 40px;
     justify-content: center;
     align-items: center;
-    .card_wrap {
-      background: url('../../../../public/assets/images/nft_management.svg');
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 100% 100%;
-      height: 200px;
-      width: 200px;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
+    .card_wrap_Animation {
+      .image_Animation {
+        background: url('../../../../public/assets/images/ANIMATION1.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_Token {
+      .image_Animation {
+        background: url('../../../../public/assets/images/2TOKEN.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_NFT {
+      .image_Animation {
+        background: url('../../../../public/assets/images/NFT3.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
+      h3 {
+        @include heading_9;
+        margin: 0px;
+      }
+    }
+    .card_wrap_Game {
+      .image_Animation {
+        background: url('../../../../public/assets/images/GAME4.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 100% 100%;
+        height: 200px;
+        width: 200px;
+      }
       h3 {
         @include heading_9;
         margin: 0px;
@@ -81,7 +164,7 @@
 
 @media only screen and (max-width: 1366px) {
   .astroon_products_wrap {
-    padding: 0px 13%;
+    padding: 0px 20%;
   }
 } /* 980 */
 

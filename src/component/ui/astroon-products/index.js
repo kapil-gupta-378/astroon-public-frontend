@@ -11,12 +11,6 @@ const AstroonProduct = () => {
     next: 0,
     index: 0,
   });
-  const data = [
-    { title: 'Animation' },
-    { title: 'Token' },
-    { title: 'NFT' },
-    { title: 'Game' },
-  ];
 
   const beforeChange = (prev, next) => {
     setIsIndex((value) => ({ ...value, prev: prev, next: next }));
@@ -106,23 +100,41 @@ const AstroonProduct = () => {
     <div className={`container ${styles.astroon_products_wrap}`}>
       <h3 className={styles.astroon_products_heading}>ASTROON Product</h3>
       <div className={styles.products_content_wrap}>
-        {data.map((data, idx) => {
-          return (
-            <div className={styles.card_wrap} key={idx}>
-              <h3>{data.title}</h3>
-            </div>
-          );
-        })}
+        <div className={styles.card_wrap_Animation}>
+          <div className={styles.image_Animation}></div>
+          <h3>{'Animation'}</h3>
+        </div>
+        <div className={styles.card_wrap_Token}>
+          <div className={styles.image_Animation}></div>
+          <h3>{'Token'}</h3>
+        </div>
+        <div className={styles.card_wrap_NFT}>
+          <div className={styles.image_Animation}></div>
+          <h3>{'NFT'}</h3>
+        </div>
+        <div className={styles.card_wrap_Game}>
+          <div className={styles.image_Animation}></div>
+          <h3>{'Game'}</h3>
+        </div>
       </div>
       <div className={styles.products_content_slider_wrap}>
         <Slider infinite={false} ref={(ref) => (slider = ref)} {...settings}>
-          {data.map((data, idx) => {
-            return (
-              <div className={styles.card_wrap} key={idx}>
-                <h3>{data.title}</h3>
-              </div>
-            );
-          })}
+          <div className={styles.card_wrap_Animation}>
+            <div className={styles.image_Animation}></div>
+            <h3>{'Animation'}</h3>
+          </div>
+          <div className={styles.card_wrap_Token}>
+            <div className={styles.image_Animation}></div>
+            <h3>{'Token'}</h3>
+          </div>
+          <div className={styles.card_wrap_NFT}>
+            <div className={styles.image_Animation}></div>
+            <h3>{'NFT'}</h3>
+          </div>
+          <div className={styles.card_wrap_Game}>
+            <div className={styles.image_Animation}></div>
+            <h3>{'Game'}</h3>
+          </div>
         </Slider>
       </div>
       <div className={styles.card_navigation_btn}>

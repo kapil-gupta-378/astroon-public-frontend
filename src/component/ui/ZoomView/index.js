@@ -1,24 +1,22 @@
-import Image from 'next/image';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import styles from './zoomView.module.scss';
 
-const ZoomView = ({ imageData, show, handleClose }) => {
+const ZoomView = ({ show, handleClose, children }) => {
   return (
     <Modal
       show={show}
-      size="lg"
+      size="sm"
       onHide={handleClose}
       aria-labelledby="contained-modal-title-vcenter"
       centered
       scrollable={false}
+      className="roadmap_popup"
     >
-      <div onMouseLeave={handleClose}>
+      <div>
         <Modal.Body scrollable={false}>
           <div className={styles.zoom_view_wrap}>
-            <div className={styles.image_wrap}>
-              <Image src={imageData} alt="image" layout="responsive" />
-            </div>
+            <div className={styles.image_wrap}>{children}</div>
           </div>
         </Modal.Body>
       </div>
