@@ -75,7 +75,11 @@ const Roadmap = () => {
               show={showPreView.youtube}
               handleClose={handlePreviewClose}
               imageData={youtubeImage}
-            />
+            >
+              <h5>01</h5>
+              <p style={{ marginBottom: '0px' }}>Q1 2023</p>
+              <p style={{ marginBottom: '0px' }}>Animated Series</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -100,7 +104,11 @@ const Roadmap = () => {
               show={showPreView.loading}
               handleClose={handlePreviewClose}
               imageData={loadingImage}
-            />
+            >
+              <h5>02</h5>
+              <p style={{ marginBottom: '0px' }}>Q1 2023</p>
+              <p style={{ marginBottom: '0px' }}>Token Seed Sale</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -125,7 +133,11 @@ const Roadmap = () => {
               show={showPreView.box}
               handleClose={handlePreviewClose}
               imageData={boxImage}
-            />
+            >
+              <h5>03</h5>
+              <p style={{ marginBottom: '0px' }}>Q2 2023</p>
+              <p style={{ marginBottom: '0px' }}>Token Private Sale</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -150,7 +162,11 @@ const Roadmap = () => {
               show={showPreView.cafe}
               handleClose={handlePreviewClose}
               imageData={cafeImage}
-            />
+            >
+              <h5>04</h5>
+              <p style={{ marginBottom: '0px' }}>Q2 2023</p>
+              <p style={{ marginBottom: '0px' }}>Token Public Sale</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -175,7 +191,13 @@ const Roadmap = () => {
               show={showPreView.moon}
               handleClose={handlePreviewClose}
               imageData={moonImage}
-            />
+            >
+              <h5>05</h5>
+              <p style={{ marginBottom: '0px' }}>Q2 2023</p>
+              <p style={{ marginBottom: '0px' }}>
+                TGE (Token Generation Event )
+              </p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -200,7 +222,11 @@ const Roadmap = () => {
               show={showPreView.nft}
               handleClose={handlePreviewClose}
               imageData={nftImage}
-            />
+            >
+              <h5>06</h5>
+              <p style={{ marginBottom: '0px' }}>Q3 2023</p>
+              <p style={{ marginBottom: '0px' }}>NFT Pre-Sale</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -225,7 +251,11 @@ const Roadmap = () => {
               show={showPreView.art}
               handleClose={handlePreviewClose}
               imageData={artImage}
-            />
+            >
+              <h5>07</h5>
+              <p style={{ marginBottom: '0px' }}>Q3 2023</p>
+              <p style={{ marginBottom: '0px' }}>NFT Public Sale</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -250,7 +280,11 @@ const Roadmap = () => {
               show={showPreView.game}
               handleClose={handlePreviewClose}
               imageData={gameImage}
-            />
+            >
+              <h5>08</h5>
+              <p style={{ marginBottom: '0px' }}>Q3 2023</p>
+              <p style={{ marginBottom: '0px' }}>Game</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
@@ -275,7 +309,11 @@ const Roadmap = () => {
               show={showPreView.base}
               handleClose={handlePreviewClose}
               imageData={baseImage}
-            />
+            >
+              <h5>09</h5>
+              <p style={{ marginBottom: '0px' }}>Q4 2023</p>
+              <p style={{ marginBottom: '0px' }}>Game</p>
+            </ZoomView>
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
           </div>

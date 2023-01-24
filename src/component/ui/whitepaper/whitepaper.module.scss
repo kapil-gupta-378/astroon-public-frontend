@@ -61,7 +61,25 @@
         @include heading_2;
       }
       p {
+        width: 100%;
       }
     }
   }
 } /* 375 */
+
+@media only screen and (max-width: 649px) {
+  .whitepaper_wrp {
+    .whitepaper_content {
+      .whitepaper_data {
+        flex-direction: column-reverse;
+      }
+      .whitepaper_btn {
+      }
+      h3 {
+        @include heading_2;
+      }
+      p {
+      }
+    }
+  }
+} /* 480 */

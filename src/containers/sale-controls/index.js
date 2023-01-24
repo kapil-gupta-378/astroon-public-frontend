@@ -342,6 +342,7 @@ const SaleControls = () => {
             key={1}
             admin={true}
             saleRoundOn={saleRoundOn}
+            availableToken={tokenData.tokensAvailable}
           />
         )}
         {privateSale && (
@@ -356,6 +357,7 @@ const SaleControls = () => {
             key={2}
             admin={true}
             saleRoundOn={saleRoundOn}
+            availableToken={tokenData.tokensAvailable}
           />
         )}
         {publicSale && (
@@ -370,6 +372,7 @@ const SaleControls = () => {
             }
             admin={true}
             saleRoundOn={saleRoundOn}
+            availableToken={tokenData.tokensAvailable}
           />
         )}
 

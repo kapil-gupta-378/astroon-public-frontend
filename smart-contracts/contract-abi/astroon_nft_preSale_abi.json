@@ -208,6 +208,15 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "astRewards",
+    "outputs": [
+      { "internalType": "contract IASTRewards", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "address", "name": "owner", "type": "address" }
     ],
@@ -250,6 +259,17 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" }
+    ],
+    "name": "checkTokenRewardEligibility",
+    "outputs": [
+      { "internalType": "bool", "name": "IsEligible", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       {
         "internalType": "enum ASTNftSale.CATEGORY",
         "name": "nftType",
@@ -288,11 +308,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
-      { "internalType": "address", "name": "userAddress", "type": "address" }
-    ],
-    "name": "getLastPurchaseTime",
+    "inputs": [],
+    "name": "getRevealedTime",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -309,7 +326,13 @@
         "name": "_maxPresaleLimit",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "_minToken", "type": "uint256" }
+      { "internalType": "uint256", "name": "_minToken", "type": "uint256" },
+      {
+        "internalType": "address",
+        "name": "_receiverAddress",
+        "type": "address"
+      },
+      { "internalType": "uint96", "name": "_royaltyAmt", "type": "uint96" }
     ],
     "name": "initialize",
     "outputs": [],
@@ -330,16 +353,6 @@
     ],
     "name": "isApprovedForAll",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "address", "name": "", "type": "address" }
-    ],
-    "name": "lastPurchasedAt",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -418,6 +431,13 @@
   {
     "inputs": [],
     "name": "revealed",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "rewardEnable",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
@@ -502,6 +522,16 @@
   },
   {
     "inputs": [
+      { "internalType": "address", "name": "receiver", "type": "address" },
+      { "internalType": "uint96", "name": "feeNumerator", "type": "uint96" }
+    ],
+    "name": "setDefaultRoyalty",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "_presaleLimit", "type": "uint256" }
     ],
     "name": "setMaxPreSaleLimit",
@@ -520,7 +550,7 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_saleId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_id", "type": "uint256" },
       { "internalType": "uint256", "name": "_newMintCost", "type": "uint256" }
     ],
     "name": "setMintCost",
@@ -540,6 +570,37 @@
   {
     "inputs": [],
     "name": "setRevealed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "contract IASTRewards",
+        "name": "_astRewards",
+        "type": "address"
+      }
+    ],
+    "name": "setRewardContract",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "setRewardStatus",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tierLevel", "type": "uint256" },
+      { "internalType": "uint256", "name": "_min", "type": "uint256" },
+      { "internalType": "uint256", "name": "_max", "type": "uint256" }
+    ],
+    "name": "setTireMap",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -570,6 +631,16 @@
     "inputs": [],
     "name": "symbol",
     "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "tierMap",
+    "outputs": [
+      { "internalType": "uint256", "name": "minValue", "type": "uint256" },
+      { "internalType": "uint256", "name": "maxValue", "type": "uint256" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },

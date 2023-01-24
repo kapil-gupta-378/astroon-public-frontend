@@ -12,6 +12,7 @@ const SaleDetailCard = ({
   onClickStopSale,
   buyTokenHandler,
   saleRoundOn,
+  availableToken,
 }) => {
   return (
     <div
@@ -27,6 +28,12 @@ const SaleDetailCard = ({
       <div className={styles.row_border}>
         <p className={styles.heading}>Number Of Token:</p>
         <p className={styles.value}>{data.noOfToken}</p>
+      </div>
+      <div className={styles.row_border}>
+        <p className={styles.heading}>Token Sold:</p>
+        <p className={styles.value}>
+          {isSaleOn && saleRoundOn ? data.noOfToken - availableToken : 0}
+        </p>
       </div>
       <div className={styles.row_border}>
         <p className={styles.heading}>Start Time:</p>

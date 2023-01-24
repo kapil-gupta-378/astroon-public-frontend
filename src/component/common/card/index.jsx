@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import styles from './card.module.scss';
 import cardback from '../../../../public/assets/images/card_back.svg';
-const Card = () => {
+const Card = ({ image }) => {
   return (
     <div className={styles.card_wrap}>
       <div className={styles.card_img_wrap}>
@@ -18,7 +18,7 @@ const Card = () => {
         </div>
         <div className={styles.img_card}>
           <Image
-            src={'/assets/images/card_avatar.svg'}
+            src={image}
             width={322}
             height={287}
             layout="fixed"
@@ -27,8 +27,10 @@ const Card = () => {
           />
         </div>
       </div>
-      <h4>Lorem Ipsum</h4>
-      <p>Co-Founder</p>
+      <h4></h4>
+      <p></p>
+      {/* <h4>Lorem Ipsum</h4>
+      <p>Co-Founder</p> */}
     </div>
   );
 };

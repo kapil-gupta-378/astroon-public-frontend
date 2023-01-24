@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import Button from '../../common/button';
 import style from './whitepaper.module.scss';
-import image_not_found_image from '../../../../public/assets/images/gallery_management.svg';
+import image_not_found_image from '../../../../public/assets/images/WhitepaperSwap.svg';
 
 function Whitepaper() {
   return (

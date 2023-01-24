@@ -57,6 +57,27 @@
   }
 }
 
+@media only screen and (max-width: 1920px) {
+  .astroon_NFT_wrap {
+    .content_wrap {
+      .right_wrap {
+        height: 460px;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 1366px) {
+  .astroon_NFT_wrap {
+    .content_wrap {
+      .right_wrap {
+        position: relative;
+        width: 28%;
+        height: 390px;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 1023px) {
   .astroon_NFT_wrap {
     .content_wrap {
@@ -66,7 +87,8 @@
         width: 100%;
       }
       .right_wrap {
-        width: 45%;
+        width: 286px;
+        height: 354px;
       }
     }
   }

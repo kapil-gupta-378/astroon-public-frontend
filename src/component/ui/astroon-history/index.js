@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './astroonHistory.module.scss';
-import historyImage from '../../../../public/assets/images/nft_management.svg';
+import historyImage from '../../../../public/assets/images/ASTROON HISTORY.svg';
 
 const AstroonHistory = () => {
   return (

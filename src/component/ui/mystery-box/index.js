@@ -192,7 +192,7 @@ const MysteryBox = () => {
               alt={'mystery-box'}
             />
           </div>
-          {!isSaleOn ? (
+          {isSaleOn ? (
             <>
               <div className={styles.pricing}>
                 <h4>{`${nftSaleData.cost ? nftSaleData.cost : 0} ETH`}</h4>
