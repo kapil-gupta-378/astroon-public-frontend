@@ -39,17 +39,21 @@
           font-family: 'Roboto Slab';
           text-align: left;
         }
-        ol {
-          li {
-            font-family: 'Rubik';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 14px;
-            line-height: 20px;
-            color: #efefef;
-            margin-bottom: 10px;
-          }
+
+        p {
+          margin-top: 10px;
         }
+        // ol {
+        //   li {
+        //     font-family: 'Rubik';
+        //     font-style: normal;
+        //     font-weight: 400;
+        //     font-size: 14px;
+        //     line-height: 20px;
+        //     color: #efefef;
+        //     margin-bottom: 10px;
+        //   }
+        // }
       }
     }
   }
