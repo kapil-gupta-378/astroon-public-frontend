@@ -1,46 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import styles from './roadmap.module.scss';
 // import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 // import RoadmapMobileImage from '../../../../public/assets/images/roadmap_desktop.svg';
 import RoadmapImageNew from '../../../../public/assets/images/Astroon Roadmap_Final.svg';
-import ZoomView from '../ZoomView';
-import youtubeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.28.PNG';
-import loadingImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.32.PNG';
-import boxImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.38.PNG';
-import cafeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.42.PNG';
-import moonImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.47.PNG';
-import nftImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.52.PNG';
-import artImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.56.PNG';
-import gameImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.41.02.PNG';
-import baseImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.41.08.PNG';
+// import ZoomView from '../ZoomView';
+// import youtubeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.28.PNG';
+// import loadingImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.32.PNG';
+// import boxImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.38.PNG';
+// import cafeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.42.PNG';
+// import moonImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.47.PNG';
+// import nftImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.52.PNG';
+// import artImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.56.PNG';
+// import gameImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.41.02.PNG';
+// import baseImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.41.08.PNG';
 
 const Roadmap = () => {
-  const [showPreView, setShowPreView] = useState({
-    youtube: false,
-    loading: false,
-    box: false,
-    cafe: false,
-    moon: false,
-    nft: false,
-    art: false,
-    game: false,
-    base: false,
-  });
+  // const [showPreView, setShowPreView] = useState({
+  //   youtube: false,
+  //   loading: false,
+  //   box: false,
+  //   cafe: false,
+  //   moon: false,
+  //   nft: false,
+  //   art: false,
+  //   game: false,
+  //   base: false,
+  // });
 
-  const handlePreviewClose = () => {
-    setShowPreView(() => ({
-      youtube: false,
-      loading: false,
-      box: false,
-      cafe: false,
-      moon: false,
-      nft: false,
-      art: false,
-      game: false,
-      base: false,
-    }));
-  };
+  // const handlePreviewClose = () => {
+  //   setShowPreView(() => ({
+  //     youtube: false,
+  //     loading: false,
+  //     box: false,
+  //     cafe: false,
+  //     moon: false,
+  //     nft: false,
+  //     art: false,
+  //     game: false,
+  //     base: false,
+  //   }));
+  // };
   return (
     <>
       <div className={`${styles.roadmap_wrapper}`}>
@@ -55,7 +55,7 @@ const Roadmap = () => {
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: true,
@@ -79,11 +79,11 @@ const Roadmap = () => {
               <h5>01</h5>
               <p style={{ marginBottom: '0px' }}>Q1 2023</p>
               <p style={{ marginBottom: '0px' }}>Animated Series</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -108,11 +108,11 @@ const Roadmap = () => {
               <h5>02</h5>
               <p style={{ marginBottom: '0px' }}>Q1 2023</p>
               <p style={{ marginBottom: '0px' }}>Token Seed Sale</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -137,11 +137,11 @@ const Roadmap = () => {
               <h5>03</h5>
               <p style={{ marginBottom: '0px' }}>Q2 2023</p>
               <p style={{ marginBottom: '0px' }}>Token Private Sale</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -166,11 +166,11 @@ const Roadmap = () => {
               <h5>04</h5>
               <p style={{ marginBottom: '0px' }}>Q2 2023</p>
               <p style={{ marginBottom: '0px' }}>Token Public Sale</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -197,11 +197,11 @@ const Roadmap = () => {
               <p style={{ marginBottom: '0px' }}>
                 TGE (Token Generation Event )
               </p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -226,11 +226,11 @@ const Roadmap = () => {
               <h5>06</h5>
               <p style={{ marginBottom: '0px' }}>Q3 2023</p>
               <p style={{ marginBottom: '0px' }}>NFT Pre-Sale</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -255,11 +255,11 @@ const Roadmap = () => {
               <h5>07</h5>
               <p style={{ marginBottom: '0px' }}>Q3 2023</p>
               <p style={{ marginBottom: '0px' }}>NFT Public Sale</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -284,11 +284,11 @@ const Roadmap = () => {
               <h5>08</h5>
               <p style={{ marginBottom: '0px' }}>Q3 2023</p>
               <p style={{ marginBottom: '0px' }}>Game</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
 
-            <div
+            {/* <div
               onMouseEnter={() =>
                 setShowPreView({
                   youtube: false,
@@ -313,7 +313,7 @@ const Roadmap = () => {
               <h5>09</h5>
               <p style={{ marginBottom: '0px' }}>Q4 2023</p>
               <p style={{ marginBottom: '0px' }}>Game</p>
-            </ZoomView>
+            </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
           </div>

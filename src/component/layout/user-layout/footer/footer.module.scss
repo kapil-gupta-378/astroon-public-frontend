@@ -12,6 +12,7 @@
     justify-content: space-between;
     span {
       @include heading_6;
+      text-align: left;
     }
     .footer_social_media {
       display: flex;
@@ -43,6 +44,10 @@
     .container {
       max-width: 660px !important;
       padding: 0px;
+      span {
+        text-align: center;
+        margin-bottom: 15px;
+      }
     }
   }
 }
