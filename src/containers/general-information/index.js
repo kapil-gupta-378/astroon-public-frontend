@@ -15,6 +15,8 @@ import {
 
 const GeneralInformation = () => {
   const [facebookURL, setFacebookURL] = useState('');
+  const [instagramUrl, setInstagramUrl] = useState('');
+  const [tiktokUrl, setTiktokUrl] = useState('');
   const [twitterURL, setTwitterURL] = useState('');
   const [discordURL, setDiscordURL] = useState('');
   const [youtubeURL, setYoutubeURL] = useState('');
@@ -38,6 +40,8 @@ const GeneralInformation = () => {
       setYoutubeURL(response.data.youtubeUrl);
       setTelegramURL(response.data.telegramUrl);
       setEmailLink(response.data.emailLink);
+      setInstagramUrl(response.data.instagramUrl);
+      setTiktokUrl(response.data.tikTokUrl);
       setHomeVideoLink(response.data.youtubeVideoLink);
       setYoutubeThumbnailImage(response.data.youtubeThumbnailImage);
       setSettingsId(response.data.id);
@@ -62,6 +66,8 @@ const GeneralInformation = () => {
       emailLink: emailLink,
       youtubeVideoLink: homeVideoLink,
       youtubeThumbnailImage: youtubeThumbnailImage,
+      instagramUrl: instagramUrl,
+      tikTokUrl: tiktokUrl,
     };
     try {
       const response = await updateGeneralInformationApi(settingsId, data);
@@ -104,6 +110,22 @@ const GeneralInformation = () => {
             handleValue={twitterURL}
             handleOnChange={(e) => setTwitterURL(e.target.value)}
             title={'Twitter URL'}
+          />
+        </div>
+        <div className={styles.flex_box_item}>
+          <TextInput
+            height={'50px'}
+            handleValue={tiktokUrl}
+            handleOnChange={(e) => setTiktokUrl(e.target.value)}
+            title={'Tiktok URL'}
+          />
+        </div>
+        <div className={styles.flex_box_item}>
+          <TextInput
+            height={'50px'}
+            handleValue={instagramUrl}
+            handleOnChange={(e) => setInstagramUrl(e.target.value)}
+            title={'Instagram URL'}
           />
         </div>
         <div className={styles.flex_box_item}>
