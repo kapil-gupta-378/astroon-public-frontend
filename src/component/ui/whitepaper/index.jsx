@@ -11,13 +11,8 @@ function Whitepaper() {
         <h3>Whitepaper</h3>
         <div className={style.whitepaper_data}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            tristique consectetur placerat tortor. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Praesent tristique consectetur placerat
-            tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Praesent tristique consectetur placerat tortor. Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Praesent tristique
-            consectetur placerat tortor.
+            You can reach our whitepaper, which contains detailed information
+            about our project, here.
           </p>
           <Image
             src={image_not_found_image}
