@@ -6,7 +6,7 @@ import image_not_found_image from '../../../../public/assets/images/image_not_fo
 const NFTCard = ({ nftData }) => {
   const myRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
+  const [category, setCategory] = useState({ value: 'NA' });
   const ImageLoader = ({ src }) => {
     return `${src}`;
   };
@@ -31,6 +31,15 @@ const NFTCard = ({ nftData }) => {
       window.removeEventListener('resize', handleResize);
     };
   }, [myRef]);
+
+  // find category data from nft data in traints array comming from opensea setting it to usstate
+  useEffect(() => {
+    if (nftData.traits !== undefined) {
+      setCategory(
+        nftData.traits.find((value) => value.trait_type === 'category'),
+      );
+    }
+  }, [nftData]);
 
   return (
     <div
@@ -120,7 +129,7 @@ const NFTCard = ({ nftData }) => {
         {nftData?.traits[1]?.value && (
           <h6 className={styles.category_wrap}>
             {'Category  '}
-            <span>{nftData?.traits[1]?.value}</span>
+            <span>{category.value}</span>
           </h6>
         )}
         <div className={styles.nft_card_price}>

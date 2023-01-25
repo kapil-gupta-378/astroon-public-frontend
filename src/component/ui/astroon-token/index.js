@@ -20,13 +20,11 @@ const AstroonToken = () => {
           <div>
             <h3 className={styles.point_heading}>Buy For</h3>
 
-            <ol>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-              <li>Lorem ipsum dolor sit amet</li>
-            </ol>
+            <p>
+              You can get $AST to be used within the ASTROON ecosystem to
+              participate in pre-sales, to use in-game purchases and to join our
+              community.
+            </p>
           </div>
         </div>
       </div>

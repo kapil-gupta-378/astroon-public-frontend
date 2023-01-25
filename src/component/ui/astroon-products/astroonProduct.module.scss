@@ -17,13 +17,14 @@
     justify-content: center;
     align-items: center;
     .card_wrap_Animation {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 271px;
       .image_Animation {
-        background: url('../../../../public/assets/images/ANIMATION1.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 204px;
-        width: 272px;
+        position: relative;
+        height: 236px;
+        width: 377px;
       }
 
       h3 {
@@ -32,13 +33,14 @@
       }
     }
     .card_wrap_Token {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/2TOKEN.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+        position: relative;
+        height: 211px;
+        width: 242px;
       }
       h3 {
         @include heading_9;
@@ -46,11 +48,12 @@
       }
     }
     .card_wrap_NFT {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/NFT3.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
+        position: relative;
         height: 200px;
         width: 200px;
       }
@@ -60,13 +63,14 @@
       }
     }
     .card_wrap_Game {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/GAME4.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+        position: relative;
+        height: 215px;
+        width: 252px;
       }
       h3 {
         @include heading_9;
@@ -82,27 +86,30 @@
     justify-content: center;
     align-items: center;
     .card_wrap_Animation {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 271px;
       .image_Animation {
-        background: url('../../../../public/assets/images/ANIMATION1.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 204px;
-        width: 272px;
+        position: relative;
+        height: 236px;
+        width: 377px;
       }
+
       h3 {
         @include heading_9;
         margin: 0px;
       }
     }
     .card_wrap_Token {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/2TOKEN.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+        position: relative;
+        height: 211px;
+        width: 242px;
       }
       h3 {
         @include heading_9;
@@ -110,11 +117,12 @@
       }
     }
     .card_wrap_NFT {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/NFT3.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
+        position: relative;
         height: 200px;
         width: 200px;
       }
@@ -124,13 +132,14 @@
       }
     }
     .card_wrap_Game {
+      height: 271px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       .image_Animation {
-        background: url('../../../../public/assets/images/GAME4.svg');
-        background-repeat: no-repeat;
-        background-position: center center;
-        background-size: 100% 100%;
-        height: 200px;
-        width: 200px;
+        position: relative;
+        height: 215px;
+        width: 252px;
       }
       h3 {
         @include heading_9;
@@ -138,39 +147,44 @@
       }
     }
   }
-  .card_navigation_btn {
-    display: none;
-    margin: 55px 0px 80px 0px;
-    text-align: center;
-    .disable_btn {
-      background: #a246d3;
-      border-radius: 8px;
-      padding: 6px 24px;
-      outline: none;
-      border: none;
-      margin-right: 18px;
-      opacity: 50%;
-    }
-    .enable_btn {
-      background: #7d13b6;
-      border-radius: 8px;
-      padding: 6px 24px;
-      outline: none;
-      border: none;
-      margin-right: 18px;
-    }
+}
+
+.card_navigation_btn {
+  display: none;
+  margin: 55px 0px 80px 0px;
+  text-align: center;
+  .disable_btn {
+    background: #a246d3;
+    border-radius: 8px;
+    padding: 6px 24px;
+    outline: none;
+    border: none;
+    margin-right: 18px;
+    opacity: 50%;
+  }
+  .enable_btn {
+    background: #7d13b6;
+    border-radius: 8px;
+    padding: 6px 24px;
+    outline: none;
+    border: none;
+    margin-right: 18px;
   }
 }
 
 @media only screen and (max-width: 1366px) {
   .astroon_products_wrap {
-    padding: 0px 20%;
+    .products_content_wrap {
+      padding: 0 10%;
+    }
+    .products_content_slider_wrap {
+    }
   }
 } /* 980 */
 
 @media only screen and (max-width: 1023px) {
   .astroon_products_wrap {
-    padding: 0px 10%;
+    // padding: 0px 10%;
 
     .products_content_wrap {
       display: none;
@@ -179,7 +193,28 @@
     }
 
     .products_content_slider_wrap {
-      display: flex;
+      display: flex !important;
+      .card_wrap_Animation {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card_wrap_Token {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .card_wrap_NFT {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .card_wrap_Game {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
     .card_navigation_btn {
       display: block;
