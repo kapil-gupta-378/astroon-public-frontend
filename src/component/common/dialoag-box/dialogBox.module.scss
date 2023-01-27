@@ -31,6 +31,8 @@
       .dailog_title {
         @include heading_12;
         margin-bottom: 20px;
+        font-size: 20px;
+        font-family: 'mont black';
       }
     }
     .input_wrap {

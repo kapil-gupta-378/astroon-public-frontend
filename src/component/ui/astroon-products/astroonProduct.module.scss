@@ -6,7 +6,8 @@
   .astroon_products_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'Roboto Slab';
+    font-family: 'mont black';
+    font-size: 20px;
     margin-bottom: 60px;
   }
   .products_content_wrap {
@@ -29,6 +30,8 @@
 
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -44,6 +47,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -59,6 +64,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -74,6 +81,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -98,6 +107,8 @@
 
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -113,6 +124,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -128,6 +141,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }
@@ -143,6 +158,8 @@
       }
       h3 {
         @include heading_9;
+        font-family: 'mont black';
+        font-size: 20px;
         margin: 0px;
       }
     }

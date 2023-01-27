@@ -16,12 +16,15 @@ $fontsize: 12px;
       padding: 20px 7px;
       margin-bottom: 20px;
       span {
+        font-size: 12px;
+        font-family: 'mont black';
         margin-top: 10px;
       }
     }
     .wallet_connect_modal_btn {
       @include heading_7;
       background: #ffffff;
+      font-family: 'mont regular';
       border-radius: 268px;
       border: none;
       padding: 8px 25px;

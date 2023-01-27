@@ -7,7 +7,8 @@
   .astroon_animation_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'Roboto Slab';
+    font-family: 'mont black';
+    font-size: 20px;
     margin-bottom: 75px;
   }
   .content_wrap {
@@ -19,11 +20,11 @@
     .left_wrap {
       width: 45%;
       p {
-        font-family: 'Rubik';
+        font-family: 'mont regular';
         font-style: normal;
         font-weight: 500;
-        font-size: 18px;
-        line-height: 24px;
+        font-size: 12px;
+        line-height: 18px;
         margin-top: 40px;
         color: white;
       }

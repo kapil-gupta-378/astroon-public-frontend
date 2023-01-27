@@ -4,8 +4,9 @@
   .team_heading {
     @include heading_2;
     text-align: center;
+    font-size: 20px;
     margin: 60px;
-    font-family: 'Roboto Slab';
+    font-family: 'mont black';
   }
   .cards_wrap {
     display: flex;
