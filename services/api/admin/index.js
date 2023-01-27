@@ -113,16 +113,17 @@ export const forgotPasswordUserApi = async (data) => {
 export const verifyResetPasswordTokenUserApi = async (verifyPasswordToken) => {
   const xhr = await axios.request({
     method: 'get',
-    url: `${APP_URL}users/verify-reset-password-token/${verifyPasswordToken}`,
+    url: `${APP_URL}users/verify-reset-password-token?token=${verifyPasswordToken}`,
   });
 
   return xhr.data;
 };
 
 export const resetPasswordUserApi = async (data, resetPasswordToken) => {
+  data['token'] = resetPasswordToken;
   const xhr = await axios.request({
     method: 'post',
-    url: `${APP_URL}users/${resetPasswordToken}/reset-password`,
+    url: `${APP_URL}users/reset-password`,
     data,
   });
 
