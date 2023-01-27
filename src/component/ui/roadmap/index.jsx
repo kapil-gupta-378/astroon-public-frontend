@@ -3,7 +3,7 @@ import Image from 'next/image';
 import styles from './roadmap.module.scss';
 // import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 // import RoadmapMobileImage from '../../../../public/assets/images/roadmap_desktop.svg';
-import RoadmapImageNew from '../../../../public/assets/images/Astroon Roadmap_Final.svg';
+import RoadmapImageNew from '../../../../public/assets/images/astroon-roadmap.svg';
 // import ZoomView from '../ZoomView';
 // import youtubeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.28.PNG';
 // import loadingImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.32.PNG';

@@ -83,7 +83,7 @@ const AdminFAQTable = () => {
       if (res.success) {
         toast.success(res.message);
         setDeleteDialog(false);
-        getFaqDataApi(1, 6);
+        getFAQData(1, 6);
         setDeleteItemId('');
       }
     } catch (error) {
