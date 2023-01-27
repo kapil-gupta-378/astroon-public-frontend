@@ -15,11 +15,14 @@ import {
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const router = useRouter();
-  const { token } = router.query;
+  const token = router.asPath;
 
   useEffect(() => {
     const data = async () => {
-      await verifyResetPasswordToken(token);
+      let newToken = token.replace('/reset/reset?token=', '');
+
+      if (newToken !== '/reset/[token]')
+        await verifyResetPasswordToken(newToken);
     };
     if (token) {
       data();
@@ -43,12 +46,14 @@ const ResetPassword = () => {
   };
 
   const handleResetPassword = async () => {
+    let newToken = token.replace('/reset/reset?token=', '');
+
     if (password) {
       const data = {
         password: password,
       };
       try {
-        const res = await resetPasswordUserApi(data, token);
+        const res = await resetPasswordUserApi(data, newToken);
         if (res.success) {
           toast.success(res.message);
           router.push('/login');
