@@ -3,11 +3,14 @@
   margin: 0 0;
   width: 88%;
   margin: 0 auto;
+  padding-top: 124px;
   // margin-bottom: 269px;
   .roadmap_heading {
     h3 {
       @include heading_2;
       margin-bottom: 59px;
+      font-family: 'mont black';
+      font-size: 20px;
     }
   }
 

@@ -18,7 +18,7 @@
       background: linear-gradient(141.07deg, #faff00 -6.88%, #fe19c1 50.39%);
       border-radius: 268px;
       border: none;
-      font-family: 'Rubik';
+      // font-family: 'mont';
       font-style: normal;
       font-weight: 500;
       font-size: 14px;
@@ -33,26 +33,27 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-family: 'Roboto Slab';
+      font-family: 'mont black';
       font-style: normal;
       font-weight: 800;
-      font-size: 50px;
+      font-size: 32px;
       line-height: 90px;
     }
     h4 {
-      font-family: 'Roboto Slab';
+      font-family: '20px';
       font-style: normal;
       font-weight: 400;
-      font-size: 30px;
+      font-size: 20px;
       line-height: 30px;
       color: #ffffff;
+      font-family: 'mont regular';
     }
     p {
       width: 90%;
-      font-family: 'Rubik';
+      font-family: 'mont regular';
       font-style: normal;
       font-weight: 400;
-      font-size: 14px;
+      font-size: 12px;
       margin-top: 40px;
       // line-height: 30px;
       /* or 180% */

@@ -21,6 +21,8 @@
       border-radius: 20px;
       .accordion_btn {
         @include heading_5;
+        font-size: 15px;
+        font-family: 'mont regular';
         text-align: start;
         width: 100%;
         border: none;
@@ -48,6 +50,8 @@
     .accordion_body_wrap {
       .accordion_body {
         @include heading_7;
+        font-size: 12px;
+        font-family: 'mont regular';
         padding-left: 7px;
         padding-bottom: 25px;
       }
