@@ -3,11 +3,35 @@
   width: 100%;
   border-radius: 20px;
   margin-top: 60px;
+  position: relative;
+  .planet_image1 {
+    position: absolute;
+    width: 13%;
+    left: 11px;
+  }
+  .planet_image2 {
+    position: absolute;
+    width: 13%;
+    right: 11px;
+    top: -100px;
+  }
+  .planet_image3 {
+    position: absolute;
+    width: 13%;
+    left: 0px;
+    bottom: -190px;
+  }
+  .planet_image4 {
+    position: absolute;
+    width: 13%;
+    right: 0px;
+    bottom: -70px;
+  }
   .astroon_history_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'mont black';
-    font-size: 20px;
+    font-family: 'mont regular';
+    font-size: 36px;
     margin-bottom: 100px;
   }
   .content_wrap {
@@ -21,8 +45,8 @@
       font-family: 'mont regular';
       font-style: normal;
       font-weight: 400;
-      font-size: 12px;
-      line-height: 24px;
+      font-size: 24px;
+      line-height: 30px;
       margin-top: 40px;
       color: white;
     }
@@ -33,6 +57,15 @@
   }
 }
 
+@media only screen and (max-width: 1366px) {
+  .astroon_history_wrap {
+    .content_wrap {
+      .left_wrap {
+        font-size: 16px;
+      }
+    }
+  }
+} /* 1024 */
 @media only screen and (max-width: 1023px) {
   .astroon_history_wrap {
     .astroon_history_heading {
@@ -55,6 +88,7 @@
   .astroon_history_wrap {
     .astroon_history_heading {
       margin-bottom: 8px;
+      font-size: 30px;
     }
     .content_wrap {
       flex-direction: column;

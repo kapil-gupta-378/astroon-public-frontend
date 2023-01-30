@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import styles from './astroonNFT.module.scss';
-import NFTImage from '../../../../public/assets/images/NFT.png';
+import NFTImage from '../../../../public/assets/images/nftColorfull.svg';
 const AstroonNFT = () => {
   return (
     <div className={`container ${styles.astroon_NFT_wrap}`}>
@@ -10,7 +10,7 @@ const AstroonNFT = () => {
         <div className={styles.left_wrap}>
           <p>
             {
-              'Each NFT consists of four different assets, each with its own score. The total score of the four assets that your NFT contains determines the value of your NFT. Our collection, which has four different value categories, includes 6625 bronze,1303 silver, 70 gold, and 2 platinum NFTs.If you have;'
+              'Each NFT consists of four different assets, each with its own score. The total score of the four assets that your NFT contains determines the value of your NFT. Our collection, which has four different value categories, includes 6625 bronze,1303 silver, 70 gold, and 2 platinum NFTs. '
             }
           </p>
           <div>

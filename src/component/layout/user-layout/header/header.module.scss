@@ -2,6 +2,10 @@ $fontsize: 12px;
 @import '../../../../../styles/typography.module';
 .header_wrapper {
   padding: 20px 0px;
+  background-image: url('../../../../../public/assets/images/stars.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   .wallet_connect_modal {
     display: flex;
     flex-direction: column;
@@ -17,7 +21,7 @@ $fontsize: 12px;
       margin-bottom: 20px;
       span {
         font-size: 12px;
-        font-family: 'mont black';
+        font-family: 'mont regular';
         margin-top: 10px;
       }
     }

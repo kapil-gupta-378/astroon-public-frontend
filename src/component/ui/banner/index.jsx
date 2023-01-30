@@ -1,6 +1,7 @@
 import React from 'react';
 import style from './banner.module.scss';
-// import HomePageImage from '../../../../public/assets/images/homepage.png';
+import HomePageImage from '../../../../public/assets/images/DUO.svg';
+import Image from 'next/image';
 function Banner() {
   return (
     <div className={style['home_wrp']}>
@@ -13,12 +14,12 @@ function Banner() {
           </h4>
           <p>
             Join the ASTROON community and be a part of this challenging and fun
-            story. 2.
+            story.
           </p>
         </div>
-        {/* <div className="home_images">
+        <div className="home_images">
           <Image src={HomePageImage} alt="" width="420px" height="570px" />
-        </div> */}
+        </div>
       </div>
     </div>
   );

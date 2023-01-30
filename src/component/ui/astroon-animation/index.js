@@ -9,9 +9,11 @@ const AstroonAnimation = () => {
       <div className={styles.content_wrap}>
         <div className={styles.left_wrap}>
           <p>
-            {
-              "An animated series suitable for all age audiences will be distributed on the world's largest streaming platforms.           Will Astro and Road be able to go to the moon? We don't know yet, but we trust them.                   Episodes of this adventure will be posted weekly on YouTube. Don't forget to support them by watching their journey."
-            }
+            An animated series suitable for all age audiences will be
+            distributed on the world&#39;s largest streaming platforms. Will
+            Astro and Roon be able to go to the moon? We don&#39;t know yet, but
+            we trust them. Episodes of this adventure will be posted weekly on
+            YouTube. Don&#39;t forget to support them by watching their journey.
           </p>
           <div>
             {/* <ol>

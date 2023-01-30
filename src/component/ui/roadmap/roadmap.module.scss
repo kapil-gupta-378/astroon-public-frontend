@@ -5,19 +5,41 @@
   margin: 0 auto;
   padding-top: 124px;
   // margin-bottom: 269px;
+  background-image: url('../../../../public/assets/images/stars.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  .planet_image1 {
+    width: 20%;
+    position: absolute;
+    top: 0px;
+  }
+  .planet_image2 {
+    width: 20%;
+    position: absolute;
+    top: 100px;
+    right: 0;
+  }
+  .planet_image3 {
+    width: 20%;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+  }
   .roadmap_heading {
     h3 {
       @include heading_2;
       margin-bottom: 59px;
-      font-family: 'mont black';
-      font-size: 20px;
+      font-family: 'mont regular';
+      font-size: 36px;
     }
   }
 
   .roadmap_image {
     width: 85%;
     margin: 0 auto;
-    position: relative;
+
     .roadmap_mobile {
       display: none !important;
     }
@@ -577,6 +599,11 @@
 @media screen and (max-width: 479px) {
   .roadmap_wrapper {
     width: 100%;
+    .roadmap_heading {
+      h3 {
+        font-size: 30px;
+      }
+    }
     .roadmap_container {
       padding: 0px !important;
     }
