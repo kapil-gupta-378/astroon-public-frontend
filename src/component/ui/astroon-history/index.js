@@ -12,16 +12,17 @@ const AstroonHistory = () => {
           <p>
             Welcome to ASTROON, a revolutionary crypto project featuring two
             cute characters, Astro and Roon! This project is designed to provide
-            users with an enchanting journey from the earth to the moon, while
-            experiencing and building a community.
+            users with an enchanting journey from the earth to the moon, beside
+            the experience you will be taking part in this journey also creating
+            our own and unique community.
           </p>
           <p>
             Our project features a token called $AST, which can be used to
             purchase and trade NFT collections and in-game items. Through these
             NFT collections, holders can earn daily $AST’s. Furthermore, we have
-            developed a series of mobile games based on Astro and Roon&#8217;s
+            developed a series of mobile games based on Astro and Roon’s
             exciting adventures, in order to spend more time with Astro and
-            Soon.
+            Roon.
           </p>
           <p>Join us on our mission to the moon, and let your journey begin!</p>
         </div>

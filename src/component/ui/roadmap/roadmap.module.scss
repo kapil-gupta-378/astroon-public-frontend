@@ -9,8 +9,8 @@
     h3 {
       @include heading_2;
       margin-bottom: 59px;
-      font-family: 'mont black';
-      font-size: 20px;
+      font-family: 'mont regular';
+      font-size: 36px;
     }
   }
 
@@ -577,6 +577,11 @@
 @media screen and (max-width: 479px) {
   .roadmap_wrapper {
     width: 100%;
+    .roadmap_heading {
+      h3 {
+        font-size: 30px;
+      }
+    }
     .roadmap_container {
       padding: 0px !important;
     }

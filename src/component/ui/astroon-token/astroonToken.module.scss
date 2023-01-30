@@ -7,8 +7,9 @@
   .astroon_token_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'mont black';
-    font-size: 20px;
+    font-family: 'mont regular';
+    font-size: 36px;
+    line-height: 40px;
     margin-bottom: 75px;
   }
   .content_wrap {
@@ -24,20 +25,21 @@
     .right_wrap {
       width: 40%;
       p {
-        font-family: 'black regular';
+        font-family: 'mont regular';
         font-style: normal;
         font-weight: 500;
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 30px;
         margin-top: 40px;
         color: #efefef;
       }
       div {
         .point_heading {
           @include heading_2;
-          font-size: 20px;
+          font-size: 30px;
+          line-height: 35px;
           text-align: center;
-          font-family: 'mont black';
+          font-family: 'mont regular';
           text-align: left;
         }
 
@@ -60,10 +62,21 @@
   }
 }
 
+@media only screen and (max-width: 1366px) {
+  .astroon_token_wrap {
+    .content_wrap {
+      .right_wrap {
+        p {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+} /* 1024 */
+
 @media only screen and (max-width: 1023px) {
   .astroon_token_wrap {
-    .astroon_token_heading {
-    }
     .content_wrap {
       flex-direction: column;
 
@@ -81,12 +94,6 @@
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          .point_heading {
-          }
-          ol {
-            li {
-            }
-          }
         }
       }
     }
@@ -95,6 +102,10 @@
 
 @media only screen and (max-width: 479px) {
   .astroon_token_wrap {
+    .astroon_token_heading {
+      font-size: 30px;
+      line-height: 35px;
+    }
     .content_wrap {
       .left_wrap {
         width: 80%;

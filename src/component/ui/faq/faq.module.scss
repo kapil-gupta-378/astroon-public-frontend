@@ -13,8 +13,9 @@
   .faq_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'mont black';
-    font-size: 20px;
+    font-family: 'mont regular';
+    font-size: 36px;
+    line-height: 40px;
     margin-bottom: 45px;
   }
   .accordion_wrap {
@@ -32,6 +33,15 @@
   }
 }
 
+@media (max-width: 1366px) {
+  .faq_wrap {
+    .faq_heading {
+      font-size: 30px;
+      line-height: 35px;
+    }
+  }
+}
+
 @media (min-width: 1200px) {
   .faq_wrap {
     max-width: 1084px !important;
@@ -40,6 +50,12 @@
 
 // 1024 -
 @media only screen and (max-width: 1199px) {
+  .faq_wrap {
+    .faq_heading {
+      font-size: 30px;
+      line-height: 36px;
+    }
+  }
 }
 // 980 -
 @media only screen and (max-width: 1023px) {
@@ -82,6 +98,12 @@
 }
 // 480 -
 @media only screen and (max-width: 649px) {
+  .faq_wrap {
+    .faq_heading {
+      font-size: 30px;
+      line-height: 35px;
+    }
+  }
 }
 // 375 -
 @media only screen and (max-width: 479px) {

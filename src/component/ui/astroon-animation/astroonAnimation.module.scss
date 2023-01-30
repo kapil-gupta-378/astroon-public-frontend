@@ -7,8 +7,8 @@
   .astroon_animation_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'mont black';
-    font-size: 20px;
+    font-family: 'mont regular';
+    font-size: 36px;
     margin-bottom: 75px;
   }
   .content_wrap {
@@ -23,8 +23,8 @@
         font-family: 'mont regular';
         font-style: normal;
         font-weight: 500;
-        font-size: 12px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 30px;
         margin-top: 40px;
         color: white;
       }
@@ -48,6 +48,19 @@
     }
   }
 }
+
+@media only screen and (max-width: 1366px) {
+  .astroon_animation_wrap {
+    .content_wrap {
+      .left_wrap {
+        p {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+} /* 1024 */
 
 @media only screen and (max-width: 1023px) {
   .astroon_animation_wrap {
@@ -77,10 +90,9 @@
 
 @media only screen and (max-width: 479px) {
   .astroon_animation_wrap {
-    .content_wrap {
-      .right_wrap {
-        width: 80%;
-      }
+    .astroon_animation_heading {
+      font-size: 30px;
+      line-height: 35px;
     }
   }
 } /* 375 */

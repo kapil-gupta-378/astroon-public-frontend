@@ -14,7 +14,7 @@ const AstroonToken = () => {
         <div className={styles.right_wrap}>
           <p>
             {
-              'Th!s adventure !s not only for ASTRO and ROON, but for all of us! $AST !s a ut!l!ty token for the commun!ty that helps our astronauts get !nto space. Our ut!l!ty token !s des!gned to have a l!m!ted supply of 25,000,000 un!ts. You can take your place !n the ASTROON ecosystem w!th $AST.'
+              'This adventure is not only for ASTRO and ROON, but for all of us! $AST is a utility token for the community that helps our astronauts get into space. Our utility token is designed to have a limited supply of 25,000,000 units. You can take your place in the ASTROON ecosystem with $AST. '
             }
           </p>
           <div>

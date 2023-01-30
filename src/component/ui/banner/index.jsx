@@ -13,7 +13,7 @@ function Banner() {
           </h4>
           <p>
             Join the ASTROON community and be a part of this challenging and fun
-            story. 2.
+            story.
           </p>
         </div>
         {/* <div className="home_images">
