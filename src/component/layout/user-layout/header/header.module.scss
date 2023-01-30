@@ -2,6 +2,10 @@ $fontsize: 12px;
 @import '../../../../../styles/typography.module';
 .header_wrapper {
   padding: 20px 0px;
+  background-image: url('../../../../../public/assets/images/stars.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   .wallet_connect_modal {
     display: flex;
     flex-direction: column;
