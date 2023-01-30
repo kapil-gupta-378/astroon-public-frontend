@@ -3,6 +3,30 @@
   width: 100%;
   border-radius: 20px;
   margin-top: 60px;
+  position: relative;
+  .planet_image1 {
+    position: absolute;
+    width: 13%;
+    left: 11px;
+  }
+  .planet_image2 {
+    position: absolute;
+    width: 13%;
+    right: 11px;
+    top: -100px;
+  }
+  .planet_image3 {
+    position: absolute;
+    width: 13%;
+    left: 0px;
+    bottom: -110px;
+  }
+  .planet_image4 {
+    position: absolute;
+    width: 13%;
+    right: 0px;
+    bottom: -70px;
+  }
   .astroon_history_heading {
     @include heading_2;
     text-align: center;

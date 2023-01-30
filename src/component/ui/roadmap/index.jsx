@@ -4,6 +4,9 @@ import styles from './roadmap.module.scss';
 // import RoadmapImage from '../../../../public/assets/images/roadmap.svg';
 // import RoadmapMobileImage from '../../../../public/assets/images/roadmap_desktop.svg';
 import RoadmapImageNew from '../../../../public/assets/images/astroon-roadmap.svg';
+import planet_image1 from '../../../../public/assets/images/planets/Group 91.svg';
+import planet_image2 from '../../../../public/assets/images/planets/Group 87.svg';
+import planet_image3 from '../../../../public/assets/images/planets/Group 90.svg';
 // import ZoomView from '../ZoomView';
 // import youtubeImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.28.PNG';
 // import loadingImage from '../../../../public/assets/images/Ekran Resmi 2023-01-18 16.40.32.PNG';
@@ -316,6 +319,16 @@ const Roadmap = () => {
             </ZoomView> */}
 
             {/* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> */}
+          </div>
+
+          <div className={styles.planet_image1}>
+            <Image src={planet_image1} alt="planet" layout="responsive" />
+          </div>
+          <div className={styles.planet_image2}>
+            <Image src={planet_image2} alt="planet" layout="responsive" />
+          </div>
+          <div className={styles.planet_image3}>
+            <Image src={planet_image3} alt="planet" layout="responsive" />
           </div>
         </div>
       </div>

@@ -288,8 +288,15 @@
 
 @media only screen and (max-width: 479px) {
   .astroon_products_wrap {
-    .astroon_products_heading {
-      font-size: 30px;
+    .products_content_slider_wrap {
+      .card_wrap_Animation {
+        position: relative;
+        height: 236px;
+        width: 312px;
+        h3 {
+          font-size: 25px;
+        }
+      }
     }
   }
 } /* 375 */

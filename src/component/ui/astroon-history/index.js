@@ -2,11 +2,21 @@ import Image from 'next/image';
 import React from 'react';
 import styles from './astroonHistory.module.scss';
 import historyImage from '../../../../public/assets/images/ASTROON HISTORY.svg';
+import planetImage from '../../../../public/assets/images/planets/Group 76.svg';
+import planetImage2 from '../../../../public/assets/images/planets/Group 78.svg';
+import planetImage3 from '../../../../public/assets/images/planets/Group 89.svg';
+import planetImage4 from '../../../../public/assets/images/planets/Group 91.svg';
 
 const AstroonHistory = () => {
   return (
     <div className={`container ${styles.astroon_history_wrap}`}>
+      <div className={styles.planet_image1}>
+        <Image src={planetImage} alt="planet" layout="responsive" />
+      </div>
       <h3 className={styles.astroon_history_heading}>ASTROON History</h3>
+      <div className={styles.planet_image2}>
+        <Image src={planetImage2} alt="planet" layout="responsive" />
+      </div>
       <div className={styles.content_wrap}>
         <div className={styles.left_wrap}>
           <p>
@@ -30,6 +40,12 @@ const AstroonHistory = () => {
         <div className={styles.right_wrap}>
           <Image src={historyImage} layout="responsive" alt="historyimage" />
         </div>
+      </div>
+      <div className={styles.planet_image3}>
+        <Image src={planetImage3} alt="planet" layout="responsive" />
+      </div>
+      <div className={styles.planet_image4}>
+        <Image src={planetImage4} alt="planet" layout="responsive" />
       </div>
     </div>
   );

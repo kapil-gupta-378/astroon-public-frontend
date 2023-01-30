@@ -617,3 +617,32 @@ body {
     width: 160px !important;
   }
 }
+
+// css for coming soon modal of connect wallet buton in header
+
+.coming_soon_modal {
+  .modal-dialog {
+    .modal-content {
+      .modal-body {
+        padding: 0px;
+        //   background: white;
+        //   background-image: url('../public/assets/images/FAQ_Background.svg');
+        //   background-repeat: no-repeat;
+        //   background-position: center;
+        //   background-size: 100%;
+        //   height: 350px;
+        //   // animation:  3s infinite;
+        //   animation: changeBg 3s linear infinite 0s;
+      }
+    }
+  }
+}
+
+// @keyframes changeBg {
+//   0% {
+//     background-image: url('../public/assets/images/ASTROON-SOON (1).svg');
+//   }
+//   100% {
+//     background-image: url('../public/assets/images/ASTROON-COMING-SOON.svg');
+//   }
+// }

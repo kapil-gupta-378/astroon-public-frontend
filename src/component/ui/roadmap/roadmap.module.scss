@@ -5,6 +5,24 @@
   margin: 0 auto;
   padding-top: 124px;
   // margin-bottom: 269px;
+  position: relative;
+  .planet_image1 {
+    width: 20%;
+    position: absolute;
+    top: 0px;
+  }
+  .planet_image2 {
+    width: 20%;
+    position: absolute;
+    top: 100px;
+    right: 0;
+  }
+  .planet_image3 {
+    width: 20%;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+  }
   .roadmap_heading {
     h3 {
       @include heading_2;
@@ -17,7 +35,7 @@
   .roadmap_image {
     width: 85%;
     margin: 0 auto;
-    position: relative;
+
     .roadmap_mobile {
       display: none !important;
     }

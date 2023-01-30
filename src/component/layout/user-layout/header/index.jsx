@@ -5,110 +5,111 @@ import Link from 'next/link';
 import walletIcon from '../../../../../public/assets/images/wallet.png';
 import Button from '../../../common/button';
 import { useEffect } from 'react';
-import DialogBox from '../../../common/dialoag-box';
-import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
+// import DialogBox from '../../../common/dialoag-box';
+// import metamaskIcon from '../../../../../public/assets/images/metamask-icon.svg';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 import WebsiteLogo from '../../../common/website-logo';
-import {
-  getNonceApi,
-  varivarifieSignatureApi,
-} from '../../../../../services/api/user';
-import {
-  setIsUserConnected,
-  setToken,
-  setWalletAddress,
-} from '../../../../redux/persist/wallet/walletSlice';
+// import {
+//   getNonceApi,
+//   varivarifieSignatureApi,
+// } from '../../../../../services/api/user';
+// import {
+//   setIsUserConnected,
+//   setToken,
+//   // setWalletAddress,
+// } from '../../../../redux/persist/wallet/walletSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
-import { toast } from 'react-toastify';
-import { useRouter } from 'next/router';
-import {
-  addWalletEventListener,
-  checkWalletConnection,
-  connectWallet,
-} from '../../../../../services/web3/walletMothods';
+// import { getWeb3Provider } from '../../../../../services/web3/web3ProviderMethods';
+// import { toast } from 'react-toastify';
+// import { useRouter } from 'next/router';
+// import {
+//   addWalletEventListener,
+//   checkWalletConnection,
+//   connectWallet,
+// } from '../../../../../services/web3/walletMothods';
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 import { fetchWalletBalance } from '../../../../redux/persist/wallet/walletAction';
-const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
-const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
+import ComingSoonModal from '../../../ui/coming-soon-modal';
+// const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
+// const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
 const Header = () => {
   const dispatch = useDispatch();
   const [MobileNavExpended, setMobileNavExpended] = useState(false);
-  const route = useRouter();
+  // const route = useRouter();
   const [walletConnetDialog, setwalletConnectDialog] = useState(false);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
 
   useEffect(() => {
-    addWalletEventListener(disconnectWallet, disconnectWallet);
+    // addWalletEventListener(disconnectWallet, disconnectWallet);
     dispatch(fetchCurrencyData());
     dispatch(fetchUserDataAction());
     if (walletAddress) dispatch(fetchWalletBalance(walletAddress));
-    checkWalletConnection((isConnected) => {
-      if (!isConnected) {
-        disconnectWallet();
-      }
-    });
+    // checkWalletConnection((isConnected) => {
+    //   if (!isConnected) {
+    //     disconnectWallet();
+    //   }
+    // });
   }, []);
 
-  function disconnectWallet() {
-    dispatch(setIsUserConnected(false));
-    dispatch(setToken(''));
-  }
+  // function disconnectWallet() {
+  //   dispatch(setIsUserConnected(false));
+  //   dispatch(setToken(''));
+  // }
 
-  const userConnectWalletHandler = async () => {
-    try {
-      const adminWalletData = await connectWallet(
-        envNetworkId,
-        envNetworkIdInHex,
-      );
+  // const userConnectWalletHandler = async () => {
+  //   try {
+  //     const adminWalletData = await connectWallet(
+  //       envNetworkId,
+  //       envNetworkIdInHex,
+  //     );
 
-      varifieSignature(
-        adminWalletData.walletAddress,
-        adminWalletData.netwrokID,
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  //     varifieSignature(
+  //       adminWalletData.walletAddress,
+  //       adminWalletData.netwrokID,
+  //     );
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  const varifieSignature = async (address, networkId) => {
-    try {
-      const { web3 } = await getWeb3Provider();
-      const data = {
-        walletAddress: address,
-      };
-      const responseNonce = await getNonceApi(data);
-      if (responseNonce.success) {
-        let sign = await web3.eth.personal.sign(responseNonce.data, address);
-        const data = {
-          nonce: responseNonce.data,
-          signature: sign,
-          networkId: networkId,
-        };
-        const responseSignature = await varivarifieSignatureApi(data);
+  // const varifieSignature = async (address, networkId) => {
+  //   try {
+  //     const { web3 } = await getWeb3Provider();
+  //     const data = {
+  //       walletAddress: address,
+  //     };
+  //     const responseNonce = await getNonceApi(data);
+  //     if (responseNonce.success) {
+  //       let sign = await web3.eth.personal.sign(responseNonce.data, address);
+  //       const data = {
+  //         nonce: responseNonce.data,
+  //         signature: sign,
+  //         networkId: networkId,
+  //       };
+  //       const responseSignature = await varivarifieSignatureApi(data);
 
-        if (responseSignature.success) {
-          localStorage.setItem('isConnected', true);
-          localStorage.setItem('token', responseSignature.data.token);
-          localStorage.setItem('role', 'user');
-          dispatch(setIsUserConnected(true));
-          dispatch(setToken(responseSignature.data.token));
-          dispatch(setWalletAddress(address));
-          dispatch(fetchWalletBalance(address));
-          setwalletConnectDialog(false);
-          toast.success('Wallet Connected');
-          route.push(`/user-profile/${address}`);
-        }
-      }
-    } catch (error) {
-      setwalletConnectDialog(false);
-      console.error(error);
-    }
-  };
+  //       if (responseSignature.success) {
+  //         localStorage.setItem('isConnected', true);
+  //         localStorage.setItem('token', responseSignature.data.token);
+  //         localStorage.setItem('role', 'user');
+  //         dispatch(setIsUserConnected(true));
+  //         dispatch(setToken(responseSignature.data.token));
+  //         dispatch(setWalletAddress(address));
+  //         dispatch(fetchWalletBalance(address));
+  //         setwalletConnectDialog(false);
+  //         toast.success('Wallet Connected');
+  //         route.push(`/user-profile/${address}`);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     setwalletConnectDialog(false);
+  //     console.error(error);
+  //   }
+  // };
 
   return (
     <div className={`user_header_wrap ${styles.header_wrapper}`}>
@@ -185,7 +186,7 @@ const Header = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <DialogBox
+      {/* <DialogBox
         closeButtonHandler={() => setwalletConnectDialog(false)}
         mainHading={'Connect Your Wallet'}
         handleShow={walletConnetDialog}
@@ -207,7 +208,12 @@ const Header = () => {
             {'Wallet Connect'}
           </button>
         </div>
-      </DialogBox>
+      </DialogBox> */}
+
+      <ComingSoonModal
+        show={walletConnetDialog}
+        onHide={() => setwalletConnectDialog(false)}
+      />
     </div>
   );
 };
