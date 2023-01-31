@@ -25,7 +25,7 @@ const AstroonProduct = () => {
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     slidesToShow: 3,
     slidesToScroll: 3,
     autoplay: false,
@@ -41,7 +41,7 @@ const AstroonProduct = () => {
           slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
+          dots: false,
         },
       },
       {
@@ -102,7 +102,7 @@ const AstroonProduct = () => {
 
   return (
     <div className={`container ${styles.astroon_products_wrap}`}>
-      <h3 className={styles.astroon_products_heading}>ASTROON Product</h3>
+      <h3 className={styles.astroon_products_heading}>ASTROON Product(s)</h3>
       <div className={styles.products_content_wrap}>
         <div className={styles.card_wrap_Animation}>
           <div className={styles.image_Animation}>
