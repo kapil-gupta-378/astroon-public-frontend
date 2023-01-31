@@ -3,10 +3,10 @@ import styles from './footer.module.scss';
 import twitter from '../../../../../public/assets/images/twitter.svg';
 import insta from '../../../../../public/assets/images/instagram.svg';
 import telegram from '../../../../../public/assets/images/telegram.svg';
-import opensea from '../../../../../public/assets/images/opensea_icon.svg';
+// import opensea from '../../../../../public/assets/images/opensea_icon.svg';
 import discord from '../../../../../public/assets/images/discord_icon.svg';
 import contact from '../../../../../public/assets/images/contact.svg';
-import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
+// import privacyIcon from '../../../../../public/assets/images/privacy-Icon.svg';
 import facebookIcon from '../../../../../public/assets/images/facebook.svg';
 import tiktokIcon from '../../../../../public/assets/images/tiktok.svg';
 import Image from 'next/image';
@@ -58,17 +58,17 @@ const Footer = () => {
             alt="contact"
             onClick={() => setModalShow(true)}
           />
-          <a
-            style={{ height: '20px' }}
+          {/* <a
+            style={{ height: '17px' }}
             target={'_blank'}
             href="https://www.tutorialspoint.com/website_development/website_development_tutorial.pdf"
             rel="noreferrer"
           >
             <Image src={privacyIcon} width={18} height={18} alt="contact" />
-          </a>
-          <a target={'_blank'} href={`${data.openseaUrl}`} rel="noreferrer">
+          </a> */}
+          {/* <a target={'_blank'} href={`${data.openseaUrl}`} rel="noreferrer">
             <Image src={opensea} width={18} height={18} alt="opensea" />
-          </a>
+          </a> */}
           <a target={'_blank'} href={data.discordUrl} rel="noreferrer">
             <Image src={discord} width={18} height={18} alt="discord" />
           </a>

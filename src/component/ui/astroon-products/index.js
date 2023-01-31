@@ -102,7 +102,7 @@ const AstroonProduct = () => {
 
   return (
     <div className={`container ${styles.astroon_products_wrap}`}>
-      <h3 className={styles.astroon_products_heading}>ASTROON Product(s)</h3>
+      <h3 className={styles.astroon_products_heading}>ASTROON Products</h3>
       <div className={styles.products_content_wrap}>
         <div className={styles.card_wrap_Animation}>
           <div className={styles.image_Animation}>
