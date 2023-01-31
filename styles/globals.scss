@@ -623,8 +623,11 @@ body {
 .coming_soon_modal {
   .modal-dialog {
     .modal-content {
+      background-color: transparent;
+      border: none;
       .modal-body {
         padding: 0px;
+        border: none;
         //   background: white;
         //   background-image: url('../public/assets/images/FAQ_Background.svg');
         //   background-repeat: no-repeat;
