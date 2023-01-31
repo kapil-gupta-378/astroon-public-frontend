@@ -14,37 +14,36 @@ import teamImage4 from '../../../../public/assets/images/TEAM4.svg';
 import teamImage5 from '../../../../public/assets/images/TEAM5.svg';
 const Team = () => {
   const [slider] = useState('');
-  const [isIndex, setIsIndex] = useState({
-    prev: 0,
-    next: 0,
-    index: 0,
-  });
+  // const [isIndex, setIsIndex] = useState({
+  //   prev: 0,
+  //   next: 0,
+  //   index: 0,
+  // });
 
-  const beforeChange = (prev, next) => {
-    setIsIndex((value) => ({ ...value, prev: prev, next: next }));
-  };
-  const afterChange = (index) => {
-    setIsIndex((value) => ({ ...value, index: index }));
-  };
+  // const beforeChange = (prev, next) => {
+  //   setIsIndex((value) => ({ ...value, prev: prev, next: next }));
+  // };
+
+  // const afterChange = (index) => {
+  //   setIsIndex((value) => ({ ...value, index: index }));
+  // };
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToScroll: 1,
     autoplay: false,
     speed: 1000,
     autoplaySpeed: 2000,
     cssEase: 'linear',
-    beforeChange: beforeChange,
-    afterChange: afterChange,
+    // beforeChange: beforeChange,
+    // afterChange: afterChange,
     responsive: [
       {
         breakpoint: 1100,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true,
-          dots: true,
         },
       },
       {
@@ -74,9 +73,9 @@ const Team = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
         },
       },
       {
@@ -103,6 +102,7 @@ const Team = () => {
     slider.slickPrev();
   };
 
+  // console.log(isIndex);
   return (
     <div className={`container ${styles.team_wrap}`}>
       <h3 className={styles.team_heading}>Team</h3>
@@ -117,12 +117,7 @@ const Team = () => {
       </div>
 
       <div className={styles.card_navigation_btn}>
-        <button
-          className={
-            isIndex.index <= 0 ? styles.disable_btn : styles.enable_btn
-          }
-          onClick={previous}
-        >
+        <button className={styles.enable_btn} onClick={previous}>
           <Image
             src={backwordEnable}
             width={10}
@@ -131,12 +126,7 @@ const Team = () => {
             layout="fixed"
           />
         </button>
-        <button
-          className={
-            isIndex.index >= 13 ? styles.disable_btn : styles.enable_btn
-          }
-          onClick={next}
-        >
+        <button className={styles.enable_btn} onClick={next}>
           <Image
             src={cardBackIcon}
             width={10}
