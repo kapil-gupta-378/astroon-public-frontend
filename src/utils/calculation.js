@@ -5,13 +5,12 @@ export const removeZero = (value) => {
   return result;
 };
 
-export const getEligibilityNftPreSale = (tokenCount) => {
-  let result = 0;
-
-  if (tokenCount >= 100 && tokenCount <= 300) return (result = 1);
-  if (tokenCount >= 301 && tokenCount <= 600) return (result = 2);
-  if (tokenCount >= 601 && tokenCount <= 800) return (result = 3);
-  if (tokenCount >= 800) return (result = 4);
-
-  return result;
+export const getEligibilityNftPreSale = (tokenCount, lastBuy) => {
+  if (tokenCount >= 400 && tokenCount < 1500) return 1;
+  if (tokenCount >= 400 && tokenCount < 1500 && lastBuy === 1) return 2;
+  if (tokenCount >= 1500 && tokenCount < 3000) return 2;
+  if (tokenCount >= 3000 && tokenCount < 4500) return 4;
+  if (tokenCount >= 4500 && tokenCount < 6000) return 6;
+  if (tokenCount >= 6000 && tokenCount < 7500) return 8;
+  if (tokenCount >= 7500) return 10;
 };

@@ -8,7 +8,7 @@ import FormSelect from '../../../component/common/form-select/';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchNftPreSaleData } from '../../../redux/nft-sale/nftSaleAction';
 import {
-  convertEtherToUSD,
+  // convertEtherToUSD,
   convertEtherToWei,
 } from '../../../utils/currencyMethods';
 import {
@@ -17,8 +17,10 @@ import {
 } from '../../../utils/calculation';
 import { getWalletAstTokenBalance } from '../../../../services/web3/walletMothods';
 import {
+  approveBuyFromASTContract,
   buyPrivateSale,
   isNftPreSaleIsActive,
+  UpdateApproveBuyFromASTContract,
 } from '../../../../services/web3/nftPreSale';
 import { toast } from 'react-toastify';
 import {
@@ -27,6 +29,8 @@ import {
 } from '../../../../services/api/nftPreSale';
 import { setGlobalLoading } from '../../../redux/global-loading/globalLoadingSlice';
 import GlobalLoading from '../../common/global-loading';
+const AST_NFT_PRESALE_CONTRACT_ADDRESS =
+  process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
 const MysteryBox = () => {
   const [selectedQuantity, setSelectedQuantity] = useState({
     value: 1,
@@ -34,7 +38,7 @@ const MysteryBox = () => {
   });
   const [selecterOption, setSelecterOption] = useState();
 
-  const [usdPrice, setUsdPrice] = useState(0);
+  // const [usdPrice, setUsdPrice] = useState(0);
   const [mysteryBoxEligibility, setMysteryBoxEligibility] = useState('');
   const [isSaleOn, setIsSaleOn] = useState(false);
 
@@ -42,7 +46,7 @@ const MysteryBox = () => {
     (state) => state.walletReducer,
   );
 
-  const { nftSaleData, nftSaleLoading } = useSelector(
+  const { nftSaleData, nftSaleLoading, saleContractData } = useSelector(
     (state) => state.nftSaleReducer,
   );
 
@@ -55,7 +59,7 @@ const MysteryBox = () => {
   }, []);
 
   useEffect(() => {
-    fetchUSDRate();
+    // fetchUSDRate();
   }, [nftSaleData]);
 
   const isSaleOnCheck = async () => {
@@ -69,7 +73,10 @@ const MysteryBox = () => {
     const walletBalance = await getWalletAstTokenBalance(walletAddress);
 
     const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(walletAddress);
-    let eligibilityResult = getEligibilityNftPreSale(walletBalance);
+    let eligibilityResult = getEligibilityNftPreSale(
+      walletBalance,
+      lastMysteryBoxPurChase.count,
+    );
     // calculating current buy nft eligibity for user by  max buy number minus last buy number
     eligibilityResult =
       eligibilityResult - lastMysteryBoxPurChase.count < 0
@@ -82,6 +89,7 @@ const MysteryBox = () => {
     for (let i = 0; i < eligibilityResult; i++) {
       arr.push({ value: i + 1, label: `${i + 1}` });
     }
+
     setSelecterOption(arr);
 
     setMysteryBoxEligibility(eligibilityResult);
@@ -98,39 +106,56 @@ const MysteryBox = () => {
       const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(walletAddress);
 
       // throw erroe when user has less than 100 ast token
-      if (walletBalance < 100)
+      if (walletBalance < 400)
         throw new Error('You are not eligible for buy. Please buy token first');
 
       // getting eligibility for user to buy mystery box
       let eligibilityResult = getEligibilityNftPreSale(walletBalance);
 
-      // throw error when user has allready buy 4 mystery box
-      if (lastMysteryBoxPurChase === 4)
+      // throw error when user has allready buy 10 mystery box
+      if (lastMysteryBoxPurChase.count === 10)
         throw new Error('You can not buy more than 4 mystery box');
 
-      // throw error when user has bouth purchased all eligible mystery box
-      if (lastMysteryBoxPurChase >= eligibilityResult)
+      // throw error when user has purchased all eligible mystery box
+      if (lastMysteryBoxPurChase.count >= eligibilityResult)
         throw new Error(
           `You can not buy more than ${eligibilityResult} mystery box`,
         );
 
       // throw error if user select more than  eligibile quantity
-      if (selectedQuantity.value > eligibilityResult - lastMysteryBoxPurChase)
+      if (
+        selectedQuantity.value >
+        eligibilityResult - lastMysteryBoxPurChase.count
+      )
         throw new Error(
           `You can not buy more than ${
-            eligibilityResult - lastMysteryBoxPurChase
+            eligibilityResult - lastMysteryBoxPurChase.count
           }`,
         );
 
       // calculating inputs for buy methods
-      let buyValue = removeZero(
-        selectedQuantity.value * (+nftSaleData.cost + +nftSaleData.mintCost),
+      let nftCostInWei = removeZero(
+        convertEtherToWei(400 * selectedQuantity.value),
       );
-      buyValue = convertEtherToWei(buyValue);
 
-      //  invoking contract method for private buy of nft pre sale
+      // approving nft buy from user by ast Token main contact meothod approve()
+      if (lastMysteryBoxPurChase.count === 0) {
+        await approveBuyFromASTContract(
+          AST_NFT_PRESALE_CONTRACT_ADDRESS,
+          nftCostInWei,
+          walletAddress,
+        );
+      } else {
+        await UpdateApproveBuyFromASTContract(
+          AST_NFT_PRESALE_CONTRACT_ADDRESS,
+          nftCostInWei,
+          walletAddress,
+        );
+      }
+
+      //  invoking contract(NFT PreSale) method for private buy of nft pre sale
       const buyResult = await buyPrivateSale(
-        buyValue,
+        saleContractData.mintCost,
         selectedQuantity.value,
         walletAddress,
       );
@@ -138,7 +163,6 @@ const MysteryBox = () => {
       // creating array of nft token id puchesed by user for creating transition history
       // emmiting value fron contract output
       let tokenIds = [];
-
       if (Array.isArray(buyResult.events.Transfer)) {
         tokenIds = buyResult.events.Transfer.map(
           (value) => value.returnValues.tokenId,
@@ -173,12 +197,12 @@ const MysteryBox = () => {
     }
   };
 
-  const fetchUSDRate = async () => {
-    if (nftSaleData.cost) {
-      const price = await convertEtherToUSD(nftSaleData.cost);
-      setUsdPrice(price);
-    }
-  };
+  // const fetchUSDRate = async () => {
+  //   if (nftSaleData.cost) {
+  //     const price = await convertEtherToUSD(nftSaleData.cost);
+  //     setUsdPrice(price);
+  //   }
+  // };
 
   return (
     <div className={styles.main_wrap}>
@@ -195,8 +219,8 @@ const MysteryBox = () => {
           {isSaleOn ? (
             <>
               <div className={styles.pricing}>
-                <h4>{`${nftSaleData.cost ? nftSaleData.cost : 0} ETH`}</h4>
-                <h5>{`$${usdPrice}`}</h5>
+                <h4>{`${400} AST PER NFT`}</h4>
+                {/* <h5>{`$${usdPrice}`}</h5> */}
               </div>
 
               <div className={styles.select_wrap}>

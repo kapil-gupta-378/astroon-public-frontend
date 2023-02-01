@@ -108,3 +108,24 @@ export const setCategoryToContract = async (category, id, address) => {
     .send({ from: address });
   return response;
 };
+
+export const approveBuyFromASTContract = async (sepender, nftCost, address) => {
+  const astTokenMainContract = await getContractInstance();
+
+  const response = astTokenMainContract.methods
+    .approve(sepender, nftCost.toString())
+    .send({ from: address });
+  return response;
+};
+export const UpdateApproveBuyFromASTContract = async (
+  sepender,
+  nftCost,
+  address,
+) => {
+  const astTokenMainContract = await getContractInstance();
+
+  const response = astTokenMainContract.methods
+    .approve(sepender, nftCost.toString())
+    .send({ from: address });
+  return response;
+};
