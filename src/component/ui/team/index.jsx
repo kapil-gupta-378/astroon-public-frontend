@@ -113,9 +113,9 @@ const Team = () => {
         <Slider ref={(c) => (slider = c)} {...settings}>
           <Card
             image={teamImage1}
-            name={''}
+            name={'***'}
             designation={'Founder'}
-            socialHandle={''}
+            socialHandle={'-'}
           />
           <Card
             image={teamImage2}
@@ -125,9 +125,9 @@ const Team = () => {
           />
           <Card
             image={teamImage3}
-            name={''}
+            name={'***'}
             designation={'Chief Operating Officer'}
-            socialHandle={''}
+            socialHandle={'-'}
           />
           <Card
             image={teamImage4}
@@ -143,15 +143,15 @@ const Team = () => {
           />
           <Card
             image={teamImage6}
-            name={''}
+            name={'***'}
             designation={'Product Manager'}
-            socialHandle={''}
+            socialHandle={'-'}
           />
           <Card
             image={teamImage7}
-            name={''}
+            name={'***'}
             designation={'Legal Affairs'}
-            socialHandle={''}
+            socialHandle={'-'}
           />
           <Card
             image={teamImage8}
