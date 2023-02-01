@@ -36,6 +36,14 @@ body {
   //   url('../public/assets/font/mont/Mont-Trial-Regular.woff2') format('woff2'),
   //   url('../public/assets/font/mont/Mont-Trial-Regular.woff') format('woff');
 }
+@font-face {
+  font-family: 'mont Bold';
+  src: url('../public/assets/font/mont/Mont-Bold.ttf');
+  // src: url('../public/assets/font/mont/Mont-Trial-Regular.eot')
+  //     format('embedded-opentype'),
+  //   url('../public/assets/font/mont/Mont-Trial-Regular.woff2') format('woff2'),
+  //   url('../public/assets/font/mont/Mont-Trial-Regular.woff') format('woff');
+}
 
 // css for filter component
 
