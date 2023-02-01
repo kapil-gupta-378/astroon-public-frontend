@@ -53,6 +53,7 @@ export const startSale = async (data, address) => {
     .local()
     .format('X');
   const endTime = moment(data.endTime.replace('.000Z', '')).local().format('X');
+
   const response = await AstMysteryBoxContract.methods
     .startPreSale(cost, mintCost, maxSupply, startTime, endTime)
     .send({
