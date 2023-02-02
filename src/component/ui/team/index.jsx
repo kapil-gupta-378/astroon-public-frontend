@@ -12,6 +12,9 @@ import teamImage2 from '../../../../public/assets/images/TEAM2.svg';
 import teamImage3 from '../../../../public/assets/images/TEAM3.svg';
 import teamImage4 from '../../../../public/assets/images/TEAM4.svg';
 import teamImage5 from '../../../../public/assets/images/TEAM5.svg';
+import teamImage6 from '../../../../public/assets/images/Varlık 2.svg';
+import teamImage7 from '../../../../public/assets/images/Varlık 3.svg';
+import teamImage8 from '../../../../public/assets/images/Varlık 4.svg';
 const Team = () => {
   const [slider] = useState('');
   // const [isIndex, setIsIndex] = useState({
@@ -108,11 +111,54 @@ const Team = () => {
       <h3 className={styles.team_heading}>Team</h3>
       <div className={styles.cards_wrap}>
         <Slider ref={(c) => (slider = c)} {...settings}>
-          <Card image={teamImage1} />
-          <Card image={teamImage2} />
-          <Card image={teamImage3} />
-          <Card image={teamImage4} />
-          <Card image={teamImage5} />
+          <Card
+            image={teamImage1}
+            name={'***'}
+            designation={'Founder'}
+            socialHandle={'-'}
+          />
+          <Card
+            image={teamImage2}
+            name={'EYK62'}
+            designation={'Tech Lead'}
+            socialHandle={'@kayaekremyilmaz'}
+          />
+          <Card
+            image={teamImage3}
+            name={'***'}
+            designation={'Chief Operating Officer'}
+            socialHandle={'-'}
+          />
+          <Card
+            image={teamImage4}
+            name={'Sidar Kaya'}
+            designation={'Art Lead'}
+            socialHandle={'@sidkaya'}
+          />
+          <Card
+            image={teamImage5}
+            name={'BraveHeart BH'}
+            designation={'Content & Marketing Manager'}
+            socialHandle={'@BraveHeartNT'}
+          />
+          <Card
+            image={teamImage6}
+            name={'***'}
+            designation={'Product Manager'}
+            socialHandle={'-'}
+          />
+          <Card
+            image={teamImage7}
+            name={'***'}
+            designation={'Legal Affairs'}
+            socialHandle={'-'}
+          />
+          <Card
+            image={teamImage8}
+            name={'MZA61'}
+            designation={'Community Operations Manager'}
+            socialHandle={'@mzaydin'}
+          />
         </Slider>
       </div>
 
