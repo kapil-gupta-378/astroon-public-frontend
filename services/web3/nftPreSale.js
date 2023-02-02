@@ -20,7 +20,7 @@ export const isNftPreSaleIsActive = async () => {
 };
 
 export const buyPrivateSale = async (
-  nftNumber,
+  mintCost,
   selectedQuantity,
   userAddress,
 ) => {
@@ -29,7 +29,7 @@ export const buyPrivateSale = async (
   );
   const result = await AstMysteryBoxContract.methods
     .buyPresale(selectedQuantity.toString())
-    .send({ from: userAddress, value: nftNumber });
+    .send({ from: userAddress, value: mintCost });
   return result;
 };
 
