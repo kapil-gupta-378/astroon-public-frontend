@@ -29,7 +29,7 @@ const MysteryBoxSale = ({
       <h3 className={styles.sale_heading}>{'Mystery box sale'}</h3>
       <div className={styles.row_border}>
         <p className={styles.heading}>NFT Price:</p>
-        <p className={styles.value}>{data.cost}</p>
+        <p className={styles.value}>{data.cost}AST</p>
       </div>
       <div className={styles.row_border}>
         <p className={styles.heading}>Mint cost:</p>

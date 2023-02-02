@@ -362,8 +362,7 @@
         "internalType": "enum ASTNftSale.CATEGORY[]",
         "name": "_category",
         "type": "uint8[]"
-      },
-      { "internalType": "string[]", "name": "_tokenURI", "type": "string[]" }
+      }
     ],
     "name": "minting",
     "outputs": [],

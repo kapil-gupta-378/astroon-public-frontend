@@ -53,6 +53,7 @@ export const startSale = async (data, address) => {
     .local()
     .format('X');
   const endTime = moment(data.endTime.replace('.000Z', '')).local().format('X');
+
   const response = await AstMysteryBoxContract.methods
     .startPreSale(cost, mintCost, maxSupply, startTime, endTime)
     .send({
@@ -104,6 +105,27 @@ export const setCategoryToContract = async (category, id, address) => {
 
   const response = AstMysteryBoxContract.methods
     .updateCategory(category, id)
+    .send({ from: address });
+  return response;
+};
+
+export const approveBuyFromASTContract = async (sepender, nftCost, address) => {
+  const astTokenMainContract = await getContractInstance();
+
+  const response = astTokenMainContract.methods
+    .approve(sepender, nftCost.toString())
+    .send({ from: address });
+  return response;
+};
+export const UpdateApproveBuyFromASTContract = async (
+  sepender,
+  nftCost,
+  address,
+) => {
+  const astTokenMainContract = await getContractInstance();
+
+  const response = astTokenMainContract.methods
+    .approve(sepender, nftCost.toString())
     .send({ from: address });
   return response;
 };
