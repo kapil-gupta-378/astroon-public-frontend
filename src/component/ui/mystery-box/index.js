@@ -10,6 +10,7 @@ import { fetchNftPreSaleData } from '../../../redux/nft-sale/nftSaleAction';
 import {
   // convertEtherToUSD,
   convertEtherToWei,
+  convertWeiToEther,
 } from '../../../utils/currencyMethods';
 import {
   getEligibilityNftPreSale,
@@ -20,7 +21,6 @@ import {
   approveBuyFromASTContract,
   buyPrivateSale,
   isNftPreSaleIsActive,
-  UpdateApproveBuyFromASTContract,
 } from '../../../../services/web3/nftPreSale';
 import { toast } from 'react-toastify';
 import {
@@ -29,6 +29,7 @@ import {
 } from '../../../../services/api/nftPreSale';
 import { setGlobalLoading } from '../../../redux/global-loading/globalLoadingSlice';
 import GlobalLoading from '../../common/global-loading';
+import { setBalance } from '../../../redux/persist/wallet/walletSlice';
 const AST_NFT_PRESALE_CONTRACT_ADDRESS =
   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
 const MysteryBox = () => {
@@ -55,8 +56,8 @@ const MysteryBox = () => {
   useEffect(() => {
     isSaleOnCheck();
     dispatch(fetchNftPreSaleData());
-    calculateUserEligibility();
-  }, []);
+    if (saleContractData.cost) calculateUserEligibility();
+  }, [saleContractData.cost]);
 
   useEffect(() => {
     // fetchUSDRate();
@@ -73,15 +74,14 @@ const MysteryBox = () => {
     const walletBalance = await getWalletAstTokenBalance(walletAddress);
 
     const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(walletAddress);
+
+    // calculating current buy nft eligibity for user
     let eligibilityResult = getEligibilityNftPreSale(
-      walletBalance,
+      walletBalance +
+        Number(convertWeiToEther(saleContractData.cost)) *
+          lastMysteryBoxPurChase.count,
       lastMysteryBoxPurChase.count,
     );
-    // calculating current buy nft eligibity for user by  max buy number minus last buy number
-    eligibilityResult =
-      eligibilityResult - lastMysteryBoxPurChase.count < 0
-        ? 0
-        : eligibilityResult - lastMysteryBoxPurChase.count;
 
     let arr = [];
 
@@ -89,7 +89,6 @@ const MysteryBox = () => {
     for (let i = 0; i < eligibilityResult; i++) {
       arr.push({ value: i + 1, label: `${i + 1}` });
     }
-
     setSelecterOption(arr);
 
     setMysteryBoxEligibility(eligibilityResult);
@@ -139,19 +138,11 @@ const MysteryBox = () => {
       );
 
       // approving nft buy from user by ast Token main contact meothod approve()
-      if (lastMysteryBoxPurChase.count === 0) {
-        await approveBuyFromASTContract(
-          AST_NFT_PRESALE_CONTRACT_ADDRESS,
-          nftCostInWei,
-          walletAddress,
-        );
-      } else {
-        await UpdateApproveBuyFromASTContract(
-          AST_NFT_PRESALE_CONTRACT_ADDRESS,
-          nftCostInWei,
-          walletAddress,
-        );
-      }
+      await approveBuyFromASTContract(
+        AST_NFT_PRESALE_CONTRACT_ADDRESS,
+        nftCostInWei,
+        walletAddress,
+      );
 
       //  invoking contract(NFT PreSale) method for private buy of nft pre sale
       const buyResult = await buyPrivateSale(
@@ -185,6 +176,8 @@ const MysteryBox = () => {
         if (postResponse.success) {
           toast.success('Mystery box buy successfully');
           isSaleOnCheck();
+          const walletBalance = await getWalletAstTokenBalance(walletAddress);
+          dispatch(setBalance(walletBalance));
           dispatch(fetchNftPreSaleData());
           calculateUserEligibility();
           dispatch(setGlobalLoading(false));
