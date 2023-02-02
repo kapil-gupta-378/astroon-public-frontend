@@ -37,6 +37,7 @@ import moment from 'moment';
 import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
 import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
+import NFTRewardModal from '../../component/ui/nft-reward-modal';
 const Profile = () => {
   const { userData, claimingToken, tokenBuyHistory, nftBuyHistory } =
     useSelector((state) => state.userReducer);
@@ -50,6 +51,7 @@ const Profile = () => {
 
   const [historyModal, setHistoryModal] = useState(false);
   const [nftHistoryModal, setNftHistoryModal] = useState(false);
+  const [nftRewardModal, setNftRewardModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
@@ -413,6 +415,12 @@ const Profile = () => {
                     >
                       NFT History
                     </div>
+                    <div
+                      onClick={() => setNftRewardModal(true)}
+                      className={styles.wallet_address}
+                    >
+                      NFT Reward
+                    </div>
                   </>
                 )}
               </div>
@@ -511,6 +519,10 @@ const Profile = () => {
             handleShow={nftHistoryModal}
             leftButtonHandler={() => setNftHistoryModal(false)}
             reveal={isNftSaleRevealed}
+          />
+          <NFTRewardModal
+            handleShow={nftRewardModal}
+            leftButtonHandler={() => setNftRewardModal(false)}
           />
         </main>
       ) : (
