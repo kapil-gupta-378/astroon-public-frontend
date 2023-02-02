@@ -139,7 +139,7 @@ const Header = () => {
           />
           <Navbar.Collapse className="items_wrap" id="basic-navbar-nav">
             <Nav className="">
-              {/* <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/'}>Home</Link>
               </Nav.Item>
               <Nav.Item
@@ -165,7 +165,7 @@ const Header = () => {
               </Nav.Item>
               <Nav.Item onClick={() => setMobileNavExpended(false)}>
                 <Link href={'/blog'}>Blog</Link>
-              </Nav.Item> */}
+              </Nav.Item>
               {!isUserConnected && (
                 <Nav.Item onClick={() => setMobileNavExpended(false)}>
                   <Button
