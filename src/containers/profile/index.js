@@ -405,7 +405,7 @@ const Profile = () => {
                       onClick={() => setHistoryModal(true)}
                       className={styles.wallet_address}
                     >
-                      Transaction History
+                      Token History
                     </div>
                     <div
                       onClick={() => setNftHistoryModal(true)}

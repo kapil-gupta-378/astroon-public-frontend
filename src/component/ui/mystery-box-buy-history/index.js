@@ -82,7 +82,7 @@ const MysteryBoxBuyHistory = ({
                           <tr key={item.id}>
                             <th scope="row">{idx + 1}</th>
                             <td>{item.quantity}</td>
-                            <td>{item.price} ETH</td>
+                            <td>{item.price * item.quantity} AST</td>
                             <td>
                               {moment(item.createdAt).format(
                                 'DD/MM/YYYY h:mma',

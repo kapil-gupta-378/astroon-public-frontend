@@ -3,6 +3,8 @@ import React from 'react';
 import TextInput from '../text-input';
 import styles from './dialogBox.module.scss';
 import crossIcon from '../../../../public/assets/images/crossIcon.svg';
+import PropTypes from 'prop-types';
+
 const DialogBox = ({
   mainHading,
   content,
@@ -78,6 +80,20 @@ const DialogBox = ({
 
 DialogBox.defaultProps = {
   height: 'auto',
+};
+
+DialogBox.propTypes = {
+  mainHading: PropTypes.string,
+  content: PropTypes.element,
+  leftButtonHandler: PropTypes.func,
+  rightButtonHandler: PropTypes.func,
+  leftButtonName: PropTypes.string,
+  rightButtonName: PropTypes.string,
+  handleShow: PropTypes.func,
+  inputValue: PropTypes.any,
+  onChangeInput: PropTypes.func,
+  children: PropTypes.element,
+  closeButtonHandler: PropTypes.func,
 };
 
 export default DialogBox;

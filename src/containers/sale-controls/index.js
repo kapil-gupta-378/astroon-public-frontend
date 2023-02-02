@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import Web3 from 'web3';
 import { updateTokenSaleDataApi } from '../../../services/api/astroon-token';
 import {
   getPrivateUserMerkleRootApi,
@@ -18,6 +19,7 @@ import {
   revealMysteryBoxData,
   setBaseUri,
   setCategoryToContract,
+  setRewardContractAddress,
   startSale,
 } from '../../../services/web3/nftPreSale';
 import {
@@ -29,6 +31,7 @@ import EditSaleDetailsModal from '../../component/common/edit-sale-details-modal
 import SaleDetailCard from '../../component/common/sale-detail-card';
 import MysteryBoxSale from '../../component/ui/mystery-box-sale';
 import EditMysteryBoxSaleDataModal from '../../component/ui/mystery-box-sale-data-modal';
+import RewardContractModal from '../../component/ui/reward-contract-modal';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
@@ -39,6 +42,8 @@ const SaleControls = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [isNftSaleOnState, setIsNftSaleOnState] = useState(false);
   const [showEditMysteryBoxModal, setShowEditMysteryBoxModal] = useState(false);
+  const [rewardContractAd, setRewardContractAd] = useState('');
+  const [rewardModalShow, setRewardModalShow] = useState(false);
   const csvInputRef = useRef();
   const [newSaleData, setNewSaleData] = useState({
     saleType: '',
@@ -278,9 +283,21 @@ const SaleControls = () => {
   const handleRevealMysteryBox = async () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
+
+      if (!rewardContractAd)
+        throw new Error('Please enter reward contract address');
+
+      if (!Web3.utils.isAddress(rewardContractAd))
+        throw new Error('Please enter valid reward contract address');
+
       dispatch(setGlobalLoading(true));
+
+      let contractResponse = await setRewardContractAddress(
+        rewardContractAd,
+        walletAddress,
+      );
+
       const categoryData = await getNFTCategoryData();
-      let contractResponse;
       if (categoryData.data.categoriesId && categoryData.data.tokenIds) {
         // setting data for upcoming reward on pre sale nft by sending
         // token id and category
@@ -299,6 +316,15 @@ const SaleControls = () => {
       dispatch(setGlobalLoading(false));
     } catch (error) {
       dispatch(setGlobalLoading(false));
+      toast.error(error.message ? error.message : error.toString().slice(7));
+    }
+  };
+
+  const openRewardAddressModal = () => {
+    try {
+      if (!isConnected) throw new Error('Please Connect Your Wallet');
+      setRewardModalShow(true);
+    } catch (error) {
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
@@ -383,7 +409,7 @@ const SaleControls = () => {
           editSaleDetailsHander={() => editMysteryBoxSale(nftSaleData)}
           saleRoundOn={isNftSaleOnState}
           isSaleOn={isNftSaleOnState}
-          revealHandler={handleRevealMysteryBox}
+          revealHandler={openRewardAddressModal}
           uploadCsvHandler={uploadCsvHandler}
           isRevealed={isNftSaleRevealed}
           saleContractData={saleContractData}
@@ -405,6 +431,19 @@ const SaleControls = () => {
         modalClosehandler={hideMyterySaleEditModalHandler}
         rightButtonHandler={() => updateNftSaleData(newMysteryBoxSaleData)}
         loading={false}
+      />
+      <RewardContractModal
+        handleShow={rewardModalShow}
+        mainHading="Please Enter Reward Contract Address"
+        rightButtonHandler={handleRevealMysteryBox}
+        leftButtonHandler={() => {
+          setRewardContractAd('');
+          setRewardModalShow(false);
+        }}
+        leftButtonName="Cancel"
+        rightButtonName="Reveal"
+        onChange={(e) => setRewardContractAd(e.target.value)}
+        value={rewardContractAd}
       />
     </main>
   );
