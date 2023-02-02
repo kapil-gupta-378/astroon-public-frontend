@@ -2,33 +2,31 @@ import moment from 'moment';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Button from '../../common/button';
 import GlobalLoading from '../../common/global-loading';
-import styles from './MysteryBoxBuyHistory.module.scss';
-
-const MysteryBoxBuyHistory = ({
+import styles from './NFTRewardModal.module.scss';
+const NFTRewardModal = ({
   handleShow,
   leftButtonHandler,
+  claimHandler,
   fetchMoreData,
   loading,
   dataCount,
-  data = [
-    { saleType: 'NFT Pre', count: '2', price: '0.02', createdAt: '02/01/2023' },
-  ],
-  reveal,
+  data = [{ saleType: 'sdofak', buyToken: 'soidadfmo', createdAt: 'doisgifj' }],
 }) => {
   return (
     <>
       <Modal
         show={handleShow}
         onHide={leftButtonHandler}
-        size="lg"
+        size="xl"
         aria-labelledby="contained-modal-title-vcenter"
         centered={true}
         className={'claim_token_modal'}
       >
         <Modal.Header closeVariant={'white'} closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Transaction History
+            Claim Token
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -70,25 +68,44 @@ const MysteryBoxBuyHistory = ({
                       <tr>
                         <th scope="col">S.No.</th>
                         <th scope="col">NFT</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">Category</th>
                         <th scope="col">Purchase time</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Available claim</th>
+                        <th scope="col">Token claimed</th>
                       </tr>
                     </thead>
 
                     <tbody>
                       {data.map((item, idx) => {
                         return (
-                          <tr key={item.id}>
+                          <tr key={idx}>
                             <th scope="row">{idx + 1}</th>
-                            <td>{item.quantity}</td>
-                            <td>{item.price * item.quantity} AST</td>
+                            <td>{item.saleType}</td>
+                            <td>{item.totalBuyToken}</td>
                             <td>
-                              {moment(item.createdAt).format(
+                              {moment(item.updatedAt).format(
                                 'DD/MM/YYYY h:mma',
                               )}
                             </td>
-                            <td>{reveal ? 'Revealed' : 'Not reveal'}</td>
+                            <td>{item.remainingClaim}</td>
+                            <td>{item.claimToken}</td>
+                            {
+                              <td>
+                                <Button
+                                  disabled={item.remainingClaim === 0}
+                                  onClick={() =>
+                                    claimHandler(
+                                      item.remainingClaim,
+                                      item.saleRound,
+                                    )
+                                  }
+                                >
+                                  {item.remainingClaim === 0
+                                    ? 'Claimed'
+                                    : 'Claim'}
+                                </Button>
+                              </td>
+                            }
                           </tr>
                         );
                       })}
@@ -111,4 +128,4 @@ const MysteryBoxBuyHistory = ({
   );
 };
 
-export default MysteryBoxBuyHistory;
+export default NFTRewardModal;

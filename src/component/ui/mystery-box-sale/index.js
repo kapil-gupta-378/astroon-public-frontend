@@ -65,7 +65,9 @@ const MysteryBoxSale = ({
             <Button disabled={isSaleOn} onClick={saleStartHandler}>{`${
               isSaleOn ? 'Sale is on' : 'Start'
             } `}</Button>
-            <Button onClick={editSaleDetailsHander}>Edit</Button>
+            <Button disabled={isSaleOn} onClick={editSaleDetailsHander}>
+              Edit
+            </Button>
           </>
         ) : (
           <Button

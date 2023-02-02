@@ -76,7 +76,9 @@ const SaleDetailCard = ({
                 isSaleOn ? onClickStopSale(data.saleType) : saleStartHandler()
               }
             >{`${isSaleOn ? 'Stop' : 'Start'} `}</Button>
-            <Button onClick={editSaleDetailsHander}>Edit</Button>
+            <Button disabled={isSaleOn} onClick={editSaleDetailsHander}>
+              Edit
+            </Button>
           </>
         ) : (
           <Button
