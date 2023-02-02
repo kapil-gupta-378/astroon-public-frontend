@@ -133,8 +133,8 @@ const MysteryBox = () => {
         );
 
       // calculating inputs for buy methods
-      let nftCostInWei = removeZero(
-        convertEtherToWei(400 * selectedQuantity.value),
+      let nftCostInWei = convertEtherToWei(
+        removeZero(400 * selectedQuantity.value),
       );
 
       // approving nft buy from user by ast Token main contact meothod approve()
@@ -145,8 +145,11 @@ const MysteryBox = () => {
       );
 
       //  invoking contract(NFT PreSale) method for private buy of nft pre sale
+      const mintCost = removeZero(
+        saleContractData.mintCost * selectedQuantity.value,
+      );
       const buyResult = await buyPrivateSale(
-        saleContractData.mintCost,
+        mintCost,
         selectedQuantity.value,
         walletAddress,
       );
