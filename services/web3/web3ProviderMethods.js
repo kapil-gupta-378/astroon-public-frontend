@@ -12,6 +12,10 @@ const AST_NFT_PRESALE_CONTRACT_ADDRESS =
   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
 import AST_NFT_PRESALE_CONTRACT_ABI from '../../smart-contracts/contract-abi/astroon_nft_preSale_abi.json';
 
+const AST_NFT_PRESALE_REWARD_CONTRACT_ADDRESS =
+  process.env.NEXT_PUBLIC_AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS;
+import AST_NFT_PRESALE_REWARD_CONTRACT_ABI from '../../smart-contracts/contract-abi/astroon_NFT_reward.json';
+
 export const getWeb3Provider = () => {
   return new Promise(async (resolve, reject) => {
     if (window.ethereum) {
@@ -55,6 +59,10 @@ export const getContractInstance = async (contractName) => {
     case 'NFT PRESALE CONTRACT':
       abi = AST_NFT_PRESALE_CONTRACT_ABI;
       contractAddress = AST_NFT_PRESALE_CONTRACT_ADDRESS;
+      break;
+    case 'NFT REWARD CONTRACT':
+      abi = AST_NFT_PRESALE_REWARD_CONTRACT_ABI;
+      contractAddress = AST_NFT_PRESALE_REWARD_CONTRACT_ADDRESS;
       break;
     default:
       abi = AST_Token_Core_Contract_ABI;

@@ -92,7 +92,7 @@ const TokenBuyHistory = ({
               </InfiniteScroll>
             ) : (
               <div className={styles.spinner_wrap}>
-                <div className="spinner-border text-primary" role="status">
+                <div className="spinner-border text-white" role="status">
                   <span className="sr-only"></span>
                 </div>
               </div>

@@ -61,3 +61,11 @@ export const postNftPreSaleCsvApi = async (data) => {
   });
   return xhr.data;
 };
+
+export const getNFTRewardApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-reward`,
+  });
+  return xhr.data;
+};

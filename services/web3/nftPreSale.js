@@ -130,7 +130,10 @@ export const UpdateApproveBuyFromASTContract = async (
   return response;
 };
 
-export const setRewardContractAddress = async (contractAddress, address) => {
+export const setRewardContractAddressToPreSale = async (
+  contractAddress,
+  address,
+) => {
   const astTokenMainContract = await getContractInstance(
     'NFT PRESALE CONTRACT',
   );

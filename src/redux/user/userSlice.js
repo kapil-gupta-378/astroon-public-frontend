@@ -6,6 +6,8 @@ const initialState = {
   claimingToken: [],
   tokenBuyHistory: [],
   nftBuyHistory: [],
+  nftRewardData: [],
+  nftRewardCount: 0,
 };
 
 export const userSlice = createSlice({
@@ -39,6 +41,12 @@ export const userSlice = createSlice({
     setBuyNftHistory: (state, action) => {
       state.nftBuyHistory = action.payload;
     },
+    setNftRewardData: (state, action) => {
+      state.nftRewardData = action.payload;
+    },
+    setNftRewardCount: (state, action) => {
+      state.nftRewardCount = action.payload;
+    },
   },
 });
 
@@ -51,6 +59,8 @@ export const {
   setClaimingTokenNumber,
   setBuyTokenHistory,
   setBuyNftHistory,
+  setNftRewardData,
+  setNftRewardCount,
 } = userSlice.actions;
 
 export default userSlice.reducer;

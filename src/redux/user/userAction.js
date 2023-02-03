@@ -3,14 +3,20 @@ import {
   getTokenBuyTransaction,
   getTokenDataApi,
 } from '../../../services/api/astroon-token';
-import { getNFTPurchaseDataApi } from '../../../services/api/nftPreSale';
+import {
+  getNFTPurchaseDataApi,
+  getNFTRewardApi,
+} from '../../../services/api/nftPreSale';
 import { getUserDataApi } from '../../../services/api/user';
+// import { checkReward } from '../../../services/web3/nftReward';
 import { getCurrentTokenToBeClaimed } from '../../../services/web3/tokenMothods';
 import { convertWeiToEther } from '../../utils/currencyMethods';
 import {
   setBuyNftHistory,
   setBuyTokenHistory,
   setClaimingTokenNumber,
+  // setNftRewardCount,
+  setNftRewardData,
   setUserData,
   setUserDataLoading,
 } from './userSlice';
@@ -56,6 +62,12 @@ export const fetchUserDataAction = (walletAddress) => {
         dispatch(setBuyNftHistory(lastMysteryBoxPurChase.data));
       }
 
+      // fetching nft reward per day data from BE api
+      const nftReward = await getNFTRewardApi();
+      dispatch(setNftRewardData(nftReward.data));
+      // fetching reward count from reward contract method
+      // const rewardCount = await checkReward();
+      // dispatch(setNftRewardCount(rewardCount));
       dispatch(setUserDataLoading(false));
     } catch (error) {
       console.error(error);
