@@ -39,8 +39,14 @@ import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import NFTRewardModal from '../../component/ui/nft-reward-modal';
 const Profile = () => {
-  const { userData, claimingToken, tokenBuyHistory, nftBuyHistory } =
-    useSelector((state) => state.userReducer);
+  const {
+    userData,
+    claimingToken,
+    tokenBuyHistory,
+    nftBuyHistory,
+    nftRewardData,
+    userDataLoading,
+  } = useSelector((state) => state.userReducer);
 
   const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
@@ -59,6 +65,7 @@ const Profile = () => {
   const { tokenData, saleOnData, saleRoundOn } = useSelector(
     (state) => state.tokenReducer,
   );
+
   const route = useRouter();
   const dispatch = useDispatch();
   const { address } = route.query;
@@ -409,18 +416,22 @@ const Profile = () => {
                     >
                       Token History
                     </div>
-                    <div
-                      onClick={() => setNftHistoryModal(true)}
-                      className={styles.wallet_address}
-                    >
-                      NFT History
-                    </div>
-                    <div
-                      onClick={() => setNftRewardModal(true)}
-                      className={styles.wallet_address}
-                    >
-                      NFT Reward
-                    </div>
+                    {nftBuyHistory.length !== 0 && (
+                      <div
+                        onClick={() => setNftHistoryModal(true)}
+                        className={styles.wallet_address}
+                      >
+                        NFT History
+                      </div>
+                    )}
+                    {userData.assets.length !== 0 && (
+                      <div
+                        onClick={() => setNftRewardModal(true)}
+                        className={styles.wallet_address}
+                      >
+                        NFT Reward
+                      </div>
+                    )}
                   </>
                 )}
               </div>
@@ -506,6 +517,7 @@ const Profile = () => {
             leftButtonHandler={() => setShowCliamTokenModal(false)}
             claimHandler={claimTokenHandler}
             claimingNumber={claimingToken}
+            loading={userDataLoading}
           />
           <TokenBuyHistory
             data={tokenBuyHistory}
@@ -513,16 +525,20 @@ const Profile = () => {
             leftButtonHandler={() => setHistoryModal(false)}
             claimingNumber={claimingToken}
             lastBuy={currentSaleLastBuy}
+            loading={userDataLoading}
           />
           <MysteryBoxBuyHistory
             data={nftBuyHistory}
             handleShow={nftHistoryModal}
             leftButtonHandler={() => setNftHistoryModal(false)}
             reveal={isNftSaleRevealed}
+            loading={userDataLoading}
           />
           <NFTRewardModal
             handleShow={nftRewardModal}
             leftButtonHandler={() => setNftRewardModal(false)}
+            data={nftRewardData}
+            loading={userDataLoading}
           />
         </main>
       ) : (
