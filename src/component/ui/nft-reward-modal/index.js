@@ -13,6 +13,7 @@ const NFTRewardModal = ({
   loading,
   dataCount,
   claimDisabled,
+  nftRewardCount,
   data = [{ saleType: 'sdofak', buyToken: 'soidadfmo', createdAt: 'doisgifj' }],
 }) => {
   return (
@@ -94,6 +95,9 @@ const NFTRewardModal = ({
                       <div className={styles.headings}>
                         <h5>
                           Total Reward : <span>300</span>
+                        </h5>
+                        <h5>
+                          Available Reward : <span>{nftRewardCount}</span>
                         </h5>
                         <h5>
                           Total Claimed : <span>300</span>

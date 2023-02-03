@@ -38,6 +38,7 @@ import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
 import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import NFTRewardModal from '../../component/ui/nft-reward-modal';
+import { claimReward } from '../../../services/web3/nftReward';
 const Profile = () => {
   const {
     userData,
@@ -46,6 +47,7 @@ const Profile = () => {
     nftBuyHistory,
     nftRewardData,
     userDataLoading,
+    nftRewardCount,
   } = useSelector((state) => state.userReducer);
 
   const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
@@ -297,6 +299,11 @@ const Profile = () => {
     }
   };
 
+  const handleNFTRewardClaim = async () => {
+    const res = await claimReward(walletAddress);
+    if (res.status) toast.success('Reward claim successfully');
+  };
+
   return (
     <>
       {isUserConnected ? (
@@ -539,6 +546,8 @@ const Profile = () => {
             leftButtonHandler={() => setNftRewardModal(false)}
             data={nftRewardData}
             loading={userDataLoading}
+            claimDisabled={() => (nftRewardCount === 0 ? true : false)}
+            claimHandler={handleNFTRewardClaim}
           />
         </main>
       ) : (
