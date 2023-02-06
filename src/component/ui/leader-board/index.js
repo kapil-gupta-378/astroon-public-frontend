@@ -17,6 +17,8 @@ const LeaderBoard = () => {
 
   const getLeaderboardData = async () => {
     try {
+      setLoading(true);
+
       const res = await getUserLeaderboardDataApi();
       if (res.success) {
         setLoading(false);

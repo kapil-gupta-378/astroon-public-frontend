@@ -26,6 +26,7 @@
     justify-content: center;
     align-items: center;
   }
+
   table {
     thead {
       tr {
@@ -117,6 +118,20 @@
           font-size: 20px;
           margin-left: 10px;
         }
+      }
+    }
+
+    .remainingCliam {
+      @include heading_5;
+      margin-top: 25px;
+      font-weight: 500;
+      color: #ffffff;
+      animation: blinker 1s linear infinite;
+    }
+
+    @keyframes blinker {
+      50% {
+        opacity: 0;
       }
     }
   }

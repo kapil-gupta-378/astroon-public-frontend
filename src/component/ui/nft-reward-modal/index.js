@@ -2,6 +2,7 @@ import moment from 'moment';
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { convertWeiToEther } from '../../../utils/currencyMethods';
 import Button from '../../common/button';
 import GlobalLoading from '../../common/global-loading';
 import styles from './NFTRewardModal.module.scss';
@@ -13,8 +14,10 @@ const NFTRewardModal = ({
   loading,
   dataCount,
   claimDisabled,
-  nftRewardCount,
-  data = [{ saleType: 'sdofak', buyToken: 'soidadfmo', createdAt: 'doisgifj' }],
+  remainingCliam,
+  data,
+  totalReward,
+  claimedReward,
 }) => {
   return (
     <>
@@ -65,10 +68,9 @@ const NFTRewardModal = ({
                     <thead>
                       <tr>
                         <th scope="col">S.No.</th>
-                        <th scope="col">NFT Name</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Purchase time</th>
-                        <th scope="col">Available claim</th>
+                        <th scope="col">Purchase Time</th>
+                        <th scope="col">Available Reward</th>
                       </tr>
                     </thead>
 
@@ -77,10 +79,9 @@ const NFTRewardModal = ({
                         return (
                           <tr key={idx}>
                             <th scope="row">{idx + 1}</th>
-                            <td>{item.name ? item.name : '-'}</td>
                             <td>{item.categoryId}</td>
                             <td>
-                              {moment(item.updatedAt).format(
+                              {moment(item.createdAt).format(
                                 'DD/MM/YYYY h:mma',
                               )}
                             </td>
@@ -94,18 +95,24 @@ const NFTRewardModal = ({
                     <div className={styles.reward_wrap}>
                       <div className={styles.headings}>
                         <h5>
-                          Total Reward : <span>300</span>
+                          Total Earned : <span>{totalReward}</span>
                         </h5>
                         <h5>
-                          Available Reward : <span>{nftRewardCount}</span>
+                          Available Reward :
+                          <span>{+totalReward - +claimedReward}</span>
                         </h5>
                         <h5>
-                          Total Claimed : <span>300</span>
+                          Withdrawn : <span>{claimedReward}</span>
                         </h5>
                       </div>
                       <Button disabled={claimDisabled} onClick={claimHandler}>
-                        Claim
+                        Withdraw
                       </Button>
+                      <p className={styles.remainingCliam}>
+                        {`You can withdraw ${convertWeiToEther(
+                          remainingCliam,
+                        )} reward this month`}
+                      </p>
                     </div>
                   )}
                 </div>

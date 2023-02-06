@@ -6,16 +6,18 @@ import {
 import {
   getNFTPurchaseDataApi,
   getNFTRewardApi,
+  getNFTRewardClaimApi,
 } from '../../../services/api/nftPreSale';
 import { getUserDataApi } from '../../../services/api/user';
-// import { checkReward } from '../../../services/web3/nftReward';
+import { checkReward } from '../../../services/web3/nftReward';
 import { getCurrentTokenToBeClaimed } from '../../../services/web3/tokenMothods';
 import { convertWeiToEther } from '../../utils/currencyMethods';
 import {
   setBuyNftHistory,
   setBuyTokenHistory,
+  setClaimedReward,
   setClaimingTokenNumber,
-  // setNftRewardCount,
+  setNftRewardCount,
   setNftRewardData,
   setUserData,
   setUserDataLoading,
@@ -64,10 +66,16 @@ export const fetchUserDataAction = (walletAddress) => {
 
       // fetching nft reward per day data from BE api
       const nftReward = await getNFTRewardApi();
-      dispatch(setNftRewardData(nftReward.data));
+      dispatch(setNftRewardData(nftReward));
       // fetching reward count from reward contract method
-      // const rewardCount = await checkReward();
-      // dispatch(setNftRewardCount(rewardCount));
+      if (walletAddress) {
+        const rewardCount = await checkReward(walletAddress);
+        dispatch(setNftRewardCount(rewardCount));
+      }
+      // fetching total AST claimed by user that earned by after buying NFT from presale (backend API)
+
+      const res = await getNFTRewardClaimApi();
+      if (res.total) dispatch(setClaimedReward(res.total));
       dispatch(setUserDataLoading(false));
     } catch (error) {
       console.error(error);
