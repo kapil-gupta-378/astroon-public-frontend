@@ -39,6 +39,8 @@ import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import NFTRewardModal from '../../component/ui/nft-reward-modal';
 import { claimReward } from '../../../services/web3/nftReward';
+import { postNFTRewardClaimApi } from '../../../services/api/nftPreSale';
+import { convertWeiToEther } from '../../utils/currencyMethods';
 const Profile = () => {
   const {
     userData,
@@ -48,6 +50,7 @@ const Profile = () => {
     nftRewardData,
     userDataLoading,
     nftRewardCount,
+    claimedReward,
   } = useSelector((state) => state.userReducer);
 
   const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
@@ -300,8 +303,23 @@ const Profile = () => {
   };
 
   const handleNFTRewardClaim = async () => {
-    const res = await claimReward(walletAddress);
-    if (res.status) toast.success('Reward claim successfully');
+    try {
+      dispatch(setGlobalLoading(true));
+      const res = await claimReward(walletAddress);
+      if (res.status) {
+        const data = {
+          walletAddress: walletAddress,
+          claimedReward: convertWeiToEther(nftRewardCount),
+          claimedDate: moment().toString(),
+        };
+        await postNFTRewardClaimApi(data);
+        toast.success('Reward claim successfully');
+      }
+      dispatch(setGlobalLoading(false));
+    } catch (error) {
+      dispatch(setGlobalLoading(false));
+      toast.error(error.message ? error.message : error.toString().slice(7));
+    }
   };
 
   return (
@@ -544,10 +562,13 @@ const Profile = () => {
           <NFTRewardModal
             handleShow={nftRewardModal}
             leftButtonHandler={() => setNftRewardModal(false)}
-            data={nftRewardData}
+            data={nftRewardData.data}
             loading={userDataLoading}
-            claimDisabled={() => (nftRewardCount === 0 ? true : false)}
+            claimDisabled={Number(nftRewardCount) === 0 ? true : false}
             claimHandler={handleNFTRewardClaim}
+            remainingCliam={nftRewardCount}
+            totalReward={nftRewardData.total}
+            claimedReward={claimedReward}
           />
         </main>
       ) : (

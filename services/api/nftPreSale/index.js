@@ -69,3 +69,18 @@ export const getNFTRewardApi = async () => {
   });
   return xhr.data;
 };
+export const postNFTRewardClaimApi = async (data) => {
+  const xhr = await axios.request({
+    method: 'post',
+    url: `${APP_URL}nft-reward/claim`,
+    data: data,
+  });
+  return xhr.data;
+};
+export const getNFTRewardClaimApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-reward/claim`,
+  });
+  return xhr.data;
+};
