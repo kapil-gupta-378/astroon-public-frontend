@@ -100,6 +100,7 @@ const AddAdmin = () => {
                   handleType={'text'}
                   handleOnChange={(e) => setFirstName(e.target.value)}
                   isRequired={true}
+                  maxlength="40"
                 />
                 <TextInput
                   titleBackground={'#05052d'}
@@ -109,6 +110,7 @@ const AddAdmin = () => {
                   handleType={'text'}
                   handleOnChange={(e) => setLastName(e.target.value)}
                   isRequired={true}
+                  maxlength="40"
                 />
               </div>
               <TextInput
@@ -119,6 +121,7 @@ const AddAdmin = () => {
                 handleType={'text'}
                 handleOnChange={(e) => setUseraName(e.target.value)}
                 isRequired={true}
+                maxlength="20"
               />
               <TextInput
                 titleBackground={'#05052d'}
@@ -128,6 +131,7 @@ const AddAdmin = () => {
                 handleType={'email'}
                 handleOnChange={(e) => setEmail(e.target.value)}
                 isRequired={true}
+                maxlength="50"
               />
               <TextInput
                 titleBackground={'#05052d'}
@@ -136,6 +140,7 @@ const AddAdmin = () => {
                 handleValue={password}
                 handleType={'password'}
                 handleOnChange={(e) => setPassword(e.target.value)}
+                maxlength="60"
               />
 
               <div className={styles.name_input_wrap}>
@@ -143,6 +148,7 @@ const AddAdmin = () => {
                   label={'Role'}
                   options={rollSelectOptions}
                   handleChange={(value) => setRole(value.value)}
+                  isSearchable={false}
                 />
                 <FormSelect
                   label={'Status'}
@@ -150,6 +156,7 @@ const AddAdmin = () => {
                   handleChange={(value) =>
                     setStatus(value.value === 'active' ? true : false)
                   }
+                  isSearchable={false}
                 />
               </div>
             </div>

@@ -2,13 +2,7 @@ import React from 'react';
 import styles from './addressTable.module.scss';
 import PropTypes from 'prop-types';
 import InfiniteScroll from 'react-infinite-scroll-component';
-const AddressTable = ({
-  data,
-  loading,
-  fetchMoreData,
-  dataCount,
-  onClickUserName,
-}) => {
+const AddressTable = ({ data, loading, fetchMoreData, dataCount }) => {
   return (
     <div id={'table_scroll'} className={styles.table_wrap}>
       {!loading ? (
@@ -42,7 +36,7 @@ const AddressTable = ({
                 <tr>
                   <th scope="col">S.No.</th>
                   <th scope="col">Address</th>
-                  <th scope="col">userName</th>
+                  <th scope="col">Username</th>
                 </tr>
               </thead>
 
@@ -53,12 +47,12 @@ const AddressTable = ({
                       <th scope="row">{idx + 1}</th>
 
                       <td
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => onClickUserName(item.id)}
+                      // style={{ cursor: 'pointer' }}
+                      // onClick={() => onClickUserName(item.id)}
                       >
                         {item.walletAddress}
                       </td>
-                      <td>{item.userName}</td>
+                      <td>{item.userName ? item.userName : 'NA'}</td>
                     </tr>
                   );
                 })}

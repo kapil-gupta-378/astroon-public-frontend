@@ -86,7 +86,9 @@ const ListTable = ({
                         {item.userName}
                       </td>
                       <td>{item.email}</td>
-                      <td>{item.role.name}</td>
+                      <td>
+                        {item.role.name === 'subadmin' ? 'Sub-Admin' : 'Admin'}
+                      </td>
                       <td>
                         {item.isBlocked ? (
                           <div className={styles.inactive}>

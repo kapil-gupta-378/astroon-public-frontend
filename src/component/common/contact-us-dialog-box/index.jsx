@@ -107,7 +107,7 @@ const ContactUsDialogBox = ({
               <div className={styles.text_msg}>
                 <h5>Messages</h5>
                 {finalData.replies.length !== 0 ? (
-                  finalData.replies.map((reply, idx) => {
+                  finalData.replies.splice(0, 1).map((reply, idx) => {
                     return (
                       <div key={idx} className="col-12">
                         <li>{reply.description}</li>

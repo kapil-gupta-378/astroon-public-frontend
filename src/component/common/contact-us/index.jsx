@@ -61,8 +61,8 @@ const ContactUs = (props) => {
       )
         throw new Error('Please all all fields');
 
-      if (username.length > 10)
-        throw new Error('Username can not be more than 10 charactors');
+      // if (username.length > 25)
+      //   throw new Error('Username can not be more than 10 charactors');
 
       const fileBody = new FormData();
       fileBody.append('file', attachment);
@@ -135,6 +135,7 @@ const ContactUs = (props) => {
               placeHolder="Enter your username"
               handleValue={username}
               handleOnChange={(e) => setUsername(e.target.value)}
+              maxlength="25"
             />
 
             <FormSelect

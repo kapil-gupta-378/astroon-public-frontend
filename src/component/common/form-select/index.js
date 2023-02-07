@@ -6,6 +6,7 @@ const FormSelect = ({
   options,
   label,
   titleBackground,
+  ...props
 }) => {
   return (
     <div className="form_select_wrap">
@@ -19,6 +20,7 @@ const FormSelect = ({
         {label}
       </label>
       <Select
+        {...props}
         value={selectedOption}
         onChange={handleChange}
         options={options}
