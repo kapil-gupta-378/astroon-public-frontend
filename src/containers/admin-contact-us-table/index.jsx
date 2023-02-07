@@ -31,7 +31,6 @@ const ContactUsTable = () => {
   const [pageLimit, setPageLimit] = useState();
   const [adminContactUsCount, setAdminContactUsCount] = useState('');
   const [getFileType, setFileType] = useState('');
-
   useEffect(() => {
     setPageLimit(6);
     setPageNumber(1);
@@ -131,32 +130,35 @@ const ContactUsTable = () => {
   };
 
   const handleSendReply = async () => {
-    if (parentId && reply) {
-      try {
-        let data = {
-          parentId: parentId,
-          description: reply,
-        };
-        const res = await replyByUserApi(data);
-        if (res.success) {
-          toast.success(res.message);
-          setTimeout(() => {
-            setIsDialogShow(false);
-            setIsReplyDialogShow(false);
-            getContactUsData();
-          }, 2000);
-        } else {
-          setContactUsLoading(false);
-          toast.error(res.message);
-        }
-      } catch (error) {
+    try {
+      setContactUsLoading(true);
+
+      if (!parentId && !reply) throw new Error('Fill The Reply Field');
+      let data = {
+        parentId: parentId,
+        description: reply,
+      };
+      const res = await replyByUserApi(data);
+      if (res.success) {
+        toast.success(res.message);
+        setTimeout(() => {
+          setIsDialogShow(false);
+          setIsReplyDialogShow(false);
+          getContactUsData();
+        }, 2000);
+      } else {
         setContactUsLoading(false);
-        toast.error(error.response.data.message);
-        // throw error;
+        toast.error(res.message);
       }
-    } else {
+    } catch (error) {
       setContactUsLoading(false);
-      toast.error('Fill The Reply Field');
+      toast.error(
+        error?.response?.data?.message
+          ? error?.response?.data?.message
+          : error?.message
+          ? error?.message
+          : error?.toString().slice(7),
+      );
     }
   };
 
@@ -202,6 +204,7 @@ const ContactUsTable = () => {
         handleReplyShow={isReplyDialogShow}
         reply={reply}
         setReply={setReply}
+        loading={contactUsLoading}
       />
     </main>
   );

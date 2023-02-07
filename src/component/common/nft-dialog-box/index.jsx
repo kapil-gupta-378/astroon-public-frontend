@@ -49,6 +49,13 @@ const NFTDialogBox = ({
             </div>
             <div className={styles.dialog_footer}>
               <button
+                onClick={() => leftBlogButtonHandler()}
+                type="button"
+                className={styles.dialog_left_btn}
+              >
+                Cancel
+              </button>
+              <button
                 onClick={() => rightBlogButtonHandler()}
                 type="button"
                 className={styles.dialog_right_btn}

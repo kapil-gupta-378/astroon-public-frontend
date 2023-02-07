@@ -17,6 +17,7 @@ const TextInput = ({
   textarea,
   isRequired,
   handleName,
+  ...props
 }) => {
   const [inputType, setInputType] = useState(handleType);
   const inputRef = useRef();
@@ -39,6 +40,7 @@ const TextInput = ({
       )}
       {textarea ? (
         <textarea
+          {...props}
           name={handleName}
           required={isRequired}
           style={{ height: inputHeight }}
@@ -54,6 +56,7 @@ const TextInput = ({
       ) : (
         <div>
           <input
+            {...props}
             ref={inputRef}
             name={handleName}
             required={isRequired}

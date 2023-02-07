@@ -215,7 +215,7 @@ const NFTManagement = () => {
           <SearchBar inputValue={searchKeyWord} typeValue={handleSearchNFT} />
         </div>
         <div className={styles.top_bar_right}>
-          <div className={''}>
+          <div>
             <Button onClick={() => setIsShow(true)}>Add NFT</Button>
           </div>
         </div>

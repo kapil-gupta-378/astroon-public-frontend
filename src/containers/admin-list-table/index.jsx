@@ -23,6 +23,7 @@ const AdminListTable = () => {
   const filterByOptions = [
     { value: 'admin', label: 'Admin' },
     { value: 'subadmin', label: 'Sub Admin' },
+    { value: undefined, label: 'All Admin' },
   ];
   const { adminListData, adminLoading, adminListCount, adminToken } =
     useSelector((state) => state.adminReducer);

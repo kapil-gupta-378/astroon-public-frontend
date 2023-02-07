@@ -80,18 +80,7 @@ const ContactUsDialogBox = ({
               </div>
             </div>
             <div className="row">
-              <div className="col-lg-6 col-md-6 col-sm-12">
-                <div className={styles.input_wrap}>
-                  <TextInput
-                    titleBackground={'#AF3277'}
-                    handleType={'text'}
-                    kind="fullborder"
-                    handleValue={finalData.subject}
-                    title="Subject"
-                  />
-                </div>
-              </div>
-              <div className="col-lg-6 col-md-6 col-sm-12">
+              <div className="col-12">
                 <div className={styles.input_wrap}>
                   <TextInput
                     titleBackground={'#AF3277'}
@@ -107,7 +96,7 @@ const ContactUsDialogBox = ({
               <div className={styles.text_msg}>
                 <h5>Messages</h5>
                 {finalData.replies.length !== 0 ? (
-                  finalData.replies.map((reply, idx) => {
+                  finalData.replies.splice(0, 1).map((reply, idx) => {
                     return (
                       <div key={idx} className="col-12">
                         <li>{reply.description}</li>

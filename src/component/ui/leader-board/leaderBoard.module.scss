@@ -6,7 +6,9 @@
   .leader_board_heading {
     @include heading_2;
     text-align: center;
-    font-family: 'Roboto Slab';
+    font-size: 36px;
+    line-height: 40px;
+    font-family: 'mont regular';
     margin-bottom: 45px;
   }
   .table_wrap {
@@ -48,7 +50,8 @@
           th {
             @include heading_7;
             color: rgba(255, 255, 255, 0.9);
-            font-family: 'Rubik';
+            font-family: 'mont regular';
+            font-size: 24px;
             padding: 26px 20px;
             border-bottom: none;
             text-align: center;
@@ -65,18 +68,19 @@
           th {
             @include heading_7;
             color: rgba(255, 255, 255, 0.9);
-            font-family: 'Rubik';
+            font-family: 'mont regular';
             padding: 26px 20px;
             font-weight: 400;
-            font-size: 13px;
+            font-size: 24px;
           }
           td {
             @include heading_7;
             color: rgba(255, 255, 255, 0.9);
-            font-family: 'Rubik';
+            font-family: 'mont regular';
             padding: 26px 20px;
             font-weight: 400;
-            font-size: 13px;
+            font-size: 24px;
+            vertical-align: middle;
             & [data-testid='table_profile_image'] {
               border-radius: 50%;
             }
@@ -105,3 +109,62 @@
   }
 }
 // }
+
+@media only screen and (max-width: 1366px) {
+  .leader_board_wrap {
+    .table_wrap {
+      table {
+        thead {
+          tr {
+            th {
+              font-size: 16px;
+              line-height: 20px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            th {
+              font-size: 16px;
+              line-height: 20px;
+            }
+            td {
+              font-size: 16px;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 479px) {
+  .leader_board_wrap {
+    font-size: 30px;
+    line-height: 36px;
+    .table_wrap {
+      table {
+        thead {
+          tr {
+            th {
+              font-size: 13px;
+              line-height: 20px;
+            }
+          }
+        }
+        tbody {
+          tr {
+            th {
+              font-size: 13px;
+              line-height: 20px;
+            }
+            td {
+              font-size: 13px;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+} /* 1024 */

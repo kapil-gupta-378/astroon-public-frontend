@@ -62,7 +62,9 @@ body {
         border-color: hsl(0, 0%, 70%);
         box-shadow: unset !important;
       }
-      .css-319lph-ValueContainer {
+
+      .css-319lph-ValueContainer,
+      .css-1d8n9bt {
         color: #fff;
         font-size: 14px;
         .css-qc6sy-singleValue {
@@ -153,9 +155,18 @@ body {
         }
         .css-14el2xx-placeholder {
           color: hsl(0deg 0% 100% / 51%);
+          div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+              margin-right: 10px;
+            }
+          }
         }
       }
     }
+
     .css-1pahdxg-control {
       background: transparent;
       display: flex;

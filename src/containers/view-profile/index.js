@@ -84,7 +84,7 @@ const ViewProfile = () => {
                   <span>{userName} </span>
                 </div>
                 <div className={styles.details_text_wrap}>
-                  <h6 className={styles.detail_text}>Email Name :</h6>
+                  <h6 className={styles.detail_text}>Email Address:</h6>
                   <span>{email} </span>
                 </div>
                 <div className={styles.details_text_wrap}>

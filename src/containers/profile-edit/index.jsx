@@ -14,6 +14,8 @@ import defaltProfileImage from '../../../public/assets/images/Dummy_Image.svg';
 import Button from '../../component/common/button';
 import FormSelect from '../../component/common/form-select';
 import { toast } from 'react-toastify';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import { useDispatch, useSelector } from 'react-redux';
 const rollSelectOptions = [
   { value: 'admin', label: 'Admin' },
   { value: 'subadmin', label: 'Sub Admin' },
@@ -32,8 +34,11 @@ const ProfileEdit = () => {
   const [profileImage, setProfileImage] = useState();
   const [newUpadateImageURL, setNewUpadateImageURL] = useState();
   const [pageLoadinng, setPageLoading] = useState(true);
+  const { globalLoading } = useSelector((state) => state.globalLoadingReducer);
+
   const router = useRouter();
   const ImageInputRef = useRef();
+  const dispatch = useDispatch();
   const { id } = router.query;
   useEffect(() => {
     if (id) {
@@ -76,6 +81,8 @@ const ProfileEdit = () => {
 
   const uploadDataToServer = async () => {
     try {
+      dispatch(setGlobalLoading(true));
+
       if (role) {
         data = {
           name: role.value,
@@ -98,6 +105,7 @@ const ProfileEdit = () => {
       const res = await updateAdminDataApi(id, data);
       if (res.success) {
         toast.success(res.message);
+        dispatch(setGlobalLoading(false));
         router.back();
       }
     } catch (error) {
@@ -167,17 +175,21 @@ const ProfileEdit = () => {
                     label={'Role'}
                     options={rollSelectOptions}
                     handleChange={(value) => setRole(value)}
+                    isSearchable={false}
                   />
                   <FormSelect
                     selectedOption={status}
                     label={'Status'}
                     options={statusSelctOptions}
                     handleChange={(value) => setStatus(value)}
+                    isSearchable={false}
                   />
                 </div>
               </div>
               <div className={styles.submit_button}>
-                <Button onClick={uploadDataToServer}>Submit</Button>
+                <Button disabled={globalLoading} onClick={uploadDataToServer}>
+                  Submit
+                </Button>
               </div>
             </div>
             <div className={styles.profile_details_left}>

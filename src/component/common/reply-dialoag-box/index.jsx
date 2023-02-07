@@ -7,6 +7,7 @@ const ReplyDialogBox = ({
   handleReplyShow,
   reply,
   setReply,
+  loading,
 }) => {
   return (
     <div className="dialog_box">
@@ -39,6 +40,7 @@ const ReplyDialogBox = ({
                 Cancel
               </button>
               <button
+                disabled={loading}
                 onClick={rightReplyButtonHandler}
                 type="button"
                 className={styles.dialog_right_btn}

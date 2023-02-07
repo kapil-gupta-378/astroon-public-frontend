@@ -70,6 +70,7 @@ const Profile = () => {
   const { tokenData, saleOnData, saleRoundOn } = useSelector(
     (state) => state.tokenReducer,
   );
+  const { globalLoading } = useSelector((state) => state.globalLoadingReducer);
 
   const route = useRouter();
   const dispatch = useDispatch();
@@ -191,10 +192,13 @@ const Profile = () => {
   };
 
   async function updataProfile(e) {
-    e.preventDefault();
     try {
+      e.preventDefault();
+      dispatch(setGlobalLoading(true));
+
       let profileImageUploadResponse;
       let coverImageUploadResponse;
+
       if (uploadProfileImage) {
         let body = new FormData();
         body.append('file', userData.profileImage);
@@ -217,11 +221,18 @@ const Profile = () => {
       if (response.success) {
         toast.success(response.message);
         route.push(`/user-profile/${address}`);
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
-      if (error.response) {
-        toast.error(error.response.data.message);
-      }
+      dispatch(setGlobalLoading(false));
+
+      toast.error(
+        error?.response?.data?.message
+          ? error?.response?.data?.message
+          : error?.message
+          ? error?.message
+          : error?.toString().slice(7),
+      );
     }
   }
 
@@ -489,7 +500,8 @@ const Profile = () => {
                   inputHeight={'63px'}
                   handleValue={userData.displayName}
                   handleOnChange={(e) => updateState(e)}
-                  titleBackground={'rgb(15 15 45)'}
+                  titleBackground={'#3C1D74'}
+                  isRequired={true}
                 />
                 {/* <TextInput
                   handleName={'customUrl'}
@@ -498,17 +510,18 @@ const Profile = () => {
                   inputHeight={'63px'}
                   handleValue={userData.customUrl}
                   handleOnChange={(e) => updateState(e)}
-                  titleBackground={'rgb(14 16 44)'}
+                  titleBackground={'#3C1D74'}
                 /> */}
                 <TextInput
                   handleName={'email'}
                   handleType={'email'}
-                  titleBackground={'rgb(33 33 64)'}
+                  titleBackground={'#3C1D74'}
                   title={'Email Address'}
                   placeHolder="Enter your email address"
                   inputHeight={'63px'}
                   handleValue={userData.email}
                   handleOnChange={(e) => updateState(e)}
+                  isRequired={true}
                 />
                 <TextInput
                   title={'Bio'}
@@ -516,12 +529,15 @@ const Profile = () => {
                   placeHolder="Write a brief description about yourself"
                   inputHeight={'120px'}
                   textarea={true}
-                  titleBackground={'rgb(89 47 93)'}
+                  titleBackground={'#3C1D74'}
                   handleValue={userData.bio}
                   handleOnChange={(e) => updateState(e)}
+                  isRequired={true}
                 />
                 <div className={styles.submit_btn}>
-                  <Button type="submit">Submit</Button>
+                  <Button disabled={globalLoading} type="submit">
+                    Submit
+                  </Button>
                 </div>
               </section>
             </form>
