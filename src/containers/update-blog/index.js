@@ -22,7 +22,7 @@ const UpdateBlog = () => {
   const [blogContent, setBlogContent] = useState('');
   const [metaDescription, setMetaDescription] = useState('');
   const [editorLoaded, setEditorLoaded] = useState(false);
-
+  const [loading, setLoading] = useState();
   const router = useRouter();
   const blogImageRef = useRef();
   const uploadImageToBlog = () => {
@@ -100,6 +100,7 @@ const UpdateBlog = () => {
   };
 
   const updateBlog = async () => {
+    setLoading(true);
     const data = {
       title: blogTitle,
       featureImage: blogFeatureImageUrl ? blogFeatureImageUrl : getImageUrl,
@@ -114,8 +115,10 @@ const UpdateBlog = () => {
       if (response.success) {
         toast.success(response.message);
         router.back();
+        setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
@@ -221,7 +224,9 @@ const UpdateBlog = () => {
         </div>
 
         <div className={styles.btn_wrap}>
-          <Button onClick={updateBlog}>Update</Button>
+          <Button disabled={loading} onClick={updateBlog}>
+            Update
+          </Button>
         </div>
       </section>
     </main>
