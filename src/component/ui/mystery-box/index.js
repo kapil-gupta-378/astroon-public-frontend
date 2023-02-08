@@ -43,7 +43,7 @@ const MysteryBox = () => {
   const [mysteryBoxEligibility, setMysteryBoxEligibility] = useState('');
   const [isSaleOn, setIsSaleOn] = useState(false);
 
-  const { isUserConnected, walletAddress } = useSelector(
+  const { isUserConnected, walletAddress, balance } = useSelector(
     (state) => state.walletReducer,
   );
 
@@ -90,7 +90,6 @@ const MysteryBox = () => {
       arr.push({ value: i + 1, label: `${i + 1}` });
     }
     setSelecterOption(arr);
-
     setMysteryBoxEligibility(eligibilityResult);
     dispatch(setGlobalLoading(false));
   };
@@ -100,37 +99,6 @@ const MysteryBox = () => {
       dispatch(setGlobalLoading(true));
 
       if (!isUserConnected) throw new Error('Please Connect Your Wallet');
-
-      const walletBalance = await getWalletAstTokenBalance(walletAddress);
-      const lastMysteryBoxPurChase = await getNFTPurchaseDataApi(walletAddress);
-
-      // throw erroe when user has less than 100 ast token
-      if (walletBalance < 400)
-        throw new Error('You are not eligible for buy. Please buy token first');
-
-      // getting eligibility for user to buy mystery box
-      let eligibilityResult = getEligibilityNftPreSale(walletBalance);
-
-      // throw error when user has allready buy 10 mystery box
-      if (lastMysteryBoxPurChase.count === 10)
-        throw new Error('You can not buy more than 4 mystery box');
-
-      // throw error when user has purchased all eligible mystery box
-      if (lastMysteryBoxPurChase.count >= eligibilityResult)
-        throw new Error(
-          `You can not buy more than ${eligibilityResult} mystery box`,
-        );
-
-      // throw error if user select more than  eligibile quantity
-      if (
-        selectedQuantity.value >
-        eligibilityResult - lastMysteryBoxPurChase.count
-      )
-        throw new Error(
-          `You can not buy more than ${
-            eligibilityResult - lastMysteryBoxPurChase.count
-          }`,
-        );
 
       // calculating inputs for buy methods
       let nftCostInWei = convertEtherToWei(
@@ -229,16 +197,20 @@ const MysteryBox = () => {
                 />
               </div>
               <Button
-                disabled={!isSaleOn || mysteryBoxEligibility <= 0}
+                disabled={
+                  !isSaleOn || mysteryBoxEligibility <= 0 || balance < 1500
+                }
                 onClick={buyMysteryBox}
               >
                 Buy Now
               </Button>
               <h3 className={styles.eligibility_heading}>
-                {mysteryBoxEligibility > 0
+                {!isUserConnected
+                  ? 'Connect Your Wallet'
+                  : balance < 1500
+                  ? 'You are not eligible for this sale.'
+                  : mysteryBoxEligibility > 0
                   ? `You are eligible for ${mysteryBoxEligibility} mystery box`
-                  : isUserConnected
-                  ? 'You have exceeded your buying limit.'
                   : 'Connect Your Wallet'}
               </h3>
             </>

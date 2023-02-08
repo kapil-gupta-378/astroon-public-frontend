@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +12,9 @@ import {
 import {
   getNFTCategoryData,
   getNFTSaleDataApi,
+  postCronTimeApi,
   postNftPreSaleCsvApi,
+  refreshNftDataApi,
   updateNFTSaleDataApi,
 } from '../../../services/api/nftPreSale';
 import {
@@ -22,7 +25,10 @@ import {
   setRewardContractAddressToPreSale,
   startSale,
 } from '../../../services/web3/nftPreSale';
-import { setNFTPreCon_To_RewardCon } from '../../../services/web3/nftReward';
+import {
+  setNFTPreCon_To_RewardCon,
+  setRewardMonthData,
+} from '../../../services/web3/nftReward';
 import {
   startPrivateSale,
   startPublicSale,
@@ -35,6 +41,7 @@ import EditMysteryBoxSaleDataModal from '../../component/ui/mystery-box-sale-dat
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
+import { convertEtherToWei } from '../../utils/currencyMethods';
 import { emptyObject } from '../../utils/objectMethods';
 import styles from './saleControls.module.scss';
 const AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS =
@@ -301,6 +308,27 @@ const SaleControls = () => {
 
       dispatch(setGlobalLoading(true));
 
+      // creating month reward data from current month
+      const monthInNumber = moment().month();
+      const rewardMap = [
+        0, 100, 200, 200, 300, 500, 700, 700, 1500, 1500, 1500, 2500,
+      ];
+      const rotateArray = function (arry, position) {
+        for (let i = 0; i < position; i++) {
+          arry.unshift(arry.pop());
+        }
+
+        return arry;
+      };
+
+      const currentRewardMap = rotateArray(rewardMap, monthInNumber);
+      const currentRewardMapInWei = currentRewardMap.map((value) =>
+        convertEtherToWei(value),
+      );
+
+      // setting nft preSale reward array by current month number
+      await setRewardMonthData(currentRewardMapInWei, walletAddress);
+
       // setting presale contract to nft reward contract
       await setNFTPreCon_To_RewardCon(
         AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS,
@@ -328,7 +356,11 @@ const SaleControls = () => {
       if (contractResponse.status)
         var response = await revealMysteryBoxData(walletAddress);
 
-      if (response.status) toast.success('Mystery box reveal successfully');
+      if (response.status) {
+        postCronTimeApi();
+        refreshNftDataApi();
+        toast.success('Mystery box reveal successfully');
+      }
       dispatch(setGlobalLoading(false));
     } catch (error) {
       dispatch(setGlobalLoading(false));

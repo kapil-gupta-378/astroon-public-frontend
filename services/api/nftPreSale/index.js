@@ -84,3 +84,17 @@ export const getNFTRewardClaimApi = async () => {
   });
   return xhr.data;
 };
+export const postCronTimeApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-reward/cronTime`,
+  });
+  return xhr.data;
+};
+export const refreshNftDataApi = async () => {
+  const xhr = await axios.request({
+    method: 'get',
+    url: `${APP_URL}nft-purchase/refresh/metadata`,
+  });
+  return xhr.data;
+};

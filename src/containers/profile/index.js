@@ -460,7 +460,7 @@ const Profile = () => {
                         NFT History
                       </div>
                     )}
-                    {userData.assets.length !== 0 && (
+                    {nftRewardData.data.length !== 0 && (
                       <div
                         onClick={() => setNftRewardModal(true)}
                         className={styles.wallet_address}
