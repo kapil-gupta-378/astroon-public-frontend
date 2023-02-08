@@ -21,3 +21,12 @@ export const setNFTPreCon_To_RewardCon = async (contractAddress, address) => {
     .send({ from: address });
   return response;
 };
+
+export const setRewardMonthData = async (data, address) => {
+  const astNFTRewardContract = await getContractInstance('NFT REWARD CONTRACT');
+
+  const response = astNFTRewardContract.methods
+    .updateLimits(data)
+    .send({ from: address });
+  return response;
+};

@@ -51,18 +51,8 @@ const ContactUs = (props) => {
   async function submitContactDetails(e) {
     e.preventDefault();
     try {
-      if (
-        !email &&
-        !username &&
-        !reasonForContact &&
-        !subject &&
-        !description &&
-        !attachment
-      )
-        throw new Error('Please all all fields');
-
-      // if (username.length > 25)
-      //   throw new Error('Username can not be more than 10 charactors');
+      if (!reasonForContact) throw new Error('Please select reason');
+      if (!attachment) throw new Error('Please select image');
 
       const fileBody = new FormData();
       fileBody.append('file', attachment);
@@ -143,6 +133,7 @@ const ContactUs = (props) => {
               label={'Reason for contact'}
               options={getReason}
               handleChange={(value) => setReasonForContact(value.value)}
+              required={true}
             />
 
             <TextInput

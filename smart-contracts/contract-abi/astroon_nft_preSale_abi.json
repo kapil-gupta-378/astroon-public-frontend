@@ -271,7 +271,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum ASTNftSale.CATEGORY",
+        "internalType": "enum ASTNftSale1.CATEGORY",
         "name": "nftType",
         "type": "uint8"
       }
@@ -299,7 +299,7 @@
     "name": "getCategory",
     "outputs": [
       {
-        "internalType": "enum ASTNftSale.CATEGORY",
+        "internalType": "enum ASTNftSale1.CATEGORY",
         "name": "",
         "type": "uint8"
       }
@@ -359,7 +359,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum ASTNftSale.CATEGORY[]",
+        "internalType": "enum ASTNftSale1.CATEGORY[]",
         "name": "_category",
         "type": "uint8[]"
       }
@@ -567,6 +567,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "setRevealed",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "contract IASTRewards",
@@ -714,7 +721,7 @@
   {
     "inputs": [
       {
-        "internalType": "enum ASTNftSale.CATEGORY[]",
+        "internalType": "enum ASTNftSale1.CATEGORY[]",
         "name": "_category",
         "type": "uint8[]"
       },

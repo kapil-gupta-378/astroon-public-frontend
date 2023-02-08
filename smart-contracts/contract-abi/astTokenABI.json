@@ -3,19 +3,25 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": true,
-        "internalType": "address",
-        "name": "to",
-        "type": "address"
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "tokenId",
+        "type": "uint256"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "value",
+        "name": "rewards",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum ASTTokenRewards.CATEGORY",
+        "name": "_category",
+        "type": "uint8"
       }
     ],
-    "name": "BoughtTokens",
+    "name": "HoldingRewardsClaimed",
     "type": "event"
   },
   {
@@ -69,6 +75,37 @@
       {
         "indexed": false,
         "internalType": "address",
+        "name": "_user",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "totalRewards",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "SoldTokensRewards",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ClaimedRewardsDue",
+        "type": "uint256"
+      }
+    ],
+    "name": "RewardsClaimedToday",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
         "name": "account",
         "type": "address"
       }
@@ -76,62 +113,131 @@
     "name": "Unpaused",
     "type": "event"
   },
-  { "stateMutability": "payable", "type": "fallback" },
-  {
-    "inputs": [],
-    "name": "_days",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "buyTokens",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "amount", "type": "uint256" }
+      { "internalType": "uint256", "name": "", "type": "uint256" },
+      {
+        "internalType": "enum ASTTokenRewards.CATEGORY",
+        "name": "",
+        "type": "uint8"
+      }
     ],
-    "name": "calculateToken",
+    "name": "RewardsMap",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "cap",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getMerkleRoot",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "goalReached",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "initialTokens",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "_astNftsale",
+    "outputs": [
+      { "internalType": "contract IASTNftSale", "name": "", "type": "address" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_tokenAddr", "type": "address" },
-      { "internalType": "uint256", "name": "_initialTokens", "type": "uint256" }
+      { "internalType": "address", "name": "_addr", "type": "address" }
+    ],
+    "name": "checkReward",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "claim",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getDay",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint8", "name": "month", "type": "uint8" },
+      { "internalType": "uint16", "name": "year", "type": "uint16" }
+    ],
+    "name": "getDaysInMonth",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getHour",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getMinute",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getMonth",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "_id", "type": "uint256" }],
+    "name": "getRewardsCalc",
+    "outputs": [
+      { "internalType": "uint256", "name": "rewardAmount", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getSecond",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getWeekday",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "name": "getYear",
+    "outputs": [{ "internalType": "uint16", "name": "", "type": "uint16" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_nftaddress", "type": "address" },
+      { "internalType": "address", "name": "_AstTokenAddr", "type": "address" }
     ],
     "name": "initialize",
     "outputs": [],
@@ -139,9 +245,27 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "isActive",
+    "inputs": [{ "internalType": "uint16", "name": "year", "type": "uint16" }],
+    "name": "isLeapYear",
     "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "year", "type": "uint256" }
+    ],
+    "name": "leapYearsBefore",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nftContract",
+    "outputs": [
+      { "internalType": "contract IASTNftSale", "name": "", "type": "address" }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -167,43 +291,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "bytes32[]", "name": "_proof", "type": "bytes32[]" }
-    ],
-    "name": "preSaleBuy",
-    "outputs": [],
-    "stateMutability": "payable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "presaleM",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "publicM",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "raisedAmount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "rate",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -212,44 +299,98 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" }
+      { "internalType": "uint256", "name": "_rewards", "type": "uint256" },
+      { "internalType": "uint256", "name": "_year", "type": "uint256" },
+      {
+        "internalType": "enum ASTTokenRewards.CATEGORY",
+        "name": "_x",
+        "type": "uint8"
+      }
     ],
-    "name": "setMerkleRoot",
+    "name": "setRewardsMap",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "start",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_rate", "type": "uint256" },
-      { "internalType": "uint256", "name": "_cap", "type": "uint256" },
-      { "internalType": "uint256", "name": "_start", "type": "uint256" },
-      { "internalType": "uint256", "name": "_ddays", "type": "uint256" }
+      { "internalType": "uint256", "name": "_month", "type": "uint256" },
+      { "internalType": "uint256", "name": "_limit", "type": "uint256" }
     ],
-    "name": "startTokenSale",
+    "name": "setWithdrawalLimits",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "togglePresale",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "inputs": [
+      { "internalType": "uint16", "name": "year", "type": "uint16" },
+      { "internalType": "uint8", "name": "month", "type": "uint8" },
+      { "internalType": "uint8", "name": "day", "type": "uint8" },
+      { "internalType": "uint8", "name": "hour", "type": "uint8" },
+      { "internalType": "uint8", "name": "minute", "type": "uint8" }
+    ],
+    "name": "toTimestamp",
+    "outputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "year", "type": "uint16" },
+      { "internalType": "uint8", "name": "month", "type": "uint8" },
+      { "internalType": "uint8", "name": "day", "type": "uint8" },
+      { "internalType": "uint8", "name": "hour", "type": "uint8" }
+    ],
+    "name": "toTimestamp",
+    "outputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "year", "type": "uint16" },
+      { "internalType": "uint8", "name": "month", "type": "uint8" },
+      { "internalType": "uint8", "name": "day", "type": "uint8" }
+    ],
+    "name": "toTimestamp",
+    "outputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint16", "name": "year", "type": "uint16" },
+      { "internalType": "uint8", "name": "month", "type": "uint8" },
+      { "internalType": "uint8", "name": "day", "type": "uint8" },
+      { "internalType": "uint8", "name": "hour", "type": "uint8" },
+      { "internalType": "uint8", "name": "minute", "type": "uint8" },
+      { "internalType": "uint8", "name": "second", "type": "uint8" }
+    ],
+    "name": "toTimestamp",
+    "outputs": [
+      { "internalType": "uint256", "name": "timestamp", "type": "uint256" }
+    ],
+    "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "togglePublicSale",
-    "outputs": [],
-    "stateMutability": "nonpayable",
+    "name": "token",
+    "outputs": [
+      {
+        "internalType": "contract IERC20Upgradeable",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -277,9 +418,64 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "admin", "type": "address" }
+      { "internalType": "address", "name": "_nftaddress", "type": "address" }
     ],
-    "name": "withdrawETH",
+    "name": "updateASTNFTaddress",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_tokenId", "type": "uint256" },
+      { "internalType": "uint256", "name": "_rewards", "type": "uint256" },
+      { "internalType": "address", "name": "_from", "type": "address" }
+    ],
+    "name": "updateData",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256[]", "name": "_limits", "type": "uint256[]" }
+    ],
+    "name": "updateLimits",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "name": "userTokenDetailsMap",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "lastRewardClaimed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalRewardsClaimed",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "rewardsOfSoldToken",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "ClaimedRewardsDue",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawAmount",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -293,6 +489,5 @@
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
-  },
-  { "stateMutability": "payable", "type": "receive" }
+  }
 ]
