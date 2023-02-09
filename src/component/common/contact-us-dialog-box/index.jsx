@@ -1,13 +1,18 @@
 import React from 'react';
 import TextInput from '../text-input';
 import styles from './contactUsBlogBox.module.scss';
-import Image from 'next/image';
 const ContactUsDialogBox = ({
   leftBlogButtonHandler,
   rightBlogButtonHandler,
   handleShow,
   finalData,
 }) => {
+  const getAttachmentName = (link) => {
+    const value = link.split('/');
+    const valueLength = value.length;
+    return value[valueLength - 1];
+  };
+
   return (
     <div className="dialog_box">
       {handleShow && (
@@ -20,17 +25,7 @@ const ContactUsDialogBox = ({
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac
               nibh ut in. Convallis in tristique dui sit vestibulum habitant
             </p>
-            <div className={`row ${styles.attachment}`}>
-              <Image
-                src={finalData.attachments}
-                // src={'/assets/images/card_avatar.svg'}
-                height={100}
-                width={100}
-                layout="fixed"
-                id="attachment_id"
-                alt=""
-              />
-            </div>
+
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 <div className={styles.input_wrap}>
@@ -108,6 +103,20 @@ const ContactUsDialogBox = ({
                     <li>NA</li>
                   </div>
                 )}
+                {
+                  <p className={styles.attachment}>
+                    {'Attachment : '}
+                    <a
+                      href={finalData.attachments}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {finalData.attachments
+                        ? getAttachmentName(finalData.attachments)
+                        : 'NA'}
+                    </a>
+                  </p>
+                }
               </div>
             </div>
             <div className={styles.dialog_footer}>

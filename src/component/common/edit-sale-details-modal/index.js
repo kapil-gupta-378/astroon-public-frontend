@@ -53,25 +53,27 @@ const EditSaleDetailsModal = ({
                 titleBackground={'#AF3277'}
                 title={'Token Price'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    tokenPrice: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      tokenPrice: e.target.value,
+                    }));
+                }}
               />
               <TextInput
                 handleValue={value.noOfToken}
                 titleBackground={'#AF3277'}
                 title={'Number oF Token'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    noOfToken: e.target.value,
-                    cap: removeZero(value.tokenPrice * e.target.value),
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      noOfToken: e.target.value,
+                      cap: removeZero(value.tokenPrice * e.target.value),
+                    }));
+                }}
               />
             </div>
             <TextInput
@@ -99,12 +101,13 @@ const EditSaleDetailsModal = ({
                 titleBackground={'#AF3277'}
                 title={'End In (Days)'}
                 handleType="number"
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    endDate: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      endDate: e.target.value,
+                    }));
+                }}
               />
             </div>
             <div className={styles.input_wrap}>
@@ -113,24 +116,26 @@ const EditSaleDetailsModal = ({
                 titleBackground={'#AF3277'}
                 title={'Clifting Time'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    cliftingTime: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      cliftingTime: e.target.value,
+                    }));
+                }}
               />
               <TextInput
                 handleValue={value.vestingTime}
                 titleBackground={'#AF3277'}
                 title={'Vesting Time'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    vestingTime: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      vestingTime: e.target.value,
+                    }));
+                }}
               />
             </div>
             <div className={styles.input_wrap}>
@@ -139,24 +144,26 @@ const EditSaleDetailsModal = ({
                 titleBackground={'#AF3277'}
                 title={'Minimum Buy Limit Per User'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    minBuy: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      minBuy: e.target.value,
+                    }));
+                }}
               />
               <TextInput
                 handleValue={value.maxLimit}
                 titleBackground={'#AF3277'}
                 title={'Maximum Buy Limit Per User'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    maxLimit: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      maxLimit: e.target.value,
+                    }));
+                }}
               />
             </div>
           </form>

@@ -36,9 +36,9 @@ const AdminBlogTable = () => {
   const route = useRouter();
 
   useEffect(() => {
-    setPageLimit(6);
+    setPageLimit(10);
     setPageNumber(1);
-    getBlogData(1, 6);
+    getBlogData(1, 10);
     setPageNumber((value) => value + 1);
   }, []);
 
@@ -58,7 +58,7 @@ const AdminBlogTable = () => {
     setAdminBlogData((value) => [...value, ...res.data.rows]);
     setBlogLoading(false);
     setAdminBlogCount((value) => {
-      return value - 6;
+      return value - 10;
     });
     setPageNumber((value) => value + 1);
   };

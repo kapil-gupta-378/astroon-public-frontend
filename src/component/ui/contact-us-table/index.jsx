@@ -44,7 +44,7 @@ const ContactTable = ({
                   <th scope="col">Username</th>
                   <th scope="col">Reason for Contact</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Subject</th>
+                  <th scope="col">Action</th>
                 </tr>
               </thead>
               <tbody>

@@ -11,7 +11,7 @@ export const fetchAdminListData = (paramsData, moreData = false) => {
       if (!moreData) {
         dispatch(setAdmindataLoading(true));
         const data = await getAdminListDataApi(paramsData);
-        if (data.rows.length !== 0) dispatch(setAdmindata(data.rows));
+        if (data?.rows) dispatch(setAdmindata(data.rows));
         dispatch(setAdminListCount(data.count));
       } else {
         const data = await getAdminListDataApi(paramsData);

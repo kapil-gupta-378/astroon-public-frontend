@@ -286,12 +286,8 @@ body {
           a {
             color: #efefef;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: inherit;
             text-decoration: none;
-            &:focus {
-              font-weight: 500;
-              color: white;
-            }
           }
           div {
             color: #efefef;

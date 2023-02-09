@@ -16,8 +16,8 @@ const AdminListTable = () => {
   const [deleteItemComment, setDeleteItemComment] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState();
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageLimit] = useState(6);
-  const [role, setRole] = useState('admin');
+  const [pageLimit] = useState(10);
+  const [role, setRole] = useState(undefined);
   const dispatch = useDispatch();
   const route = useRouter();
   const filterByOptions = [

@@ -11,7 +11,7 @@ const WhiteListUserTable = ({ data, handleDeleteItem }) => {
           <thead>
             <tr>
               <th scope="col">S.No.</th>
-              <th scope="col">address</th>
+              <th scope="col">Address</th>
               <th scope="col">Type</th>
             </tr>
           </thead>

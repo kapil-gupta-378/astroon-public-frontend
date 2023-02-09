@@ -30,12 +30,7 @@
       border-radius: 2px;
       background-color: #001764;
     }
-    .attachment {
-      padding: 1% 45%;
-      span {
-        border-radius: 80%;
-      }
-    }
+
     .text_msg {
       @include heading_7;
     }
@@ -55,7 +50,7 @@
       font-size: 13px;
       text-align: center;
       line-height: 18px;
-      margin: 0px auto 0px auto;
+      margin: 0px auto 40px auto;
     }
 
     .dialog_footer {

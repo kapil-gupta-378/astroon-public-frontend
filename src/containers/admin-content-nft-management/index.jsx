@@ -38,9 +38,9 @@ const NFTManagement = () => {
   const [pageLimit, setPageLimit] = useState();
 
   useEffect(() => {
-    setPageLimit(6);
+    setPageLimit(10);
     setPageNumber(1);
-    getNFTFinalData(1, 6);
+    getNFTFinalData(1, 10);
     setPageNumber((value) => value + 1);
   }, []);
 
@@ -61,7 +61,7 @@ const NFTManagement = () => {
     setNFTListData((value) => [...value, ...res.data.rows]);
     setIsLoading(false);
     setAdminNFTCount((value) => {
-      return value - 6;
+      return value - 10;
     });
     setPageNumber((value) => value + 1);
   };
@@ -77,7 +77,7 @@ const NFTManagement = () => {
       if (res.success) {
         toast.success(res.message);
         setDeleteItemId('');
-        getNFTFinalData(1, 6);
+        getNFTFinalData(1, 10);
         setDeleteDialog(false);
         setCategory('');
       }
