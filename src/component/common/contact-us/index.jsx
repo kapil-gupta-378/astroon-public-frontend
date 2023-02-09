@@ -113,6 +113,7 @@ const ContactUs = (props) => {
               kind="fullborder"
               placeHolder="Enter your email"
               handleValue={email}
+              maxlength="320"
               handleOnChange={(e) => setEmail(e.target.value)}
             />
 

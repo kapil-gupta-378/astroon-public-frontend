@@ -6,6 +6,9 @@ $fontsize: 12px;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  .active {
+    font-weight: 700 !important;
+  }
   .wallet_connect_modal {
     display: flex;
     flex-direction: column;

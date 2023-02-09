@@ -4,6 +4,9 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
+  border: 1px solid hsl(0deg, 0%, 70%);
+  padding: 7px 16px;
+  border-radius: 36px;
   .search_input {
     color: white;
     background: transparent;

@@ -50,18 +50,18 @@ const AddAdmin = () => {
   };
 
   async function uploadDataToServer(e) {
-    e.preventDefault();
-    const data = {
-      firstName: firstName,
-      lastName: lastName,
-      profileImage: newUpadateImageURL,
-      userName: userName,
-      email: email,
-      password: password,
-      isActive: status,
-      roleId: role,
-    };
     try {
+      e.preventDefault();
+      const data = {
+        firstName: firstName,
+        lastName: lastName,
+        profileImage: newUpadateImageURL,
+        userName: userName,
+        email: email,
+        password: password,
+        isActive: status,
+        roleId: role,
+      };
       const res = await createAdminAccountApi(data);
       if (res.success) {
         toast.success(res.message);
@@ -70,9 +70,13 @@ const AddAdmin = () => {
         toast.success(res.message);
       }
     } catch (error) {
-      if (error.response) {
-        toast.error(error?.response?.data?.message[0].errorDetail.isNotEmpty);
-      }
+      toast.error(
+        error?.response?.data?.message
+          ? error?.response?.data?.message
+          : error?.message
+          ? error?.message
+          : error?.toString().slice(7),
+      );
     }
   }
   return (
@@ -139,6 +143,7 @@ const AddAdmin = () => {
                 kind={'fullborder'}
                 handleValue={password}
                 handleType={'password'}
+                autocomplete="new-password"
                 handleOnChange={(e) => setPassword(e.target.value)}
                 maxlength="60"
               />

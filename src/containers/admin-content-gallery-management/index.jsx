@@ -37,9 +37,9 @@ const GalleryManagement = () => {
   const [pageLimit, setPageLimit] = useState();
 
   useEffect(() => {
-    setPageLimit(6);
+    setPageLimit(10);
     setPageNumber(1);
-    getGalleryData(1, 6);
+    getGalleryData(1, 10);
     setPageNumber((value) => value + 1);
   }, []);
 
@@ -59,7 +59,7 @@ const GalleryManagement = () => {
     setGalleryList((value) => [...value, ...res.data.rows]);
     setLoading(false);
     setAdminGalleryCount((value) => {
-      return value - 6;
+      return value - 10;
     });
     setPageNumber((value) => value + 1);
   };
@@ -215,7 +215,7 @@ const GalleryManagement = () => {
       if (res.success) {
         toast.success(res.message);
         setDeleteItemId('');
-        getGalleryData(1, 6);
+        getGalleryData(1, 10);
         setDeleteDialog(false);
       }
     } catch (error) {

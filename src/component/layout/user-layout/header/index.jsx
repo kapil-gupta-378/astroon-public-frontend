@@ -139,31 +139,55 @@ const Header = () => {
           />
           <Navbar.Collapse className="items_wrap" id="basic-navbar-nav">
             <Nav className="">
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/'}>Home</Link>
               </Nav.Item>
               <Nav.Item
+                className={route.pathname === '/animation' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
                 href="/animation"
               >
                 <Link href={'/animation'}>Animation</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/ast' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/ast'}>Token</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
-                <Link href={'/nft'}>NFT</Link>
+              <Nav.Item
+                className={route.pathname === '/nft' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
+                <Link className={'cuuiashi'} legacyBehavior href={'/nft'}>
+                  NFT
+                </Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/app' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/app'}>App</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/games' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/games'}>Games</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/gallery' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/gallery'}>Gallery</Link>
               </Nav.Item>
-              <Nav.Item onClick={() => setMobileNavExpended(false)}>
+              <Nav.Item
+                className={route.pathname === '/blog' ? styles.active : ''}
+                onClick={() => setMobileNavExpended(false)}
+              >
                 <Link href={'/blog'}>Blog</Link>
               </Nav.Item>
               {!isUserConnected && (

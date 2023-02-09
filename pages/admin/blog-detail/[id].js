@@ -9,7 +9,7 @@ const BlogDetailPages = ({ data }) => {
 
   return (
     <div>
-      <BlogDetail isAdmin="isAdmin" id={id} data={data} />
+      <BlogDetail isAdmin="isAdmin" id={id} data={data} backBtn={true} />
     </div>
   );
 };

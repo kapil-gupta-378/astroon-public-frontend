@@ -14,7 +14,7 @@ const WalletManagementTable = () => {
   const [deleteItemComment, setDeleteItemComment] = useState('');
   const [searchKeyWord, setSearchKeyWord] = useState();
   const [pageNumber, setPageNumber] = useState(1);
-  const [pageLimit] = useState(6);
+  const [pageLimit] = useState(10);
   const dispatch = useDispatch();
   const route = useRouter();
   // const filterByOptions = [

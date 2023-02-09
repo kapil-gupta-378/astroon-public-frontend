@@ -32,9 +32,9 @@ const ContactUsTable = () => {
   const [adminContactUsCount, setAdminContactUsCount] = useState('');
   const [getFileType, setFileType] = useState('');
   useEffect(() => {
-    setPageLimit(6);
+    setPageLimit(10);
     setPageNumber(1);
-    getContactUsData(1, 6);
+    getContactUsData(1, 10);
     setPageNumber((value) => value + 1);
   }, []);
 
@@ -70,7 +70,7 @@ const ContactUsTable = () => {
     setContactUsData((value) => [...value, ...res.data.rows]);
     setContactUsLoading(false);
     setAdminContactUsCount((value) => {
-      return value - 6;
+      return value - 10;
     });
     setPageNumber((value) => value + 1);
   };

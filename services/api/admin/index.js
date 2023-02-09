@@ -54,11 +54,7 @@ export const updateAdminProfileImageToServerApi = async (data) => {
   return xhr.data.data;
 };
 export const createAdminAccountApi = async (data) => {
-  const xhr = await axios.post(
-    `${APP_URL}users/admin/account-create`,
-    data,
-    {},
-  );
+  const xhr = await axios.post(`${APP_URL}users/admin/account-create`, data);
   return xhr.data;
 };
 
@@ -74,7 +70,7 @@ export const createAdminAuditApi = async (data) => {
 export const changeAdminRoleApi = async (id, data) => {
   const xhr = await axios.request({
     method: 'put',
-    url: `${APP_URL}role/${id}`,
+    url: `${APP_URL}users/${id}/update-role`,
     data,
   });
   return xhr.data;

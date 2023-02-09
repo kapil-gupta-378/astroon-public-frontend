@@ -84,8 +84,8 @@ const ProfileEdit = () => {
       dispatch(setGlobalLoading(true));
 
       if (role) {
-        data = {
-          name: role.value,
+        let data = {
+          roleId: role.value,
         };
         await changeAdminRoleApi(id, data);
       }
@@ -109,6 +109,7 @@ const ProfileEdit = () => {
         router.back();
       }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       toast.error(error.response.data.message);
     }
   };

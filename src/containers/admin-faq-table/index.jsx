@@ -24,9 +24,9 @@ const AdminFAQTable = () => {
   const route = useRouter();
 
   useEffect(() => {
-    setPageLimit(6);
+    setPageLimit(10);
     setPageNumber(1);
-    getFAQData(1, 6);
+    getFAQData(1, 10);
     setPageNumber((value) => value + 1);
   }, []);
 
@@ -46,7 +46,7 @@ const AdminFAQTable = () => {
     setAdminFAQData((value) => [...value, ...res.rows]);
     setAdminLoading(false);
     setAdminFAQCount((value) => {
-      return value - 6;
+      return value - 10;
     });
     setPageNumber((value) => value + 1);
   };
@@ -83,7 +83,7 @@ const AdminFAQTable = () => {
       if (res.success) {
         toast.success(res.message);
         setDeleteDialog(false);
-        getFAQData(1, 6);
+        getFAQData(1, 10);
         setDeleteItemId('');
       }
     } catch (error) {
