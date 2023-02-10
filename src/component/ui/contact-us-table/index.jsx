@@ -15,7 +15,7 @@ const ContactTable = ({
           scrollableTarget={'table_scroll'}
           dataLength={data.length} //This is important field to render the next data
           next={() => fetchMoreData()}
-          hasMore={dataCount > 6}
+          hasMore={dataCount > 10}
           loader={<h4 style={{ textAlign: 'center' }}>Loading...</h4>}
           endMessage={
             <p style={{ textAlign: 'center' }}>
@@ -50,7 +50,7 @@ const ContactTable = ({
               <tbody>
                 {data.map((item, idx) => {
                   return (
-                    <tr key={item.id}>
+                    <tr key={idx}>
                       <th scope="row">{idx + 1}</th>
                       <td>{item.email}</td>
                       <td>{item.username}</td>

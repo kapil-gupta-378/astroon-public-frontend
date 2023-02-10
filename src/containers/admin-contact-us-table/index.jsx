@@ -4,7 +4,6 @@ import SearchBar from '../../component/common/SearchBar';
 import FilterBy from '../../component/common/FilterBy';
 import styles from './adminContactUsTable.module.scss';
 import {
-  getContactUsDataApi,
   contactUsDataOperationApi,
   getcontactUsDataDetailsApi,
   replyByUserApi,
@@ -16,6 +15,7 @@ import ReplyDialogBox from '../../component/common/reply-dialoag-box';
 const statusSelectOptions = [
   { value: 'pending', label: 'Pending' },
   { value: 'replied', label: 'Replied' },
+  { value: '', label: 'All' },
 ];
 
 const ContactUsTable = () => {
@@ -27,8 +27,8 @@ const ContactUsTable = () => {
   const [reply, setReply] = useState('');
   const [isReplyDialogShow, setIsReplyDialogShow] = useState(false);
   const [parentId, setParentId] = useState('');
-  const [pageNumber, setPageNumber] = useState();
-  const [pageLimit, setPageLimit] = useState();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [pageLimit, setPageLimit] = useState(10);
   const [adminContactUsCount, setAdminContactUsCount] = useState('');
   const [getFileType, setFileType] = useState('');
   useEffect(() => {
@@ -39,34 +39,32 @@ const ContactUsTable = () => {
   }, []);
 
   useEffect(() => {
-    if (getFileType) {
-      filterContactUsData(getFileType);
-    }
+    getContactUsData();
   }, [getFileType]);
 
-  const filterContactUsData = async (file) => {
-    const res = await contactUsDataOperationApi(`status=${file}`);
+  const getContactUsData = async () => {
+    const param = {
+      page: 1,
+      limit: 10,
+      status: getFileType,
+    };
+    const res = await contactUsDataOperationApi(param);
     if (res.success) {
       setContactUsData(res.data.rows);
-      setContactUsLoading(false);
-    } else {
-      toast.error(res.message);
-    }
-  };
-
-  const getContactUsData = async (pageNo, pageLim) => {
-    const res = await getContactUsDataApi(pageNo, pageLim);
-    if (res.success) {
-      setContactUsData(res.data.rows);
-      setContactUsLoading(false);
       setAdminContactUsCount(res.data.count);
+      setContactUsLoading(false);
     } else {
       toast.error(res.message);
     }
   };
 
   const fetchMoreData = async () => {
-    const res = await getContactUsDataApi(pageNumber, pageLimit);
+    const param = {
+      page: pageNumber,
+      limit: pageLimit,
+      status: getFileType,
+    };
+    const res = await contactUsDataOperationApi(param);
     setContactUsData((value) => [...value, ...res.data.rows]);
     setContactUsLoading(false);
     setAdminContactUsCount((value) => {
@@ -175,6 +173,7 @@ const ContactUsTable = () => {
         <div className={styles.top_bar_right}>
           <div className={styles.filter_wrap}>
             <FilterBy
+              isSearchable={false}
               options={statusSelectOptions}
               handleChange={(value) => setFileType(value.value)}
             />

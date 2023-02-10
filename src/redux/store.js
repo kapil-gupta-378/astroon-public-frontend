@@ -29,7 +29,7 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: storage,
-  whitelist: ['walletReducer'],
+  whitelist: ['walletReducer', 'adminReducer'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -36,10 +36,11 @@ export const getContactUsDataApi = async (page, limit) => {
   return xhr.data;
 };
 
-export const contactUsDataOperationApi = async (data) => {
+export const contactUsDataOperationApi = async (params) => {
   const xhr = await axios.request({
     method: 'get',
-    url: `${APP_URL}contact-us?${data}`,
+    url: `${APP_URL}contact-us`,
+    params: params,
   });
 
   return xhr.data;
