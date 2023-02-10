@@ -16,7 +16,7 @@ import {
   disconnectAdmin,
   setAdminWalletAddress,
   setIsConnected,
-  setIsNeworkId,
+  setIsNetworkId,
 } from '../../../../redux/admin/adminSlice';
 import { getContractInstance } from '../../../../../services/web3/web3ProviderMethods';
 import { toast } from 'react-toastify';
@@ -30,11 +30,6 @@ const AdminHeader = ({ setOpenSideBar }) => {
   );
   const router = useRouter();
   const dispatch = useDispatch();
-  const Logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    router.push('/login');
-  };
 
   useEffect(() => {
     loadInitialData();
@@ -58,7 +53,7 @@ const AdminHeader = ({ setOpenSideBar }) => {
         ownerWalletAddress.toLowerCase()
       ) {
         dispatch(setAdminWalletAddress(adminWalletData.walletAddress));
-        dispatch(setIsNeworkId(adminWalletData.netwrokID));
+        dispatch(setIsNetworkId(adminWalletData.networkID));
         dispatch(setIsConnected(true));
         toast.success('Wallet Connected');
       } else {
@@ -75,6 +70,12 @@ const AdminHeader = ({ setOpenSideBar }) => {
     return `${src}`;
   };
 
+  const Logout = () => {
+    adminDisconnectHandler();
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    router.push('/login');
+  };
   return (
     <div className={styles.admin_header_wrap}>
       <div className={styles.header_nav_wrap}>

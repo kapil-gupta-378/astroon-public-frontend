@@ -30,7 +30,7 @@ export const adminSlice = createSlice({
     setAdminWalletAddress: (state, action) => {
       state.walletAddress = action.payload;
     },
-    setIsNeworkId: (state, action) => {
+    setIsNetworkId: (state, action) => {
       state.networkId = action.payload;
     },
     setIsConnected: (state, action) => {
@@ -53,7 +53,7 @@ export const {
   setAdminListCount,
   setAdmindataUpdate,
   setAdminWalletAddress,
-  setIsNeworkId,
+  setIsNetworkId,
   setIsConnected,
   disconnectAdmin,
   setAdminToken,
