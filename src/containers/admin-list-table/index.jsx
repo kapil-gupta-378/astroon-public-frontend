@@ -8,7 +8,7 @@ import DialogBox from '../../component/common/dialoag-box';
 import FilterBy from '../../component/common/FilterBy';
 import ListTable from '../../component/common/list-table';
 import SearchBar from '../../component/common/SearchBar';
-import { fetchAdminListData } from '../../redux/admin/adminAction';
+import { fetchAdminListData } from '../../redux/admin-list-data/adminListAction';
 import styles from './adminListTable.module.scss';
 const AdminListTable = () => {
   const [deleteDialog, setDeleteDialog] = useState(false);
@@ -25,8 +25,10 @@ const AdminListTable = () => {
     { value: 'subadmin', label: 'Sub Admin' },
     { value: undefined, label: 'All Admin' },
   ];
-  const { adminListData, adminLoading, adminListCount, adminToken } =
-    useSelector((state) => state.adminReducer);
+  const { adminListData, adminLoading, adminListCount } = useSelector(
+    (state) => state.adminListReducer,
+  );
+  const { adminToken } = useSelector((state) => state.adminReducer);
   useEffect(() => {
     const paramsObj = {
       page: pageNumber,

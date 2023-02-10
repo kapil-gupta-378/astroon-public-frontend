@@ -4,7 +4,8 @@ import {
   setAdmindataLoading,
   setAdmindataUpdate,
   setAdminListCount,
-} from './adminSlice';
+} from '../admin-list-data/adminListSlice';
+
 export const fetchAdminListData = (paramsData, moreData = false) => {
   return async (dispatch) => {
     try {

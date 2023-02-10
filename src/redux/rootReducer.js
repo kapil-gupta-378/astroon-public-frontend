@@ -13,7 +13,7 @@ import whiteListUserReducer from './white-list-user/whiteListSlice';
 import whiteListSeedUserReducer from './white-list-seed-user/whiteListSeedSlice';
 import addressListReducer from './wallet-list/walletListSlice';
 import nftSaleReducer from './nft-sale/nftSaleSlice';
-
+import adminListReducer from './admin-list-data/adminListSlice';
 export const rootReducer = combineReducers({
   homeReducer,
   faqReducer,
@@ -29,4 +29,5 @@ export const rootReducer = combineReducers({
   whiteListSeedUserReducer,
   addressListReducer,
   nftSaleReducer,
+  adminListReducer,
 });
