@@ -23,7 +23,7 @@ export const connectWallet = async (envNetworkId, envNetworkIdInHex) => {
         params: [{ chainId: envNetworkIdInHex }],
       });
     }
-    return { walletAddress: accounts[0], netwrokID: networkId };
+    return { walletAddress: accounts[0], networkID: networkId };
   } else {
     window.location.href =
       process.env.NEXT_PUBLIC_METAMASK_DOWNLOAD_LINK_FOR_MOBILE;

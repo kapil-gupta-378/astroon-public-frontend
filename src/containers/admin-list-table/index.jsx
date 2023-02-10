@@ -121,6 +121,7 @@ const AdminListTable = () => {
         <div className={styles.top_bar_right}>
           <div className={styles.filter_wrap}>
             <FilterBy
+              isSearchable={false}
               options={filterByOptions}
               handleChange={(value) => setRole(value.value)}
             />

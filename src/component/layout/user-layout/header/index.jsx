@@ -69,7 +69,7 @@ const Header = () => {
 
       varifieSignature(
         adminWalletData.walletAddress,
-        adminWalletData.netwrokID,
+        adminWalletData.networkID,
       );
     } catch (error) {
       console.error(error);

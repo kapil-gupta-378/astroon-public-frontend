@@ -2,10 +2,11 @@ import Image from 'next/image';
 import React from 'react';
 import filterByIcon from '../../../../public/assets/images/filerByIcon.svg';
 import Select from 'react-select';
-const FilterBy = ({ selectedOption, handleChange, options }) => {
+const FilterBy = ({ selectedOption, handleChange, options, ...props }) => {
   return (
     <div className="filter_wrap">
       <Select
+        {...props}
         components={{
           DropdownIndicator: () => null,
           IndicatorSeparator: () => null,
