@@ -11,6 +11,8 @@ import getConfig from 'next/config';
 import 'react-toastify/dist/ReactToastify.css';
 import { chains, providers } from '@web3modal/ethereum';
 import { Web3Modal } from '@web3modal/react';
+import 'rc-slider/assets/index.css';
+
 import {
   requestInterceptor,
   responseInterceptor,

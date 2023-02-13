@@ -119,6 +119,13 @@ const BuyTokenModal = ({
                   backgroundColor: 'rgba(0, 0, 0, 0.1)',
                   height: 10,
                 }}
+                handleStyle={{
+                  height: 20,
+                  width: 20,
+                  marginLeft: '-8px',
+                  marginTop: '-5px',
+                  borderColor: 'black',
+                }}
               />
             </div>
             <div className={styles.buy_btn_wrap}>
