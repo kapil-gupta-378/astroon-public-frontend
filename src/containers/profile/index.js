@@ -439,7 +439,7 @@ const Profile = () => {
                     />
                     {`${
                       address
-                        ? `${address.slice(0, 5)}...${address.slice(11, 16)}`
+                        ? `${address.slice(0, 5)}...${address.slice(37, 42)}`
                         : ''
                     }`}
                   </div>
