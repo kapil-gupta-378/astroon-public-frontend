@@ -33,7 +33,7 @@ export const getNonceApi = async (data) => {
   });
   return xhr.data;
 };
-export const varivarifieSignatureApi = async (data) => {
+export const varifieSignatureApi = async (data) => {
   const xhr = await axios.request({
     method: 'post',
     url: `${APP_URL}users/verify-signature`,

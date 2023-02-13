@@ -12,7 +12,7 @@ import {
   setIsUserConnected,
   setToken,
 } from '../../../redux/persist/wallet/walletSlice';
-const UserProfileDropDown = () => {
+const UserProfileDropDown = ({ profileImage }) => {
   const { walletAddress, balance } = useSelector(
     (state) => state.walletReducer,
   );
@@ -29,9 +29,10 @@ const UserProfileDropDown = () => {
       <NavDropdown
         title={
           <Image
+            loader={({ src }) => `${src}`}
             width={25}
             height={25}
-            src={defaltProfileImage}
+            src={profileImage ? profileImage : defaltProfileImage}
             layout="fixed"
             alt="profileImage"
           />

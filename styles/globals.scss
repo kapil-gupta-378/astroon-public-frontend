@@ -388,6 +388,9 @@ body {
     border: 1px solid #ffffff;
     border-radius: 30px;
     .dropdown-toggle {
+      span {
+        border-radius: 50%;
+      }
       padding: 5px 10px;
       display: flex;
       justify-content: center;
