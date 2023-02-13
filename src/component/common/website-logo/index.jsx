@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { getGeneralSettingsApi } from '../../../../services/api/general-settings';
-import logoIcon from '../../../../public/assets/images/Logo.png';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
 
@@ -18,22 +17,15 @@ const WebsiteLogo = () => {
     setData(res.data);
     if (res.success) {
     } else {
-      toast.error(res.message, {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error(res.message);
     }
   };
   return (
     <>
       <Image
         style={{ cursor: 'pointer' }}
-        src={data.websiteLogo ? data.websiteLogo : logoIcon}
+        // loader={(src) => src}
+        src={data.websiteLogo}
         height={100}
         width={150}
         layout="fixed"

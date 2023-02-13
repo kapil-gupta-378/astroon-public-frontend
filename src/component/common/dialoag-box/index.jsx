@@ -89,7 +89,7 @@ DialogBox.propTypes = {
   rightButtonHandler: PropTypes.func,
   leftButtonName: PropTypes.string,
   rightButtonName: PropTypes.string,
-  handleShow: PropTypes.func,
+  handleShow: PropTypes.bool,
   inputValue: PropTypes.any,
   onChangeInput: PropTypes.func,
   children: PropTypes.element,

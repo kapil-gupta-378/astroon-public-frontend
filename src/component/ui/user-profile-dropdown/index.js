@@ -16,7 +16,7 @@ const UserProfileDropDown = ({ profileImage }) => {
   const { walletAddress, balance } = useSelector(
     (state) => state.walletReducer,
   );
-  const { ethUsdPrice } = useSelector((state) => state.currencyReducer);
+  // const { ethUsdPrice } = useSelector((state) => state.currencyReducer);
   const router = useRouter();
   const dispatch = useDispatch();
   const disconnect = () => {
@@ -79,7 +79,7 @@ const UserProfileDropDown = ({ profileImage }) => {
           </OverlayTrigger>
 
           <div className={styles.usd}>
-            ${(0.0001 * balance * ethUsdPrice).toFixed(2)} USD
+            {/* ${(0.0001 * balance * ethUsdPrice).toFixed(2)} USD */}
           </div>
         </NavDropdown.Item>
       </NavDropdown>

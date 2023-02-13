@@ -31,10 +31,7 @@ import {
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 import { fetchWalletBalance } from '../../../../redux/persist/wallet/walletAction';
-import {
-  disconnectAdmin,
-  setIsConnected,
-} from '../../../../redux/admin/adminSlice';
+import { disconnectAdmin } from '../../../../redux/admin/adminSlice';
 // import ComingSoonModal from '../../../ui/coming-soon-modal';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
@@ -105,10 +102,10 @@ const Header = () => {
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));
-          dispatch(disconnectAdmin());
           dispatch(fetchWalletBalance(address));
-          dispatch(setIsConnected(false));
           setwalletConnectDialog(false);
+          // disconnecting admin by redux
+          dispatch(disconnectAdmin());
           toast.success('Wallet Connected');
           route.push(`/user-profile/${address}`);
         }
@@ -131,13 +128,6 @@ const Header = () => {
         <Container>
           <Navbar.Brand>
             <Link href={'/'}>
-              {/* <Image
-                src={logoIcon}
-                height={100}
-                width={150}
-                layout="fixed"
-                alt="logo"
-              /> */}
               <WebsiteLogo />
             </Link>
           </Navbar.Brand>
@@ -170,7 +160,7 @@ const Header = () => {
                 className={route.pathname === '/nft' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
               >
-                <Link className={'cuuiashi'} legacyBehavior href={'/nft'}>
+                <Link legacyBehavior href={'/nft'}>
                   NFT
                 </Link>
               </Nav.Item>

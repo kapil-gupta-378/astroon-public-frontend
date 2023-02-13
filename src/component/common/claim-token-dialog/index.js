@@ -12,7 +12,7 @@ const ClaimTokenDialog = ({
   fetchMoreData,
   loading,
   dataCount,
-  data = [{ saleType: 'sdofak', buyToken: 'soidadfmo', createdAt: 'doisgifj' }],
+  data,
 }) => {
   return (
     <>
@@ -91,19 +91,22 @@ const ClaimTokenDialog = ({
                             <td>{item.claimToken}</td>
                             {
                               <td>
-                                <Button
-                                  disabled={item.remainingClaim === 0}
-                                  onClick={() =>
-                                    claimHandler(
-                                      item.remainingClaim,
-                                      item.saleRound,
-                                    )
-                                  }
-                                >
-                                  {item.remainingClaim === 0
-                                    ? 'Claimed'
-                                    : 'Claim'}
-                                </Button>
+                                {(item.remainingClaim !== 0 ||
+                                  item.claimToken !== 0) && (
+                                  <Button
+                                    disabled={item.remainingClaim === 0}
+                                    onClick={() =>
+                                      claimHandler(
+                                        item.remainingClaim,
+                                        item.saleRound,
+                                      )
+                                    }
+                                  >
+                                    {item.remainingClaim === 0
+                                      ? 'Claimed'
+                                      : 'Claim'}
+                                  </Button>
+                                )}
                               </td>
                             }
                           </tr>
