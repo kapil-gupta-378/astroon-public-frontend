@@ -12,7 +12,7 @@ import UserProfileDropDown from '../../../ui/user-profile-dropdown';
 import WebsiteLogo from '../../../common/website-logo';
 import {
   getNonceApi,
-  varivarifieSignatureApi,
+  varifieSignatureApi,
 } from '../../../../../services/api/user';
 import {
   setIsUserConnected,
@@ -31,6 +31,10 @@ import {
 import { fetchCurrencyData } from '../../../../redux/currency/currencyAction';
 import { fetchUserDataAction } from '../../../../redux/user/userAction';
 import { fetchWalletBalance } from '../../../../redux/persist/wallet/walletAction';
+import {
+  disconnectAdmin,
+  setIsConnected,
+} from '../../../../redux/admin/adminSlice';
 // import ComingSoonModal from '../../../ui/coming-soon-modal';
 const envNetworkId = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID;
 const envNetworkIdInHex = process.env.NEXT_PUBLIC_ETHEREUM_NETWORK_ID_IN_HEX;
@@ -42,6 +46,8 @@ const Header = () => {
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
+
+  const { userData } = useSelector((state) => state.userReducer);
 
   useEffect(() => {
     addWalletEventListener(disconnectWallet, disconnectWallet);
@@ -90,7 +96,7 @@ const Header = () => {
           signature: sign,
           networkId: networkId,
         };
-        const responseSignature = await varivarifieSignatureApi(data);
+        const responseSignature = await varifieSignatureApi(data);
 
         if (responseSignature.success) {
           localStorage.setItem('isConnected', true);
@@ -99,7 +105,9 @@ const Header = () => {
           dispatch(setIsUserConnected(true));
           dispatch(setToken(responseSignature.data.token));
           dispatch(setWalletAddress(address));
+          dispatch(disconnectAdmin());
           dispatch(fetchWalletBalance(address));
+          dispatch(setIsConnected(false));
           setwalletConnectDialog(false);
           toast.success('Wallet Connected');
           route.push(`/user-profile/${address}`);
@@ -203,7 +211,7 @@ const Header = () => {
               )}
               {isUserConnected && (
                 <Nav.Item>
-                  <UserProfileDropDown />
+                  <UserProfileDropDown profileImage={userData.profileImage} />
                 </Nav.Item>
               )}
             </Nav>
