@@ -52,7 +52,7 @@ const Profile = () => {
     nftRewardCount,
     claimedReward,
   } = useSelector((state) => state.userReducer);
-
+  const [isCopied, setIsCopied] = useState(false);
   const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
@@ -333,6 +333,12 @@ const Profile = () => {
     }
   };
 
+  const copyToClipboard = (value) => {
+    navigator.clipboard.writeText(value);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
   return (
     <>
       {isUserConnected ? (
@@ -413,18 +419,29 @@ const Profile = () => {
                   placement={'auto'}
                   overlay={
                     <Tooltip>
-                      <strong>{address}</strong>
+                      <strong>
+                        {isCopied
+                          ? `Copied. ${address}`
+                          : `Click to copy. ${address}`}
+                      </strong>
                     </Tooltip>
                   }
                 >
-                  <div className={styles.wallet_address}>
+                  <div
+                    onClick={() => copyToClipboard(address)}
+                    className={styles.wallet_address}
+                  >
                     <Image
                       src={ethIconWhite}
                       width={13}
                       height={13}
                       alt="eth"
                     />
-                    {`${address ? `${address.slice(0, 9)}...` : ''}`}
+                    {`${
+                      address
+                        ? `${address.slice(0, 5)}...${address.slice(11, 16)}`
+                        : ''
+                    }`}
                   </div>
                 </OverlayTrigger>
                 {route.pathname === '/user-profile/[address]' && (

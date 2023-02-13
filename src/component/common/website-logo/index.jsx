@@ -20,24 +20,29 @@ const WebsiteLogo = () => {
       toast.error(res.message);
     }
   };
+  const ImageLoader = ({ src }) => {
+    return `${src}`;
+  };
   return (
     <>
-      <Image
-        style={{ cursor: 'pointer' }}
-        // loader={(src) => src}
-        src={data.websiteLogo}
-        height={100}
-        width={150}
-        layout="fixed"
-        alt="logo"
-        onClick={() =>
-          router.pathname.includes('/admin')
-            ? router.push('/admin/dashboard')
-            : router.pathname.includes('/login')
-            ? router.push('/login')
-            : router.push('/')
-        }
-      />
+      {data.websiteLogo && (
+        <Image
+          style={{ cursor: 'pointer' }}
+          loader={ImageLoader}
+          src={data.websiteLogo}
+          height={100}
+          width={150}
+          layout="fixed"
+          alt="logo"
+          onClick={() =>
+            router.pathname.includes('/admin')
+              ? router.push('/admin/dahboard')
+              : router.pathname.includes('/login')
+              ? router.push('/login')
+              : router.push('/')
+          }
+        />
+      )}
     </>
   );
 };
