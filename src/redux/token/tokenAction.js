@@ -45,7 +45,6 @@ export const fetchTokenDataAction = () => {
       const saleOnData = await getSaleOnStatusApi();
 
       // checking is any sale is on
-
       const isSaleOn = await checkSaleRoundIsOn(currentSale.saleData.saleRound);
       dispatch(setSaleRoundOn(isSaleOn));
 

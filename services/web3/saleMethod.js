@@ -11,6 +11,10 @@ export const startPrivateSale = async (
 ) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
 
+  // if stopping public sale if public sale on
+  const isPublicSaleOn = await AstTokenContract.methods.publicM().call();
+  if (isPublicSaleOn) await stopSale('Public Sale', adminWalletAddress);
+
   // setting merkle root for sale
   const merkleResponse = await setMerkleRoot(
     privateUserMerkleRoot.merkleRoot,
@@ -44,18 +48,20 @@ export const startPrivateSale = async (
 
 export const startPublicSale = async (saleData, adminWalletAddress) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
+  // if seed / private sale is on we close that sale by below code
+  const isPrivateSaleOn = await AstTokenContract.methods.presaleM().call();
+  if (isPrivateSaleOn) await stopSale('Private Sale', adminWalletAddress);
+
   const setSaleDataResponse = await setSaleData(saleData, adminWalletAddress);
+
   const startPrivateSaleResponse = await AstTokenContract.methods
     .togglePublicSale()
     .send({ from: adminWalletAddress });
-
   const data = {
     isPublic: true,
     isPrivate: false,
     isSeed: false,
-    saleRound: Number(
-      setSaleDataResponse.events.SaleCreated.returnValues.saleId,
-    ),
+    saleRound: Number(setSaleDataResponse),
   };
   // updating sale status in backend
   const updateResponse = postSaleOnStatusApi(data);
