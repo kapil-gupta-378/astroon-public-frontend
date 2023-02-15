@@ -137,13 +137,13 @@ const AST = () => {
       if (tokenData.isPrivateSale) {
         // throw Error when user is not white list user
         if (saleOnData.isPrivate && !userData.whiteListedUser)
-          throw new Error('Currently token are availble for private user');
+          throw new Error('Currently token are available for private user');
         if (saleOnData.isSeed && !userData.seedUser)
-          throw new Error('Currently token are availble for seed user');
+          throw new Error('Currently token are available for seed user');
       }
 
       let tokenTransaction;
-      // invoking token buy funtion if no error
+      // invoking token buy function if no error
       dispatch(setGlobalLoading(true));
       tokenTransaction = await buyToken(
         sliderValue,

@@ -103,7 +103,6 @@ const SaleControls = () => {
 
       let startSaleResponse;
       dispatch(setGlobalLoading(true));
-
       if (saleType === 'private') {
         const privateUserMerkleRoot = await getPrivateUserMerkleRootApi();
 
