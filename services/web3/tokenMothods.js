@@ -17,7 +17,7 @@ export const buyToken = async (
 
   let tokenTransition;
 
-  if (tokenData) {
+  if (tokenData.isPrivateSale) {
     let merkleData;
     if (tokenData.saleData.isSeed) {
       merkleData = await getMerkleSeedDataApi();
