@@ -27,6 +27,7 @@ export const fetchTokenDataAction = () => {
       const publicSaleData = SaleTypeDetails.find(
         (saleData) => saleData.saleType === 'Public Sale',
       );
+
       dispatch(setPublicSaleDetails(publicSaleData));
 
       //  creating private sale data object

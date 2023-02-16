@@ -60,6 +60,7 @@ const EditSaleDetailsModal = ({
                       tokenPrice: e.target.value,
                     }));
                 }}
+                isRequired={true}
               />
               <TextInput
                 handleValue={value.noOfToken}
@@ -74,6 +75,8 @@ const EditSaleDetailsModal = ({
                       cap: removeZero(value.tokenPrice * e.target.value),
                     }));
                 }}
+                min={1}
+                isRequired={true}
               />
             </div>
             <TextInput
@@ -95,6 +98,8 @@ const EditSaleDetailsModal = ({
                     startDate: e.target.value,
                   }))
                 }
+                min={moment().format('YYYY-MM-DDTHH:mm')}
+                isRequired={true}
               />
               <TextInput
                 handleValue={value.endDate}
@@ -108,6 +113,8 @@ const EditSaleDetailsModal = ({
                       endDate: e.target.value,
                     }));
                 }}
+                min={1}
+                isRequired={true}
               />
             </div>
             <div className={styles.input_wrap}>
@@ -123,6 +130,8 @@ const EditSaleDetailsModal = ({
                       cliftingTime: e.target.value,
                     }));
                 }}
+                min={1}
+                isRequired={true}
               />
               <TextInput
                 handleValue={value.vestingTime}
@@ -136,6 +145,8 @@ const EditSaleDetailsModal = ({
                       vestingTime: e.target.value,
                     }));
                 }}
+                min={4}
+                isRequired={true}
               />
             </div>
             <div className={styles.input_wrap}>
@@ -151,6 +162,8 @@ const EditSaleDetailsModal = ({
                       minBuy: e.target.value,
                     }));
                 }}
+                min={1}
+                isRequired={true}
               />
               <TextInput
                 handleValue={value.maxLimit}
@@ -164,6 +177,8 @@ const EditSaleDetailsModal = ({
                       maxLimit: e.target.value,
                     }));
                 }}
+                min={1}
+                isRequired={true}
               />
             </div>
           </form>
