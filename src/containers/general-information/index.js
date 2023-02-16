@@ -12,6 +12,9 @@ import {
   updateGeneralInformationApi,
   uploadHomePageYoutubeThumbnailApi,
 } from '../../../services/api/general-information/general-information';
+import { useDispatch } from 'react-redux';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import GlobalLoading from '../../component/common/global-loading';
 
 const GeneralInformation = () => {
   const [facebookURL, setFacebookURL] = useState('');
@@ -27,6 +30,7 @@ const GeneralInformation = () => {
   const [settingsId, setSettingsId] = useState('');
 
   const route = useRouter();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchIntialData();
@@ -57,6 +61,8 @@ const GeneralInformation = () => {
   };
 
   const updateSettingsData = async () => {
+    dispatch(setGlobalLoading(true));
+
     const data = {
       facebookUrl: facebookURL,
       twitterUrl: twitterURL,
@@ -74,10 +80,14 @@ const GeneralInformation = () => {
       if (response.success) {
         toast.success(response.message);
         fetchIntialData();
+        dispatch(setGlobalLoading(false));
       } else {
         toast.error(response.message);
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
+
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   };
@@ -179,6 +189,7 @@ const GeneralInformation = () => {
       <section className={styles.footer_wrap}>
         <Button onClick={updateSettingsData}>Submit</Button>
       </section>
+      <GlobalLoading />
     </main>
   );
 };

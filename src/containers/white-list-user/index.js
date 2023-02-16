@@ -61,6 +61,8 @@ const WhiteListUser = () => {
   // for create new whitelist user
   const createWhiteListUser = async () => {
     try {
+      dispatch(setGlobalLoading(true));
+
       let newArray = [];
 
       for (let i = 0; i < whiteListUserData.length; i++) {
@@ -77,11 +79,14 @@ const WhiteListUser = () => {
           toast.success('WhiteList User Created Successfully');
           if (saleOnData.isPrivate && tokenData.isPrivateSale)
             updateUserInContract();
+          dispatch(setGlobalLoading(false));
         }
       } catch (error) {
+        dispatch(setGlobalLoading(false));
         return error;
       }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
       return error;
     }
   };
