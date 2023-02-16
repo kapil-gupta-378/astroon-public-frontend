@@ -154,6 +154,7 @@ const SaleControls = () => {
           : saleType === 'seed'
           ? 'Seed Sale'
           : 'Private Sale',
+      startDate: undefined,
     }));
     setShowEditModal(true);
   }
@@ -174,20 +175,6 @@ const SaleControls = () => {
   }
 
   async function updateSaleData() {
-    const data = {
-      saleType: newSaleData.saleType,
-      buyLimit: Number(newSaleData.buyLimit),
-      cap: Number(newSaleData.cap),
-      cliftingTime: Number(newSaleData.cliftingTime),
-      endDate: Number(newSaleData.endDate),
-      startDate: newSaleData.startDate.toString(),
-      tokenPrice: newSaleData.tokenPrice,
-      vestingTime: Number(newSaleData.vestingTime),
-      noOfToken: Number(newSaleData.noOfToken),
-      minBuy: Number(newSaleData.minBuy),
-      maxLimit: Number(newSaleData.maxLimit),
-    };
-
     try {
       if (
         !newSaleData.saleType ||
@@ -203,6 +190,30 @@ const SaleControls = () => {
       )
         throw new Error('Please Fill All Field');
 
+      if (!newSaleData.startDate) throw new Error('Please Select Start Time.');
+
+      if (newSaleData.maxLimit < newSaleData.minBuy)
+        throw new Error('Max buy limit can not less than Minimum buy limit');
+      if (newSaleData.tokenPrice <= 0)
+        throw new Error('Token price can not be 0 or less than 0 ');
+      if (newSaleData.minBuy <= 0)
+        throw new Error('Minimum buy limit can not be 0 or less than 0 ');
+      if (newSaleData.maxLimit <= 0)
+        throw new Error('Max buy limit can not be 0 or less than 0 ');
+
+      const data = {
+        saleType: newSaleData.saleType,
+        buyLimit: Number(newSaleData.buyLimit),
+        cap: Number(newSaleData.cap),
+        cliftingTime: Number(newSaleData.cliftingTime),
+        endDate: Number(newSaleData.endDate),
+        startDate: newSaleData.startDate.toString(),
+        tokenPrice: newSaleData.tokenPrice,
+        vestingTime: Number(newSaleData.vestingTime),
+        noOfToken: Number(newSaleData.noOfToken),
+        minBuy: Number(newSaleData.minBuy),
+        maxLimit: Number(newSaleData.maxLimit),
+      };
       const updateResponse = await updateTokenSaleDataApi(
         newSaleData.saleType,
         data,
@@ -266,7 +277,7 @@ const SaleControls = () => {
     }
   }
 
-  // function for starting mystery box sale buy conntact (presale contraact method - startSale())
+  // function for starting mystery box sale buy contract (presale contract method - startSale())
   const handleStartMysterBoxSale = async () => {
     try {
       if (!isConnected) throw new Error('Please Connect Your Wallet');
@@ -367,7 +378,7 @@ const SaleControls = () => {
     }
   };
 
-  // funtion for handle csv uploaded by input csv
+  // function for handle csv uploaded by input csv
   // uploading csv file to server and then uploading uri to contract
   const uploadCsvHandler = async (e) => {
     try {
@@ -379,7 +390,7 @@ const SaleControls = () => {
         const response = await postNftPreSaleCsvApi(formData);
 
         if (response.success) {
-          // contract Invokation
+          // contract Invocation
           const uriResponse = await setBaseUri(response.data, walletAddress);
           if (uriResponse.status) toast.success('Data uploaded');
         }

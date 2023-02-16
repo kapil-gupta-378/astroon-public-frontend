@@ -1,19 +1,17 @@
 import { getSeedWhiteListAddressApi } from '../../../services/api/markle';
-import {
-  setWhiteListSeedUserData,
-  setWhiteListSeedUserDataLoading,
-} from './whiteListSeedSlice';
+import { setGlobalLoading } from '../global-loading/globalLoadingSlice';
+import { setWhiteListSeedUserData } from './whiteListSeedSlice';
 
 export const fetchWhiteListSeedUserDataAction = () => {
   return async (dispatch) => {
     try {
-      dispatch(setWhiteListSeedUserDataLoading(true));
+      dispatch(setGlobalLoading(true));
       const data = await getSeedWhiteListAddressApi();
       dispatch(setWhiteListSeedUserData(data.rows));
-      dispatch(setWhiteListSeedUserDataLoading(false));
+      dispatch(setGlobalLoading(false));
     } catch (error) {
       dispatch(setWhiteListSeedUserData([]));
-      dispatch(setWhiteListSeedUserDataLoading(false));
+      dispatch(setGlobalLoading(false));
     }
   };
 };
