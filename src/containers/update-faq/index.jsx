@@ -11,6 +11,9 @@ import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
 import { toast } from 'react-toastify';
 import inputStyles from '../../component/common/text-input/textInput.module.scss';
+import GlobalLoading from '../../component/common/global-loading';
+import { useDispatch } from 'react-redux';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 
 const UpdateFAQ = () => {
   const router = useRouter();
@@ -18,7 +21,7 @@ const UpdateFAQ = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [ordering, setOrdering] = useState('');
-
+  const dispatch = useDispatch();
   useEffect(() => {
     getFaqData(id);
   }, []);
@@ -46,18 +49,23 @@ const UpdateFAQ = () => {
         ordering: Number(ordering),
       };
       try {
+        dispatch(setGlobalLoading(true));
         const res = await updateFaqDataApi(id, data);
         if (res.success) {
           getFaqData(id);
           toast.success(res.message);
+          dispatch(setGlobalLoading(false));
         } else {
           toast.error(res.message);
+          dispatch(setGlobalLoading(false));
         }
       } catch (error) {
         toast.error(error?.response?.data?.message);
+        dispatch(setGlobalLoading(false));
       }
     } else {
       toast.error('Please Fill All Fields');
+      dispatch(setGlobalLoading(false));
     }
   };
   return (
@@ -126,6 +134,7 @@ const UpdateFAQ = () => {
           </div>
         </div>
       </>
+      <GlobalLoading />
     </main>
   );
 };

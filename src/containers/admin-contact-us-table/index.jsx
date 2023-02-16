@@ -11,6 +11,9 @@ import {
 import { toast } from 'react-toastify';
 import ContactUsDialogBox from '../../component/common/contact-us-dialog-box';
 import ReplyDialogBox from '../../component/common/reply-dialoag-box';
+import GlobalLoading from '../../component/common/global-loading';
+import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
+import { useDispatch } from 'react-redux';
 
 const statusSelectOptions = [
   { value: 'pending', label: 'Pending' },
@@ -31,6 +34,7 @@ const ContactUsTable = () => {
   const [pageLimit, setPageLimit] = useState(10);
   const [adminContactUsCount, setAdminContactUsCount] = useState('');
   const [getFileType, setFileType] = useState('');
+  const dispatch = useDispatch();
   useEffect(() => {
     setPageLimit(10);
     setPageNumber(1);
@@ -130,6 +134,7 @@ const ContactUsTable = () => {
   const handleSendReply = async () => {
     try {
       setContactUsLoading(true);
+      dispatch(setGlobalLoading(true));
 
       if (!parentId && !reply) throw new Error('Fill The Reply Field');
       let data = {
@@ -143,13 +148,18 @@ const ContactUsTable = () => {
           setIsDialogShow(false);
           setIsReplyDialogShow(false);
           getContactUsData();
+          dispatch(setGlobalLoading(false));
         }, 2000);
       } else {
         setContactUsLoading(false);
         toast.error(res.message);
+        dispatch(setGlobalLoading(false));
+        dispatch(setGlobalLoading(false));
       }
     } catch (error) {
       setContactUsLoading(false);
+      dispatch(setGlobalLoading(false));
+
       toast.error(
         error?.response?.data?.message
           ? error?.response?.data?.message
@@ -205,6 +215,8 @@ const ContactUsTable = () => {
         setReply={setReply}
         loading={contactUsLoading}
       />
+
+      {<GlobalLoading />}
     </main>
   );
 };

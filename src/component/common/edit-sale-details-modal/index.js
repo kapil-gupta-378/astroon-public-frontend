@@ -88,7 +88,11 @@ const EditSaleDetailsModal = ({
             />
             <div className={styles.input_wrap}>
               <TextInput
-                handleValue={moment(value.startDate).format('YYYY-MM-DDTHH:mm')}
+                handleValue={
+                  value.startDate
+                    ? moment(value.startDate).format('YYYY-MM-DDTHH:mm')
+                    : ''
+                }
                 titleBackground={'#AF3277'}
                 title={'Start Date'}
                 handleType="datetime-local"

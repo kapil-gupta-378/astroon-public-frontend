@@ -36,7 +36,7 @@ const WebsiteLogo = () => {
           alt="logo"
           onClick={() =>
             router.pathname.includes('/admin')
-              ? router.push('/admin/dahboard')
+              ? router.push('/admin/dashboard')
               : router.pathname.includes('/login')
               ? router.push('/login')
               : router.push('/')

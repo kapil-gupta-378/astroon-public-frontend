@@ -57,6 +57,8 @@ const WhiteListSeedUser = () => {
 
   const createWhiteListSeedUser = async () => {
     try {
+      dispatch(setGlobalLoading(true));
+
       if (!isConnected) throw new Error('Please connect your wallet');
 
       let newArray = [];
