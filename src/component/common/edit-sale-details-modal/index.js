@@ -58,6 +58,7 @@ const EditSaleDetailsModal = ({
                     setNewSaleDataHandler((prevValue) => ({
                       ...prevValue,
                       tokenPrice: e.target.value,
+                      cap: removeZero(value.noOfToken * e.target.value),
                     }));
                 }}
                 isRequired={true}

@@ -209,7 +209,7 @@ const SaleControls = () => {
         newSaleData.noOfToken < newSaleData.minBuy
       )
         throw new Error(
-          'Minimum and Maximum buy limit can not bigger than token number',
+          'Minimum and Maximum buy limit can not greater than token number',
         );
 
       const data = {
