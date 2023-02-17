@@ -194,12 +194,23 @@ const SaleControls = () => {
 
       if (newSaleData.maxLimit < newSaleData.minBuy)
         throw new Error('Max buy limit can not less than Minimum buy limit');
+
       if (newSaleData.tokenPrice <= 0)
         throw new Error('Token price can not be 0 or less than 0 ');
+
       if (newSaleData.minBuy <= 0)
         throw new Error('Minimum buy limit can not be 0 or less than 0 ');
+
       if (newSaleData.maxLimit <= 0)
         throw new Error('Max buy limit can not be 0 or less than 0 ');
+
+      if (
+        newSaleData.noOfToken < newSaleData.maxLimit ||
+        newSaleData.noOfToken < newSaleData.minBuy
+      )
+        throw new Error(
+          'Minimum and Maximum buy limit can not bigger than token number',
+        );
 
       const data = {
         saleType: newSaleData.saleType,

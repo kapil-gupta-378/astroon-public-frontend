@@ -4,7 +4,7 @@ import { NavDropdown, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import defaltProfileImage from '../../../../public/assets/images/dummyProfileImage.png';
 import ethereumIconWhite from '../../../../public/assets/images/ethereum-icon-white.svg';
 import styles from './userProfileDropdown.module.scss';
-import editIcon from '../../../../public/assets/images/edit-icon-white.svg';
+import profileIcon from '../../../../public/assets/images/Profile.svg';
 import logoutIcon from '../../../../public/assets/images/logout-icon-white.svg';
 import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,7 +44,7 @@ const UserProfileDropDown = ({ profileImage }) => {
             onClick={() => router.push(`/user-profile/${walletAddress}`)}
             className="item_div"
           >
-            <Image src={editIcon} width={14} height={14} alt="icon" />
+            <Image src={profileIcon} width={14} height={14} alt="icon" />
             <span>Profile</span>
           </div>
         </NavDropdown.Item>
