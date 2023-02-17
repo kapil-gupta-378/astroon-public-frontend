@@ -73,7 +73,6 @@ function MyApp({ Component, pageProps }) {
                 draggable
                 pauseOnHover
                 theme="light"
-                limit={1}
               />
               <Web3Modal config={modalConfig} />
               <Component {...pageProps} />
