@@ -84,7 +84,7 @@ const EditSaleDetailsModal = ({
               readOnly={true}
               handleValue={removeZero(value.tokenPrice * value.noOfToken)}
               titleBackground={'#AF3277'}
-              title={'Cap In Eth'}
+              title={'Cap In ETH'}
               handleType={'number'}
             />
             <div className={styles.input_wrap}>

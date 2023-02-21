@@ -4,8 +4,20 @@ import styles from './astroonToken.module.scss';
 import tokenImage from '../../../../public/assets/images/Varlık 1.png';
 import planet_image1 from '../../../../public/assets/images/planets/Group 94.svg';
 import planet_image2 from '../../../../public/assets/images/planets/Group 92.svg';
+import SaleDetailCard from '../../common/sale-detail-card';
+import { useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const AstroonToken = () => {
+  const router = useRouter();
+  const {
+    tokenData,
+    seedSale,
+    privateSale,
+    publicSale,
+    saleOnData,
+    saleRoundOn,
+  } = useSelector((state) => state.tokenReducer);
   return (
     <div className={`container ${styles.astroon_token_wrap}`}>
       <h3 className={styles.astroon_token_heading}>ASTROON Token</h3>
@@ -36,6 +48,35 @@ const AstroonToken = () => {
       </div>
       <div className={styles.planet_image2}>
         <Image src={planet_image2} alt="planet" layout="responsive" />
+      </div>
+      <div className={styles.Sale_card_wrap}>
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard
+            data={seedSale}
+            key={1}
+            isSaleOn={saleOnData.isSeed && tokenData.isPrivateSale}
+            buyTokenHandler={() => router.push('/ast')}
+            saleRoundOn={saleRoundOn}
+          />
+        </div>
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard
+            data={privateSale}
+            key={2}
+            isSaleOn={saleOnData.isPrivate && tokenData.isPrivateSale}
+            buyTokenHandler={() => router.push('/ast')}
+            saleRoundOn={saleRoundOn}
+          />
+        </div>
+        <div style={{ width: '350px' }}>
+          <SaleDetailCard
+            data={publicSale}
+            key={3}
+            isSaleOn={saleOnData.isPublic && tokenData.isPublicSale}
+            buyTokenHandler={() => router.push('/ast')}
+            saleRoundOn={saleRoundOn}
+          />
+        </div>
       </div>
     </div>
   );
