@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import FAQ from '../../component/ui/faq';
 import Team from '../../component/ui/team';
 
@@ -14,8 +14,15 @@ import AstroonProduct from '../../component/ui/astroon-products';
 import AstroonAnimation from '../../component/ui/astroon-animation';
 import AstroonToken from '../../component/ui/astroon-token';
 import AstroonNFT from '../../component/ui/astroon-nft';
+import { useDispatch } from 'react-redux';
+import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 
 const Home = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTokenDataAction());
+  }, []);
+
   return (
     <div className={styles.home_wrp}>
       <Banner />
