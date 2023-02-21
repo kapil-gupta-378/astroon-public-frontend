@@ -17,6 +17,15 @@
     top: 0px;
     left: 0px;
   }
+  .Sale_card_wrap {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
   .astroon_token_heading {
     @include heading_2;
     text-align: center;

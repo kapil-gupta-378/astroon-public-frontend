@@ -4,10 +4,10 @@ import {
   Cell,
   Line,
   LineChart,
+  Tooltip,
   Pie,
   PieChart,
   ResponsiveContainer,
-  Tooltip,
   XAxis,
   YAxis,
 } from 'recharts';
@@ -26,6 +26,9 @@ import SaleDetailCard from '../../component/common/sale-detail-card';
 import { postTokenBuyTransaction } from '../../../services/api/astroon-token';
 import moment from 'moment/moment';
 import { fetchUserDataAction } from '../../redux/user/userAction';
+import { OverlayTrigger, Tooltip as Tooltipboot } from 'react-bootstrap';
+const AST_TOKEN_CORE_CONTRACT_ADDRESS =
+  process.env.NEXT_PUBLIC_AST_TOKEN_CORE_CONTRACT_ADDRESS;
 const lineChartData = [
   { name: '1D', uv: 10, pv: 2400, amt: 2400 },
   { name: '1Week', uv: 30, pv: 2400, amt: 2400 },
@@ -41,6 +44,8 @@ const pieChartData = [
   { name: 'Group D', value: 200 },
 ];
 const AST = () => {
+  const [isCopied, setIsCopied] = useState(false);
+
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
@@ -190,6 +195,11 @@ const AST = () => {
         : Number(tokenData?.rate?.minBound),
     );
   };
+  const copyToClipboard = (value) => {
+    navigator.clipboard.writeText(value);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
   return (
     <section className={`container ${styles.ast_page_wrap}`}>
@@ -218,6 +228,22 @@ const AST = () => {
           viverra volutpat ornare Vulputate mauris, aliquet vitae, vitae. Turpis
           integer vestibulum nun
         </p>
+
+        <OverlayTrigger
+          placement={'auto'}
+          overlay={
+            <Tooltipboot>
+              <strong>{isCopied ? `Copied` : `Click to copy. `}</strong>
+            </Tooltipboot>
+          }
+        >
+          <p className={styles.contract_heading}>
+            AST Contract Address:
+            <span
+              onClick={() => copyToClipboard(AST_TOKEN_CORE_CONTRACT_ADDRESS)}
+            >{`${AST_TOKEN_CORE_CONTRACT_ADDRESS}`}</span>
+          </p>
+        </OverlayTrigger>
       </div>
       <div className={styles.Sale_card_wrap}>
         <div style={{ width: '350px' }}>
