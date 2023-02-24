@@ -92,7 +92,9 @@ const EditMysteryBoxSaleDataModal = ({
               <TextInput
                 min={moment().format('YYYY-MM-DDTHH:mm')}
                 handleValue={
-                  value.startTime ? moment().format('YYYY-MM-DDTHH:mm') : ''
+                  value.startTime
+                    ? moment(value.startTime).format('YYYY-MM-DDTHH:mm')
+                    : ''
                 }
                 titleBackground={'#AF3277'}
                 title={'Start time'}
@@ -105,7 +107,11 @@ const EditMysteryBoxSaleDataModal = ({
                 }
               />
               <TextInput
-                handleValue={value.endTime}
+                handleValue={
+                  value.endTime
+                    ? moment(value.endTime).format('YYYY-MM-DDTHH:mm')
+                    : ''
+                }
                 titleBackground={'#AF3277'}
                 title={'End time'}
                 handleType="datetime-local"
