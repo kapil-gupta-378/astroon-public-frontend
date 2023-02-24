@@ -12,6 +12,9 @@ import {
 import { toast } from 'react-toastify';
 import Modal from 'react-bootstrap/Modal';
 import { useRouter } from 'next/router';
+import GlobalLoading from '../global-loading';
+import { useDispatch } from 'react-redux';
+import { setGlobalLoading } from '../../../redux/global-loading/globalLoadingSlice';
 
 const ContactUs = (props) => {
   const [email, setEmail] = useState('');
@@ -21,7 +24,9 @@ const ContactUs = (props) => {
   const [subject, setSubject] = useState('');
   const [description, setDescription] = useState('');
   const [attachment, setAttachment] = useState('');
+  const dispatch = useDispatch();
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getResonForContact();
@@ -53,7 +58,8 @@ const ContactUs = (props) => {
     try {
       if (!reasonForContact) throw new Error('Please select reason');
       if (!attachment) throw new Error('Please select image');
-
+      setLoading(true);
+      dispatch(setGlobalLoading(true));
       const fileBody = new FormData();
       fileBody.append('file', attachment);
       const fileResponse = await insertContactUsFileApi(fileBody);
@@ -78,168 +84,183 @@ const ContactUs = (props) => {
           toast.success('Contact form submitted successfully');
           props.onHide();
           router.push('/thank-you');
+          setLoading(false);
+          dispatch(setGlobalLoading(false));
         }
       }
     } catch (error) {
+      setLoading(false);
+      dispatch(setGlobalLoading(false));
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
   }
 
   return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className="contact_form_modal"
-      close
-    >
-      {' '}
-      <Modal.Header closeVariant={'white'} closeButton></Modal.Header>
-      <Modal.Body>
-        <div className={styles.modal_content}>
-          <div className="row">
-            <div className={styles.bg_image}>
-              <p>Astroon / Submit a Request</p>
-              <h3>Submit a Request</h3>
-            </div>
-          </div>
-          <form onSubmit={submitContactDetails} className={styles.input_wrap}>
-            <TextInput
-              titleBackground={'#ae2e6f'}
-              isRequired={true}
-              title={'Email Address'}
-              handleType={'email'}
-              kind="fullborder"
-              placeHolder="Enter your email"
-              handleValue={email}
-              maxlength="320"
-              handleOnChange={(e) => setEmail(e.target.value)}
-            />
-
-            <TextInput
-              titleBackground={'#ae2e6f'}
-              title={'Username'}
-              isRequired={true}
-              handleType={'text'}
-              kind="fullborder"
-              placeHolder="Enter your username"
-              handleValue={username}
-              handleOnChange={(e) => setUsername(e.target.value)}
-              maxlength="25"
-            />
-
-            <FormSelect
-              titleBackground={'#ae2e6f'}
-              label={'Reason for contact'}
-              options={getReason}
-              handleChange={(value) => setReasonForContact(value.value)}
-              required={true}
-            />
-
-            <TextInput
-              isRequired={true}
-              titleBackground={'#ae2e6f'}
-              title={'Subject'}
-              handleType={'text'}
-              kind="fullborder"
-              placeHolder="Enter your Subject"
-              handleValue={subject}
-              handleOnChange={(e) => setSubject(e.target.value)}
-            />
-            <TextInput
-              isRequired={true}
-              titleBackground={'#ae2e6f'}
-              title={'Description'}
-              handleType={'textarea'}
-              kind="fullborder"
-              placeHolder="Enter your description"
-              handleValue={description}
-              textarea={true}
-              inputHeight={'120px'}
-              handleOnChange={(e) => setDescription(e.target.value)}
-            />
-
-            <div className={inputStyles.input_wrap}>
-              <div
-                className={inputStyles.corner_border_label}
-                style={{ background: '#ae2e6f' }}
-              >
-                <label>Attachments</label>
+    <>
+      <Modal
+        {...props}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        className="contact_form_modal"
+        close
+        onHide={() => {
+          props.onHide();
+          setEmail('');
+          setUsername('');
+          setSubject('');
+          setDescription('');
+          setAttachment('');
+        }}
+      >
+        {' '}
+        <Modal.Header closeVariant={'white'} closeButton></Modal.Header>
+        <Modal.Body>
+          <div className={styles.modal_content}>
+            <div className="row">
+              <div className={styles.bg_image}>
+                <p>Astroon / Submit a Request</p>
+                <h3>Submit a Request</h3>
               </div>
+            </div>
+            <form onSubmit={submitContactDetails} className={styles.input_wrap}>
+              <TextInput
+                titleBackground={'#ae2e6f'}
+                isRequired={true}
+                title={'Email Address'}
+                handleType={'email'}
+                kind="fullborder"
+                placeHolder="Enter your email"
+                handleValue={email}
+                maxlength="320"
+                handleOnChange={(e) => setEmail(e.target.value)}
+              />
 
-              <div
-                style={{
-                  padding: 0,
-                  width: '100%',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  display: 'inline-block',
-                }}
-                className={inputStyles.full_border}
-              >
+              <TextInput
+                titleBackground={'#ae2e6f'}
+                title={'Username'}
+                isRequired={true}
+                handleType={'text'}
+                kind="fullborder"
+                placeHolder="Enter your username"
+                handleValue={username}
+                handleOnChange={(e) => setUsername(e.target.value)}
+                maxlength="25"
+              />
+
+              <FormSelect
+                titleBackground={'#ae2e6f'}
+                label={'Reason for contact'}
+                options={getReason}
+                handleChange={(value) => setReasonForContact(value.value)}
+                required={true}
+              />
+
+              <TextInput
+                isRequired={true}
+                titleBackground={'#ae2e6f'}
+                title={'Subject'}
+                handleType={'text'}
+                kind="fullborder"
+                placeHolder="Enter your Subject"
+                handleValue={subject}
+                handleOnChange={(e) => setSubject(e.target.value)}
+              />
+              <TextInput
+                isRequired={true}
+                titleBackground={'#ae2e6f'}
+                title={'Description'}
+                handleType={'textarea'}
+                kind="fullborder"
+                placeHolder="Enter your description"
+                handleValue={description}
+                textarea={true}
+                inputHeight={'120px'}
+                handleOnChange={(e) => setDescription(e.target.value)}
+              />
+
+              <div className={inputStyles.input_wrap}>
+                <div
+                  className={inputStyles.corner_border_label}
+                  style={{ background: '#ae2e6f' }}
+                >
+                  <label>Attachments</label>
+                </div>
+
                 <div
                   style={{
+                    padding: 0,
+                    width: '100%',
+                    overflow: 'hidden',
                     cursor: 'pointer',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    display: 'inline-block',
                   }}
-                >
-                  <p
-                    style={{
-                      cursor: 'pointer',
-                      marginBottom: 0,
-                      padding: '8px',
-                      opacity: '0.5',
-                      marginLeft: '19px',
-                    }}
-                  >
-                    {attachment
-                      ? attachment.name
-                      : 'Add file or drop files here'}
-                  </p>
-                  <h6
-                    style={{
-                      background: 'white',
-                      color: '#020039',
-                      fontSize: '14px',
-                      float: 'right',
-                      padding: '14px 20px',
-                      marginBottom: 0,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {attachment ? 'Change File' : 'Upload File'}
-                  </h6>
-                </div>
-                <input
-                  style={{
-                    height: '68px',
-                    cursor: 'pointer',
-                    fontSize: '100px',
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    opacity: 0,
-                  }}
-                  type="file"
                   className={inputStyles.full_border}
-                  placeholder="Upload File"
-                  onChange={uploadAttachment}
-                  accept="image/png, image/gif, image/jpeg"
-                />
+                >
+                  <div
+                    style={{
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <p
+                      style={{
+                        cursor: 'pointer',
+                        marginBottom: 0,
+                        padding: '8px',
+                        opacity: '0.5',
+                        marginLeft: '19px',
+                      }}
+                    >
+                      {attachment
+                        ? attachment.name
+                        : 'Add file or drop files here'}
+                    </p>
+                    <h6
+                      style={{
+                        background: 'white',
+                        color: '#020039',
+                        fontSize: '14px',
+                        float: 'right',
+                        padding: '14px 20px',
+                        marginBottom: 0,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      {attachment ? 'Change File' : 'Upload File'}
+                    </h6>
+                  </div>
+                  <input
+                    style={{
+                      height: '68px',
+                      cursor: 'pointer',
+                      fontSize: '100px',
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      opacity: 0,
+                    }}
+                    type="file"
+                    className={inputStyles.full_border}
+                    placeholder="Upload File"
+                    onChange={uploadAttachment}
+                    accept="image/png, image/gif, image/jpeg"
+                  />
+                </div>
               </div>
-            </div>
-            <div className={styles.dialog_footer}>
-              <Button kind={'white_btn'} type="submit">
-                Submit a request
-              </Button>
-            </div>
-          </form>
-        </div>
-      </Modal.Body>
-    </Modal>
+              <div className={styles.dialog_footer}>
+                <Button disabled={loading} kind={'white_btn'} type="submit">
+                  Submit a request
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <GlobalLoading />
+    </>
   );
 };
 
