@@ -165,7 +165,11 @@ const SaleControls = () => {
   }
 
   function editMysteryBoxSale(data) {
-    setNewMysteryBoxSaleData(data);
+    setNewMysteryBoxSaleData({
+      ...data,
+      startTime: undefined,
+      endTime: undefined,
+    });
     setShowEditMysteryBoxModal(true);
   }
 
