@@ -244,9 +244,17 @@ const SaleControls = () => {
         !newMysteryBoxSaleData.mintCost ||
         !newMysteryBoxSaleData.maxSupply ||
         !newMysteryBoxSaleData.startTime ||
-        !newMysteryBoxSaleData.endTime
+        !newMysteryBoxSaleData.endTime ||
+        !newMysteryBoxSaleData.cost
       )
         throw new Error('Please Fill All Field');
+
+      if (newMysteryBoxSaleData.cost <= 0)
+        throw new Error('Cost can not be 0 or less than 0');
+      if (newMysteryBoxSaleData.mintCost <= 0)
+        throw new Error('MintCost can not be 0 or less than 0');
+      if (newMysteryBoxSaleData.maxSupply <= 0)
+        throw new Error('MaxSupply can not be 0 or less than 0');
 
       const updateResponse = await updateNFTSaleDataApi(data);
 

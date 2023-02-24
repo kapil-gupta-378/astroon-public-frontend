@@ -51,7 +51,7 @@ const ContentTable = ({
               <thead>
                 <tr>
                   <th scope="col">S.No.</th>
-                  <th scope="col">NFT</th>
+                  <th scope="col">Image</th>
                   <th scope="col">NFT Name</th>
                   <th scope="col">Category</th>
                   <th scope="col">ETH Price</th>

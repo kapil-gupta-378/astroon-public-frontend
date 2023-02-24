@@ -50,26 +50,29 @@ const EditMysteryBoxSaleDataModal = ({
               <TextInput
                 handleValue={value.cost}
                 titleBackground={'#AF3277'}
-                title={'NFT Price'}
+                title={'NFT Price (AST)'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    cost: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      cost: e.target.value,
+                    }));
+                }}
+                min={1}
               />
               <TextInput
                 handleValue={value.mintCost}
                 titleBackground={'#AF3277'}
-                title={'Mint cost'}
+                title={'Mint cost (ETH)'}
                 handleType={'number'}
-                handleOnChange={(e) =>
-                  setNewSaleDataHandler((prevValue) => ({
-                    ...prevValue,
-                    mintCost: e.target.value,
-                  }))
-                }
+                handleOnChange={(e) => {
+                  if (e.target.value >= 0)
+                    setNewSaleDataHandler((prevValue) => ({
+                      ...prevValue,
+                      mintCost: e.target.value,
+                    }));
+                }}
               />
             </div>
             <TextInput
@@ -77,16 +80,20 @@ const EditMysteryBoxSaleDataModal = ({
               titleBackground={'#AF3277'}
               title={'Max supply'}
               handleType={'number'}
-              handleOnChange={(e) =>
-                setNewSaleDataHandler((prevValue) => ({
-                  ...prevValue,
-                  maxSupply: e.target.value,
-                }))
-              }
+              handleOnChange={(e) => {
+                if (e.target.value >= 0)
+                  setNewSaleDataHandler((prevValue) => ({
+                    ...prevValue,
+                    maxSupply: e.target.value,
+                  }));
+              }}
             />
             <div className={styles.input_wrap}>
               <TextInput
-                handleValue={moment(value.startTime).format('YYYY-MM-DDTHH:mm')}
+                min={moment().format('YYYY-MM-DDTHH:mm')}
+                handleValue={
+                  value.startTime ? moment().format('YYYY-MM-DDTHH:mm') : ''
+                }
                 titleBackground={'#AF3277'}
                 title={'Start time'}
                 handleType="datetime-local"
@@ -107,6 +114,11 @@ const EditMysteryBoxSaleDataModal = ({
                     ...prevValue,
                     endTime: e.target.value,
                   }))
+                }
+                min={
+                  value.startTime
+                    ? value.startTime
+                    : moment().format('YYYY-MM-DDTHH:mm')
                 }
               />
             </div>
