@@ -14,7 +14,7 @@ const WebsiteLogo = () => {
 
   const fetchComponentData = async () => {
     const res = await getGeneralSettingsApi();
-    setData(res.data);
+    setData(res.data ? res.data : {});
     if (res.success) {
     } else {
       toast.error(res.message);
@@ -25,11 +25,11 @@ const WebsiteLogo = () => {
   };
   return (
     <>
-      {data.websiteLogo && (
+      {data?.websiteLogo && (
         <Image
           style={{ cursor: 'pointer' }}
           loader={ImageLoader}
-          src={data.websiteLogo}
+          src={data?.websiteLogo}
           height={100}
           width={150}
           layout="fixed"
