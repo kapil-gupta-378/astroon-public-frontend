@@ -143,20 +143,20 @@ const Header = () => {
               >
                 <Link href={'/'}>Home</Link>
               </Nav.Item>
-              <Nav.Item
+              {/* <Nav.Item
                 className={route.pathname === '/animation' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
                 href="/animation"
               >
                 <Link href={'/animation'}>Animation</Link>
-              </Nav.Item>
+              </Nav.Item> */}
               <Nav.Item
-                className={route.pathname === '/ast' ? styles.active : ''}
+                className={route.pathname === '/token' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
               >
-                <Link href={'/ast'}>Token</Link>
+                <Link href={'/token'}>Token</Link>
               </Nav.Item>
-              <Nav.Item
+              {/* <Nav.Item
                 className={route.pathname === '/nft' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
               >
@@ -187,7 +187,7 @@ const Header = () => {
                 onClick={() => setMobileNavExpended(false)}
               >
                 <Link href={'/blog'}>Blog</Link>
-              </Nav.Item>
+              </Nav.Item> */}
               {!isUserConnected && (
                 <Nav.Item onClick={() => setMobileNavExpended(false)}>
                   <Button
