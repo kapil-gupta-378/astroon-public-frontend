@@ -151,10 +151,10 @@ const Header = () => {
                 <Link href={'/animation'}>Animation</Link>
               </Nav.Item>
               <Nav.Item
-                className={route.pathname === '/ast' ? styles.active : ''}
+                className={route.pathname === '/token' ? styles.active : ''}
                 onClick={() => setMobileNavExpended(false)}
               >
-                <Link href={'/ast'}>Token</Link>
+                <Link href={'/token'}>Token</Link>
               </Nav.Item>
               <Nav.Item
                 className={route.pathname === '/nft' ? styles.active : ''}
