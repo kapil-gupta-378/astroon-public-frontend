@@ -1,34 +1,34 @@
-import moment from 'moment';
+// import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import Web3 from 'web3';
+// import Web3 from 'web3';
 import { updateTokenSaleDataApi } from '../../../services/api/astroon-token';
 import {
   getPrivateUserMerkleRootApi,
   getSeedUserMerkleRootApi,
 } from '../../../services/api/markle';
-import {
-  getNFTCategoryData,
-  getNFTSaleDataApi,
-  postCronTimeApi,
-  postNftPreSaleCsvApi,
-  refreshNftDataApi,
-  updateNFTSaleDataApi,
-} from '../../../services/api/nftPreSale';
-import {
-  isNftPreSaleIsActive,
-  revealMysteryBoxData,
-  setBaseUri,
-  setCategoryToContract,
-  setRewardContractAddressToPreSale,
-  startSale,
-} from '../../../services/web3/nftPreSale';
-import {
-  setNFTPreCon_To_RewardCon,
-  setRewardMonthData,
-} from '../../../services/web3/nftReward';
+// import {
+//   getNFTCategoryData,
+//   getNFTSaleDataApi,
+//   postCronTimeApi,
+//   postNftPreSaleCsvApi,
+//   refreshNftDataApi,
+//   updateNFTSaleDataApi,
+// } from '../../../services/api/nftPreSale';
+// import {
+//   isNftPreSaleIsActive,
+//   revealMysteryBoxData,
+//   setBaseUri,
+//   setCategoryToContract,
+//   setRewardContractAddressToPreSale,
+//   startSale,
+// } from '../../../services/web3/nftPreSale';
+// import {
+//   setNFTPreCon_To_RewardCon,
+//   setRewardMonthData,
+// } from '../../../services/web3/nftReward';
 import {
   startPrivateSale,
   startPublicSale,
@@ -36,23 +36,23 @@ import {
 } from '../../../services/web3/saleMethod';
 import EditSaleDetailsModal from '../../component/common/edit-sale-details-modal';
 import SaleDetailCard from '../../component/common/sale-detail-card';
-import MysteryBoxSale from '../../component/ui/mystery-box-sale';
-import EditMysteryBoxSaleDataModal from '../../component/ui/mystery-box-sale-data-modal';
+// import MysteryBoxSale from '../../component/ui/mystery-box-sale';
+// import EditMysteryBoxSaleDataModal from '../../component/ui/mystery-box-sale-data-modal';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
-import { convertEtherToWei } from '../../utils/currencyMethods';
+// import { convertEtherToWei } from '../../utils/currencyMethods';
 import { emptyObject } from '../../utils/objectMethods';
 import styles from './saleControls.module.scss';
-const AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS =
-  process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
-const AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS =
-  process.env.NEXT_PUBLIC_AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS;
+// const AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS =
+//   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
+// const AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS =
+//   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS;
 const SaleControls = () => {
   const [showEditModal, setShowEditModal] = useState(false);
-  const [isNftSaleOnState, setIsNftSaleOnState] = useState(false);
-  const [showEditMysteryBoxModal, setShowEditMysteryBoxModal] = useState(false);
-  const csvInputRef = useRef();
+  // const [isNftSaleOnState, setIsNftSaleOnState] = useState(false);
+  // const [showEditMysteryBoxModal, setShowEditMysteryBoxModal] = useState(false);
+  // const csvInputRef = useRef();
   const [newSaleData, setNewSaleData] = useState({
     saleType: '',
     buyLimit: '',
@@ -66,18 +66,18 @@ const SaleControls = () => {
     minBuy: '',
     maxLimit: '',
   });
-  const [newMysteryBoxSaleData, setNewMysteryBoxSaleData] = useState({
-    cost: '',
-    mintCost: '',
-    maxSupply: '',
-    startTime: '',
-    endTime: '',
-  });
+  // const [newMysteryBoxSaleData, setNewMysteryBoxSaleData] = useState({
+  //   cost: '',
+  //   mintCost: '',
+  //   maxSupply: '',
+  //   startTime: '',
+  //   endTime: '',
+  // });
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    checkIsNftSaleOn();
+    // checkIsNftSaleOn();
     dispatch(fetchTokenDataAction());
     dispatch(fetchNftPreSaleData());
   }, []);
@@ -85,9 +85,9 @@ const SaleControls = () => {
   const { isConnected, walletAddress } = useSelector(
     (state) => state.adminReducer,
   );
-  const { nftSaleData, isNftSaleRevealed, saleContractData } = useSelector(
-    (state) => state.nftSaleReducer,
-  );
+  // const { nftSaleData, isNftSaleRevealed, saleContractData } = useSelector(
+  //   (state) => state.nftSaleReducer,
+  // );
   const {
     tokenData,
     seedSale,
@@ -164,19 +164,19 @@ const SaleControls = () => {
     setShowEditModal(false);
   }
 
-  function editMysteryBoxSale(data) {
-    setNewMysteryBoxSaleData({
-      ...data,
-      startTime: undefined,
-      endTime: undefined,
-    });
-    setShowEditMysteryBoxModal(true);
-  }
+  // function editMysteryBoxSale(data) {
+  //   setNewMysteryBoxSaleData({
+  //     ...data,
+  //     startTime: undefined,
+  //     endTime: undefined,
+  //   });
+  //   setShowEditMysteryBoxModal(true);
+  // }
 
-  function hideMyterySaleEditModalHandler() {
-    // setNewMysteryBoxSaleData((prevState) => emptyObject(prevState));
-    setShowEditMysteryBoxModal(false);
-  }
+  // function hideMyterySaleEditModalHandler() {
+  //   // setNewMysteryBoxSaleData((prevState) => emptyObject(prevState));
+  //   setShowEditMysteryBoxModal(false);
+  // }
 
   async function updateSaleData() {
     try {
@@ -241,44 +241,44 @@ const SaleControls = () => {
     }
   }
 
-  const updateNftSaleData = async (data) => {
-    try {
-      if (
-        !newMysteryBoxSaleData.saleType ||
-        !newMysteryBoxSaleData.mintCost ||
-        !newMysteryBoxSaleData.maxSupply ||
-        !newMysteryBoxSaleData.startTime ||
-        !newMysteryBoxSaleData.endTime ||
-        !newMysteryBoxSaleData.cost
-      )
-        throw new Error('Please Fill All Field');
+  // const updateNftSaleData = async (data) => {
+  //   try {
+  //     if (
+  //       !newMysteryBoxSaleData.saleType ||
+  //       !newMysteryBoxSaleData.mintCost ||
+  //       !newMysteryBoxSaleData.maxSupply ||
+  //       !newMysteryBoxSaleData.startTime ||
+  //       !newMysteryBoxSaleData.endTime ||
+  //       !newMysteryBoxSaleData.cost
+  //     )
+  //       throw new Error('Please Fill All Field');
 
-      if (newMysteryBoxSaleData.cost <= 0)
-        throw new Error('Cost can not be 0 or less than 0');
-      if (newMysteryBoxSaleData.mintCost <= 0)
-        throw new Error('MintCost can not be 0 or less than 0');
-      if (newMysteryBoxSaleData.maxSupply <= 0)
-        throw new Error('MaxSupply can not be 0 or less than 0');
+  //     if (newMysteryBoxSaleData.cost <= 0)
+  //       throw new Error('Cost can not be 0 or less than 0');
+  //     if (newMysteryBoxSaleData.mintCost <= 0)
+  //       throw new Error('MintCost can not be 0 or less than 0');
+  //     if (newMysteryBoxSaleData.maxSupply <= 0)
+  //       throw new Error('MaxSupply can not be 0 or less than 0');
 
-      const updateResponse = await updateNFTSaleDataApi(data);
+  //     const updateResponse = await updateNFTSaleDataApi(data);
 
-      if (updateResponse.success) {
-        toast.success('Data Updated');
-        setShowEditMysteryBoxModal(false);
-        checkIsNftSaleOn();
-        dispatch(fetchTokenDataAction());
-        dispatch(fetchNftPreSaleData());
-      }
-    } catch (error) {
-      setShowEditMysteryBoxModal(false);
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  //     if (updateResponse.success) {
+  //       toast.success('Data Updated');
+  //       setShowEditMysteryBoxModal(false);
+  //       checkIsNftSaleOn();
+  //       dispatch(fetchTokenDataAction());
+  //       dispatch(fetchNftPreSaleData());
+  //     }
+  //   } catch (error) {
+  //     setShowEditMysteryBoxModal(false);
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
-  const checkIsNftSaleOn = async () => {
-    const isSaleOn = await isNftPreSaleIsActive();
-    setIsNftSaleOnState(isSaleOn);
-  };
+  // const checkIsNftSaleOn = async () => {
+  //   const isSaleOn = await isNftPreSaleIsActive();
+  //   setIsNftSaleOnState(isSaleOn);
+  // };
 
   async function stopSaleHander(saleType) {
     try {
@@ -301,130 +301,130 @@ const SaleControls = () => {
   }
 
   // function for starting mystery box sale buy contract (presale contract method - startSale())
-  const handleStartMysterBoxSale = async () => {
-    try {
-      if (!isConnected) throw new Error('Please Connect Your Wallet');
-      dispatch(setGlobalLoading(true));
+  // const handleStartMysterBoxSale = async () => {
+  //   try {
+  //     if (!isConnected) throw new Error('Please Connect Your Wallet');
+  //     dispatch(setGlobalLoading(true));
 
-      //  fetching data from server for latest data
-      const data = await getNFTSaleDataApi();
+  //     //  fetching data from server for latest data
+  //     const data = await getNFTSaleDataApi();
 
-      const saleStartResponse = await startSale(data.data, walletAddress);
-      if (saleStartResponse.status) {
-        checkIsNftSaleOn();
-        toast.success('Sale Started');
-        dispatch(setGlobalLoading(false));
-      }
-    } catch (error) {
-      dispatch(setGlobalLoading(false));
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  //     const saleStartResponse = await startSale(data.data, walletAddress);
+  //     if (saleStartResponse.status) {
+  //       checkIsNftSaleOn();
+  //       toast.success('Sale Started');
+  //       dispatch(setGlobalLoading(false));
+  //     }
+  //   } catch (error) {
+  //     dispatch(setGlobalLoading(false));
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
-  const handleRevealMysteryBox = async () => {
-    try {
-      if (!isConnected) throw new Error('Please Connect Your Wallet');
+  // const handleRevealMysteryBox = async () => {
+  //   try {
+  //     if (!isConnected) throw new Error('Please Connect Your Wallet');
 
-      if (!AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS)
-        throw new Error('Please enter NFT Presale contract address in env');
+  //     if (!AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS)
+  //       throw new Error('Please enter NFT Presale contract address in env');
 
-      if (!Web3.utils.isAddress(AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS))
-        throw new Error(
-          'Please enter valid NFT Presale contract address in env',
-        );
+  //     if (!Web3.utils.isAddress(AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS))
+  //       throw new Error(
+  //         'Please enter valid NFT Presale contract address in env',
+  //       );
 
-      if (!AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS)
-        throw new Error('Please enter reward contract address');
+  //     if (!AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS)
+  //       throw new Error('Please enter reward contract address');
 
-      if (!Web3.utils.isAddress(AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS))
-        throw new Error('Please enter valid reward contract address');
+  //     if (!Web3.utils.isAddress(AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS))
+  //       throw new Error('Please enter valid reward contract address');
 
-      dispatch(setGlobalLoading(true));
+  //     dispatch(setGlobalLoading(true));
 
-      // creating month reward data from current month
-      const monthInNumber = moment().month();
-      const rewardMap = [
-        0, 100, 200, 200, 300, 500, 700, 700, 1500, 1500, 1500, 2500,
-      ];
-      const rotateArray = function (arry, position) {
-        for (let i = 0; i < position; i++) {
-          arry.unshift(arry.pop());
-        }
+  //     // creating month reward data from current month
+  //     const monthInNumber = moment().month();
+  //     const rewardMap = [
+  //       0, 100, 200, 200, 300, 500, 700, 700, 1500, 1500, 1500, 2500,
+  //     ];
+  //     const rotateArray = function (arry, position) {
+  //       for (let i = 0; i < position; i++) {
+  //         arry.unshift(arry.pop());
+  //       }
 
-        return arry;
-      };
+  //       return arry;
+  //     };
 
-      const currentRewardMap = rotateArray(rewardMap, monthInNumber);
-      const currentRewardMapInWei = currentRewardMap.map((value) =>
-        convertEtherToWei(value),
-      );
+  //     const currentRewardMap = rotateArray(rewardMap, monthInNumber);
+  //     const currentRewardMapInWei = currentRewardMap.map((value) =>
+  //       convertEtherToWei(value),
+  //     );
 
-      // setting nft preSale reward array by current month number
-      await setRewardMonthData(currentRewardMapInWei, walletAddress);
+  //     // setting nft preSale reward array by current month number
+  //     await setRewardMonthData(currentRewardMapInWei, walletAddress);
 
-      // setting presale contract to nft reward contract
-      await setNFTPreCon_To_RewardCon(
-        AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS,
-        walletAddress,
-      );
-      // setting reward contract to nft presale contract
-      let contractResponse = await setRewardContractAddressToPreSale(
-        AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS,
-        walletAddress,
-      );
+  //     // setting presale contract to nft reward contract
+  //     await setNFTPreCon_To_RewardCon(
+  //       AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS,
+  //       walletAddress,
+  //     );
+  //     // setting reward contract to nft presale contract
+  //     let contractResponse = await setRewardContractAddressToPreSale(
+  //       AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS,
+  //       walletAddress,
+  //     );
 
-      const categoryData = await getNFTCategoryData();
+  //     const categoryData = await getNFTCategoryData();
 
-      if (categoryData.data.categoriesId && categoryData.data.tokenIds) {
-        // setting data for upcoming reward on pre sale nft by sending
-        // token id and category
-        contractResponse = await setCategoryToContract(
-          categoryData.data.categoriesId,
-          categoryData.data.tokenIds,
-          walletAddress,
-        );
-      }
+  //     if (categoryData.data.categoriesId && categoryData.data.tokenIds) {
+  //       // setting data for upcoming reward on pre sale nft by sending
+  //       // token id and category
+  //       contractResponse = await setCategoryToContract(
+  //         categoryData.data.categoriesId,
+  //         categoryData.data.tokenIds,
+  //         walletAddress,
+  //       );
+  //     }
 
-      // revealing mystery box if reward category was set successfuly
-      if (contractResponse.status)
-        var response = await revealMysteryBoxData(walletAddress);
+  //     // revealing mystery box if reward category was set successfuly
+  //     if (contractResponse.status)
+  //       var response = await revealMysteryBoxData(walletAddress);
 
-      if (response.status) {
-        postCronTimeApi();
-        refreshNftDataApi();
-        toast.success('Mystery box reveal successfully');
-      }
-      dispatch(setGlobalLoading(false));
-    } catch (error) {
-      dispatch(setGlobalLoading(false));
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  //     if (response.status) {
+  //       postCronTimeApi();
+  //       refreshNftDataApi();
+  //       toast.success('Mystery box reveal successfully');
+  //     }
+  //     dispatch(setGlobalLoading(false));
+  //   } catch (error) {
+  //     dispatch(setGlobalLoading(false));
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
   // function for handle csv uploaded by input csv
   // uploading csv file to server and then uploading uri to contract
-  const uploadCsvHandler = async (e) => {
-    try {
-      if (!isConnected) throw new Error('Please Connect Your Wallet');
-      dispatch(setGlobalLoading(true));
-      if (e.target.files[0]) {
-        const formData = new FormData();
-        formData.append('file', e.target.files[0]);
-        const response = await postNftPreSaleCsvApi(formData);
+  // const uploadCsvHandler = async (e) => {
+  //   try {
+  //     if (!isConnected) throw new Error('Please Connect Your Wallet');
+  //     dispatch(setGlobalLoading(true));
+  //     if (e.target.files[0]) {
+  //       const formData = new FormData();
+  //       formData.append('file', e.target.files[0]);
+  //       const response = await postNftPreSaleCsvApi(formData);
 
-        if (response.success) {
-          // contract Invocation
-          const uriResponse = await setBaseUri(response.data, walletAddress);
-          if (uriResponse.status) toast.success('Data uploaded');
-        }
-        dispatch(setGlobalLoading(false));
-      }
-    } catch (error) {
-      csvInputRef.current.value = null;
-      dispatch(setGlobalLoading(false));
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  //       if (response.success) {
+  //         // contract Invocation
+  //         const uriResponse = await setBaseUri(response.data, walletAddress);
+  //         if (uriResponse.status) toast.success('Data uploaded');
+  //       }
+  //       dispatch(setGlobalLoading(false));
+  //     }
+  //   } catch (error) {
+  //     csvInputRef.current.value = null;
+  //     dispatch(setGlobalLoading(false));
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
   return (
     <main className={styles.sale_page_wrap}>
@@ -475,7 +475,7 @@ const SaleControls = () => {
           />
         )}
 
-        <MysteryBoxSale
+        {/* <MysteryBoxSale
           admin={true}
           data={nftSaleData}
           saleStartHandler={handleStartMysterBoxSale}
@@ -487,7 +487,7 @@ const SaleControls = () => {
           isRevealed={isNftSaleRevealed}
           saleContractData={saleContractData}
           csvInputRef={csvInputRef}
-        />
+        /> */}
       </div>
       <EditSaleDetailsModal
         value={newSaleData}
@@ -497,14 +497,14 @@ const SaleControls = () => {
         rightButtonHandler={() => updateSaleData()}
         loading={false}
       />
-      <EditMysteryBoxSaleDataModal
+      {/* <EditMysteryBoxSaleDataModal
         value={newMysteryBoxSaleData}
         handleShow={showEditMysteryBoxModal}
         setNewSaleDataHandler={setNewMysteryBoxSaleData}
         modalClosehandler={hideMyterySaleEditModalHandler}
         rightButtonHandler={() => updateNftSaleData(newMysteryBoxSaleData)}
         loading={false}
-      />
+      /> */}
     </main>
   );
 };

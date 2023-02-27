@@ -35,25 +35,25 @@ import {
 import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 import moment from 'moment';
 import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
-import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
+// import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
 import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
-import NFTRewardModal from '../../component/ui/nft-reward-modal';
-import { claimReward } from '../../../services/web3/nftReward';
-import { postNFTRewardClaimApi } from '../../../services/api/nftPreSale';
-import { convertWeiToEther } from '../../utils/currencyMethods';
+// import NFTRewardModal from '../../component/ui/nft-reward-modal';
+// import { claimReward } from '../../../services/web3/nftReward';
+// import { postNFTRewardClaimApi } from '../../../services/api/nftPreSale';
+// import { convertWeiToEther } from '../../utils/currencyMethods';
 const Profile = () => {
   const {
     userData,
     claimingToken,
     tokenBuyHistory,
-    nftBuyHistory,
-    nftRewardData,
+    // nftBuyHistory,
+    // nftRewardData,
     userDataLoading,
-    nftRewardCount,
-    claimedReward,
+    // nftRewardCount,
+    // claimedReward,
   } = useSelector((state) => state.userReducer);
   const [isCopied, setIsCopied] = useState(false);
-  const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
+  // const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
   const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
@@ -61,8 +61,8 @@ const Profile = () => {
   const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
 
   const [historyModal, setHistoryModal] = useState(false);
-  const [nftHistoryModal, setNftHistoryModal] = useState(false);
-  const [nftRewardModal, setNftRewardModal] = useState(false);
+  // const [nftHistoryModal, setNftHistoryModal] = useState(false);
+  // const [nftRewardModal, setNftRewardModal] = useState(false);
   const [sliderValue, setSliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
@@ -313,25 +313,25 @@ const Profile = () => {
     }
   };
 
-  const handleNFTRewardClaim = async () => {
-    try {
-      dispatch(setGlobalLoading(true));
-      const res = await claimReward(walletAddress);
-      if (res.status) {
-        const data = {
-          walletAddress: walletAddress,
-          claimedReward: convertWeiToEther(nftRewardCount),
-          claimedDate: moment().toString(),
-        };
-        await postNFTRewardClaimApi(data);
-        toast.success('Reward claim successfully');
-      }
-      dispatch(setGlobalLoading(false));
-    } catch (error) {
-      dispatch(setGlobalLoading(false));
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  // const handleNFTRewardClaim = async () => {
+  //   try {
+  //     dispatch(setGlobalLoading(true));
+  //     const res = await claimReward(walletAddress);
+  //     if (res.status) {
+  //       const data = {
+  //         walletAddress: walletAddress,
+  //         claimedReward: convertWeiToEther(nftRewardCount),
+  //         claimedDate: moment().toString(),
+  //       };
+  //       await postNFTRewardClaimApi(data);
+  //       toast.success('Reward claim successfully');
+  //     }
+  //     dispatch(setGlobalLoading(false));
+  //   } catch (error) {
+  //     dispatch(setGlobalLoading(false));
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
   const copyToClipboard = (value) => {
     navigator.clipboard.writeText(value);
@@ -469,22 +469,22 @@ const Profile = () => {
                     >
                       Token History
                     </div>
-                    {nftBuyHistory.length !== 0 && (
+                    {/* {nftBuyHistory.length !== 0 && (
                       <div
                         onClick={() => setNftHistoryModal(true)}
                         className={styles.wallet_address}
                       >
                         NFT History
                       </div>
-                    )}
-                    {nftRewardData.data.length !== 0 && (
+                    )} */}
+                    {/* {nftRewardData.data.length !== 0 && (
                       <div
                         onClick={() => setNftRewardModal(true)}
                         className={styles.wallet_address}
                       >
                         NFT Reward
                       </div>
-                    )}
+                    )} */}
                   </>
                 )}
               </div>
@@ -585,14 +585,14 @@ const Profile = () => {
             lastBuy={currentSaleLastBuy}
             loading={userDataLoading}
           />
-          <MysteryBoxBuyHistory
+          {/* <MysteryBoxBuyHistory
             data={nftBuyHistory}
             handleShow={nftHistoryModal}
             leftButtonHandler={() => setNftHistoryModal(false)}
             reveal={isNftSaleRevealed}
             loading={userDataLoading}
-          />
-          <NFTRewardModal
+          /> */}
+          {/* <NFTRewardModal
             handleShow={nftRewardModal}
             leftButtonHandler={() => setNftRewardModal(false)}
             data={nftRewardData.data}
@@ -602,7 +602,7 @@ const Profile = () => {
             remainingCliam={nftRewardCount}
             totalReward={nftRewardData.total}
             claimedReward={claimedReward}
-          />
+          /> */}
         </main>
       ) : (
         <div style={{ height: '100vh' }}></div>
