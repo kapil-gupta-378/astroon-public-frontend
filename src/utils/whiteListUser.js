@@ -87,10 +87,7 @@ export const parseCSVFile = async (e, csvDataCallBack, toast) => {
   // Check if user has entered the file
 };
 
-export const createNewDataForWhiteListTable = (
-  newWhitelistAddress,
-  oldWhiteListAddress,
-) => {
+export const createNewDataForWhiteListTable = (newWhitelistAddress) => {
   const newAddressArray = [];
   for (let i = 0; i < newWhitelistAddress.length; i++) {
     const isValidAddrress = Web3.utils.isAddress(newWhitelistAddress[i]);
@@ -107,7 +104,7 @@ export const createNewDataForWhiteListTable = (
     }
   }
 
-  const oldNewMergeAddressArray = newAddressArray.concat(oldWhiteListAddress);
+  const oldNewMergeAddressArray = newAddressArray;
   oldNewMergeAddressArray;
   return oldNewMergeAddressArray;
 };

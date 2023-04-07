@@ -4,7 +4,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 // import Web3 from 'web3';
-import { updateTokenSaleDataApi } from '../../../services/api/astroon-token';
+import {
+  getTokenDataApi,
+  updateTokenSaleDataApi,
+} from '../../../services/api/astroon-token';
 import {
   getPrivateUserMerkleRootApi,
   getSeedUserMerkleRootApi,
@@ -36,20 +39,30 @@ import {
 } from '../../../services/web3/saleMethod';
 import EditSaleDetailsModal from '../../component/common/edit-sale-details-modal';
 import SaleDetailCard from '../../component/common/sale-detail-card';
+import { fetchCurrencyData } from '../../redux/currency/currencyAction';
 // import MysteryBoxSale from '../../component/ui/mystery-box-sale';
 // import EditMysteryBoxSaleDataModal from '../../component/ui/mystery-box-sale-data-modal';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
-import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
+// import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 // import { convertEtherToWei } from '../../utils/currencyMethods';
 import { emptyObject } from '../../utils/objectMethods';
 import styles from './saleControls.module.scss';
+import TextInput from '../../component/common/text-input';
+import Button from '../../component/common/button';
+import { getContractInstance } from '../../../services/web3/web3ProviderMethods';
+import { convertWeiToEther } from '../../utils/currencyMethods';
 // const AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS =
 //   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_PROXY_CONTRACT_ADDRESS;
 // const AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS =
 //   process.env.NEXT_PUBLIC_AST_NFT_PRESALE_REWARD_PROXY_CONTRACT_ADDRESS;
+const SEED_SALE_TYPE = process.env.NEXT_PUBLIC_SEED_SALE_ID;
+const PRIVATE_SALE_TYPE = process.env.NEXT_PUBLIC_PRIVATE_SALE_ID;
+const PUBLIC_SALE_TYPE = process.env.NEXT_PUBLIC_PUBLIC_SALE_ID;
+
 const SaleControls = () => {
   const [showEditModal, setShowEditModal] = useState(false);
+  const [initialTokenInput, setInitialTokenInput] = useState(0);
   // const [isNftSaleOnState, setIsNftSaleOnState] = useState(false);
   // const [showEditMysteryBoxModal, setShowEditMysteryBoxModal] = useState(false);
   // const csvInputRef = useRef();
@@ -66,6 +79,9 @@ const SaleControls = () => {
     minBuy: '',
     maxLimit: '',
   });
+
+  const { ethUsdPrice } = useSelector((state) => state.currencyReducer);
+
   // const [newMysteryBoxSaleData, setNewMysteryBoxSaleData] = useState({
   //   cost: '',
   //   mintCost: '',
@@ -79,7 +95,9 @@ const SaleControls = () => {
   useEffect(() => {
     // checkIsNftSaleOn();
     dispatch(fetchTokenDataAction());
-    dispatch(fetchNftPreSaleData());
+    dispatch(fetchCurrencyData());
+    getInitialToken();
+    // dispatch(fetchNftPreSaleData());
   }, []);
 
   const { isConnected, walletAddress } = useSelector(
@@ -88,14 +106,8 @@ const SaleControls = () => {
   // const { nftSaleData, isNftSaleRevealed, saleContractData } = useSelector(
   //   (state) => state.nftSaleReducer,
   // );
-  const {
-    tokenData,
-    seedSale,
-    privateSale,
-    publicSale,
-    saleOnData,
-    saleRoundOn,
-  } = useSelector((state) => state.tokenReducer);
+  const { seedSale, privateSale, publicSale, saleOnData, saleRoundOn } =
+    useSelector((state) => state.tokenReducer);
 
   async function saleStartHandler(saleType) {
     try {
@@ -103,12 +115,17 @@ const SaleControls = () => {
 
       let startSaleResponse;
       dispatch(setGlobalLoading(true));
+
+      const currentSale = await getTokenDataApi();
+
       if (saleType === 'private') {
         const privateUserMerkleRoot = await getPrivateUserMerkleRootApi();
 
         startSaleResponse = await startPrivateSale(
           privateUserMerkleRoot,
           privateSale,
+          PRIVATE_SALE_TYPE,
+          saleOnData.privateId,
           walletAddress,
         );
         dispatch(fetchTokenDataAction());
@@ -123,6 +140,8 @@ const SaleControls = () => {
         startSaleResponse = await startPrivateSale(
           seedUserMerkleRoot,
           seedSale,
+          SEED_SALE_TYPE,
+          saleOnData.seedId,
           walletAddress,
         );
         dispatch(fetchTokenDataAction());
@@ -131,7 +150,12 @@ const SaleControls = () => {
         return startPrivateSale;
       }
 
-      startSaleResponse = await startPublicSale(publicSale, walletAddress);
+      startSaleResponse = await startPublicSale(
+        PUBLIC_SALE_TYPE,
+        currentSale.saleData.publicId,
+        publicSale,
+        walletAddress,
+      );
       toast.success('Sale Started');
 
       dispatch(fetchTokenDataAction());
@@ -182,7 +206,6 @@ const SaleControls = () => {
     try {
       if (
         !newSaleData.saleType ||
-        !newSaleData.buyLimit ||
         !newSaleData.cap ||
         !newSaleData.cliftingTime ||
         !newSaleData.endDate ||
@@ -196,21 +219,21 @@ const SaleControls = () => {
 
       if (!newSaleData.startDate) throw new Error('Please Select Start Time.');
 
-      if (newSaleData.maxLimit < newSaleData.minBuy)
+      if (+newSaleData.maxLimit < +newSaleData.minBuy)
         throw new Error('Max buy limit can not less than Minimum buy limit');
 
-      if (newSaleData.tokenPrice <= 0)
+      if (+newSaleData.tokenPrice <= 0)
         throw new Error('Token price can not be 0 or less than 0 ');
 
-      if (newSaleData.minBuy <= 0)
+      if (+newSaleData.minBuy <= 0)
         throw new Error('Minimum buy limit can not be 0 or less than 0 ');
 
-      if (newSaleData.maxLimit <= 0)
+      if (+newSaleData.maxLimit <= 0)
         throw new Error('Max buy limit can not be 0 or less than 0 ');
 
       if (
-        newSaleData.noOfToken < newSaleData.maxLimit ||
-        newSaleData.noOfToken < newSaleData.minBuy
+        +newSaleData.noOfToken < +newSaleData.maxLimit ||
+        +newSaleData.noOfToken < +newSaleData.minBuy
       )
         throw new Error(
           'Minimum and Maximum buy limit can not greater than token number',
@@ -286,9 +309,17 @@ const SaleControls = () => {
 
       dispatch(setGlobalLoading(true));
 
-      const stopSaleResponse = await stopSale(saleType, walletAddress);
+      const saleId =
+        saleType === 'Seed Sale'
+          ? saleOnData.seedId
+          : saleType === 'Private Sale'
+          ? saleOnData.privateId
+          : saleType === 'Public Sale'
+          ? saleOnData.publicId
+          : 0;
+      const stopSaleResponse = await stopSale(saleId, saleType, walletAddress);
       if (stopSaleResponse.status) {
-        toast.success(`${saleType} Stoped`);
+        toast.success(`${saleType} Stopped`);
       }
 
       dispatch(fetchTokenDataAction());
@@ -426,12 +457,54 @@ const SaleControls = () => {
   //   }
   // };
 
+  const setInitialToken = async () => {
+    try {
+      dispatch(setGlobalLoading(true));
+
+      if (!isConnected) throw new Error('Please Connect Your Wallet');
+
+      const AstTokenContract = await getContractInstance('ILO CONTRACT');
+      const initial_token = await AstTokenContract.methods
+        .set_initialTokens(initialTokenInput)
+        .send({ from: walletAddress });
+      dispatch(setGlobalLoading(false));
+      if (initial_token.status) {
+        toast.success(`Initial token set successfully`);
+      }
+    } catch (error) {
+      dispatch(setGlobalLoading(false));
+      console.error(error);
+      toast.error(error.message ? error.message : error.toString().slice(7));
+    }
+  };
+
+  const getInitialToken = async () => {
+    const AstTokenContract = await getContractInstance('ILO CONTRACT');
+    const value = await AstTokenContract.methods.initialTokens().call();
+    setInitialTokenInput(convertWeiToEther(value));
+  };
   return (
     <main className={styles.sale_page_wrap}>
+      <div className={styles.initial_token}>
+        <div style={{ width: '30%', marginLeft: '25px  ' }}>
+          <TextInput
+            handleValue={initialTokenInput}
+            titleBackground={'#030321'}
+            title={'Initial Token'}
+            handleType={'number'}
+            handleOnChange={(e) => setInitialTokenInput(e.target.value)}
+            isRequired={true}
+          />
+        </div>
+        <Button onClick={setInitialToken}>Set Initial Token</Button>
+      </div>
       <div className={styles.sale_Card_wrap}>
         {seedSale && (
           <SaleDetailCard
-            isSaleOn={tokenData.isPrivateSale && saleOnData.isSeed}
+            isSaleOn={saleRoundOn?.isSeedSaleOn}
+            tokenSold={convertWeiToEther(
+              saleRoundOn?.seedSaleDateInContract?.tokenSold,
+            )}
             onClickStopSale={stopSaleHander}
             data={seedSale}
             saleStartHandler={() => saleStartHandler('seed')}
@@ -440,13 +513,17 @@ const SaleControls = () => {
             }
             key={1}
             admin={true}
-            saleRoundOn={saleRoundOn}
-            availableToken={tokenData.tokensAvailable}
+            saleRoundOn={saleRoundOn.isSeedSaleOn}
+            ethUsdPrice={ethUsdPrice}
           />
         )}
+
         {privateSale && (
           <SaleDetailCard
-            isSaleOn={tokenData.isPrivateSale && saleOnData.isPrivate}
+            isSaleOn={saleRoundOn.isPrivateSaleOn}
+            tokenSold={convertWeiToEther(
+              saleRoundOn?.privateSaleDateInContract?.tokenSold,
+            )}
             onClickStopSale={stopSaleHander}
             data={privateSale}
             saleStartHandler={() => saleStartHandler('private')}
@@ -455,13 +532,16 @@ const SaleControls = () => {
             }
             key={2}
             admin={true}
-            saleRoundOn={saleRoundOn}
-            availableToken={tokenData.tokensAvailable}
+            saleRoundOn={saleRoundOn.isPrivateSaleOn}
+            ethUsdPrice={ethUsdPrice}
           />
         )}
         {publicSale && (
           <SaleDetailCard
-            isSaleOn={tokenData.isPublicSale}
+            isSaleOn={saleRoundOn.isPublicSaleOn}
+            tokenSold={convertWeiToEther(
+              saleRoundOn?.publicSaleDateInContract?.tokenSold,
+            )}
             onClickStopSale={stopSaleHander}
             data={publicSale}
             key={3}
@@ -470,8 +550,8 @@ const SaleControls = () => {
               editSaleDetailsHander('public', publicSale)
             }
             admin={true}
-            saleRoundOn={saleRoundOn}
-            availableToken={tokenData.tokensAvailable}
+            saleRoundOn={saleRoundOn.isPublicSaleOn}
+            ethUsdPrice={ethUsdPrice}
           />
         )}
 

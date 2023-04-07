@@ -7,7 +7,14 @@ const initialState = {
   publicSale: {},
   tokenDataLoading: false,
   saleOnData: {},
-  saleRoundOn: false,
+  saleRoundOn: {
+    isSeedSaleOn: false,
+    isPrivateSaleOn: false,
+    isPublicSaleOn: false,
+    seedSaleDateInContract: {},
+    privateSaleDateInContract: {},
+    publicSaleDateInContract: {},
+  },
 };
 
 export const tokenSlice = createSlice({

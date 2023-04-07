@@ -3,12 +3,13 @@ import { getMerkleDataApi, getMerkleSeedDataApi } from '../api/markle';
 import { getContractInstance } from './web3ProviderMethods';
 
 export const buyToken = async (
+  selectedSaleName,
   buyingQuality,
   OneTokenPrice,
   walletAddress,
-  tokenData,
 ) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
+
   const TokenRateInEthForBuyCount = convertEtherToWei(
     Math.round(
       parseFloat(buyingQuality * Number(OneTokenPrice)) * Math.pow(10, 10),
@@ -17,15 +18,18 @@ export const buyToken = async (
 
   let tokenTransition;
 
-  if (tokenData.isPrivateSale) {
+  if (selectedSaleName === 'private' || selectedSaleName === 'seed') {
     let merkleData;
-    if (tokenData.saleData.isSeed) {
+    let saleType;
+    if (selectedSaleName === 'seed') {
       merkleData = await getMerkleSeedDataApi();
+      saleType = process.env.NEXT_PUBLIC_SEED_SALE_ID;
     } else {
       merkleData = await getMerkleDataApi();
+      saleType = process.env.NEXT_PUBLIC_PRIVATE_SALE_ID;
     }
     tokenTransition = await AstTokenContract.methods
-      .preSaleBuy(merkleData.proof ? merkleData.proof : null)
+      .preSaleBuy(saleType, merkleData.proof)
       .send({
         from: walletAddress,
         value: TokenRateInEthForBuyCount,
@@ -48,22 +52,16 @@ export const claimToken = async (walletAddress, saleRound) => {
   return tokenTransition;
 };
 
-export const getCurrentTokenToBeClaimed = async (
-  address,
-  saleRound,
-  currentSaleRound,
-) => {
+export const getCurrentTokenToBeClaimed = async (address, saleRound) => {
   try {
     let claimResponse = 0;
     const AstTokenContract = await getContractInstance('ILO CONTRACT');
-    if (saleRound <= currentSaleRound) {
-      claimResponse = await AstTokenContract.methods
-        .getReward(saleRound, address)
-        .call();
-    }
+
+    claimResponse = await AstTokenContract.methods
+      .getReward(saleRound, address)
+      .call();
     return claimResponse;
   } catch (error) {
-    console.error(error);
     return 0;
   }
 };

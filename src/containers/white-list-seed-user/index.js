@@ -30,7 +30,7 @@ const WhiteListSeedUser = () => {
     (state) => state.whiteListSeedUserReducer,
   );
 
-  const { tokenData, saleOnData } = useSelector((state) => state.tokenReducer);
+  const { saleRoundOn } = useSelector((state) => state.tokenReducer);
   const dispatch = useDispatch();
 
   const csvFileInputRef = useRef();
@@ -76,10 +76,11 @@ const WhiteListSeedUser = () => {
       if (response) {
         dispatch(setGlobalLoading(false));
         toast.success('WhiteList User Created Successfully');
-        if (saleOnData.isSeed && tokenData.isPrivateSale)
-          setShowMerkleUpdateModal(true);
+        if (saleRoundOn?.isSeedSaleOn) setShowMerkleUpdateModal(true);
       }
     } catch (error) {
+      dispatch(setGlobalLoading(false));
+
       console.error(error);
       toast.error(error.message ? error.message : error.toString().slice(7));
     }
@@ -94,19 +95,20 @@ const WhiteListSeedUser = () => {
   };
 
   const afterCsvFileparse = (csvFileData) => {
-    const newAddressArrayForWhiteListTable = createNewDataForWhiteListTable(
-      csvFileData,
-      whiteListSeedUserData,
-    );
+    const newAddressArrayForWhiteListTable =
+      createNewDataForWhiteListTable(csvFileData);
     dispatch(setWhiteListSeedUserData(newAddressArrayForWhiteListTable));
   };
 
   async function updateUserInContract() {
     try {
+      dispatch(setGlobalLoading(true));
+
       if (!isConnected) throw new Error('Please connect your wallet');
       const seedUserMerkleRoot = await getSeedUserMerkleRootApi();
 
       const setMerkleRootResponse = await setMerkleRoot(
+        'Seed Sale',
         seedUserMerkleRoot.merkleRoot,
         walletAddress,
       );

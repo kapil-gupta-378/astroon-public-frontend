@@ -29,7 +29,14 @@
       @include heading_2;
       color: black;
       font-family: 'Rubik';
-      font-size: 35px;
+      font-size: 25px;
+      margin-bottom: 0px;
+    }
+    .statics_data_USD {
+      @include heading_2;
+      color: black;
+      font-family: 'Rubik';
+      font-size: 25px;
       margin-bottom: 0px;
     }
   }

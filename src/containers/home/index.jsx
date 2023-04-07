@@ -8,7 +8,7 @@ import Roadmap from '../../component/ui/roadmap';
 // import Whitepaper from '../../component/ui/whitepaper';
 // import BlogRow from '../../component/ui/blog-row';
 // import NftSlider from '../../component/ui/nft-slider-home';
-import LeaderBoard from '../../component/ui/leader-board';
+// import LeaderBoard from '../../component/ui/leader-board';
 import AstroonHistory from '../../component/ui/astroon-history';
 import AstroonProduct from '../../component/ui/astroon-products';
 import AstroonAnimation from '../../component/ui/astroon-animation';
@@ -28,7 +28,7 @@ const Home = () => {
       <Banner />
       <AstroonHistory />
       <AstroonProduct />
-      <LeaderBoard />
+      {/* <LeaderBoard /> */}
       {/* <Whitepaper /> */}
       <Roadmap />
       <AstroonAnimation />

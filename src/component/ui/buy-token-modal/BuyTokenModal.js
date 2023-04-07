@@ -8,8 +8,10 @@ import downArrowIcon from '../../../../public/assets/images/Arrow_down.svg';
 import upArrowIcon from '../../../../public/assets/images/Arrow_Up.svg';
 import darkDownArrowIcon from '../../../../public/assets/images/Arrow_down dark.svg';
 import GlobalLoading from '../../common/global-loading';
+import { convertWeiToEther } from '../../../utils/currencyMethods';
 const BuyTokenModal = ({
   modalShow,
+  initialToken,
   handleFunction,
   modalShowHandler,
   sliderValue,
@@ -17,6 +19,7 @@ const BuyTokenModal = ({
   selectedQuantity,
   tokenData,
   lastBuy = 0,
+  ethUsdPrice = 0,
 }) => {
   return (
     <>
@@ -36,7 +39,7 @@ const BuyTokenModal = ({
               <div>
                 <h6 className={styles.statics_heading}>Available for sale</h6>
                 <h2 className={styles.statics_data}>
-                  {tokenData.tokensAvailable}
+                  {+initialToken - +convertWeiToEther(tokenData?.tokenSold)} AST
                 </h2>
               </div>
               <div>
@@ -47,18 +50,46 @@ const BuyTokenModal = ({
                     <Tooltip>
                       <strong>
                         {Math.round(
-                          parseFloat(tokenData?.rate?.rate * selectedQuantity) *
-                            Math.pow(10, 10),
+                          parseFloat(
+                            convertWeiToEther(tokenData?.rate) *
+                              selectedQuantity,
+                          ) * Math.pow(10, 10),
                         ) / Math.pow(10, 10)}
                       </strong>
                     </Tooltip>
                   }
                 >
                   <h2 className={styles.statics_data}>
-                    {(tokenData?.rate?.rate * selectedQuantity)
+                    {`${(convertWeiToEther(tokenData?.rate) * selectedQuantity)
                       .toString()
-                      .substring(0, 6)}
-                    ETH
+                      .substring(0, 6)} ETH`}
+                  </h2>
+                </OverlayTrigger>
+                {/* USD price  */}
+                <OverlayTrigger
+                  placement={'auto'}
+                  overlay={
+                    <Tooltip>
+                      <strong>
+                        {Math.round(
+                          parseFloat(
+                            convertWeiToEther(tokenData?.rate) *
+                              selectedQuantity *
+                              ethUsdPrice,
+                          ) * Math.pow(10, 10),
+                        ) / Math.pow(10, 10)}
+                      </strong>
+                    </Tooltip>
+                  }
+                >
+                  <h2 className={styles.statics_data_USD}>
+                    {`${(
+                      convertWeiToEther(tokenData?.rate) *
+                      selectedQuantity *
+                      ethUsdPrice
+                    )
+                      .toString()
+                      .substring(0, 6)} USD`}
                   </h2>
                 </OverlayTrigger>
               </div>
@@ -73,10 +104,23 @@ const BuyTokenModal = ({
                 }
               > */}
                 <div className={styles.value_wrap}>
-                  <h2 className={styles.statics_data}>{selectedQuantity}</h2>
+                  <h2 className={styles.statics_data}>
+                    {selectedQuantity} AST
+                  </h2>
                   <div className={styles.arrow_wrap}>
                     <Image
-                      onClick={() => sliderOnChange((value) => value + 1)}
+                      onClick={() =>
+                        sliderOnChange((value) => {
+                          if (
+                            +value + 1 <=
+                            Number(convertWeiToEther(tokenData?.thresHold))
+                          ) {
+                            return +value + 1;
+                          } else {
+                            return +value;
+                          }
+                        })
+                      }
                       src={upArrowIcon}
                       width={15}
                       height={15}
@@ -84,11 +128,24 @@ const BuyTokenModal = ({
                     />
                     <Image
                       onClick={() => {
-                        if (sliderValue >= 1) {
-                          sliderOnChange((value) => value - 1);
-                        }
+                        sliderOnChange((value) => {
+                          if (
+                            sliderValue >= 1 &&
+                            sliderValue - 1 >
+                              convertWeiToEther(tokenData.minBound)
+                          ) {
+                            return +value - 1;
+                          } else {
+                            return +convertWeiToEther(tokenData.minBound);
+                          }
+                        });
                       }}
-                      src={sliderValue >= 1 ? darkDownArrowIcon : downArrowIcon}
+                      src={
+                        sliderValue >= 1 &&
+                        sliderValue - 1 >= convertWeiToEther(tokenData.minBound)
+                          ? darkDownArrowIcon
+                          : downArrowIcon
+                      }
                       width={15}
                       height={15}
                       alt={'down'}
@@ -101,14 +158,13 @@ const BuyTokenModal = ({
             </div>
             <div className={styles.slider_wrap}>
               <Slider
+                disabled={
+                  Number(convertWeiToEther(tokenData?.thresHold)) === lastBuy
+                }
                 min={Number(
-                  lastBuy <= 0
-                    ? tokenData?.rate?.minBound
-                    : lastBuy <= tokenData?.rate?.minBound
-                    ? tokenData?.rate?.minBound - lastBuy
-                    : 10,
+                  lastBuy ? 1 : +convertWeiToEther(tokenData?.minBound),
                 )}
-                max={Number(tokenData?.rate?.thresHold) - lastBuy}
+                max={Number(convertWeiToEther(tokenData?.thresHold)) - lastBuy}
                 step={1}
                 value={sliderValue}
                 onChange={sliderOnChange}

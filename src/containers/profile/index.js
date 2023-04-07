@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './profile.module.scss';
 import avatar from '../../../public/assets/images/profile-avatar.svg';
 import ethIconWhite from '../../../public/assets/images/ethereum-icon-white.svg';
-import NFTCard from '../../component/common/nft-card';
+// import NFTCard from '../../component/common/nft-card';
 import { useRouter } from 'next/router';
 import TextInput from '../../component/common/text-input';
 import Button from '../../component/common/button';
@@ -21,22 +21,21 @@ import {
 } from '../../../services/api/user';
 import { toast } from 'react-toastify';
 import { useRef } from 'react';
-import BuyTokenModal from '../../component/ui/buy-token-modal/BuyTokenModal';
 import { fetchTokenDataAction } from '../../redux/token/tokenAction';
 import { setGlobalLoading } from '../../redux/global-loading/globalLoadingSlice';
-import { buyToken, claimToken } from '../../../services/web3/tokenMothods';
-import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
-import { setBalance } from '../../redux/persist/wallet/walletSlice';
+import { claimToken } from '../../../services/web3/tokenMothods';
+// import { getWalletAstTokenBalance } from '../../../services/web3/walletMothods';
+// import { setBalance } from '../../redux/persist/wallet/walletSlice';
 import ClaimTokenDialog from '../../component/common/claim-token-dialog';
 import {
-  postTokenBuyTransaction,
+  // postTokenBuyTransaction,
   postTokenClaimTransaction,
 } from '../../../services/api/astroon-token';
 import TokenBuyHistory from '../../component/ui/tokenBuyHistory';
 import moment from 'moment';
 import { fetchWalletBalance } from '../../redux/persist/wallet/walletAction';
 // import MysteryBoxBuyHistory from '../../component/ui/mystery-box-buy-history';
-import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
+// import { fetchNftPreSaleData } from '../../redux/nft-sale/nftSaleAction';
 // import NFTRewardModal from '../../component/ui/nft-reward-modal';
 // import { claimReward } from '../../../services/web3/nftReward';
 // import { postNFTRewardClaimApi } from '../../../services/api/nftPreSale';
@@ -56,14 +55,14 @@ const Profile = () => {
   // const { isNftSaleRevealed } = useSelector((state) => state.nftSaleReducer);
   const [uploadProfileImage, setUploadProfileImage] = useState(false);
   const [uploadCoverImage, setUploadCoverImage] = useState(false);
-  const [showBuyTokenModal, setShowBuyTokenModal] = useState(false);
+  // const [, setShowBuyTokenModal] = useState(false);
   const [showClaimTokenModal, setShowCliamTokenModal] = useState(false);
   const [currentSaleLastBuy, setCurrentSaleLastBuy] = useState(0);
 
   const [historyModal, setHistoryModal] = useState(false);
   // const [nftHistoryModal, setNftHistoryModal] = useState(false);
   // const [nftRewardModal, setNftRewardModal] = useState(false);
-  const [sliderValue, setSliderValue] = useState(1);
+  // const [sliderValue] = useState(1);
   const { isUserConnected, walletAddress } = useSelector(
     (state) => state.walletReducer,
   );
@@ -80,7 +79,7 @@ const Profile = () => {
   useEffect(() => {
     fetchTokenData();
     fetchUserData();
-    dispatch(fetchNftPreSaleData());
+    // dispatch(fetchNftPreSaleData());
   }, []);
 
   useEffect(() => {
@@ -121,75 +120,75 @@ const Profile = () => {
     dispatch(updateUserData({ name: e.target.name, value: e.target.value }));
   };
 
-  const buyTokenHandler = async () => {
-    try {
-      if (!isUserConnected) {
-        // throw Error when user not connected to website
-        throw new Error('Please connect your wallet');
-      }
+  // const buyTokenHandler = async () => {
+  //   try {
+  //     if (!isUserConnected) {
+  //       // throw Error when user not connected to website
+  //       throw new Error('Please connect your wallet');
+  //     }
 
-      // throw Error when user buying amount less than limit
-      if (
-        sliderValue < Number(tokenData?.rate?.minBound) &&
-        currentSaleLastBuy < Number(tokenData?.rate?.minBound)
-      )
-        throw new Error(
-          `You can not buy token less than ${tokenData?.rate?.minBound}`,
-        );
+  //     // throw Error when user buying amount less than limit
+  //     if (
+  //       sliderValue < Number(tokenData?.rate?.minBound) &&
+  //       currentSaleLastBuy < Number(tokenData?.rate?.minBound)
+  //     )
+  //       throw new Error(
+  //         `You can not buy token less than ${tokenData?.rate?.minBound}`,
+  //       );
 
-      if (!tokenData.isPrivateSale && !tokenData.isPublicSale) {
-        // throw Error when sale is not on
-        throw new Error('Sale is not live');
-      }
+  //     if (!tokenData.isPrivateSale && !tokenData.isPublicSale) {
+  //       // throw Error when sale is not on
+  //       throw new Error('Sale is not live');
+  //     }
 
-      let tokenTransaction;
-      // checking which sale is on
-      if (tokenData.isPrivateSale) {
-        // throw Error when user is not white list user
+  //     let tokenTransaction;
+  //     // checking which sale is on
+  //     if (tokenData.isPrivateSale) {
+  //       // throw Error when user is not white list user
 
-        if (saleOnData.isPrivate && !userData.whiteListedUser)
-          throw new Error('Currently token are availble for private user');
-        if (saleOnData.isSeed && !userData.seedUser)
-          throw new Error('Currently token are availble for seed user');
-      }
-      // invoking token buy funtion if no error
-      dispatch(setGlobalLoading(true));
-      tokenTransaction = await buyToken(
-        sliderValue,
-        tokenData.rate.rate,
-        walletAddress,
-        tokenData,
-      );
-      const currentDate = moment().format('');
+  //       if (saleOnData.isPrivate && !userData.whiteListedUser)
+  //         throw new Error('Currently token are availble for private user');
+  //       if (saleOnData.isSeed && !userData.seedUser)
+  //         throw new Error('Currently token are availble for seed user');
+  //     }
+  //     // invoking token buy funtion if no error
+  //     dispatch(setGlobalLoading(true));
+  //     tokenTransaction = await buyToken(
+  //       sliderValue,
+  //       tokenData.rate.rate,
+  //       walletAddress,
+  //       tokenData,
+  //     );
+  //     const currentDate = moment().format('');
 
-      if (tokenTransaction.status) {
-        const data = {
-          walletAddress: walletAddress,
-          saleRound: tokenData.saleData.saleRound,
-          buyToken: sliderValue,
-          saleType: tokenData.saleData.isSeed
-            ? 'Seed sale'
-            : tokenData.saleData.isPrivate
-            ? 'Private sale'
-            : 'Public sale',
-          purchaseDate: currentDate,
-        };
-        await postTokenBuyTransaction(data);
-        toast.success('Token Transfered Successfully');
-        setShowBuyTokenModal(false);
-        fetchTokenData();
-        fetchUserData();
-        const walletBalance = await getWalletAstTokenBalance(walletAddress);
-        dispatch(setBalance(walletBalance));
-        dispatch(setGlobalLoading(false));
-      }
-    } catch (error) {
-      console.error(error);
-      dispatch(fetchTokenDataAction());
-      dispatch(setGlobalLoading(false));
-      toast.error(error.message ? error.message : error.toString().slice(7));
-    }
-  };
+  //     if (tokenTransaction.status) {
+  //       const data = {
+  //         walletAddress: walletAddress,
+  //         saleRound: tokenData.saleData.saleRound,
+  //         buyToken: sliderValue,
+  //         saleType: tokenData.saleData.isSeed
+  //           ? 'Seed sale'
+  //           : tokenData.saleData.isPrivate
+  //           ? 'Private sale'
+  //           : 'Public sale',
+  //         purchaseDate: currentDate,
+  //       };
+  //       await postTokenBuyTransaction(data);
+  //       toast.success('Token Transfered Successfully');
+  //       setShowBuyTokenModal(false);
+  //       fetchTokenData();
+  //       fetchUserData();
+  //       const walletBalance = await getWalletAstTokenBalance(walletAddress);
+  //       dispatch(setBalance(walletBalance));
+  //       dispatch(setGlobalLoading(false));
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     dispatch(fetchTokenDataAction());
+  //     dispatch(setGlobalLoading(false));
+  //     toast.error(error.message ? error.message : error.toString().slice(7));
+  //   }
+  // };
 
   async function updataProfile(e) {
     try {
@@ -451,7 +450,7 @@ const Profile = () => {
                       saleOnData.isPublic) &&
                       saleRoundOn && (
                         <div
-                          onClick={() => route.push('/ast')}
+                          onClick={() => route.push('/')}
                           className={styles.wallet_address}
                         >
                           Buy Token
@@ -490,7 +489,7 @@ const Profile = () => {
               </div>
             </div>
           </section>
-          {route.pathname === '/user-profile/[address]' && (
+          {/* {route.pathname === '/user-profile/[address]' && (
             <section className={styles.user_nft_wrapper}>
               <h3 className={styles.section_headeing}>My NFT’s</h3>
               {userData.assets.length !== 0 ? (
@@ -506,7 +505,7 @@ const Profile = () => {
                 </div>
               )}
             </section>
-          )}
+          )} */}
           {route.pathname === '/edit-user-profile/[address]' && (
             <form onSubmit={updataProfile}>
               <section className={styles.user_edit_profile_form_wrap}>
@@ -559,16 +558,18 @@ const Profile = () => {
               </section>
             </form>
           )}
-          <BuyTokenModal
-            tokenData={tokenData}
-            sliderOnChange={setSliderValue}
-            sliderValue={sliderValue}
-            modalShowHandler={setShowBuyTokenModal}
-            modalShow={showBuyTokenModal}
-            selectedQuantity={sliderValue}
-            handleFunction={buyTokenHandler}
-            lastBuy={currentSaleLastBuy}
-          />
+          {/* {tokenData?.rate && (
+            <BuyTokenModal
+              tokenData={tokenData}
+              sliderOnChange={setSliderValue}
+              sliderValue={sliderValue}
+              modalShowHandler={setShowBuyTokenModal}
+              modalShow={showBuyTokenModal}
+              selectedQuantity={sliderValue}
+              handleFunction={buyTokenHandler}
+              lastBuy={currentSaleLastBuy}
+            />
+          )} */}
           <ClaimTokenDialog
             data={claimingToken}
             handleShow={showClaimTokenModal}

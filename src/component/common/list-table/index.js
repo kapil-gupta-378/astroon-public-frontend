@@ -87,7 +87,11 @@ const ListTable = ({
                       </td>
                       <td>{item.email}</td>
                       <td>
-                        {item.role.name === 'subadmin' ? 'Sub Admin' : 'Admin'}
+                        {item.role.name === 'subadmin'
+                          ? 'Sub Admin'
+                          : item.role.name === 'admin'
+                          ? 'Admin'
+                          : 'xx'}
                       </td>
                       <td>
                         {item.isBlocked ? (
@@ -102,32 +106,36 @@ const ListTable = ({
                           </div>
                         )}
                       </td>
-                      <td
-                        style={{ cursor: 'pointer' }}
-                        onClick={() =>
-                          router.push(`/admin/edit-profile/${item.id}`)
-                        }
-                      >
-                        <Image
-                          src={editIcon}
-                          width={15}
-                          height={15}
-                          layout="fixed"
-                          alt="delte-icon"
-                        />
-                      </td>
-                      <td
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => handleDeleteItem(item.id)}
-                      >
-                        <Image
-                          src={deleteIcon}
-                          width={15}
-                          height={15}
-                          layout="fixed"
-                          alt="delte-icon"
-                        />
-                      </td>
+                      {item.role.name === 'subadmin' && (
+                        <>
+                          <td
+                            style={{ cursor: 'pointer' }}
+                            onClick={() =>
+                              router.push(`/admin/edit-profile/${item.id}`)
+                            }
+                          >
+                            <Image
+                              src={editIcon}
+                              width={15}
+                              height={15}
+                              layout="fixed"
+                              alt="delte-icon"
+                            />
+                          </td>
+                          <td
+                            style={{ cursor: 'pointer' }}
+                            onClick={() => handleDeleteItem(item.id)}
+                          >
+                            <Image
+                              src={deleteIcon}
+                              width={15}
+                              height={15}
+                              layout="fixed"
+                              alt="delte-icon"
+                            />
+                          </td>{' '}
+                        </>
+                      )}
                     </tr>
                   );
                 })}
