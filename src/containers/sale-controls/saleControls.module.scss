@@ -44,6 +44,27 @@
   }
 }
 
+.initial_token {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  justify-content: center;
+  align-content: center;
+  gap: 30px;
+  .heading {
+    margin-left: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+      color: white;
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0px;
+    }
+  }
+}
+
 @media only screen and (max-width: 649px) {
   .sale_page_wrap {
     .sale_Card_wrap {
