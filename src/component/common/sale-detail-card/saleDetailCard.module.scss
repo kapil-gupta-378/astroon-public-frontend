@@ -24,13 +24,14 @@
     .heading {
       margin-left: 12px;
       margin: 10px 0px;
-      text-align: center;
+      text-align: left;
     }
     .value {
-      margin-left: 12px;
+      // margin-left: 12px;
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 0px;
+      text-align: right;
     }
   }
   .footer_wrap {

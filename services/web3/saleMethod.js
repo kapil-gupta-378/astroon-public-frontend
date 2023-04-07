@@ -7,77 +7,98 @@ import { getContractInstance } from './web3ProviderMethods';
 export const startPrivateSale = async (
   privateUserMerkleRoot,
   saleData,
+  saleType,
+  saleId,
   adminWalletAddress,
 ) => {
-  const AstTokenContract = await getContractInstance('ILO CONTRACT');
-
-  // if stopping public sale if public sale on
-  const isPublicSaleOn = await AstTokenContract.methods.publicM().call();
-  if (isPublicSaleOn) await stopSale('Public Sale', adminWalletAddress);
-
   // setting merkle root for sale
   const merkleResponse = await setMerkleRoot(
+    saleData.saleType,
     privateUserMerkleRoot.merkleRoot,
     adminWalletAddress,
   );
 
   // setting sale pricing data and other info for sale
-  const setSaleDataResponse = await setSaleData(saleData, adminWalletAddress);
+  const setSaleDataResponse = await setSaleData(
+    saleType,
+    saleId,
+    saleData,
+    adminWalletAddress,
+  );
 
-  // start (toggling) sale
-  const startPrivateSaleResponse = await AstTokenContract.methods
-    .togglePresale()
-    .send({ from: adminWalletAddress });
+  // // start (toggling) sale
+  // const startPrivateSaleResponse = await AstTokenContract.methods
+  //   .togglePresale()
+  //   .send({ from: adminWalletAddress });
 
   // updating sale status in backend
 
-  const data = {
-    isPublic: false,
-    isPrivate: saleData.saleType === 'Private Sale' ? true : false,
-    isSeed: saleData.saleType === 'Seed Sale' ? true : false,
-    saleRound: Number(setSaleDataResponse),
-  };
+  const data = {};
+
+  if (saleData.saleType === 'Private Sale') {
+    data.isPrivate = true;
+    data.privateId = Number(setSaleDataResponse);
+  }
+  if (saleData.saleType === 'Seed Sale') {
+    data.isSeed = true;
+    data.seedId = Number(setSaleDataResponse);
+  }
   const updateResponse = postSaleOnStatusApi(data);
-  return [
-    merkleResponse,
-    setSaleDataResponse,
-    startPrivateSaleResponse,
-    updateResponse,
-  ];
+  return [merkleResponse, setSaleDataResponse, updateResponse];
 };
 
-export const startPublicSale = async (saleData, adminWalletAddress) => {
-  const AstTokenContract = await getContractInstance('ILO CONTRACT');
-  // if seed / private sale is on we close that sale by below code
-  const isPrivateSaleOn = await AstTokenContract.methods.presaleM().call();
-  if (isPrivateSaleOn) await stopSale('Private Sale', adminWalletAddress);
+export const startPublicSale = async (
+  saleType,
+  saleId,
+  saleData,
+  adminWalletAddress,
+) => {
+  const setSaleDataResponse = await setSaleData(
+    saleType,
+    saleId,
+    saleData,
+    adminWalletAddress,
+  );
 
-  const setSaleDataResponse = await setSaleData(saleData, adminWalletAddress);
+  // const startPrivateSaleResponse = await AstTokenContract.methods
+  //   .togglePublicSale()
+  //   .send({ from: adminWalletAddress });
 
-  const startPrivateSaleResponse = await AstTokenContract.methods
-    .togglePublicSale()
-    .send({ from: adminWalletAddress });
   const data = {
     isPublic: true,
-    isPrivate: false,
-    isSeed: false,
-    saleRound: Number(setSaleDataResponse),
+    publicId: Number(setSaleDataResponse),
   };
+
   // updating sale status in backend
   const updateResponse = postSaleOnStatusApi(data);
-  return [startPrivateSaleResponse, setSaleDataResponse, updateResponse];
+  return [setSaleDataResponse, updateResponse];
 };
 
-export const setMerkleRoot = async (merkleRoot, adminWalletAddress) => {
+export const setMerkleRoot = async (type, merkleRoot, adminWalletAddress) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
-  const merkleResponse = await AstTokenContract.methods
-    .setMerkleRoot(merkleRoot)
-    .send({ from: adminWalletAddress });
+  let merkleResponse;
+  if (type === 'Private Sale') {
+    merkleResponse = await AstTokenContract.methods
+      .setPrivateSaleMerkleRoot(merkleRoot)
+      .send({ from: adminWalletAddress });
+  }
+
+  if (type === 'Seed Sale') {
+    merkleResponse = await AstTokenContract.methods
+      .setSeedMerkleRoot(merkleRoot)
+      .send({ from: adminWalletAddress });
+  }
+
   if (!merkleResponse.status) throw new Error(merkleResponse.error);
   return merkleResponse;
 };
 
-export const setSaleData = async (saleData, adminWalletAddress) => {
+export const setSaleData = async (
+  saleType,
+  saleId,
+  saleData,
+  adminWalletAddress,
+) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
   const tokenRateInWai = convertEtherToWei(saleData.tokenPrice);
   const capInWei = convertEtherToWei(saleData.cap);
@@ -90,16 +111,13 @@ export const setSaleData = async (saleData, adminWalletAddress) => {
   const thresHold = convertEtherToWei(saleData.maxLimit);
   const cliftingTime = Number(saleData.cliftingTime);
   const vestingTime = Number(saleData.vestingTime);
-  const initialTokenValue = Math.round(
-    Number(saleData.cap) / Number(saleData.tokenPrice),
-  );
-  const minBuy = Number(saleData.minBuy);
-  await AstTokenContract.methods
-    .set_initialTokens(initialTokenValue)
-    .send({ from: adminWalletAddress });
+
+  const minBuy = convertEtherToWei(saleData.minBuy);
 
   const setSaleDataResponse = await AstTokenContract.methods
     .startTokenSale(
+      saleType,
+      saleId,
       tokenRateInWai,
       capInWei,
       startDate,
@@ -131,32 +149,20 @@ export const getSaleDetails = async (saleRound) => {
   return saleDetailsResponse;
 };
 
-export const stopSale = async (saleType, adminWalletAddress) => {
+export const stopSale = async (saleId, saleType, adminWalletAddress) => {
   const AstTokenContract = await getContractInstance('ILO CONTRACT');
-  const data = {
-    isPublic: saleType === 'Public Sale' ? false : undefined,
-    isPrivate: saleType === 'Private Sale' ? false : undefined,
-    isSeed: saleType === 'Seed Sale' ? false : undefined,
-  };
-  let stopSaleResponse;
-  if (saleType === 'Private Sale' || saleType === 'Seed Sale') {
-    stopSaleResponse = await AstTokenContract.methods
-      .togglePresale()
-      .send({ from: adminWalletAddress });
-    if (!stopSaleResponse.status) throw new Error(stopSaleResponse.error);
-    await postSaleOnStatusApi(data);
-    return stopSaleResponse;
-  }
-  if (saleType === 'Public Sale') {
-    stopSaleResponse = await AstTokenContract.methods
-      .togglePublicSale()
-      .send({ from: adminWalletAddress });
-    if (!stopSaleResponse.status) throw new Error(stopSaleResponse.error);
-    await postSaleOnStatusApi(data);
-    return stopSaleResponse;
-  }
+  const data = {};
+  if (saleType === 'Public Sale') data.isPublic = false;
+  if (saleType === 'Private Sale') data.isPrivate = false;
+  if (saleType === 'Seed Sale') data.isSeed = false;
 
-  throw new Error('Please Select Sale Type');
+  let stopSaleResponse = await AstTokenContract.methods
+    .updateSaleIdStatus(saleId)
+    .send({ from: adminWalletAddress });
+
+  if (!stopSaleResponse.status) throw new Error(stopSaleResponse.error);
+  await postSaleOnStatusApi(data);
+  return stopSaleResponse;
 };
 
 export const checkSaleRoundIsOn = async (saleRound) => {

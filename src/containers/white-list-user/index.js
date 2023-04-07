@@ -30,7 +30,7 @@ const WhiteListUser = () => {
   const { whiteListUserData } = useSelector(
     (state) => state.whiteListUserReducer,
   );
-  const { tokenData, saleOnData } = useSelector((state) => state.tokenReducer);
+  const { saleRoundOn } = useSelector((state) => state.tokenReducer);
 
   const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ const WhiteListUser = () => {
     dispatch(setWhiteListUserData(filterArray));
   };
 
-  // funtion for reset table data with old user
+  // function for reset table data with old user
   const resetTableData = () => {
     dispatch(fetchWhiteListUserDataAction());
   };
@@ -77,8 +77,7 @@ const WhiteListUser = () => {
         const response = await postWhiteListAddressApi(data);
         if (response.success) {
           toast.success('WhiteList User Created Successfully');
-          if (saleOnData.isPrivate && tokenData.isPrivateSale)
-            updateUserInContract();
+          if (saleRoundOn.isPrivateSaleOn) updateUserInContract();
           dispatch(setGlobalLoading(false));
         }
       } catch (error) {
@@ -104,10 +103,8 @@ const WhiteListUser = () => {
   // creating new data with old user data and checking invalid address
   const afterCsvFileparse = (csvFileData) => {
     //  function for checking invalid address
-    const newAddressArrayForWhiteListTable = createNewDataForWhiteListTable(
-      csvFileData,
-      whiteListUserData,
-    );
+    const newAddressArrayForWhiteListTable =
+      createNewDataForWhiteListTable(csvFileData);
     dispatch(setWhiteListUserData(newAddressArrayForWhiteListTable));
   };
   const leftButtonHandler = () => {
@@ -119,6 +116,7 @@ const WhiteListUser = () => {
       const seedUserMerkleRoot = await getPrivateUserMerkleRootApi();
 
       const setMerkleRootResponse = await setMerkleRoot(
+        'Seed Sale',
         seedUserMerkleRoot.merkleRoot,
         walletAddress,
       );

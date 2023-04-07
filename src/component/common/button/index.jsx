@@ -6,7 +6,7 @@ import styles from './button.module.scss';
 const Button = ({ children, kind, ...rest }) => {
   const downloadFile = () => {
     window.open(
-      'https://file-examples.com/storage/fe2879c03363c669a9ef954/2017/10/file-sample_150kB.pdf',
+      'https://astroon-prod-bucket.s3.ap-northeast-1.amazonaws.com/app/ASTROON+Whitepaper.pdf',
       '_blank',
     );
     // axios

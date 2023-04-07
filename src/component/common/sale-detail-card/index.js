@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import styles from './saleDetailCard.module.scss';
 import moment from 'moment';
 import Button from '../button';
+import { removeZero } from '../../../utils/calculation';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 const SaleDetailCard = ({
   data,
   saleStartHandler,
@@ -12,7 +14,8 @@ const SaleDetailCard = ({
   onClickStopSale,
   buyTokenHandler,
   saleRoundOn,
-  availableToken,
+  tokenSold,
+  ethUsdPrice = 0,
 }) => {
   return (
     <div
@@ -23,18 +26,48 @@ const SaleDetailCard = ({
       <h3 className={styles.sale_heading}>{data.saleType}</h3>
       <div className={styles.row_border}>
         <p className={styles.heading}>Token Price:</p>
-        <p className={styles.value}>{data.tokenPrice}</p>
+
+        <div style={{ textAlign: 'right' }}>
+          <OverlayTrigger
+            placement={'auto'}
+            overlay={
+              <Tooltip>
+                <strong>{data?.tokenPrice && Number(data?.tokenPrice)}</strong>
+              </Tooltip>
+            }
+          >
+            <p className={styles.value}>{`${
+              data?.tokenPrice &&
+              removeZero(Number(data?.tokenPrice).toFixed(7))
+            } ETH`}</p>
+          </OverlayTrigger>
+          <OverlayTrigger
+            placement={'auto'}
+            overlay={
+              <Tooltip>
+                <strong>
+                  {data?.tokenPrice &&
+                    removeZero(Number(data?.tokenPrice * ethUsdPrice))}
+                </strong>
+              </Tooltip>
+            }
+          >
+            <p className={styles.value}>{`${
+              data?.tokenPrice &&
+              removeZero(Number(data?.tokenPrice * ethUsdPrice).toFixed(7))
+            } USD`}</p>
+          </OverlayTrigger>
+        </div>
       </div>
+
       <div className={styles.row_border}>
         <p className={styles.heading}>Number Of Token:</p>
-        <p className={styles.value}>{data.noOfToken}</p>
+        <p className={styles.value}>{`${data.noOfToken} AST`}</p>
       </div>
-      {availableToken && (
+      {admin && (
         <div className={styles.row_border}>
           <p className={styles.heading}>Token Sold:</p>
-          <p className={styles.value}>
-            {isSaleOn && saleRoundOn ? data.noOfToken - availableToken : 0}
-          </p>
+          <p className={styles.value}>{tokenSold} AST</p>
         </div>
       )}
       <div className={styles.row_border}>
@@ -57,17 +90,24 @@ const SaleDetailCard = ({
       </div>
 
       <div className={styles.row_border}>
-        <p className={styles.heading}>cap:</p>
-        <p className={styles.value}>{data.cap}</p>
+        <p className={styles.heading}>Cap:</p>
+        <div style={{ textAlign: 'right' }}>
+          <p className={styles.value}>
+            {data?.cap && removeZero(Number(data.cap).toFixed(7))} ETH
+          </p>
+          <p className={styles.value}>{`${
+            data?.cap && removeZero(Number(data?.cap * ethUsdPrice).toFixed(7))
+          } USD`}</p>
+        </div>
       </div>
 
       <div className={styles.row_border}>
         <p className={styles.heading}>Maximum buy:</p>
-        <p className={styles.value}>{data.maxLimit}</p>
+        <p className={styles.value}>{data.maxLimit} AST</p>
       </div>
       <div className={styles.row_border}>
         <p className={styles.heading}>Minimum buy:</p>
-        <p className={styles.value}>{data.minBuy}</p>
+        <p className={styles.value}>{data.minBuy} AST</p>
       </div>
 
       <div className={styles.footer_wrap}>

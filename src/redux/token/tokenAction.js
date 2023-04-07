@@ -3,7 +3,10 @@ import {
   getTokenDataApi,
   getTokenSaleData,
 } from '../../../services/api/astroon-token';
-import { checkSaleRoundIsOn } from '../../../services/web3/saleMethod';
+import {
+  checkSaleRoundIsOn,
+  getSaleDetails,
+} from '../../../services/web3/saleMethod';
 import { setGlobalLoading } from '../global-loading/globalLoadingSlice';
 import {
   setPrivateSaleDetails,
@@ -18,9 +21,7 @@ export const fetchTokenDataAction = () => {
   return async (dispatch) => {
     try {
       dispatch(setGlobalLoading(true));
-      // fetching initial data of sale
-      const currentSale = await getTokenDataApi();
-      dispatch(setTokendata(currentSale));
+
       // fetching all type sale pricing details
       const SaleTypeDetails = await getTokenSaleData();
       //  creating public sale data object
@@ -45,11 +46,41 @@ export const fetchTokenDataAction = () => {
       //fetching which sale is on data
       const saleOnData = await getSaleOnStatusApi();
 
-      // checking is any sale is on
-      const isSaleOn = await checkSaleRoundIsOn(currentSale.saleData.saleRound);
-      dispatch(setSaleRoundOn(isSaleOn));
-
       dispatch(setSaleOnData(saleOnData.data));
+
+      // fetching initial data of sale
+      const currentSale = await getTokenDataApi();
+      dispatch(setTokendata(currentSale));
+
+      const isSeedSaleOn = await checkSaleRoundIsOn(
+        currentSale.saleData.seedId,
+      );
+      const isPrivateSaleOn = await checkSaleRoundIsOn(
+        currentSale.saleData.privateId,
+      );
+      const isPublicSaleOn = await checkSaleRoundIsOn(
+        currentSale.saleData.publicId,
+      );
+      const seedSaleDateInContract = await getSaleDetails(
+        currentSale.saleData.seedId,
+      );
+      const privateSaleDateInContract = await getSaleDetails(
+        currentSale.saleData.privateId,
+      );
+      const publicSaleDateInContract = await getSaleDetails(
+        currentSale.saleData.publicId,
+      );
+
+      dispatch(
+        setSaleRoundOn({
+          isSeedSaleOn: isSeedSaleOn,
+          isPrivateSaleOn: isPrivateSaleOn,
+          isPublicSaleOn: isPublicSaleOn,
+          seedSaleDateInContract: seedSaleDateInContract,
+          privateSaleDateInContract: privateSaleDateInContract,
+          publicSaleDateInContract: publicSaleDateInContract,
+        }),
+      );
       dispatch(setGlobalLoading(false));
     } catch (error) {
       console.error(error);

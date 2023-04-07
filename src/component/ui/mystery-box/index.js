@@ -6,7 +6,7 @@ import comingSoonImage from '../../../../public/assets/images/coming_soon.svg';
 import Button from '../../common/button';
 import FormSelect from '../../../component/common/form-select/';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchNftPreSaleData } from '../../../redux/nft-sale/nftSaleAction';
+// import { fetchNftPreSaleData } from '../../../redux/nft-sale/nftSaleAction';
 import {
   // convertEtherToUSD,
   convertEtherToWei,
@@ -55,7 +55,7 @@ const MysteryBox = () => {
 
   useEffect(() => {
     isSaleOnCheck();
-    dispatch(fetchNftPreSaleData());
+    // dispatch(fetchNftPreSaleData());
     if (saleContractData.cost) calculateUserEligibility();
   }, [saleContractData.cost]);
 
@@ -149,7 +149,7 @@ const MysteryBox = () => {
           isSaleOnCheck();
           const walletBalance = await getWalletAstTokenBalance(walletAddress);
           dispatch(setBalance(walletBalance));
-          dispatch(fetchNftPreSaleData());
+          // dispatch(fetchNftPreSaleData());
           calculateUserEligibility();
           dispatch(setGlobalLoading(false));
         }

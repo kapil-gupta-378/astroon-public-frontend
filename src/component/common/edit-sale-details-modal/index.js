@@ -103,7 +103,6 @@ const EditSaleDetailsModal = ({
                     startDate: e.target.value,
                   }))
                 }
-                min={moment().format('YYYY-MM-DDTHH:mm')}
                 isRequired={true}
               />
               <TextInput

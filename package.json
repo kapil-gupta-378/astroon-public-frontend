@@ -12,7 +12,7 @@
     "lint": "next lint",
     "formate": "prettier --write \"./**/*.+(js|jsx|ts|tsx|json|css|scss|sass|md|html)\"",
     "prepare": "husky install",
-    "build:production": "env-cmd -f .env.production next build && yarn next start",
+    "build:production": "env-cmd -f .env.production next build",
     "start:production": "env-cmd -f .env.production next start"
   },
   "dependencies": {

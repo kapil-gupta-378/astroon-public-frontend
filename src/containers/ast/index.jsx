@@ -250,7 +250,7 @@ const AST = () => {
           <SaleDetailCard
             data={seedSale}
             key={1}
-            isSaleOn={saleOnData.isSeed && tokenData.isPrivateSale}
+            isSaleOn={saleOnData?.isSeed && tokenData?.isPrivateSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
             saleRoundOn={saleRoundOn}
           />
@@ -259,7 +259,7 @@ const AST = () => {
           <SaleDetailCard
             data={privateSale}
             key={2}
-            isSaleOn={saleOnData.isPrivate && tokenData.isPrivateSale}
+            isSaleOn={saleOnData?.isPrivate && tokenData?.isPrivateSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
             saleRoundOn={saleRoundOn}
           />
@@ -268,7 +268,7 @@ const AST = () => {
           <SaleDetailCard
             data={publicSale}
             key={3}
-            isSaleOn={saleOnData.isPublic && tokenData.isPublicSale}
+            isSaleOn={saleOnData?.isPublic && tokenData?.isPublicSale}
             buyTokenHandler={() => setShowBuyTokenModal(true)}
             saleRoundOn={saleRoundOn}
           />
@@ -318,16 +318,18 @@ const AST = () => {
           </PieChart>
         </ResponsiveContainer>
       </div>
-      <BuyTokenModal
-        tokenData={tokenData}
-        sliderOnChange={setSliderValue}
-        sliderValue={sliderValue}
-        modalShowHandler={closeModal}
-        modalShow={showBuyTokenModal}
-        selectedQuantity={sliderValue}
-        handleFunction={buyTokenHandler}
-        lastBuy={currentSaleLastBuy}
-      />
+      {tokenData?.rate && (
+        <BuyTokenModal
+          tokenData={tokenData}
+          sliderOnChange={setSliderValue}
+          sliderValue={sliderValue}
+          modalShowHandler={closeModal}
+          modalShow={showBuyTokenModal}
+          selectedQuantity={sliderValue}
+          handleFunction={buyTokenHandler}
+          lastBuy={currentSaleLastBuy}
+        />
+      )}
     </section>
   );
 };

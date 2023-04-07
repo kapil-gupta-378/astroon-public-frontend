@@ -79,8 +79,8 @@ const AdminListTable = () => {
   };
   const handleDeleteAdmin = async (id, comment) => {
     const paramsObj = {
-      page: pageNumber,
-      limit: pageLimit,
+      page: 1,
+      limit: 10,
       role: role,
     };
     const data = {
@@ -95,6 +95,7 @@ const AdminListTable = () => {
       }
       const res = await deleteAdminApi(id);
       if (res.success) {
+        setPageNumber(1);
         toast.success(res.message);
         setDeleteDialog(false);
         dispatch(fetchAdminListData(paramsObj));
@@ -146,7 +147,7 @@ const AdminListTable = () => {
 
       <DialogBox
         mainHading="You’re about to delete this account"
-        content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in ac nibh ut in. Convallis in tristique dui sit vestibulum habitant"
+        content=""
         leftButtonHandler={handleDeleteDialogCancel}
         rightButtonHandler={() =>
           handleDeleteAdmin(deleteItemId, deleteItemComment)

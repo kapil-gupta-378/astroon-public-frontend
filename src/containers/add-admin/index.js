@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useRef, useState } from 'react';
 import {
   createAdminAccountApi,
-  updateAdminProfileApi,
+  updateAdminProfileImageToServerApi,
 } from '../../../services/api/admin';
 import styles from './addAdmin.module.scss';
 import backArrowIcon from '../../../public/assets/images/backArrow.svg';
@@ -45,7 +45,7 @@ const AddAdmin = () => {
     setProfileImage(URL.createObjectURL(e.target.files[0]));
     const body = new FormData();
     body.append('file', e.target.files[0]);
-    const imageResponse = await updateAdminProfileApi(body);
+    const imageResponse = await updateAdminProfileImageToServerApi(body);
     setNewUpadateImageURL(imageResponse.fileName);
   };
 
