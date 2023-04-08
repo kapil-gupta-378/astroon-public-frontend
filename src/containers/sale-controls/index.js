@@ -219,21 +219,21 @@ const SaleControls = () => {
 
       if (!newSaleData.startDate) throw new Error('Please Select Start Time.');
 
-      if (newSaleData.maxLimit < newSaleData.minBuy)
+      if (+newSaleData.maxLimit < +newSaleData.minBuy)
         throw new Error('Max buy limit can not less than Minimum buy limit');
 
-      if (newSaleData.tokenPrice <= 0)
+      if (+newSaleData.tokenPrice <= 0)
         throw new Error('Token price can not be 0 or less than 0 ');
 
-      if (newSaleData.minBuy <= 0)
+      if (+newSaleData.minBuy <= 0)
         throw new Error('Minimum buy limit can not be 0 or less than 0 ');
 
-      if (newSaleData.maxLimit <= 0)
+      if (+newSaleData.maxLimit <= 0)
         throw new Error('Max buy limit can not be 0 or less than 0 ');
 
       if (
-        newSaleData.noOfToken < newSaleData.maxLimit ||
-        newSaleData.noOfToken < newSaleData.minBuy
+        +newSaleData.noOfToken < +newSaleData.maxLimit ||
+        +newSaleData.noOfToken < +newSaleData.minBuy
       )
         throw new Error(
           'Minimum and Maximum buy limit can not greater than token number',
